@@ -64,6 +64,6 @@ jobs:
       - uses: pulumi/actions@v2
         with:
           command: up
-          stack-name: tqtezos/tqinfra/dev
+          stack-name: tqtezos/teztnets/dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
