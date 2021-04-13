@@ -42,32 +42,13 @@ export class TezosK8s extends pulumi.ComponentResource {
         this.ns = new k8s.core.v1.Namespace(this.name, {metadata: {name:this.name,}},
                             { provider: cluster.provider});
 
-        // FIXME don't build images when the helm chart comes from a repo
-        // because in that case, the images are expected to be in a public registry
-        const defaultHelmValuesFile = fs.readFileSync(`${k8sRepoPath}/charts/tezos/values.yaml`, 'utf8')
-        const defaultHelmValues = YAML.parse(defaultHelmValuesFile)
-        
         const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
         const helmValues = YAML.parse(helmValuesFile)
         
-        const tezosK8sImages = defaultHelmValues["tezos_k8s_images"]
-
-        // do not build zerotier for now since it takes times and it is not used in tqinfra
-        delete tezosK8sImages["zerotier"]
-
-        const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-            (obj: {[index: string]:any}, [key]) => {
-                obj[key] = repo.buildAndPushImage(`${k8sRepoPath}/${key.replace(/_/g, "-")}`)
-                return obj
-            },
-            {}
-        )
-        
-        helmValues["tezos_k8s_images"] = pulumiTaggedImages
         // Deploy Tezos into our cluster.
         this.chain = new k8s.helm.v2.Chart(this.name, {
             namespace: this.ns.metadata.name,
-            chart: 'tezos-k8s',
+            chart: 'tezos-chain',
             fetchOpts: { repo: k8sRepo },
             values: helmValues,
         }, { providers: { "kubernetes": cluster.provider } });
@@ -159,7 +140,7 @@ const cluster = new eks.Cluster(stack, {
             roleArn   : `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/KubernetesAdmin`,
             username  : "admin",
         }
-    ]
+    ],
     vpcId: vpc.id,
     publicSubnetIds: vpc.publicSubnetIds,
     privateSubnetIds: vpc.privateSubnetIds,
@@ -304,4 +285,4 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
-const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "https://github.com/tqtezos/tezos-helm-charts", cluster, repo);
+const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "https://tqtezos.github.io/tezos-helm-charts/", cluster, repo);
