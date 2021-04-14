@@ -93,8 +93,6 @@ const repo = new awsx.ecr.Repository(stack);
 
 const desiredClusterCapacity = 2;
 const aws_account_id = process.env.AWS_ACCOUNT_ID;
-pulumi.log.info("Here's my ARN");
-pulumi.log.info(`arn:aws:iam::${aws_account_id}:role/KubernetesAdmin`);
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
