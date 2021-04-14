@@ -92,6 +92,7 @@ export class TezosK8s extends pulumi.ComponentResource {
 const repo = new awsx.ecr.Repository(stack);
 
 const desiredClusterCapacity = 2;
+const aws_account_id = process.env.AWS_ACCOUNT_ID;
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
@@ -132,12 +133,12 @@ const cluster = new eks.Cluster(stack, {
     minSize: 1,
     maxSize: 5,
     providerCredentialOpts: {
-            roleArn   : `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/KubernetesAdmin`,
+            roleArn   : `arn:aws:iam::${aws_account_id}:role/KubernetesAdmin`,
     },
     roleMappings: [
         {
             groups    : ["system:masters"],
-            roleArn   : `arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/KubernetesAdmin`,
+            roleArn   : `arn:aws:iam::${aws_account_id}:role/KubernetesAdmin`,
             username  : "admin",
         }
     ],
