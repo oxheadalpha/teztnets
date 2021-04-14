@@ -34,6 +34,7 @@ jobs:
           stack-name: tqtezos/teztnets/dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
   up:
     needs: Preview
@@ -67,3 +68,4 @@ jobs:
           stack-name: tqtezos/teztnets/dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
