@@ -1,8 +1,8 @@
 bootstrap_peers: []
-chain_name: TEZOS_MONDAYNET_2021-04-09T20:00:00Z
+chain_name: TEZOS_MONDAYNET_2021-04-15T20:00:00Z
 genesis:
   block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
-  timestamp: "2021-03-04T20:00:00Z"
+  timestamp: "2021-04-15T20:00:00Z"
 protocol:
   bootstrap_mutez: "4000000000000"
   command: alpha
@@ -12,11 +12,10 @@ images:
 is_invitation: false
 nodes:
   baking:
-  - bake_for: baker0
-    bootstrap: true
-    history_mode: archive
-    name: tezos-baking-node-0
-  regular: []
+    tezos-baking-node-0:
+      config:
+        shell:
+          history_mode: archive
 rpc_auth: false
 zerotier_config:
   zerotier_network: null
