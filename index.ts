@@ -27,7 +27,7 @@ export class TezosK8s extends pulumi.ComponentResource {
     * @param cluster The kubernetes cluster to deploy it into.
     * @param repo The ECR repository where to push the custom images for this chain.
     */
-    constructor(name: string, valuesPath: string, k8sRepo: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, valuesPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
 
         const inputs: pulumi.Inputs = {
             options: opts,
@@ -42,46 +42,71 @@ export class TezosK8s extends pulumi.ComponentResource {
         this.ns = new k8s.core.v1.Namespace(this.name, {metadata: {name:this.name,}},
                             { provider: cluster.provider});
 
+        const defaultHelmValuesFile = fs.readFileSync(`${k8sRepoPath}/charts/tezos/values.yaml`, 'utf8')
+        const defaultHelmValues = YAML.parse(defaultHelmValuesFile)
+        
         const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
         const helmValues = YAML.parse(helmValuesFile)
+
+        helmValues["accounts"]["tqbaker"] = {
+               "key": private_baking_key,
+               "type": "secret",
+               "is_bootstrap_baker_account": true,
+               "bootstrap_balance": "2500000000000"
+        }
+        helmValues["accounts"]["tqfree"] = {
+               "key": private_non_baking_key,
+               "type": "secret",
+               "is_bootstrap_baker_account": false,
+               "bootstrap_balance": "50000000000000"
+        }
         
-        // Deploy Tezos into our cluster.
+        const tezosK8sImages = defaultHelmValues["tezos_k8s_images"]
+        // do not build zerotier for now since it takes times and it is not used in tqinfra
+        delete tezosK8sImages["zerotier"]
+
+        const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
+            (obj: {[index: string]:any}, [key]) => {
+                obj[key] = repo.buildAndPushImage(`${k8sRepoPath}/${key.replace(/_/g, "-")}`)
+                return obj
+            },
+            {}
+        )
+        helmValues["tezos_k8s_images"] = pulumiTaggedImages
+        // deploy from repository
+        //this.chain = new k8s.helm.v2.Chart(this.name, {
+        //    namespace: this.ns.metadata.name,
+        //    chart: 'tezos-chain',
+        //    fetchOpts: { repo: k8sRepo },
+        //    values: helmValues,
+        //}, { providers: { "kubernetes": cluster.provider } });
+        
+        // Deploy Tezos into our cluster
+        // Deploy from file
         this.chain = new k8s.helm.v2.Chart(this.name, {
             namespace: this.ns.metadata.name,
-            chart: 'tezos-chain',
-            fetchOpts: { repo: k8sRepo },
+            path: `${k8sRepoPath}/charts/tezos`,
             values: helmValues,
         }, { providers: { "kubernetes": cluster.provider } });
-        
-        // Ingresses
 
-        const rpc_ingress = new k8s.extensions.v1beta1.Ingress(
-          `${this.name}-rpc-ingress`,
+        const p2p_lb_service = new k8s.core.v1.Service(
+          `${this.name}-p2p-lb`,
           {
             metadata: {
               namespace: this.ns.metadata.name,
               name: this.name,
               annotations: {
-                "kubernetes.io/ingress.class": "alb",
-                "alb.ingress.kubernetes.io/scheme": "internet-facing",
-                "alb.ingress.kubernetes.io/healthcheck-path": "/chains/main/blocks/head/header",
-                "alb.ingress.kubernetes.io/healthcheck-port": "8732"
+                "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
               },
-              labels: { app: "tezos-node" }
             },
             spec: {
-              rules: [
-                {
-                  http: {
-                    paths: [
-                      {
-                        path: "/*",
-                        backend: { serviceName: "tezos-node-rpc", servicePort: "rpc" }
-                      }
-                    ]
-                  }
-                }
-              ]
+                ports:
+                    [ { port: 9732,
+                        targetPort: 9732,
+                        protocol: "TCP" } ],
+                selector:
+                    { app: "tezos-baking-node" },
+                type: "LoadBalancer"
             }
           },
           { provider: cluster.provider }
@@ -93,8 +118,10 @@ const repo = new awsx.ecr.Repository(stack);
 
 const desiredClusterCapacity = 2;
 const aws_account_id = process.env.AWS_ACCOUNT_ID;
-if (aws_account_id == null) {
-  pulumi.log.error("AWS_ACCOUNT_ID environment variable must be defined.");
+const private_baking_key = process.env.PRIVATE_BAKING_KEY;
+const private_non_baking_key = process.env.PRIVATE_NON_BAKING_KEY;
+if (aws_account_id == null || private_baking_key == null || private_non_baking_key == null) {
+  pulumi.log.error("AWS_ACCOUNT_ID, PRIVATE_BAKING_KEY and PRIVATE_NON_BAKING_KEY secrets must be defined as environment variables.");
   throw Error;
 }
 
@@ -290,4 +317,7 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
-const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "https://tqtezos.github.io/tezos-helm-charts/", cluster, repo);
+//const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "https://tqtezos.github.io/tezos-helm-charts/",
+//                                   private_baking_key, private_non_baking_key, cluster, repo);
+const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster, repo);
