@@ -93,6 +93,10 @@ const repo = new awsx.ecr.Repository(stack);
 
 const desiredClusterCapacity = 2;
 const aws_account_id = process.env.AWS_ACCOUNT_ID;
+if (aws_account_id == null) {
+  pulumi.log.error("AWS_ACCOUNT_ID environment variable must be defined.");
+  throw Error;
+}
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
