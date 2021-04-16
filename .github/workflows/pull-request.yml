@@ -38,3 +38,5 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          PRIVATE_BAKING_KEY: ${{secrets.PRIVATE_BAKING_KEY }}
+          PRIVATE_NON_BAKING_KEY: ${{secrets.PRIVATE_NON_BAKING_KEY }}
