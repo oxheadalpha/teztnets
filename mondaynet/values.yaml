@@ -71,7 +71,7 @@ activation:
     - '20'
     minimal_block_delay: '1'
     tokens_per_roll: '8000000000'
-  should_include_commitments: false
+  should_include_commitments: true
 
 protocol:
   command: alpha
