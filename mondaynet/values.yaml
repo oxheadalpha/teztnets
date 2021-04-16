@@ -1,11 +1,11 @@
 bootstrap_peers: []
 node_config_network:
   activation_account_name: tqbaker
-  chain_name: TEZOS_MONDAYNET_2021-04-15T20:00:00Z
+  chain_name: TEZOS_MONDAYNET_2021-04-16T20:00:00Z
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-    timestamp: "2021-04-15T20:00:00Z"
+    timestamp: "2021-04-16T20:00:00Z"
 images:
   tezos: tezos/tezos:master
 is_invitation: false
