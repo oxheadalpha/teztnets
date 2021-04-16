@@ -32,7 +32,8 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
         print(json.dumps(network_config), file=out_file)
     teztnets[network_name] = { "chain_name": node_config_network["chain_name"],
             "network_url": f"https://tqtezos.github.io/teztnets/{network_name}",
-            "command": network_values["protocol"]["command"] }
+            "command": network_values["protocol"]["command"],
+            "docker_build": network_values["images"]["tezos"] }
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=teztnets)
 with open("target/release/index.md", "w") as out_file:

@@ -7,7 +7,7 @@ node_config_network:
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
     timestamp: "2021-04-16T20:00:00Z"
 images:
-  tezos: tezos/tezos:master
+  tezos: tezos/tezos:master_5c716376_20210416172936
 is_invitation: false
 nodes:
   baking:
