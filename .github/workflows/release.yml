@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: 3.8 #install the python needed
       - name: install pip pkgs
-	run: |
+        run: |
           pip install PyYAML
       - name: generate release artifacts
         run: |
