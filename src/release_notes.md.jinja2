@@ -1,15 +1,17 @@
 Teztnets
 ========
 
-{{ network }}
+{% for k, v in teztnets.items() %}
+{{ k }}
 ---------
 
-To join {{ network }}, download the last master branch build of tezos-node then run:
+To join {{ k }}, download the last master branch build of tezos-node then run:
 
 ```
-tezos-node config init --network https://tqtezos.github.io/teztnets/{{ network }}
+tezos-node config init --network {{ v["network_url"] }}
 tezos-node run
 ```
 
 |-------|---------------------|
-| Baker | `tezos-baker-alpha` |
+| Baker | `tezos-baker-{{ v["command"] }}` |
+{% endfor %}
