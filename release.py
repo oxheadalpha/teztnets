@@ -1,12 +1,12 @@
 #!/bin/python
 import json
 import os
-import json
 import yaml
+import jinja2
 
 os.makedirs("target/release", exist_ok=True)
 
-for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] != "./." and f.path != "./node_modules" and f.path != "./target" ]:
+for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] != "./." and f.path != "./node_modules" and f.path != "./target" and f.path != "./src" ]:
     with open(f"{network}/values.yaml", 'r') as stream:
         network_values = yaml.safe_load(stream)
     node_config_network = network_values["node_config_network"]
@@ -29,3 +29,7 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
 
     with open(f"target/release/{network_name}", "w") as out_file:
         print(json.dumps(network_config), file=out_file)
+
+index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(network="mondaynet")
+with open("target/release/index.html", "w") as out_file:
+    print(index, file=out_file)
