@@ -15,8 +15,7 @@ tezos-node run
 | | |
 |-------|---------------------|
 | Baker | `tezos-baker-alpha` |
-| Tezos commit hash | ? (TODO) |
-| Tezos docker build | ? (TODO) |
+| Tezos docker build | [tezos/tezos:master_5c716376_20210416172936](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=tezos/tezos:master_5c716376_20210416172936) |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
