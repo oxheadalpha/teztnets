@@ -1,0 +1,3 @@
+[submodule "mondaynet/tezos-k8s"]
+	path = mondaynet/tezos-k8s
+	url = git@github.com:nicolasochem/tezos-k8s.git
