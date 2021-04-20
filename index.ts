@@ -3,6 +3,7 @@ import * as eks from "@pulumi/eks";
 import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
+import {createAliasRecord} from "./route53";
 
 import * as fs from 'fs';
 import * as YAML from 'yaml'
@@ -111,6 +112,10 @@ export class TezosK8s extends pulumi.ComponentResource {
           },
           { provider: cluster.provider }
         );
+        let aRecord = p2p_lb_service.status.apply((s) =>
+            createAliasRecord(`${this.name}.tznode.net`, s.loadBalancer.ingress[0].hostname)
+        );
+
     }
 
 }
