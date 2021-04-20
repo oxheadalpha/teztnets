@@ -1,2 +1,2 @@
 description: A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha
-public_bootstrap_bakers: []
+public_bootstrap_peers: []
