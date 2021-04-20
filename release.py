@@ -17,9 +17,15 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     # TODO: generate it dynamically based on privkey
     genesis_pubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n"
 
+    with open(f"{network}/metadata.yaml", 'r') as stream:
+        network_metadata = yaml.safe_load(stream)
+
+    default_bootstrap_peers = network_metadata["public_bootstrap_peers"]
+    default_bootstrap_peers.insert(0, f"{network_name}.tznode.net")
+
     network_config = { "sandboxed_chain_name": "SANDBOXED_TEZOS",
             "chain_name": node_config_network["chain_name"],
-            "default_bootstrap_peers": [ f"{network_name}.tznode.net" ],
+            "default_bootstrap_peers": default_bootstrap_peers,
             "genesis": node_config_network["genesis"],
             "genesis_parameters": {
                 "values": {
@@ -33,6 +39,7 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     teztnets[network_name] = { "chain_name": node_config_network["chain_name"],
             "network_url": f"https://tqtezos.github.io/teztnets/{network_name}",
             "command": network_values["protocol"]["command"],
+            "description": network_metadata["description"],
             "docker_build": network_values["images"]["tezos"] }
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=teztnets)
