@@ -42,6 +42,11 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "2500000000000"
+  bruno:
+    key: edpkuu3jmS3kbaLYTmyVaPHaxowC1KP8fDSrLoJhcvip1Cm2tK5QCd
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "2500000000000"
 
       #two more accouts added by pulumi (not shown here):
       # * tq's baker
