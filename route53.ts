@@ -32,7 +32,13 @@ export function createAliasRecord(targetDomain: string, albUrl: string): aws.rou
 
   const albUrlObj = getDomainAndSubdomain(albUrl);
   console.log('albUrlObj', albUrlObj);
-  const hostedZoneIdALB = aws.elb.getHostedZoneId().then(hostedZoneIdALB => hostedZoneIdALB.id);
+  // FIXME: You can't get the hosted zone of the NLB from k8s API.
+  // See issue: https://github.com/pulumi/pulumi-aws/issues/1353
+  // It works fine for ALBs though.
+  // I am hardcoding zone here for teztnets
+  // The solution seems to be to use kubernetes external-dns to have k8s control creation of route53 records instead of having pulumi do it
+  // https://github.com/kubernetes-sigs/external-dns
+  const hostedZoneIdALB = "ZLMOA37VPKANP";
 
    const targetZoneID = aws.route53.getZone({
     name: "tznode.net",
