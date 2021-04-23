@@ -5,7 +5,7 @@ import shutil
 import yaml
 import jinja2
 
-os.makedirs("target/release", exist_ok=True)
+shutil.copytree("src/website", "target/release")
 
 teztnets = {}
 for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] != "./." and f.path != "./node_modules" and f.path != "./target" and f.path != "./src" ]:
@@ -44,7 +44,6 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
             "docker_build": network_values["images"]["tezos"] }
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=teztnets)
-shutil.copytree("src/website", "target/release")
 with open("target/release/index.markdown", "w") as out_file:
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
