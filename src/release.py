@@ -47,11 +47,6 @@ index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztn
 with open("target/release-notes.markdown", "w") as out_file:
     print(index, file=out_file)
 with open("target/release/index.markdown", "a") as out_file:
-    print("""---
-layout: home
-title: Teztnets
----
-""", file=out_file)
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
     print(json.dumps(teztnets), file=out_file)

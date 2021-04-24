@@ -1,9 +1,4 @@
 ---
 layout: home
+title: Teztnets
 ---
-
-# Testnets
-
-## Hi
-
-This is text.
