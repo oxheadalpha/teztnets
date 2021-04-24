@@ -44,7 +44,13 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
             "docker_build": network_values["images"]["tezos"] }
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=teztnets)
+with open("target/release-notes.markdown", "w") as out_file:
+    print(index, file=out_file)
 with open("target/release/index.markdown", "w") as out_file:
+    print("""---
+layout: home
+---
+""")
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
     print(json.dumps(teztnets), file=out_file)
