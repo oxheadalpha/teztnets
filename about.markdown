@@ -4,6 +4,6 @@ title: About Teztnets
 permalink: /about/
 ---
 
-Tezos Testnets managed by TQ Tezos are listed here.
+Testnets for the [Tezos](https://tezos.com) blockchain managed by [TQ Tezos](https://tqtezos.com) are listed here.
 
-Deployed from the [github repo](https://github.com/tqtezos/teztnets)
+The [github repo](https://github.com/tqtezos/teztnets) has more information regarding these testnets, how they are configured, and how to deploy new ones.
