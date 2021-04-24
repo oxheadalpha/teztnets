@@ -1,3 +1,17 @@
+---
+layout: home
+---
+
+# Testnets
+
+## Hi
+
+This is text.
+---
+layout: home
+title: Teztnets
+---
+
 
 mondaynet
 ---------
