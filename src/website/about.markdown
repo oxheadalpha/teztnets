@@ -6,4 +6,4 @@ permalink: /about/
 
 Tezos Testnets managed by TQ Tezos are listed here.
 
-[github repo](https://github.com/tqtezos/teztnets)
+Deployed from the [github repo](https://github.com/tqtezos/teztnets)
