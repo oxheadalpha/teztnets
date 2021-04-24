@@ -6,24 +6,6 @@ Teztnets
 ========
 
 
-liquidnet
----------
-
-Dedicated testnet for liquidity baking https://gitlab.com/nomadic-labs/tezos/-/tree/sophia@liquidity_baking
-
-To join liquidnet, download tezos-node from the specified docker build then run:
-
-```
-docker run -it --entrypoint=/bin/sh <docker container image needed here>
-~ $ tezos-node config init --network https://tqtezos.github.io/teztnets/liquidnet
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Baker | `tezos-baker-alpha` |
-| Tezos docker build | [<docker container image needed here>](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=<docker container image needed here>) |
-
 mondaynet
 ---------
 
