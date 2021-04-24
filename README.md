@@ -2,6 +2,8 @@
 
 Infrastructure-as-code repo to activate and bootstrap tezos testnets in a repeatable, automated way.
 
+Deployed at [Teztnets.xyz](https://teztnets.xyz)
+
 ## Currently deployed Teztnets
 
 Deployment of new testnets is performed with Github Releases.
@@ -13,7 +15,7 @@ The most recent release on the [Release page](https://github.com/tqtezos/teztnet
 You are encouraged to build automation to ensure your Tezos project keeps running with the future versions of Tezos shell and/or protocol.
 
 1. monitor this repo's releases using your monitoring tool of choice
-1. this endpoint lists the current active testnets: [https://tqtezos.github.io/teztnets/teztnets.json](https://tqtezos.github.io/teztnets/teztnets.json)
+1. this endpoint lists the current active testnets: [https://teztnets.xyz/teztnets.json](https://teztnets.xyz/teztnets.json)
 
 ## Add new Teztnets or modify existing Teztnets
 
