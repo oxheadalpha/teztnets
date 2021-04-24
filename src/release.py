@@ -49,6 +49,7 @@ with open("target/release-notes.markdown", "w") as out_file:
 with open("target/release/index.markdown", "w") as out_file:
     print("""---
 layout: home
+title: Teztnets
 ---
 """)
     print(index, file=out_file)

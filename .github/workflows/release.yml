@@ -57,7 +57,7 @@ jobs:
           pip install PyYAML jinja2
       - name: generate release artifacts
         run: |
-          python release.py
+          python src/release.py
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
