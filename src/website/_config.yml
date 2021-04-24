@@ -38,8 +38,8 @@ plugins:
 # their entries' file path in the `include:` list.
 #
 include:
-  - teztnets.json
-  - *net
+  - 'teztnets.json'
+  - '*net'
 # exclude:
 #   - .sass-cache/
 #   - .jekyll-cache/
