@@ -2,9 +2,6 @@
 layout: home
 ---
 
-Teztnets
-========
-
 
 mondaynet
 ---------
@@ -26,3 +23,5 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_a2e6e70c_20210420154916
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
+
+The list of testnets is also available in [json format](https://teztnets.xyz/teztnets.json).
