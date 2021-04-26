@@ -53,7 +53,7 @@ export class TezosK8s extends pulumi.ComponentResource {
                "key": private_baking_key,
                "type": "secret",
                "is_bootstrap_baker_account": true,
-               "bootstrap_balance": "2500000000000"
+               "bootstrap_balance": "7500000000000"
         }
         helmValues["accounts"]["tqfree"] = {
                "key": private_non_baking_key,
