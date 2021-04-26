@@ -1,1 +1,1 @@
-{}
+{"mondaynet": {"chain_name": "TEZOS_MONDAYNET_2021-04-26T00:00:00Z", "network_url": "https://teztnets.xyz/mondaynet", "command": "alpha", "description": "A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha", "docker_build": "tezos/tezos:master_786329ea_20210423192025"}}
