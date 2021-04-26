@@ -16,6 +16,7 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 |-------|---------------------|
 | Baker | `tezos-baker-{{ v["command"] }}` |
 | Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
+| Full network name | {{ v["chain_name"] }} |
 {% endfor %}
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
