@@ -71,7 +71,7 @@ activation:
     min_proposal_quorum: 500
     initial_endorsers: 24
     delay_per_missing_endorsement: "4"
-    minimal_block_delay: '1'
+    minimal_block_delay: '15'
   should_include_commitments: true
 
 protocol:
