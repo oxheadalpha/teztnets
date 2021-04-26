@@ -38,7 +38,7 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     with open(f"target/release/{network_name}", "w") as out_file:
         print(json.dumps(network_config), file=out_file)
     teztnets[network_name] = { "chain_name": node_config_network["chain_name"],
-            "network_url": f"https://tqtezos.github.io/teztnets/{network_name}",
+            "network_url": f"https://teztnets.xyz/{network_name}",
             "command": network_values["protocol"]["command"],
             "description": network_metadata["description"],
             "docker_build": network_values["images"]["tezos"] }
