@@ -1,11 +1,11 @@
 bootstrap_peers: []
 node_config_network:
   activation_account_name: tqbaker
-  chain_name: TEZOS_LIQUIDNET_2021-04-21T18:00:00Z
+  chain_name: TEZOS_GALPHANET-04-21T18:00:00Z
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-    timestamp: "2021-04-21T18:00:00Z"
+    timestamp: "2021-04-FIXMET18:00:00Z"
 images:
   tezos: <docker container image needed here>
 is_invitation: false
@@ -37,7 +37,7 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "2500000000000"
-  luke_youngblood:
+  luke:
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     type: public
     is_bootstrap_baker_account: true
@@ -47,6 +47,17 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "2500000000000"
+  tezosil:
+    key: edpkvQj8r3YigN6QFsDRaKQCoxDNhKK4whDUkFkw6Gom36d86uhEbv
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "2500000000000"
+  tz1THUNA:
+    # Romain's faucet
+    key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "50000000000000"
 
       #two more accouts added by pulumi (not shown here):
       # * tq's baker

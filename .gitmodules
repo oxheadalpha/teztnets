@@ -1,6 +1,6 @@
 [submodule "mondaynet/tezos-k8s"]
 	path = mondaynet/tezos-k8s
 	url = git@github.com:nicolasochem/tezos-k8s.git
-[submodule "liquidnet/tezos-k8s"]
-	path = liquidnet/tezos-k8s
+[submodule "galphanet/tezos-k8s"]
+	path = galphanet/tezos-k8s
 	url = git@github.com:nicolasochem/tezos-k8s.git
