@@ -1,0 +1,3 @@
+description: Dedicated testnet for liquidity baking https://gitlab.com/nomadic-labs/tezos/-/tree/sophia@liquidity_baking
+public_bootstrap_peers:
+  - liquidnet.smartpy.io
