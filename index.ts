@@ -10,6 +10,16 @@ import * as YAML from 'yaml'
 
 let stack = pulumi.getStack();
 
+// Function to fail on non-truthy variable.
+const getEnvVariable = (name: string): string => {
+  const env = process.env[name];
+  if (!env) {
+    pulumi.log.error(`${name} environment variable is not set`);
+    throw Error;
+  }
+  return env;
+};
+
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
  * Supports either local charts or charts from a repo
@@ -122,13 +132,9 @@ export class TezosK8s extends pulumi.ComponentResource {
 const repo = new awsx.ecr.Repository(stack);
 
 const desiredClusterCapacity = 2;
-const aws_account_id = process.env.AWS_ACCOUNT_ID;
-const private_baking_key = process.env.PRIVATE_BAKING_KEY;
-const private_non_baking_key = process.env.PRIVATE_NON_BAKING_KEY;
-if (aws_account_id == null || private_baking_key == null || private_non_baking_key == null) {
-  pulumi.log.error("AWS_ACCOUNT_ID, PRIVATE_BAKING_KEY and PRIVATE_NON_BAKING_KEY secrets must be defined as environment variables.");
-  throw Error;
-}
+const aws_account_id = getEnvVariable('AWS_ACCOUNT_ID');
+const private_baking_key = getEnvVariable('PRIVATE_BAKING_KEY');
+const private_non_baking_key = getEnvVariable('PRIVATE_NON_BAKING_KEY');
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
