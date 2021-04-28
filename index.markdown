@@ -24,6 +24,25 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_25c8b965_20210426211742
 | Tezos docker build | [tezos/tezos:master_25c8b965_20210426211742](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_25c8b965_20210426211742) |
 | Full network name | `TEZOS_MONDAYNET_2021-04-27T00:00:00Z` |
 
+galphanet
+---------
+
+First alpha network for protocol G
+
+To join galphanet, download tezos-node from the specified docker build then run:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_0a7fe025_20210428084834
+~ $ tezos-node config init --network https://teztnets.xyz/galphanet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-alpha` |
+| Tezos docker build | [tezos/tezos:master_0a7fe025_20210428084834](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_0a7fe025_20210428084834) |
+| Full network name | `TEZOS_GALPHANET_2021-04-28T15:00:00Z` |
+
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
 
