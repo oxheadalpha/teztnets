@@ -104,7 +104,7 @@ activation:
     min_proposal_quorum: 500
     initial_endorsers: 24
     delay_per_missing_endorsement: "4"
-    minimal_block_delay: '1'
+    minimal_block_delay: '15'
     # liquidity baking constants
     liquidity_baking_subsidy: "2500000"
     liquidity_baking_sunset_duration: 525600
