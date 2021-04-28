@@ -102,7 +102,7 @@ activation:
     quorum_max: 7000
     min_proposal_quorum: 500
     initial_endorsers: 192
-    delay_per_missing_endorsement: "4"
+    delay_per_missing_endorsement: "2"
     minimal_block_delay: '15'
     # liquidity baking constants
     liquidity_baking_subsidy: "2500000"
