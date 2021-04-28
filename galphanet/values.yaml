@@ -80,7 +80,7 @@ activation:
     time_between_blocks:
       - "30"
       - "20"
-    endorsers_per_block: 32
+    endorsers_per_block: 256
     hard_gas_limit_per_operation: "1040000"
     hard_gas_limit_per_block: "10400000"
     proof_of_work_threshold: "70368744177663"
@@ -91,17 +91,17 @@ activation:
     block_security_deposit: "512000000"
     endorsement_security_deposit: "64000000"
     baking_reward_per_endorsement:
-      - "1250000"
-      - "187500"
+      - "78125"
+      - "11719"
     endorsement_reward:
-      - "1250000"
-      - "833333"
+      - "78125"
+      - "11719"
     cost_per_byte: "250"
     hard_storage_limit_per_operation: "60000"
     quorum_min: 2000
     quorum_max: 7000
     min_proposal_quorum: 500
-    initial_endorsers: 24
+    initial_endorsers: 192
     delay_per_missing_endorsement: "4"
     minimal_block_delay: '15'
     # liquidity baking constants
