@@ -52,6 +52,11 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "2500000000000"
+  pirbo:
+    key: edpkvE2HEoPyM1XbToGiLmuPhzzrZsAYCcR3nbrjEVsbEe6vFQFdPo
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "2500000000000"
   tz1THUNA:
     # Romain's faucet
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
