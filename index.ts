@@ -69,7 +69,7 @@ export class TezosK8s extends pulumi.ComponentResource {
                "key": private_non_baking_key,
                "type": "secret",
                "is_bootstrap_baker_account": false,
-               "bootstrap_balance": "50000000000000"
+               "bootstrap_balance": "500000000000000"
         }
         
         const tezosK8sImages = defaultHelmValues["tezos_k8s_images"]
@@ -333,4 +333,6 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
 const galphanet_chain = new TezosK8s("galphanet", "galphanet/values.yaml", "galphanet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster, repo);
+const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net/values.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
