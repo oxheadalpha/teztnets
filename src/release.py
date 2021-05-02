@@ -24,11 +24,11 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     default_bootstrap_peers = network_metadata["public_bootstrap_peers"]
     default_bootstrap_peers.insert(0, f"{network_name}.tznode.net")
 
-    network_config = { "sandboxed_chain_name": "SANDBOXED_TEZOS",
-            "chain_name": node_config_network["chain_name"],
-            "default_bootstrap_peers": default_bootstrap_peers,
-            "genesis": node_config_network["genesis"],
-            "genesis_parameters": {
+    network_config = node_config_network
+    network_config.pop("activation_account_name")
+    network_config["sandboxed_chain_name"] = "SANDBOXED_TEZOS"
+    network_config["default_bootstrap_peers"] = default_bootstrap_peers
+    network_config["genesis_parameters"] = {
                 "values": {
                     "genesis_pubkey": genesis_pubkey
                     }

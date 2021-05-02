@@ -6,6 +6,9 @@ node_config_network:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
     #timestamp: "2021-04-28T15:00:00Z"
+  user_activated_upgrades:
+  - level: 42
+    replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 images:
   #tezos: tezos/tezos:master_0a7fe025_20210428084834
 is_invitation: false
@@ -65,7 +68,7 @@ accounts:
 
 
 activation:
-  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+  protocol_hash: PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 2048
@@ -98,12 +101,9 @@ activation:
     min_proposal_quorum: 500
     initial_endorsers: 192
     delay_per_missing_endorsement: "2"
-    minimal_block_delay: '15'
-    # liquidity baking constants
-    liquidity_baking_subsidy: "2500000"
-    liquidity_baking_sunset_level: 525600
-    liquidity_baking_escape_ema_threshold: 1000000
+    test_chain_duration: "1966080"
   should_include_commitments: true
 
-protocol:
-  command: alpha
+protocols:
+- command: alpha
+- command: 009-FLoren
