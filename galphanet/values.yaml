@@ -64,46 +64,47 @@ accounts:
       # * tq's faucet
 
 
-activation:
-  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
-  protocol_parameters:
-    preserved_cycles: 3
-    blocks_per_cycle: 2048
-    blocks_per_commitment: 16
-    blocks_per_roll_snapshot: 128
-    blocks_per_voting_period: 1024
-    time_between_blocks:
-      - "30"
-      - "20"
-    endorsers_per_block: 256
-    hard_gas_limit_per_operation: "1040000"
-    hard_gas_limit_per_block: "10400000"
-    proof_of_work_threshold: "70368744177663"
-    tokens_per_roll: "8000000000"
-    michelson_maximum_type_size: 1000
-    seed_nonce_revelation_tip: "125000"
-    origination_size: 257
-    block_security_deposit: "512000000"
-    endorsement_security_deposit: "64000000"
-    baking_reward_per_endorsement:
-      - "78125"
-      - "11719"
-    endorsement_reward:
-      - "78125"
-      - "11719"
-    cost_per_byte: "250"
-    hard_storage_limit_per_operation: "60000"
-    quorum_min: 2000
-    quorum_max: 7000
-    min_proposal_quorum: 500
-    initial_endorsers: 192
-    delay_per_missing_endorsement: "2"
-    minimal_block_delay: '15'
-    # liquidity baking constants
-    liquidity_baking_subsidy: "2500000"
-    liquidity_baking_sunset_level: 525600
-    liquidity_baking_escape_ema_threshold: 1000000
-  should_include_commitments: true
+      # comment out activation after it's done once otherwise pulumi is unhappy
+      #activation:
+      #  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+      #  protocol_parameters:
+      #    preserved_cycles: 3
+      #    blocks_per_cycle: 2048
+      #    blocks_per_commitment: 16
+      #    blocks_per_roll_snapshot: 128
+      #    blocks_per_voting_period: 1024
+      #    time_between_blocks:
+      #      - "30"
+      #      - "20"
+      #    endorsers_per_block: 256
+      #    hard_gas_limit_per_operation: "1040000"
+      #    hard_gas_limit_per_block: "10400000"
+      #    proof_of_work_threshold: "70368744177663"
+      #    tokens_per_roll: "8000000000"
+      #    michelson_maximum_type_size: 1000
+      #    seed_nonce_revelation_tip: "125000"
+      #    origination_size: 257
+      #    block_security_deposit: "512000000"
+      #    endorsement_security_deposit: "64000000"
+      #    baking_reward_per_endorsement:
+      #      - "78125"
+      #      - "11719"
+      #    endorsement_reward:
+      #      - "78125"
+      #      - "11719"
+      #    cost_per_byte: "250"
+      #    hard_storage_limit_per_operation: "60000"
+      #    quorum_min: 2000
+      #    quorum_max: 7000
+      #    min_proposal_quorum: 500
+      #    initial_endorsers: 192
+      #    delay_per_missing_endorsement: "2"
+      #    minimal_block_delay: '15'
+      #    # liquidity baking constants
+      #    liquidity_baking_subsidy: "2500000"
+      #    liquidity_baking_sunset_level: 525600
+      #    liquidity_baking_escape_ema_threshold: 1000000
+      #  should_include_commitments: true
 
 protocol:
   command: alpha
