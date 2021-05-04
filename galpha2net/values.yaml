@@ -61,8 +61,9 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "500000000000000"
-  liquid_admin:
-    # the admin for the liquidity baking contract
+  tzbtc_admin:
+    # admin for the test token contract that stands in for tzBTC.
+    # (put here to test liquidity baking)
     key: edpkuBknW28nW72KG6RoHtYW7p12T6GKc7nAbwYX5m8Wd9sDVC9yav
     type: public
     is_bootstrap_baker_account: false
