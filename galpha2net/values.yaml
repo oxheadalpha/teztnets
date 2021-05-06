@@ -10,7 +10,7 @@ node_config_network:
   - level: 42
     replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 images:
-  tezos: tezos/tezos:master_b72d7960_20210505211746
+  tezos: tezos/tezos:master_25655e7e_20210506121840
 is_invitation: false
 nodes:
   baking:
