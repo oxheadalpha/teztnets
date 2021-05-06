@@ -69,7 +69,7 @@ export class TezosK8s extends pulumi.ComponentResource {
                "key": private_non_baking_key,
                "type": "secret",
                "is_bootstrap_baker_account": false,
-               "bootstrap_balance": "500000000000000"
+               "bootstrap_balance": "5000000000000000"
         }
         
         const tezosK8sImages = defaultHelmValues["tezos_k8s_images"]

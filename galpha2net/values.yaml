@@ -67,7 +67,7 @@ accounts:
     key: edpkuBknW28nW72KG6RoHtYW7p12T6GKc7nAbwYX5m8Wd9sDVC9yav
     type: public
     is_bootstrap_baker_account: false
-    bootstrap_balance: "500000000000000"
+    bootstrap_balance: "5000000000000000"
 
 
       #two more accouts added by pulumi (not shown here):
