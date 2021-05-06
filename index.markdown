@@ -20,7 +20,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_25655e7e_20210506121840
 
 | | |
 |-------|---------------------|
-| Baker | `tezos-baker-alpha, 009-FLoren` |
+| Baker | `tezos-baker-alpha, 009-PsFLoren` |
 | Tezos docker build | [tezos/tezos:master_25655e7e_20210506121840](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_25655e7e_20210506121840) |
 | Full network name | `TEZOS_GALPHANET_2021-05-06T15:00:00Z` |
 
