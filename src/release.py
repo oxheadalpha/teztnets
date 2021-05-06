@@ -33,7 +33,6 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
                     "genesis_pubkey": genesis_pubkey
                     }
                 }
-            }
 
     with open(f"target/release/{network_name}", "w") as out_file:
         print(json.dumps(network_config), file=out_file)
