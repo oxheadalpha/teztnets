@@ -1,0 +1,5 @@
+description: Second alpha network for protocol G
+public_bootstrap_peers:
+  - galpha2net.smartpy.io
+  - galpha2net.tezos.co.il
+  - galpha2net.kaml.fr
