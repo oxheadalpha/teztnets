@@ -82,7 +82,7 @@ activation:
     blocks_per_cycle: 2048
     blocks_per_commitment: 16
     blocks_per_roll_snapshot: 128
-    blocks_per_voting_period: 1024
+    blocks_per_voting_period: 10240
     time_between_blocks:
       - "30"
       - "20"
