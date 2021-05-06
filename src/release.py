@@ -40,8 +40,8 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
             "network_url": f"https://teztnets.xyz/{network_name}",
             "description": network_metadata["description"],
             "docker_build": network_values["images"]["tezos"] }
-    if isinstance(network_values["protocol"], list):
-        teztnets[network_name]["command"] = ", ".join([ p["command"] for p in network_values["protocol"]])
+    if "protocols" in network_values:
+        teztnets[network_name]["command"] = ", ".join([ p["command"] for p in network_values["protocols"]])
     else:
         teztnets[network_name]["command"] = network_values["protocol"]["command"]
 
