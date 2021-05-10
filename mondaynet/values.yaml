@@ -78,5 +78,5 @@ accounts:
       #    liquidity_baking_escape_ema_threshold: 1000000
       #  should_include_commitments: true
 
-protocol:
+protocols:
 - command: alpha
