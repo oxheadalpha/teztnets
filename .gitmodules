@@ -1,9 +1,3 @@
-[submodule "mondaynet/tezos-k8s"]
-	path = mondaynet/tezos-k8s
-	url = git@github.com:nicolasochem/tezos-k8s.git
-[submodule "galphanet/tezos-k8s"]
-	path = galphanet/tezos-k8s
-	url = git@github.com:nicolasochem/tezos-k8s.git
 [submodule "galpha2net/tezos-k8s"]
 	path = galpha2net/tezos-k8s
 	url = git@github.com:tqtezos/tezos-k8s.git
