@@ -332,7 +332,5 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 //                                   private_baking_key, private_non_baking_key, cluster, repo);
 const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const galphanet_chain = new TezosK8s("galphanet", "galphanet/values.yaml", "galphanet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster, repo);
 const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net/values.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
