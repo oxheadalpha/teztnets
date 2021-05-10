@@ -24,6 +24,25 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_f581581a_20210507100713
 | Tezos docker build | [tezos/tezos:master_f581581a_20210507100713](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_f581581a_20210507100713) |
 | Full network name | `TEZOS_GALPHA2NET_2021-05-07T15:00:00Z` |
 
+mondaynet
+---------
+
+A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha
+
+To join mondaynet, download tezos-node from the specified docker build then run:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_a76bf6e8_20210510180824
+~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-alpha` |
+| Tezos docker build | [tezos/tezos:master_a76bf6e8_20210510180824](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a76bf6e8_20210510180824) |
+| Full network name | `TEZOS_MONDAYNET_2021-05-10T00:00:00Z` |
+
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
 
