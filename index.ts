@@ -38,7 +38,15 @@ export class TezosK8s extends pulumi.ComponentResource {
     * @param cluster The kubernetes cluster to deploy it into.
     * @param repo The ECR repository where to push the custom images for this chain.
     */
-    constructor(name: string, valuesPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
+    constructor(name: string,
+                valuesPath: string,
+                k8sRepoPath: string,
+                private_baking_key: string,
+                private_non_baking_key: string,
+                cluster: eks.Cluster,
+                repo: awsx.ecr.Repository,
+                suppressActivation=false,
+                opts?: pulumi.ResourceOptions) {
 
         const inputs: pulumi.Inputs = {
             options: opts,
@@ -84,6 +92,11 @@ export class TezosK8s extends pulumi.ComponentResource {
             {}
         )
         helmValues["tezos_k8s_images"] = pulumiTaggedImages
+
+        if (suppressActivation) {
+          helmValues["activation"] = undefined;
+        }
+
         // deploy from repository
         //this.chain = new k8s.helm.v2.Chart(this.name, {
         //    namespace: this.ns.metadata.name,
