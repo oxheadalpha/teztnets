@@ -94,7 +94,7 @@ export class TezosK8s extends pulumi.ComponentResource {
         helmValues["tezos_k8s_images"] = pulumiTaggedImages
 
         if (suppressActivation) {
-          helmValues["activation"] = undefined;
+          helmValues.delete("activation");
         }
 
         // deploy from repository
