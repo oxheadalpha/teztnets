@@ -8,6 +8,8 @@ import {createAliasRecord} from "./route53";
 import * as fs from 'fs';
 import * as YAML from 'yaml'
 
+const mime = require("mime");
+
 let stack = pulumi.getStack();
 
 // Function to fail on non-truthy variable.
@@ -19,6 +21,22 @@ const getEnvVariable = (name: string): string => {
   }
   return env;
 };
+
+function publicReadPolicyForBucket(bucketName: string) {
+    return JSON.stringify({
+        Version: "2012-10-17",
+        Statement: [{
+    	Effect: "Allow",
+    	Principal: "*",
+    	Action: [
+    	    "s3:GetObject"
+    	],
+    	Resource: [
+    	    `arn:aws:s3:::${bucketName}/*` // policy refers to bucket name explicitly
+    	]
+        }]
+    });
+}
 
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
@@ -38,7 +56,7 @@ export class TezosK8s extends pulumi.ComponentResource {
     * @param cluster The kubernetes cluster to deploy it into.
     * @param repo The ECR repository where to push the custom images for this chain.
     */
-    constructor(name: string, valuesPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, valuesPath: string, teztnetMetadataPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
 
         const inputs: pulumi.Inputs = {
             options: opts,
@@ -58,6 +76,29 @@ export class TezosK8s extends pulumi.ComponentResource {
         
         const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
         const helmValues = YAML.parse(helmValuesFile)
+
+        const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8')
+        const teztnetMetadata = YAML.parse(teztnetMetadataFile)
+        if (("bootstrap_contracts" in teztnetMetadata) &&
+            //"activation" in helmValues &&
+            teztnetMetadata["bootstrap_contracts"].length > 0) {
+            const activationBucket = new aws.s3.Bucket("activation-bucket");
+	    const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
+		bucket: activationBucket.bucket,
+		policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
+	    })
+            const bucketUrl = activationBucket.websiteEndpoint;
+            //helmValues["activation"]["bootstrap_contracts"] = []
+
+            teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
+		const bucketObject = new aws.s3.BucketObject(contractFile, {
+		    bucket: activationBucket.bucket,
+                    source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
+                    contentType: mime.getType(contractFile) 
+		});
+               // helmValues["activation"]["bootstrap_contracts"].push(`${bucketUrl}/${contractFile}`);
+            })
+        }
 
         helmValues["accounts"]["tqbaker"] = {
                "key": private_baking_key,
@@ -330,7 +371,7 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 // chains
 //const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "https://tqtezos.github.io/tezos-helm-charts/",
 //                                   private_baking_key, private_non_baking_key, cluster, repo);
-const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
+const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net/values.yaml", "galpha2net/tezos-k8s",
+const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);

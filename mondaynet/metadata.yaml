@@ -1,2 +1,5 @@
 description: A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha
 public_bootstrap_peers: []
+bootstrap_contracts:
+  - taquito1.json
+  - taquito2.json
