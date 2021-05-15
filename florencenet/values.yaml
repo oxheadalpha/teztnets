@@ -1,0 +1,48 @@
+nodes:
+  baking:
+    tezos-baking-node-0:
+      bake_using_account: tqbaker
+      config:
+        shell:
+          history_mode: full
+      is_bootstrap_node: true
+  regular: {}
+regular_node_statefulset: # charts/tezos/templates/node.yaml
+  name: tezos-node
+  node_type: regular
+  storage_size: 50Gi
+node_config_network:
+  chain_name: florencenet
+images:
+    tezos: tezos/tezos:v9.1
+full_snapshot_url: https://florencenet.xtz-shots.io/full
+rolling_snapshot_url: null
+
+protocols:
+- command: 009-FLoren
+
+accounts:
+  smartpy:
+    key: edpktv8Advoagbpo5TiyyDnmC1Mqne6vJMaXQ2vvuzUfJnBfMKJmdC
+    type: public
+  akishino:
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    type: public
+  ecadlabs:
+    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
+    type: public
+  tezosil:
+    key: edpkvQj8r3YigN6QFsDRaKQCoxDNhKK4whDUkFkw6Gom36d86uhEbv
+    type: public
+  romain:
+    key: edpku4HKE3q2BhPejtYYSmfF8unntUGWEEXPLZHPJrP45z6Gke64iU
+    type: public
+  pirbo:
+    key: edpkvE2HEoPyM1XbToGiLmuPhzzrZsAYCcR3nbrjEVsbEe6vFQFdPo
+    type: public
+  tz1THUNA:
+    key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
+    type: public
+      #two more accouts added by pulumi (not shown here):
+      # * tq's baker
+      # * tq's faucet
