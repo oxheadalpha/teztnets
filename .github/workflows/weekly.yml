@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: repo checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           ref: main
           fetch-depth: 0
@@ -28,7 +28,7 @@ jobs:
           image=$(docker image inspect docker.io/tezos/tezos:amd64-master | jq -r .[0].RepoDigests[0])
           python src/fastforward.py mondaynet $image
       - name: update the repo with the changes
-      - run: |
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git status
