@@ -1,8 +1,8 @@
-name: Update mondaynet config and trigger deployment
+name: Update mondaynet
 
 on:
   schedule:
-    - cron: "0 0 * * MON"
+    - cron: "0 10 * * MON"
 
 jobs:
   build:
