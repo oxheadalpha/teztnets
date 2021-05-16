@@ -1,0 +1,42 @@
+name: Update mondaynet config and trigger deployment
+
+on:
+  schedule:
+    - cron: "0 0 * * MON"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: repo checkout
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: true
+          token : ${{ secrets.ACCESS_TOKEN }}
+      - name: install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: install pip packages
+        run: |
+          pip install PyYAML
+      - name: update mondaynet config
+        run: |
+          docker image pull docker.io/tezos/tezos:amd64-master 
+          image=$(docker image inspect docker.io/tezos/tezos:amd64-master | jq -r .[0].RepoDigests[0])
+          python src/fastforward.py mondaynet $image
+      - name: update the repo with the changes
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git status
+          git add .
+          git commit -m "auto updated mondaynet config"
+          git push origin HEAD:main
+          last_version=$(git tag -l --sort=-v:refname | head -1)
+          new_version=$(echo $last_version | awk -F'.' '{print $1,$2+1;}' | tr ' ' '.')
+          commit_sha=$(git rev-parse HEAD)
+          git tag $new_version $commit_sha
+          git push origin HEAD:main --tags

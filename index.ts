@@ -48,6 +48,10 @@ export class TezosK8s extends pulumi.ComponentResource {
         // Default resource options for this component's child resources.
         const defaultResourceOptions: pulumi.ResourceOptions = { parent: this };
 
+        const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
+        const helmValues = YAML.parse(helmValuesFile)
+        name = name || helmValues["node_config_network"]["chain_name"]
+
         this.name = name;
         this.valuesPath = valuesPath;
         this.ns = new k8s.core.v1.Namespace(this.name, {metadata: {name:this.name,}},
@@ -56,9 +60,6 @@ export class TezosK8s extends pulumi.ComponentResource {
         const defaultHelmValuesFile = fs.readFileSync(`${k8sRepoPath}/charts/tezos/values.yaml`, 'utf8')
         const defaultHelmValues = YAML.parse(defaultHelmValuesFile)
         
-        const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
-        const helmValues = YAML.parse(helmValuesFile)
-
         helmValues["accounts"]["tqbaker"] = {
                "key": private_baking_key,
                "type": "secret",
@@ -328,7 +329,7 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
-const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
+const private_chain = new TezosK8s("", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
 const florencenet_chain = new TezosK8s("florencenet", "florencenet/values.yaml", "florencenet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
