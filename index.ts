@@ -43,14 +43,15 @@ export class TezosK8s extends pulumi.ComponentResource {
         const inputs: pulumi.Inputs = {
             options: opts,
         };
-        super("pulumi-contrib:components:TezosK8s", name, inputs, opts);
-
-        // Default resource options for this component's child resources.
-        const defaultResourceOptions: pulumi.ResourceOptions = { parent: this };
 
         const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
         const helmValues = YAML.parse(helmValuesFile)
         name = name || helmValues["node_config_network"]["chain_name"]
+
+        super("pulumi-contrib:components:TezosK8s", name, inputs, opts);
+
+        // Default resource options for this component's child resources.
+        const defaultResourceOptions: pulumi.ResourceOptions = { parent: this };
 
         this.name = name;
         this.valuesPath = valuesPath;
