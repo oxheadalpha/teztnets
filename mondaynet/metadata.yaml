@@ -2,4 +2,3 @@ description: A testnet that restarts every Monday launched from tezos/tezos mast
 public_bootstrap_peers: []
 bootstrap_contracts:
   - taquito1.json
-  - taquito2.json
