@@ -44,6 +44,7 @@ function publicReadPolicyForBucket(bucketName: string) {
  */
 export class TezosK8s extends pulumi.ComponentResource {
     readonly name: string;
+    readonly route53_name: string;
     readonly valuesPath: string;
     readonly ns: k8s.core.v1.Namespace;
     readonly chain: k8s.helm.v2.Chart;
@@ -56,26 +57,29 @@ export class TezosK8s extends pulumi.ComponentResource {
     * @param cluster The kubernetes cluster to deploy it into.
     * @param repo The ECR repository where to push the custom images for this chain.
     */
-    constructor(name: string, valuesPath: string, teztnetMetadataPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, route53_name: string, valuesPath: string, teztnetMetadataPath: string, k8sRepoPath: string, private_baking_key: string, private_non_baking_key: string, cluster: eks.Cluster, repo: awsx.ecr.Repository, opts?: pulumi.ResourceOptions) {
 
         const inputs: pulumi.Inputs = {
             options: opts,
         };
+
+        const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
+        const helmValues = YAML.parse(helmValuesFile)
+        name = name || helmValues["node_config_network"]["chain_name"].split("T00")[0].toLowerCase().replace(/_/g,'-')
+
         super("pulumi-contrib:components:TezosK8s", name, inputs, opts);
 
         // Default resource options for this component's child resources.
         const defaultResourceOptions: pulumi.ResourceOptions = { parent: this };
 
         this.name = name;
+        this.route53_name = route53_name;
         this.valuesPath = valuesPath;
         this.ns = new k8s.core.v1.Namespace(this.name, {metadata: {name:this.name,}},
                             { provider: cluster.provider});
 
         const defaultHelmValuesFile = fs.readFileSync(`${k8sRepoPath}/charts/tezos/values.yaml`, 'utf8')
         const defaultHelmValues = YAML.parse(defaultHelmValuesFile)
-        
-        const helmValuesFile = fs.readFileSync(valuesPath, 'utf8')
-        const helmValues = YAML.parse(helmValuesFile)
 
         const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8')
         const teztnetMetadata = YAML.parse(teztnetMetadataFile)
@@ -88,7 +92,7 @@ export class TezosK8s extends pulumi.ComponentResource {
 		policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
 	    })
             const bucketUrl = activationBucket.websiteEndpoint;
-            //helmValues["activation"]["bootstrap_contracts"] = []
+            helmValues["activation"]["bootstrap_contracts"] = []
 
             teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
 		const bucketObject = new aws.s3.BucketObject(contractFile, {
@@ -96,7 +100,7 @@ export class TezosK8s extends pulumi.ComponentResource {
                     source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
                     contentType: mime.getType(contractFile) 
 		});
-               // helmValues["activation"]["bootstrap_contracts"].push(`${bucketUrl}/${contractFile}`);
+                helmValues["activation"]["bootstrap_contracts"].push(`${bucketUrl}/${contractFile}`);
             })
         }
 
@@ -149,6 +153,7 @@ export class TezosK8s extends pulumi.ComponentResource {
               name: this.name,
               annotations: {
                 "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+                "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
               },
             },
             spec: {
@@ -164,7 +169,7 @@ export class TezosK8s extends pulumi.ComponentResource {
           { provider: cluster.provider }
         );
         let aRecord = p2p_lb_service.status.apply((s) =>
-            createAliasRecord(`${this.name}.tznode.net`, s.loadBalancer.ingress[0].hostname)
+            createAliasRecord(`${this.route53_name}.tznode.net`, s.loadBalancer.ingress[0].hostname)
         );
 
     }
@@ -242,101 +247,211 @@ const ingressControllerPolicy = new aws.iam.Policy(
   "ingressController-iam-policy",
   {
     policy: {
-      Version: "2012-10-17",
-      Statement: [
-        {
-          Effect: "Allow",
-          Action: [
-            "acm:DescribeCertificate",
-            "acm:ListCertificates",
-            "acm:GetCertificate"
-          ],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: [
-            "ec2:AuthorizeSecurityGroupIngress",
-            "ec2:CreateSecurityGroup",
-            "ec2:CreateTags",
-            "ec2:DeleteTags",
-            "ec2:DeleteSecurityGroup",
-            "ec2:DescribeInstances",
-            "ec2:DescribeInstanceStatus",
-            "ec2:DescribeSecurityGroups",
-            "ec2:DescribeSubnets",
-            "ec2:DescribeTags",
-            "ec2:DescribeVpcs",
-            "ec2:ModifyInstanceAttribute",
-            "ec2:ModifyNetworkInterfaceAttribute",
-            "ec2:RevokeSecurityGroupIngress"
-          ],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: [
-            "elasticloadbalancing:AddTags",
-            "elasticloadbalancing:CreateListener",
-            "elasticloadbalancing:CreateLoadBalancer",
-            "elasticloadbalancing:CreateRule",
-            "elasticloadbalancing:CreateTargetGroup",
-            "elasticloadbalancing:DeleteListener",
-            "elasticloadbalancing:DeleteLoadBalancer",
-            "elasticloadbalancing:DeleteRule",
-            "elasticloadbalancing:DeleteTargetGroup",
-            "elasticloadbalancing:DeregisterTargets",
-            "elasticloadbalancing:DescribeListeners",
-            "elasticloadbalancing:DescribeListenerCertificates",
-            "elasticloadbalancing:DescribeLoadBalancers",
-            "elasticloadbalancing:DescribeLoadBalancerAttributes",
-            "elasticloadbalancing:DescribeRules",
-            "elasticloadbalancing:DescribeSSLPolicies",
-            "elasticloadbalancing:DescribeTags",
-            "elasticloadbalancing:DescribeTargetGroups",
-            "elasticloadbalancing:DescribeTargetGroupAttributes",
-            "elasticloadbalancing:DescribeTargetHealth",
-            "elasticloadbalancing:ModifyListener",
-            "elasticloadbalancing:ModifyLoadBalancerAttributes",
-            "elasticloadbalancing:ModifyRule",
-            "elasticloadbalancing:ModifyTargetGroup",
-            "elasticloadbalancing:ModifyTargetGroupAttributes",
-            "elasticloadbalancing:RegisterTargets",
-            "elasticloadbalancing:RemoveTags",
-            "elasticloadbalancing:SetIpAddressType",
-            "elasticloadbalancing:SetSecurityGroups",
-            "elasticloadbalancing:SetSubnets",
-            "elasticloadbalancing:SetWebACL"
-          ],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: ["iam:GetServerCertificate", "iam:ListServerCertificates"],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: [
-            "waf-regional:GetWebACLForResource",
-            "waf-regional:GetWebACL",
-            "waf-regional:AssociateWebACL",
-            "waf-regional:DisassociateWebACL",
-            "wafv2:GetWebACLForResource"
-          ],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: ["tag:GetResources", "tag:TagResources"],
-          Resource: "*"
-        },
-        {
-          Effect: "Allow",
-          Action: ["waf:GetWebACL"],
-          Resource: "*"
-        }
-      ]
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "iam:CreateServiceLinkedRole",
+                    "ec2:DescribeAccountAttributes",
+                    "ec2:DescribeAddresses",
+                    "ec2:DescribeAvailabilityZones",
+                    "ec2:DescribeInternetGateways",
+                    "ec2:DescribeVpcs",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeInstances",
+                    "ec2:DescribeNetworkInterfaces",
+                    "ec2:DescribeTags",
+                    "ec2:GetCoipPoolUsage",
+                    "ec2:DescribeCoipPools",
+                    "elasticloadbalancing:DescribeLoadBalancers",
+                    "elasticloadbalancing:DescribeLoadBalancerAttributes",
+                    "elasticloadbalancing:DescribeListeners",
+                    "elasticloadbalancing:DescribeListenerCertificates",
+                    "elasticloadbalancing:DescribeSSLPolicies",
+                    "elasticloadbalancing:DescribeRules",
+                    "elasticloadbalancing:DescribeTargetGroups",
+                    "elasticloadbalancing:DescribeTargetGroupAttributes",
+                    "elasticloadbalancing:DescribeTargetHealth",
+                    "elasticloadbalancing:DescribeTags"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "cognito-idp:DescribeUserPoolClient",
+                    "acm:ListCertificates",
+                    "acm:DescribeCertificate",
+                    "iam:ListServerCertificates",
+                    "iam:GetServerCertificate",
+                    "waf-regional:GetWebACL",
+                    "waf-regional:GetWebACLForResource",
+                    "waf-regional:AssociateWebACL",
+                    "waf-regional:DisassociateWebACL",
+                    "wafv2:GetWebACL",
+                    "wafv2:GetWebACLForResource",
+                    "wafv2:AssociateWebACL",
+                    "wafv2:DisassociateWebACL",
+                    "shield:GetSubscriptionState",
+                    "shield:DescribeProtection",
+                    "shield:CreateProtection",
+                    "shield:DeleteProtection"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:AuthorizeSecurityGroupIngress",
+                    "ec2:RevokeSecurityGroupIngress"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:CreateSecurityGroup"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:CreateTags"
+                ],
+                "Resource": "arn:aws:ec2:*:*:security-group/*",
+                "Condition": {
+                    "StringEquals": {
+                        "ec2:CreateAction": "CreateSecurityGroup"
+                    },
+                    "Null": {
+                        "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:CreateTags",
+                    "ec2:DeleteTags"
+                ],
+                "Resource": "arn:aws:ec2:*:*:security-group/*",
+                "Condition": {
+                    "Null": {
+                        "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+                        "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:AuthorizeSecurityGroupIngress",
+                    "ec2:RevokeSecurityGroupIngress",
+                    "ec2:DeleteSecurityGroup"
+                ],
+                "Resource": "*",
+                "Condition": {
+                    "Null": {
+                        "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:CreateLoadBalancer",
+                    "elasticloadbalancing:CreateTargetGroup"
+                ],
+                "Resource": "*",
+                "Condition": {
+                    "Null": {
+                        "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:CreateListener",
+                    "elasticloadbalancing:DeleteListener",
+                    "elasticloadbalancing:CreateRule",
+                    "elasticloadbalancing:DeleteRule"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:AddTags",
+                    "elasticloadbalancing:RemoveTags"
+                ],
+                "Resource": [
+                    "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*",
+                    "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+                    "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*"
+                ],
+                "Condition": {
+                    "Null": {
+                        "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+                        "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:AddTags",
+                    "elasticloadbalancing:RemoveTags"
+                ],
+                "Resource": [
+                    "arn:aws:elasticloadbalancing:*:*:listener/net/*/*/*",
+                    "arn:aws:elasticloadbalancing:*:*:listener/app/*/*/*",
+                    "arn:aws:elasticloadbalancing:*:*:listener-rule/net/*/*/*",
+                    "arn:aws:elasticloadbalancing:*:*:listener-rule/app/*/*/*"
+                ]
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:ModifyLoadBalancerAttributes",
+                    "elasticloadbalancing:SetIpAddressType",
+                    "elasticloadbalancing:SetSecurityGroups",
+                    "elasticloadbalancing:SetSubnets",
+                    "elasticloadbalancing:DeleteLoadBalancer",
+                    "elasticloadbalancing:ModifyTargetGroup",
+                    "elasticloadbalancing:ModifyTargetGroupAttributes",
+                    "elasticloadbalancing:DeleteTargetGroup"
+                ],
+                "Resource": "*",
+                "Condition": {
+                    "Null": {
+                        "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+                    }
+                }
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:RegisterTargets",
+                    "elasticloadbalancing:DeregisterTargets"
+                ],
+                "Resource": "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "elasticloadbalancing:SetWebAcl",
+                    "elasticloadbalancing:ModifyListener",
+                    "elasticloadbalancing:AddListenerCertificates",
+                    "elasticloadbalancing:RemoveListenerCertificates",
+                    "elasticloadbalancing:ModifyRule"
+                ],
+                "Resource": "*"
+            }
+        ]
     }
   }
 );
@@ -356,6 +471,7 @@ const albingresscntlr = new k8s.helm.v2.Chart(
   {
     chart:
       "aws-load-balancer-controller",
+    version: "1.2.0",
     fetchOpts:{
         repo: "https://aws.github.io/eks-charts",
     },
@@ -369,9 +485,9 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
-const private_chain = new TezosK8s("mondaynet", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
+const private_chain = new TezosK8s("", "mondaynet", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const florencenet_chain = new TezosK8s("florencenet", "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
+const florencenet_chain = new TezosK8s("florencenet", "florencenoba", "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
+const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
