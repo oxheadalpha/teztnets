@@ -1,6 +1,6 @@
  {
     "amount": "1000000000",
-    "delegate": "tz1TcMZd6eMnuawedgSjAtbcM9a9jiorEcqK",
+    "delegate": "tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD",
     "script": {
         "code": [
             {
@@ -763,7 +763,7 @@
                 },
                 [
                     {
-                        "string": "edpkuLxx9PQD8fZ45eUzrK3BhfDZJHhBuK4Zi49DcEGANwd2rpX82t"
+                        "string": "edpkuEmYqLwV9DFYw2xtLiiXXHLL3Lf8XXwjkonisHjsXLrug8zmnk"
                     }
                 ]
             ]
