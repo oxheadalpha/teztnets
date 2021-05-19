@@ -51,7 +51,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 To join mondaynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_ff1821a0_20210517155640
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_7904a9b2_20210517164345
 ~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
 ~ $ tezos-node run
 ```
@@ -59,8 +59,8 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_ff1821a0_20210517155640
 | | |
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
-| Tezos docker build | [tezos/tezos:master_ff1821a0_20210517155640](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_ff1821a0_20210517155640) |
-| Full network name | `TEZOS_MONDAYNET_2021-05-17T00:00:00Z` |
+| Tezos docker build | [tezos/tezos:master_7904a9b2_20210517164345](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_7904a9b2_20210517164345) |
+| Full network name | `TEZOS_MONDAYNET_2021-05-19T00:00:00Z` |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
