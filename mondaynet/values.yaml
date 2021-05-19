@@ -20,7 +20,7 @@ activation:
     preserved_cycles: 3
     blocks_per_cycle: 128
     blocks_per_commitment: 16
-    blocks_per_roll_snapshot: 128
+    blocks_per_roll_snapshot: 64
     blocks_per_voting_period: 10240
     time_between_blocks:
       - "30"
@@ -52,15 +52,15 @@ activation:
 bootstrap_peers: []
 full_snapshot_url: null
 images:
-  tezos: tezos/tezos:master_ff1821a0_20210517155640
+  tezos: tezos/tezos:master_7904a9b2_20210517164345
 is_invitation: false
 node_config_network:
   activation_account_name: tqbaker
-  chain_name: TEZOS_MONDAYNET_2021-05-17T00:00:00Z
+  chain_name: TEZOS_MONDAYNET_2021-05-19T00:00:00Z
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-    timestamp: '2021-05-17T00:00:00Z'
+    timestamp: '2021-05-19T00:00:00Z'
   user_activated_upgrades:
   - level: 255
     replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
@@ -82,4 +82,3 @@ zerotier_config:
   zerotier_network: null
   zerotier_token: null
 zerotier_in_use: false
-
