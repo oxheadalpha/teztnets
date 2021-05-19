@@ -43,6 +43,9 @@ accounts:
   tz1THUNA:
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
     type: public
-      #two more accouts added by pulumi (not shown here):
-      # * tq's baker
-      # * tq's faucet
+  tqbaker:
+    type: secret
+    # key injected by pulumi
+  tqfree:
+    type: secret
+    # key injected by pulumi

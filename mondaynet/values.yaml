@@ -4,6 +4,16 @@ accounts:
     is_bootstrap_baker_account: true
     key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
     type: public
+  tqbaker:
+    bootstrap_balance: '7500000000000'
+    is_bootstrap_baker_account: true
+    type: secret
+    # key injected by pulumi
+  tqfree:
+    bootstrap_balance: '5000000000000000'
+    is_bootstrap_baker_account: true
+    type: secret
+    # key injected by pulumi
 activation:
   protocol_hash: PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i
   protocol_parameters:

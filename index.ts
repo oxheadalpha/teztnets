@@ -112,18 +112,8 @@ export class TezosK8s extends pulumi.ComponentResource {
             }
         }
 
-        helmValues["accounts"]["tqbaker"] = {
-               "key": private_baking_key,
-               "type": "secret",
-               "is_bootstrap_baker_account": true,
-               "bootstrap_balance": "2500000000000"
-        }
-        helmValues["accounts"]["tqfree"] = {
-               "key": private_non_baking_key,
-               "type": "secret",
-               "is_bootstrap_baker_account": false,
-               "bootstrap_balance": "5000000000000000"
-        }
+        helmValues["accounts"]["tqbaker"]["key"] = private_baking_key
+        helmValues["accounts"]["tqfree"]["key"] = private_non_baking_key
         
         const tezosK8sImages = defaultHelmValues["tezos_k8s_images"]
         // do not build zerotier for now since it takes times and it is not used in tqinfra

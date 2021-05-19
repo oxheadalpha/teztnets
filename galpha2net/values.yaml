@@ -68,11 +68,16 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000000"
-
-
-      #two more accouts added by pulumi (not shown here):
-      # * tq's baker
-      # * tq's faucet
+  tqbaker:
+    bootstrap_balance: '7500000000000'
+    is_bootstrap_baker_account: true
+    type: secret
+    # key injected by pulumi
+  tqfree:
+    bootstrap_balance: '5000000000000000'
+    is_bootstrap_baker_account: true
+    type: secret
+    # key injected by pulumi
 
 
       #activation:
