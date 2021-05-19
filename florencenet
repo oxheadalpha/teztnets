@@ -1,0 +1,1 @@
+{"chain_name": "florencenet", "sandboxed_chain_name": "SANDBOXED_TEZOS", "default_bootstrap_peers": ["florencenet.tznode.net", "florencenobanet.smartpy.io:9733", "florencenobanet.tezos.co.il", "florencenobanet.kaml.fr", "florencenobanet.boot.tez.ie"], "genesis_parameters": {"values": {"genesis_pubkey": "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n"}}}

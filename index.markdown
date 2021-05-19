@@ -5,12 +5,31 @@ title: Teztnets
 
 Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. [Read more](about/).
 
+florencenet
+---------
+
+Long-running test network for the florence protocol.
+
+To join florencenet with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
+~ $ tezos-node config init --network florencenet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-009-PsFLoren` |
+| Tezos docker build | [tezos/tezos:v9.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.1) |
+| Full network name | `florencenet` |
+
 galpha2net
 ---------
 
 Second alpha network for protocol G
 
-To join galpha2net, download tezos-node from the specified docker build then run:
+To join galpha2net with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_f581581a_20210507100713
@@ -29,19 +48,19 @@ mondaynet
 
 A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha
 
-To join mondaynet, download tezos-node from the specified docker build then run:
+To join mondaynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_a76bf6e8_20210510180824
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_ff1821a0_20210517155640
 ~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Baker | `tezos-baker-alpha` |
-| Tezos docker build | [tezos/tezos:master_a76bf6e8_20210510180824](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a76bf6e8_20210510180824) |
-| Full network name | `TEZOS_MONDAYNET_2021-05-10T00:00:00Z` |
+| Baker | `tezos-baker-alpha, 009-PsFLoren` |
+| Tezos docker build | [tezos/tezos:master_ff1821a0_20210517155640](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_ff1821a0_20210517155640) |
+| Full network name | `TEZOS_MONDAYNET_2021-05-17T00:00:00Z` |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
