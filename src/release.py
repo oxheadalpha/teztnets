@@ -9,7 +9,7 @@ shutil.copytree("src/website", "target/release")
 
 teztnets = {}
 for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] != "./." and
-        f.path not in ["./node_modules", "./target", "./src", "./bootstrap_contracts" ]:
+        f.path not in ["./node_modules", "./target", "./src", "./bootstrap_contracts", "./bootstrap_commitments"]:
     with open(f"{network}/values.yaml", 'r') as stream:
         network_values = yaml.safe_load(stream)
     node_config_network = network_values["node_config_network"]
