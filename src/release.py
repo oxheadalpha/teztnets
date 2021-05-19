@@ -26,7 +26,12 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     default_bootstrap_peers.insert(0, f"{network_name}.tznode.net")
 
     network_config = node_config_network
-    network_config.pop("activation_account_name")
+    if "activation_account_name" in network_config:
+        network_config.pop("activation_account_name")
+        network_url = f"https://teztnets.xyz/{network_name}"
+    else:
+        # network config hardcoded in binary, simply pass the name instead of URL
+        network_url = network_name
     network_config["sandboxed_chain_name"] = "SANDBOXED_TEZOS"
     network_config["default_bootstrap_peers"] = default_bootstrap_peers
     network_config["genesis_parameters"] = {
@@ -38,7 +43,7 @@ for network in [ f.path for f in os.scandir(".") if f.is_dir() and f.path[:3] !=
     with open(f"target/release/{network_name}", "w") as out_file:
         print(json.dumps(network_config), file=out_file)
     teztnets[network_name] = { "chain_name": node_config_network["chain_name"],
-            "network_url": f"https://teztnets.xyz/{network_name}",
+            "network_url": network_url,
             "description": network_metadata["description"],
             "docker_build": network_values["images"]["tezos"] }
     if "protocols" in network_values:
