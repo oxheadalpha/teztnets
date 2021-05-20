@@ -72,7 +72,7 @@ nodes:
         shell:
           history_mode: archive
       is_bootstrap_node: true
-  regular: {}
+  regular: null
 protocols:
 - command: alpha
 - command: 009-PsFLoren
