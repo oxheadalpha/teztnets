@@ -83,9 +83,9 @@ export class TezosK8s extends pulumi.ComponentResource {
 
         const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8')
         const teztnetMetadata = YAML.parse(teztnetMetadataFile)
-        if ((("bootstrap_contracts" in teztnetMetadata) &&
+        if (("bootstrap_contracts" in teztnetMetadata) &&
             "activation" in helmValues &&
-            teztnetMetadata["bootstrap_contracts"].length > 0) || ("bootstrap_commitments" in teztnetMetadata)) {
+            (teztnetMetadata["bootstrap_contracts"].length > 0 || "bootstrap_commitments" in teztnetMetadata)) {
             const activationBucket = new aws.s3.Bucket("activation-bucket");
 	    const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
 		bucket: activationBucket.bucket,
