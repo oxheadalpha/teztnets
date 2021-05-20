@@ -83,9 +83,8 @@ export class TezosK8s extends pulumi.ComponentResource {
 
         const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8')
         const teztnetMetadata = YAML.parse(teztnetMetadataFile)
-        if (("bootstrap_contracts" in teztnetMetadata) &&
-            "activation" in helmValues &&
-            (teztnetMetadata["bootstrap_contracts"].length > 0 || "bootstrap_commitments" in teztnetMetadata)) {
+        if ("activation" in helmValues &&
+            ("bootstrap_contracts" in teztnetMetadata || "bootstrap_commitments" in teztnetMetadata)) {
             const activationBucket = new aws.s3.Bucket("activation-bucket");
 	    const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
 		bucket: activationBucket.bucket,
@@ -489,5 +488,5 @@ const florencenet_chain = new TezosK8s("florencenet", "florencenoba", "florencen
                                    private_baking_key, private_non_baking_key, cluster, repo);
 const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-//const granadanet_chain = new TezosK8s("", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
-                                   //private_baking_key, private_non_baking_key, cluster, repo);
+const granadanet_chain = new TezosK8s("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster, repo);
