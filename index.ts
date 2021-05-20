@@ -92,14 +92,16 @@ export class TezosK8s extends pulumi.ComponentResource {
 	    })
             helmValues["activation"]["bootstrap_contract_urls"] = []
 
-            teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
-		const bucketObject = new aws.s3.BucketObject(contractFile, {
-		    bucket: activationBucket.bucket,
-                    source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
-                    contentType: mime.getType(contractFile) 
-		});
-                helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
-            })
+            if ("bootstrap_contracts" in teztnetMetadata) {
+                teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
+                    const bucketObject = new aws.s3.BucketObject(contractFile, {
+                        bucket: activationBucket.bucket,
+                        source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
+                        contentType: mime.getType(contractFile)
+                    });
+                    helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
+                })
+            }
             if ("bootstrap_commitments" in teztnetMetadata) {
                 let commitmentFile = teztnetMetadata["bootstrap_commitments"]
 		const bucketObject = new aws.s3.BucketObject(commitmentFile, {
@@ -488,5 +490,5 @@ const florencenet_chain = new TezosK8s("florencenet", "florencenoba", "florencen
                                    private_baking_key, private_non_baking_key, cluster, repo);
 const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const granadanet_chain = new TezosK8s("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster, repo);
+//const granadanet_chain = new TezosK8s("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
+                                   //private_baking_key, private_non_baking_key, cluster, repo);
