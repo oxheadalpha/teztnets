@@ -61,7 +61,7 @@ accounts:
     is_bootstrap_baker_account: false
     bootstrap_balance: '5000000000000'
   marco:
-    key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
+    key: edpkvMWHXeETjH4i2h2ngkG2y6aVdgtW99pQ3SuHJoWNEPKANzVRLT
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: '5000000000000'
