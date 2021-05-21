@@ -56,9 +56,8 @@ export class TezosK8s extends pulumi.ComponentResource {
 
     const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8');
     const teztnetMetadata = YAML.parse(teztnetMetadataFile);
-    if (("bootstrap_contracts" in teztnetMetadata) &&
-      "activation" in helmValues &&
-      (teztnetMetadata["bootstrap_contracts"].length > 0 || "bootstrap_commitments" in teztnetMetadata)) {
+    if ("activation" in helmValues &&
+       ("bootstrap_contracts" in teztnetMetadata || "bootstrap_commitments" in teztnetMetadata)) {
       const activationBucket = new aws.s3.Bucket("activation-bucket");
       const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
         bucket: activationBucket.bucket,
@@ -66,14 +65,16 @@ export class TezosK8s extends pulumi.ComponentResource {
       });
       helmValues["activation"]["bootstrap_contract_urls"] = [];
 
-      teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
-        const bucketObject = new aws.s3.BucketObject(contractFile, {
-          bucket: activationBucket.bucket,
-          source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
-          contentType: mime.getType(contractFile)
-        });
-        helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
-      });
+      if ("bootstrap_contracts" in teztnetMetadata) {
+        teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
+            const bucketObject = new aws.s3.BucketObject(contractFile, {
+                bucket: activationBucket.bucket,
+                source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
+                contentType: mime.getType(contractFile) 
+            });
+            helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
+        })
+      }
       if ("bootstrap_commitments" in teztnetMetadata) {
         let commitmentFile = teztnetMetadata["bootstrap_commitments"];
         const bucketObject = new aws.s3.BucketObject(commitmentFile, {
