@@ -1,11 +1,4 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as eks from "@pulumi/eks";
-import * as k8s from "@pulumi/kubernetes";
-import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
-
-import * as fs from 'fs';
-import * as YAML from 'yaml'
 
 function getDomainAndSubdomain(domain: string) {
   const parts = domain.split('.');
