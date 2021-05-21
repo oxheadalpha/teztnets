@@ -10,7 +10,7 @@ node_config_network:
   - level: 4095
     replacement_protocol: PsGraNadatF72MEA6sTufJB2uVKtRXbDMbJo7SNzKjAfdx9bP5q
 images:
-  tezos: ???
+  tezos: tezos/tezos:test-release_917437eb_20210521140907
 is_invitation: false
 nodes:
   baking:
@@ -57,6 +57,11 @@ accounts:
     bootstrap_balance: '5000000000000'
   luke:
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: '5000000000000'
+  marco:
+    key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: '5000000000000'
@@ -123,4 +128,4 @@ activation:
 
 protocols:
 - command: 009-PsFLoren
-- command: alpha
+- command: 010-PsGraNad
