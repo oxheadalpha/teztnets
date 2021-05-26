@@ -104,12 +104,12 @@ export class TezosChain extends pulumi.ComponentResource {
 
     helmValues["accounts"]["tqbaker"]["key"] = private_baking_key;
     helmValues["accounts"]["tqfree"]["key"] = private_non_baking_key;
+    // if specified, parameter overrides container image from values.yaml
+    helmValues["images"]["tezos"] = params.containerImage || helmValues["images"]["tezos"]
 
     const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
     // do not build zerotier for now since it takes times and it is not used in tqinfra
     delete tezosK8sImages["zerotier"];
-    // if specified, parameter overrides container image from values.yaml
-    tezosK8sImages["tezos"] = params.containerImage || tezosK8sImages["tezos"]
 
     const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
       (obj: { [index: string]: any; }, [key]) => {
@@ -119,6 +119,7 @@ export class TezosChain extends pulumi.ComponentResource {
       {}
     );
     helmValues["tezos_k8s_images"] = pulumiTaggedImages;
+
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
     //    namespace: this.ns.metadata.name,
