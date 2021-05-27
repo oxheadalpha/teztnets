@@ -27,7 +27,7 @@ export class PeriodicChain extends TezosChain {
                 chainName: chainName,
                 containerImage: containerImage,
                 dnsName: alias,
-                simpleName: alias
+                simpleName: `${alias.toLowerCase()}-${deployDate.toISOString().split('T')[0]}`
             }, valuesPath, teztnetMetadataPath, k8sRepoPath, private_baking_key, private_non_baking_key, provider, repo, opts);
         }
 }
