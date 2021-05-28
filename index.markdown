@@ -5,25 +5,6 @@ title: Teztnets
 
 Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. [Read more](about/).
 
-florencenet
----------
-
-Long-running test network for the florence protocol.
-
-To join florencenet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
-~ $ tezos-node config init --network florencenet
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Baker | `tezos-baker-009-PsFLoren` |
-| Tezos docker build | [tezos/tezos:v9.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.1) |
-| Full network name | `florencenet` |
-
 galpha2net
 ---------
 
@@ -61,6 +42,44 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_7904a9b2_20210517164345
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
 | Tezos docker build | [tezos/tezos:master_7904a9b2_20210517164345](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_7904a9b2_20210517164345) |
 | Full network name | `TEZOS_MONDAYNET_2021-05-19T00:00:00Z` |
+
+granadanet
+---------
+
+Long-running testnet for Granada proposal
+
+To join granadanet with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:v9.2
+~ $ tezos-node config init --network https://teztnets.xyz/granadanet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-009-PsFLoren, 010-PtGRANAD` |
+| Tezos docker build | [tezos/tezos:v9.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.2) |
+| Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
+
+florencenet
+---------
+
+Long-running test network for the florence protocol.
+
+To join florencenet with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
+~ $ tezos-node config init --network florencenet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-009-PsFLoren` |
+| Tezos docker build | [tezos/tezos:v9.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.1) |
+| Full network name | `florencenet` |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
