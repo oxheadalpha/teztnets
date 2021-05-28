@@ -488,7 +488,5 @@ const mondaynet_chain = new TezosK8s("", "mondaynet", "mondaynet/values.yaml", "
                                    private_baking_key, private_non_baking_key, cluster, repo);
 const florencenet_chain = new TezosK8s("florencenet", "florencenoba", "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
-const galpha2net_chain = new TezosK8s("galpha2net", "galpha2net", "galpha2net/values.yaml", "galpha2net/metadata.yaml", "galpha2net/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster, repo);
 const granadanet_chain = new TezosK8s("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
