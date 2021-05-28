@@ -128,4 +128,4 @@ activation:
 
 protocols:
 - command: 009-PsFLoren
-- command: 010-PsGraNad
+- command: 010-PtGRANAD
