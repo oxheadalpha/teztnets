@@ -8,7 +8,7 @@ node_config_network:
     timestamp: "2021-05-21T15:00:00Z"
   user_activated_upgrades:
   - level: 4095
-    replacement_protocol: PsGraNadatF72MEA6sTufJB2uVKtRXbDMbJo7SNzKjAfdx9bP5q
+    replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
 images:
   tezos: tezos/tezos:test-release_917437eb_20210521140907
 is_invitation: false
