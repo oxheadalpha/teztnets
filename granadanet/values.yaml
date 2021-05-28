@@ -10,7 +10,7 @@ node_config_network:
   - level: 4095
     replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
 images:
-  tezos: tezos/tezos:test-release_917437eb_20210521140907
+  tezos: tezos/tezos:v9.2
 is_invitation: false
 nodes:
   baking:
