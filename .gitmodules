@@ -7,3 +7,6 @@
 [submodule "florencenet/tezos-k8s"]
 	path = florencenet/tezos-k8s
 	url = git@github.com:tqtezos/tezos-k8s.git
+[submodule "granadanet/tezos-k8s"]
+	path = granadanet/tezos-k8s
+	url = git@github.com:nicolasochem/tezos-k8s.git
