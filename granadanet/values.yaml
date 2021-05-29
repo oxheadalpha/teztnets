@@ -1,16 +1,16 @@
 bootstrap_peers: []
 node_config_network:
   activation_account_name: tqbaker
-  chain_name: TEZOS_GALPHA2NET_2021-05-07T15:00:00Z
+  chain_name: TEZOS_GRANADANET_2021-05-21T15:00:00Z
   genesis:
-    block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
+    block: BLockGenesisGenesisGenesisGenesisGenesisd4299hBGVoU
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-    timestamp: "2021-05-07T15:00:00Z"
+    timestamp: "2021-05-21T15:00:00Z"
   user_activated_upgrades:
-  - level: 2048
-    replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+  - level: 4095
+    replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
 images:
-  tezos: tezos/tezos:master_f581581a_20210507100713
+  tezos: tezos/tezos:v9.2
 is_invitation: false
 nodes:
   baking:
@@ -20,7 +20,7 @@ nodes:
         shell:
           history_mode: archive
       is_bootstrap_node: true
-  regular: {}
+  regular: null
 rpc_auth: false
 zerotier_config:
   zerotier_network: null
@@ -34,27 +34,37 @@ accounts:
     key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2500000000000"
+    bootstrap_balance: '5000000000000'
   smartpy:
     key: edpktv8Advoagbpo5TiyyDnmC1Mqne6vJMaXQ2vvuzUfJnBfMKJmdC
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2500000000000"
+    bootstrap_balance: '5000000000000'
   bruno:
     key: edpkuu3jmS3kbaLYTmyVaPHaxowC1KP8fDSrLoJhcvip1Cm2tK5QCd
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2500000000000"
+    bootstrap_balance: '5000000000000'
   tezosil:
     key: edpkvQj8r3YigN6QFsDRaKQCoxDNhKK4whDUkFkw6Gom36d86uhEbv
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2500000000000"
+    bootstrap_balance: '5000000000000'
   pirbo:
     key: edpkuGH2TWTQ5JrwzBLGRu5is1h7vcv5e5LN45VfqmXS5zaTUMpopH
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2500000000000"
+    bootstrap_balance: '5000000000000'
+  luke:
+    key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: '5000000000000'
+  marco:
+    key: edpkvMWHXeETjH4i2h2ngkG2y6aVdgtW99pQ3SuHJoWNEPKANzVRLT
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: '5000000000000'
   tz1THUNA:
     # Romain's faucet
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
@@ -69,7 +79,7 @@ accounts:
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000000"
   tqbaker:
-    bootstrap_balance: '7500000000000'
+    bootstrap_balance: '5000000000000'
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
@@ -113,9 +123,9 @@ accounts:
       #    quorum_max: 7000
       #    min_proposal_quorum: 500
       #    initial_endorsers: 24
-      #    delay_per_missing_endorsement: "8"
+      #    delay_per_missing_endorsement: "4"
       #    test_chain_duration: "1966080"
-      #  should_include_commitments: true
 
 protocols:
-- command: alpha
+- command: 009-PsFLoren
+- command: 010-PtGRANAD
