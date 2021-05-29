@@ -333,7 +333,11 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 // chains
 const mondaynet_chain = new PeriodicChain("mondaynet", "0 0 * * MON", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster.provider, repo);
-const florencenet_chain = new LegacyChain("florencenet", "florencenoba", "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster, repo);
+const florencenet_chain = new TezosChain({simpleName:"florencenet",
+                                         chainName:"florencenet",
+                                         containerImage: "",
+                                         dnsName: "florencenoba" },
+                                         "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
 const granadanet_chain = new LegacyChain("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster, repo);
