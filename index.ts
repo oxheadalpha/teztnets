@@ -4,7 +4,6 @@ import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
 
-import { TezosK8s as LegacyChain } from "./TezosK8s";
 import { TezosChain } from "./TezosChain"; // replacement for LegacyChain, as presently instanti
 import { PeriodicChain } from "./PeriodicChain";
 
@@ -334,10 +333,14 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 const mondaynet_chain = new PeriodicChain("mondaynet", "0 0 * * MON", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster.provider, repo);
 const florencenet_chain = new TezosChain({simpleName:"florencenet",
-                                         chainName:"florencenet",
+                                         chainName:"",
                                          containerImage: "",
                                          dnsName: "florencenoba" },
                                          "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster.provider, repo);
-const granadanet_chain = new LegacyChain("granadanet", "granadanet", "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster, repo);
+const granadanet_chain = new TezosChain({simpleName:"granadanet",
+                                        chainName: "",
+                                        containerImage: "",
+                                        dnsName: "granadanet"},
+                                        "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
