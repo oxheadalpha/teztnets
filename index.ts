@@ -344,3 +344,9 @@ const granadanet_chain = new TezosChain({simpleName:"granadanet",
                                         dnsName: "granadanet"},
                                         "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
                                    private_baking_key, private_non_baking_key, cluster.provider, repo);
+const granadanolbnet_chain = new TezosChain({simpleName:"granadanolbnet",
+                                        chainName: "",
+                                        containerImage: "",
+                                        dnsName: "granadanolbnet"},
+                                        "granadanolbnet/values.yaml", "granadanolbnet/metadata.yaml", "granadanolbnet/tezos-k8s",
+                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
