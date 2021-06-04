@@ -65,7 +65,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
 granadanolbnet
 ---------
 
-Long-running testnet for Granada proposal
+Testnet for Granada proposal - no Liquidity Baking
 
 To join granadanolbnet with docker, run the following commands:
 
