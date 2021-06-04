@@ -1,0 +1,3 @@
+description: Long-running testnet for Granada proposal
+public_bootstrap_peers: []
+bootstrap_commitments: commitments.json
