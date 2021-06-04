@@ -1,6 +1,0 @@
-description: Long-running testnet for Granada proposal
-public_bootstrap_peers:
-  - granadanet.smartpy.io
-  - granadanet.tezos.co.il
-  - granadanet.kaml.fr
-bootstrap_commitments: commitments.json

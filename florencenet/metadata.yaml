@@ -1,6 +1,0 @@
-description: Long-running test network for the florence protocol.
-public_bootstrap_peers:
-  - florencenobanet.smartpy.io:9733
-  - florencenobanet.tezos.co.il
-  - florencenobanet.kaml.fr
-  - florencenobanet.boot.tez.ie

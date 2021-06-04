@@ -330,17 +330,48 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
-const mondaynet_chain = new PeriodicChain("mondaynet", "0 0 * * MON", "mondaynet/values.yaml", "mondaynet/metadata.yaml", "mondaynet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
-const florencenet_chain = new TezosChain({simpleName:"florencenet",
-                                         chainName:"",
-                                         containerImage: "",
-                                         dnsName: "florencenoba" },
-                                         "florencenet/values.yaml", "florencenet/metadata.yaml", "florencenet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
-const granadanet_chain = new TezosChain({simpleName:"granadanet",
-                                        chainName: "",
-                                        containerImage: "",
-                                        dnsName: "granadanet"},
-                                        "granadanet/values.yaml", "granadanet/metadata.yaml", "granadanet/tezos-k8s",
-                                   private_baking_key, private_non_baking_key, cluster.provider, repo);
+const mondaynet_chain = new PeriodicChain(
+    {
+        simpleName:"mondaynet",
+        chainName:"",
+        containerImage: "",
+        description: "A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.",
+        bootstrapContracts: ['taquito1.json'],
+        bootstrapCommitments: "commitments.json"
+    },
+    "0 0 * * MON", "mondaynet/values.yaml", "mondaynet/tezos-k8s",
+    private_baking_key, private_non_baking_key, cluster.provider, repo);
+
+const florencenet_chain = new TezosChain(
+    {
+        simpleName: "florencenet",
+        chainName: "",
+        containerImage: "",
+        dnsName: "florencenoba",
+        description: "Long-running test network for the florence protocol.",
+        publicBootstrapPeers: [
+            "florencenobanet.smartpy.io:9733",
+            "florencenobanet.tezos.co.il",
+            "florencenobanet.kaml.fr",
+            "florencenobanet.boot.tez.ie",                                          
+        ],
+    },
+    "florencenet/values.yaml", "florencenet/tezos-k8s",
+    private_baking_key, private_non_baking_key, cluster.provider, repo);
+
+const granadanet_chain = new TezosChain(
+    {
+        simpleName: "granadanet",
+        chainName: "",
+        containerImage: "",
+        dnsName: "granadanet",
+        description: "Long-running testnet for Granada proposal.",
+        publicBootstrapPeers: [
+            "granadanet.smartpy.io",
+            "granadanet.tezos.co.il",
+            "granadanet.kaml.fr",
+        ],
+        bootstrapCommitments: "commitments.json",
+    },
+    "granadanet/values.yaml", "granadanet/tezos-k8s",
+    private_baking_key, private_non_baking_key, cluster.provider, repo);

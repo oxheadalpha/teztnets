@@ -9,11 +9,15 @@ import * as YAML from 'yaml';
 const mime = require("mime");
 
 
-interface TezosChainParameters {
-  simpleName: string;
-  chainName: string;
-  containerImage: string;
-  dnsName: string;
+export interface TezosChainParameters {
+  simpleName?: string;
+  chainName?: string;
+  containerImage?: string;
+  dnsName?: string;
+  description: string;
+  publicBootstrapPeers?: string[];
+  bootstrapContracts?: string[];
+  bootstrapCommitments?: string;
 }
 
 /**
@@ -24,7 +28,12 @@ interface TezosChainParameters {
 export class TezosChain extends pulumi.ComponentResource {
   readonly name: string;
   readonly route53_name: string;
-  readonly valuesPath: string;
+  readonly description: string;
+  readonly publicBootstrapPeers: string[];
+  readonly bootstrapContracts: string[];
+  readonly bootstrapCommitments: string;
+
+  readonly helmValues: any;
   readonly ns: k8s.core.v1.Namespace;
   readonly chain: k8s.helm.v2.Chart;
 
@@ -38,7 +47,6 @@ export class TezosChain extends pulumi.ComponentResource {
   */
   constructor(params: TezosChainParameters,
               valuesPath: string,
-              teztnetMetadataPath: string,
               k8sRepoPath: string,
               private_baking_key: string,
               private_non_baking_key: string,
@@ -63,17 +71,18 @@ export class TezosChain extends pulumi.ComponentResource {
 
     this.name = name;
     this.route53_name = params.dnsName || name;
-    this.valuesPath = valuesPath;
+    this.description = params.description;
+    this.publicBootstrapPeers = params.publicBootstrapPeers || [];
+    this.bootstrapContracts = params.bootstrapContracts || [];
+    this.bootstrapCommitments = params.bootstrapCommitments || "";
+
     this.ns = new k8s.core.v1.Namespace(this.name, { metadata: { name: this.name, } },
       { provider: provider });
 
     const defaultHelmValuesFile = fs.readFileSync(`${k8sRepoPath}/charts/tezos/values.yaml`, 'utf8');
     const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
 
-    const teztnetMetadataFile = fs.readFileSync(teztnetMetadataPath, 'utf8');
-    const teztnetMetadata = YAML.parse(teztnetMetadataFile);
-    if ("activation" in helmValues &&
-      ("bootstrap_contracts" in teztnetMetadata || "bootstrap_commitments" in teztnetMetadata)) {
+    if (("activation" in helmValues) && (this.bootstrapContracts || this.bootstrapCommitments)) {
       const activationBucket = new aws.s3.Bucket("activation-bucket");
       const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
         bucket: activationBucket.bucket,
@@ -81,8 +90,8 @@ export class TezosChain extends pulumi.ComponentResource {
       });
       helmValues["activation"]["bootstrap_contract_urls"] = [];
 
-      if ("bootstrap_contracts" in teztnetMetadata) {
-        teztnetMetadata["bootstrap_contracts"].forEach(function (contractFile: any) {
+      if (this.bootstrapContracts) {
+        this.bootstrapContracts.forEach(function (contractFile: any) {
             const bucketObject = new aws.s3.BucketObject(contractFile, {
                 bucket: activationBucket.bucket,
                 source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
@@ -91,8 +100,9 @@ export class TezosChain extends pulumi.ComponentResource {
             helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
       }
-      if ("bootstrap_commitments" in teztnetMetadata) {
-        let commitmentFile = teztnetMetadata["bootstrap_commitments"];
+
+      if (this.bootstrapCommitments) {
+        let commitmentFile = this.bootstrapCommitments;
         const bucketObject = new aws.s3.BucketObject(commitmentFile, {
           bucket: activationBucket.bucket,
           source: new pulumi.asset.FileAsset(`bootstrap_commitments/${commitmentFile}`),
@@ -119,6 +129,8 @@ export class TezosChain extends pulumi.ComponentResource {
       {}
     );
     helmValues["tezos_k8s_images"] = pulumiTaggedImages;
+
+    this.helmValues = helmValues;
 
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
@@ -161,6 +173,26 @@ export class TezosChain extends pulumi.ComponentResource {
     let aRecord = p2p_lb_service.status.apply((s) => createAliasRecord(`${this.route53_name}.tznode.net`, s.loadBalancer.ingress[0].hostname)
     );
 
+  }
+
+  getChainName(): string {
+    return this.helmValues["node_config_network"]["chain_name"];
+  }
+
+  getDescription(): string {
+    return this.description;
+  }
+
+  getNetworkUrl(): string {
+    return ""
+  }
+
+  getDockerBuild(): string {
+    return ""
+  }
+
+  getCommand(): string {
+    return ""
   }
 
 }
