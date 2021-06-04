@@ -62,6 +62,25 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
 | Tezos docker build | [tezos/tezos:v9.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.1) |
 | Full network name | `florencenet` |
 
+granadanolbnet
+---------
+
+Long-running testnet for Granada proposal
+
+To join granadanolbnet with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB
+~ $ tezos-node config init --network https://teztnets.xyz/granadanolbnet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-009-PsFLoren, 010-PtGRENLB` |
+| Tezos docker build | [registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB) |
+| Full network name | `TEZOS_GRANADANOLBNET_2021-06-04T15:00:00Z` |
+
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
 
