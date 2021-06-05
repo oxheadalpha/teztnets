@@ -375,3 +375,52 @@ const granadanet_chain = new TezosChain(
     },
     "granadanet/values.yaml", "granadanet/tezos-k8s",
     private_baking_key, private_non_baking_key, cluster.provider, repo);
+
+
+function getNetworks(chains: TezosChain[]): object {
+    const networks: {[name: string]: object} = {};
+
+    chains.forEach(function (chain) {
+        const bootstrapPeers: string[] = Object.assign([], chain.publicBootstrapPeers); // clone
+        bootstrapPeers.splice(0, 0, `${chain.name}.tznode.net`);
+    
+        // genesis_pubkey is the public key associated with the $TEZOS_BAKING_KEY private key in github secrets
+        // TODO: generate it dynamically based on privkey
+        const genesisPubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n";
+
+        const network = Object.assign({}, chain.helmValues["node_config_network"]); // clone
+        network["sandboxed_chain_name"] = "SANDBOXED_TEZOS";
+        network["default_bootstrap_peers"] = bootstrapPeers;
+        network["genesis_parameters"] = {
+            "values": {
+                "genesis_pubkey": genesisPubkey
+            }
+        };
+        if ("activation_account_name" in network) {
+            delete network["activation_account_name"];
+        };
+        
+        networks[chain.name] = network;
+    })
+
+    return networks;
+}
+
+function getTeztnets(chains: TezosChain[]): object {
+    const teztnets: {[name: string]: object} = {};
+
+    chains.forEach(function (chain) {
+        teztnets[chain.name] = {
+            chain_name: chain.getChainName(),
+            network_url: chain.getNetworkUrl(),
+            description: chain.getDescription(),
+            docker_build: chain.getDockerBuild(),
+            command: chain.getCommand()    
+        };
+    })
+
+    return teztnets;
+}
+
+export const networks = getNetworks([mondaynet_chain, florencenet_chain, granadanet_chain]);
+export const teztnets = getTeztnets([mondaynet_chain, florencenet_chain, granadanet_chain]);

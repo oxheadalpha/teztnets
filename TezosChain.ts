@@ -184,15 +184,26 @@ export class TezosChain extends pulumi.ComponentResource {
   }
 
   getNetworkUrl(): string {
-    return ""
+    if ("activation_account_name" in this.helmValues["node_config_network"]) {
+      return `https://teztnets.xyz/${this.name}`;
+    }
+
+    // network config hardcoded in binary, pass the name instead of URL
+    return this.name;
   }
 
   getDockerBuild(): string {
-    return ""
+    return this.helmValues["images"]["tezos"];
   }
 
   getCommand(): string {
-    return ""
+    if ("protocols" in this.helmValues) {
+      const protocols: [{command: string}] = this.helmValues["protocols"];
+      const commands = protocols.map(p => p["command"]);
+      return commands.join(", ");
+    }
+
+    return this.helmValues["protocol"]["command"];
   }
 
 }
