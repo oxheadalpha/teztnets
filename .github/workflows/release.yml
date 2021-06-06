@@ -51,6 +51,7 @@ jobs:
       - run: echo "${{ steps.pup.outputs.teztnets }}" > teztnets.json
 
   build:
+    needs: up
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -61,7 +62,7 @@ jobs:
           python-version: 3.8 #install the python needed
       - name: install pip pkgs
         run: |
-          pip install PyYAML jinja2 docker
+          pip install PyYAML jinja2 docker six
       - name: generate release artifacts
         run: |
           python src/release.py
