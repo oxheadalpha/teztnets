@@ -92,7 +92,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
       if (this.bootstrapContracts) {
         this.bootstrapContracts.forEach(function (contractFile: any) {
-            const bucketObject = new aws.s3.BucketObject(contractFile, {
+            const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
                 bucket: activationBucket.bucket,
                 source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
                 contentType: mime.getType(contractFile) 
@@ -103,7 +103,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
       if (this.bootstrapCommitments) {
         let commitmentFile = this.bootstrapCommitments;
-        const bucketObject = new aws.s3.BucketObject(commitmentFile, {
+        const bucketObject = new aws.s3.BucketObject(`${name}-${commitmentFile}`, {
           bucket: activationBucket.bucket,
           source: new pulumi.asset.FileAsset(`bootstrap_commitments/${commitmentFile}`),
           contentType: mime.getType(commitmentFile)
