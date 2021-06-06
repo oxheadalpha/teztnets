@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - 'v*'
+  schedule:
+    # update the deployment every Monday at 0:00 UTC
+    - cron:  '0 0 * * MON'
 
 jobs:
   up:
