@@ -376,6 +376,19 @@ const granadanet_chain = new TezosChain(
     "granadanet/values.yaml", "granadanet/tezos-k8s",
     private_baking_key, private_non_baking_key, cluster.provider, repo);
 
+const granadanolbnet_chain = new TezosChain(
+    {
+        simpleName: "granadanolbnet",
+        chainName: "",
+        containerImage: "",
+        dnsName: "granadanolbnet",
+        description: "Testnet for Granada proposal - no Liquidity Baking.",
+        publicBootstrapPeers: [],
+        bootstrapCommitments: "commitments.json",
+    },
+    "granadanolbnet/values.yaml", "granadanolbnet/tezos-k8s",
+    private_baking_key, private_non_baking_key, cluster.provider, repo);
+
 
 function getNetworks(chains: TezosChain[]): object {
     const networks: {[name: string]: object} = {};
@@ -422,5 +435,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([mondaynet_chain, florencenet_chain, granadanet_chain]);
-export const teztnets = getTeztnets([mondaynet_chain, florencenet_chain, granadanet_chain]);
+export const networks = getNetworks([mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
+export const teztnets = getTeztnets([mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
