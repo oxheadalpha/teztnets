@@ -94,6 +94,7 @@ export class TezosChain extends pulumi.ComponentResource {
         this.bootstrapContracts.forEach(function (contractFile: any) {
             const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
                 bucket: activationBucket.bucket,
+                key: contractFile,
                 source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
                 contentType: mime.getType(contractFile),
                 acl: 'public-read'
@@ -106,6 +107,7 @@ export class TezosChain extends pulumi.ComponentResource {
         let commitmentFile = this.bootstrapCommitments;
         const bucketObject = new aws.s3.BucketObject(`${name}-${commitmentFile}`, {
           bucket: activationBucket.bucket,
+          key: commitmentFile,
           source: new pulumi.asset.FileAsset(`bootstrap_commitments/${commitmentFile}`),
           contentType: mime.getType(commitmentFile),
           acl: 'public-read'
