@@ -95,7 +95,8 @@ export class TezosChain extends pulumi.ComponentResource {
             const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
                 bucket: activationBucket.bucket,
                 source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
-                contentType: mime.getType(contractFile) 
+                contentType: mime.getType(contractFile),
+                acl: 'public-read'
             });
             helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
@@ -106,7 +107,8 @@ export class TezosChain extends pulumi.ComponentResource {
         const bucketObject = new aws.s3.BucketObject(`${name}-${commitmentFile}`, {
           bucket: activationBucket.bucket,
           source: new pulumi.asset.FileAsset(`bootstrap_commitments/${commitmentFile}`),
-          contentType: mime.getType(commitmentFile)
+          contentType: mime.getType(commitmentFile),
+          acl: 'public-read'
         });
         helmValues["activation"]["commitments_url"] = pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${commitmentFile}`;
       }
