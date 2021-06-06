@@ -84,7 +84,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
     if (("activation" in helmValues) && (this.bootstrapContracts || this.bootstrapCommitments)) {
       const activationBucket = new aws.s3.Bucket(`${this.name}-activation-bucket`);
-      const bucketPolicy = new aws.s3.BucketPolicy("activation-bucket-policy", {
+      const bucketPolicy = new aws.s3.BucketPolicy(`${this.name}-activation-bucket-policy`, {
         bucket: activationBucket.bucket,
         policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
       });
