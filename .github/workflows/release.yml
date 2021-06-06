@@ -35,6 +35,7 @@ jobs:
       - run: npm install
 
       - uses: pulumi/actions@v2
+        id: pup
         with:
           command: up
           stack-name: tqtezos/teztnets/dev
@@ -43,6 +44,9 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           PRIVATE_BAKING_KEY: ${{secrets.PRIVATE_BAKING_KEY }}
           PRIVATE_NON_BAKING_KEY: ${{secrets.PRIVATE_NON_BAKING_KEY }}
+      - run: echo "${{ steps.pup.outputs.networks }}" > networks.json
+      - run: echo "${{ steps.pup.outputs.teztnets }}" > teztnets.json
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +58,7 @@ jobs:
           python-version: 3.8 #install the python needed
       - name: install pip pkgs
         run: |
-          pip install PyYAML jinja2
+          pip install PyYAML jinja2 docker
       - name: generate release artifacts
         run: |
           python src/release.py
