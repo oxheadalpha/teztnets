@@ -12,6 +12,9 @@ jobs:
   up:
     name: up
     runs-on: ubuntu-latest
+    outputs:
+      networks: ${{ steps.pup.outputs.networks }}
+      teztnets: ${{ steps.pup.outputs.teztnets }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -47,8 +50,6 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           PRIVATE_BAKING_KEY: ${{secrets.PRIVATE_BAKING_KEY }}
           PRIVATE_NON_BAKING_KEY: ${{secrets.PRIVATE_NON_BAKING_KEY }}
-      - run: echo "${{ steps.pup.outputs.networks }}" > networks.json
-      - run: echo "${{ steps.pup.outputs.teztnets }}" > teztnets.json
 
   build:
     needs: up
@@ -63,6 +64,8 @@ jobs:
       - name: install pip pkgs
         run: |
           pip install PyYAML jinja2 docker six
+      - run: echo "${{ needs.up.outputs.networks }}" > networks.json
+      - run: echo "${{ needs.up.outputs.teztnets }}" > teztnets.json
       - name: generate release artifacts
         run: |
           python src/release.py
