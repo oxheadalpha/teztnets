@@ -6,7 +6,7 @@ on:
       - 'v*'
   schedule:
     # update the deployment every Monday at 0:00 UTC
-    - cron:  '0 0 * * MON'
+    - cron:  '0 0 * * *'
 
 jobs:
   up:
@@ -63,7 +63,7 @@ jobs:
           python-version: 3.8 #install the python needed
       - name: install pip pkgs
         run: |
-          pip install PyYAML jinja2 docker six
+          pip install PyYAML jinja2
       - run: echo "${{ needs.up.outputs.networks }}" > networks.json
       - run: echo "${{ needs.up.outputs.teztnets }}" > teztnets.json
       - name: generate release artifacts
