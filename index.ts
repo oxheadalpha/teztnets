@@ -330,6 +330,18 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 );
 
 // chains
+const dailynet_chain = new PeriodicChain("dailynet",
+    {
+        description: "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
+        bootstrapContracts: ['taquito1.json'],
+        bootstrapCommitments: "commitments.json",
+        helmValuesPath: "mondaynet/values.yaml",
+        k8sRepoPath: "mondaynet/tezos-k8s",
+        private_baking_key: private_baking_key,
+        private_non_baking_key: private_non_baking_key
+    },
+    "0 0 * * *", cluster.provider, repo);
+
 const mondaynet_chain = new PeriodicChain("mondaynet",
     {
         description: "A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.",
@@ -432,5 +444,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
-export const teztnets = getTeztnets([mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, florencenet_chain, granadanet_chain, granadanolbnet_chain]);
