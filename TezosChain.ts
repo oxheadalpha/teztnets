@@ -190,9 +190,7 @@ export class TezosChain extends pulumi.ComponentResource {
       },
       { provider: this.provider }
     );
-    // let aRecord = p2p_lb_service.status.apply((s) => createAliasRecord(`${this.route53_name}.tznode.net`, s.loadBalancer.ingress[0].hostname)
-    // );
-
+    let aRecord = p2p_lb_service.status.apply((s) => createAliasRecord(`${this.route53_name}.tznode.net`, s.loadBalancer.ingress[0].hostname));
   }
 
   getChainName(): string {
