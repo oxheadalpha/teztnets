@@ -47,7 +47,6 @@ export class TezosImageResolver {
                                     `Expected content type application/json but received ${contentType}`);
                 }
                 if (error) {
-                    console.error(error.message);
                     res.resume();
                     reject(error);
                 }
