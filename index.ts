@@ -393,7 +393,7 @@ function getNetworks(chains: TezosChain[]): object {
 
     chains.forEach(function (chain) {
         const bootstrapPeers: string[] = Object.assign([], chain.publicBootstrapPeers); // clone
-        bootstrapPeers.splice(0, 0, `${chain.name}.tznode.net`);
+        bootstrapPeers.splice(0, 0, `${chain.route53_name}.tznode.net`);
     
         // genesis_pubkey is the public key associated with the $TEZOS_BAKING_KEY private key in github secrets
         // TODO: generate it dynamically based on privkey
