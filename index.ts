@@ -411,7 +411,7 @@ function getNetworks(chains: TezosChain[]): object {
             delete network["activation_account_name"];
         };
         
-        networks[chain.name] = network;
+        networks[chain.route53_name] = network;
     })
 
     return networks;
@@ -421,7 +421,7 @@ function getTeztnets(chains: TezosChain[]): object {
     const teztnets: {[name: string]: object} = {};
 
     chains.forEach(function (chain) {
-        teztnets[chain.name] = {
+        teztnets[chain.route53_name] = {
             chain_name: chain.getChainName(),
             network_url: chain.getNetworkUrl(),
             description: chain.getDescription(),
