@@ -64,9 +64,14 @@ jobs:
       - name: install pip pkgs
         run: |
           pip install PyYAML jinja2
-      - run: echo "${{ needs.up.outputs.networks }}" > networks.json
-      - run: echo "${{ needs.up.outputs.teztnets }}" > teztnets.json
-      - run: cat teztnets.json # debugging
+      - run: |
+          cat > networks.json <<EOF
+          ${{ needs.up.outputs.networks }}
+          EOF
+      - run: |
+          cat > teztnets.json <<EOF
+          ${{ needs.up.outputs.teztnets }}
+          EOF
       - name: generate release artifacts
         run: |
           python src/release.py
