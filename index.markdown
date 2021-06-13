@@ -5,43 +5,24 @@ title: Teztnets
 
 Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. [Read more](about/).
 
-mondaynet
+dailynet-2021-06-13
 ---------
 
-A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha
+A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.
 
-To join mondaynet with docker, run the following commands:
+To join dailynet-2021-06-13 with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_7904a9b2_20210517164345
-~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_5c7ce072_20210611164723
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
-| Tezos docker build | [tezos/tezos:master_7904a9b2_20210517164345](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_7904a9b2_20210517164345) |
-| Full network name | `TEZOS_MONDAYNET_2021-05-19T00:00:00Z` |
-
-granadanet
----------
-
-Long-running testnet for Granada proposal
-
-To join granadanet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v9.2
-~ $ tezos-node config init --network https://teztnets.xyz/granadanet
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Baker | `tezos-baker-009-PsFLoren, 010-PtGRANAD` |
-| Tezos docker build | [tezos/tezos:v9.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.2) |
-| Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
+| Tezos docker build | [tezos/tezos:master_5c7ce072_20210611164723](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_5c7ce072_20210611164723) |
+| Full network name | `TEZOS-DAILYNET-2021-06-13T00:00:00.000Z` |
 
 florencenet
 ---------
@@ -62,24 +43,43 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
 | Tezos docker build | [tezos/tezos:v9.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.1) |
 | Full network name | `florencenet` |
 
-granadanolbnet
+granadanet
 ---------
 
-Testnet for Granada proposal - no Liquidity Baking
+Long-running testnet for Granada proposal.
 
-To join granadanolbnet with docker, run the following commands:
+To join granadanet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB
-~ $ tezos-node config init --network https://teztnets.xyz/granadanolbnet
+docker run -it --entrypoint=/bin/sh tezos/tezos:v9.2
+~ $ tezos-node config init --network https://teztnets.xyz/granadanet
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Baker | `tezos-baker-009-PsFLoren, 010-PtGRENLB` |
-| Tezos docker build | [registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/kirimoch/tezos/bare:amd64-GRENLB) |
-| Full network name | `TEZOS_GRANADANOLBNET_2021-06-04T15:00:00Z` |
+| Baker | `tezos-baker-009-PsFLoren, 010-PtGRANAD` |
+| Tezos docker build | [tezos/tezos:v9.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.2) |
+| Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
+
+mondaynet-2021-06-07
+---------
+
+A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.
+
+To join mondaynet-2021-06-07 with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_b5e738ba_20210604200346
+~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Baker | `tezos-baker-alpha, 009-PsFLoren` |
+| Tezos docker build | [tezos/tezos:master_b5e738ba_20210604200346](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_b5e738ba_20210604200346) |
+| Full network name | `TEZOS-MONDAYNET-2021-06-07T00:00:00.000Z` |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
