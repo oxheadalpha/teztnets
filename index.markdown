@@ -5,12 +5,12 @@ title: Teztnets
 
 Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. [Read more](about/).
 
-dailynet-2021-06-13
+dailynet
 ---------
 
 A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.
 
-To join dailynet-2021-06-13 with docker, run the following commands:
+To join dailynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_5c7ce072_20210611164723
@@ -24,12 +24,12 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_5c7ce072_20210611164723
 | Tezos docker build | [tezos/tezos:master_5c7ce072_20210611164723](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_5c7ce072_20210611164723) |
 | Full network name | `TEZOS-DAILYNET-2021-06-13T00:00:00.000Z` |
 
-florencenet
+florencenoba
 ---------
 
 Long-running test network for the florence protocol.
 
-To join florencenet with docker, run the following commands:
+To join florencenoba with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:v9.1
@@ -62,12 +62,12 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v9.2
 | Tezos docker build | [tezos/tezos:v9.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v9.2) |
 | Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
 
-mondaynet-2021-06-07
+mondaynet
 ---------
 
 A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.
 
-To join mondaynet-2021-06-07 with docker, run the following commands:
+To join mondaynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_b5e738ba_20210604200346
