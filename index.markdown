@@ -22,7 +22,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_5c7ce072_20210611164723
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
 | Tezos docker build | [tezos/tezos:master_5c7ce072_20210611164723](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_5c7ce072_20210611164723) |
-| Full network name | `TEZOS-DAILYNET-2021-06-13T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2021-06-14T00:00:00.000Z` |
 
 florencenoba
 ---------
@@ -70,7 +70,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 To join mondaynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_b5e738ba_20210604200346
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_5c7ce072_20210611164723
 ~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
 ~ $ tezos-node run
 ```
@@ -78,8 +78,8 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_b5e738ba_20210604200346
 | | |
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
-| Tezos docker build | [tezos/tezos:master_b5e738ba_20210604200346](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_b5e738ba_20210604200346) |
-| Full network name | `TEZOS-MONDAYNET-2021-06-07T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_5c7ce072_20210611164723](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_5c7ce072_20210611164723) |
+| Full network name | `TEZOS-MONDAYNET-2021-06-14T00:00:00.000Z` |
 
 
 Faucet for all teztnets is at [https://faucet.tzalpha.net/](https://faucet.tzalpha.net/)
