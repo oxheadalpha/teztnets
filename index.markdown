@@ -13,7 +13,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_b869939c_20210624122850
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_40f02f46_20210625163227
 ~ $ tezos-node config init --network https://teztnets.xyz/dailynet
 ~ $ tezos-node run
 ```
@@ -21,8 +21,8 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_b869939c_20210624122850
 | | |
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
-| Tezos docker build | [tezos/tezos:master_b869939c_20210624122850](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_b869939c_20210624122850) |
-| Full network name | `TEZOS-DAILYNET-2021-06-25T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_40f02f46_20210625163227](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_40f02f46_20210625163227) |
+| Full network name | `TEZOS-DAILYNET-2021-06-26T00:00:00.000Z` |
 
 florencenoba
 ---------
