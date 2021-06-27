@@ -22,7 +22,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_40f02f46_20210625163227
 |-------|---------------------|
 | Baker | `tezos-baker-alpha, 009-PsFLoren` |
 | Tezos docker build | [tezos/tezos:master_40f02f46_20210625163227](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_40f02f46_20210625163227) |
-| Full network name | `TEZOS-DAILYNET-2021-06-26T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2021-06-27T00:00:00.000Z` |
 
 florencenoba
 ---------
