@@ -26,6 +26,9 @@ const desiredClusterCapacity = 2;
 const aws_account_id = getEnvVariable('AWS_ACCOUNT_ID');
 const private_baking_key = getEnvVariable('PRIVATE_BAKING_KEY');
 const private_non_baking_key = getEnvVariable('PRIVATE_NON_BAKING_KEY');
+const faucetSeed = getEnvVariable('FAUCET_SEED');
+const faucetRecaptchaSiteKey = getEnvVariable('FAUCET_RECAPTCHA_SITE_KEY');
+const faucetRecaptchaSecretKey = getEnvVariable('FAUCET_RECAPTCHA_SECRET_KEY');
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
@@ -338,7 +341,11 @@ const dailynet_chain = new PeriodicChain("dailynet",
         helmValuesPath: "mondaynet/values.yaml",
         k8sRepoPath: "mondaynet/tezos-k8s",
         private_baking_key: private_baking_key,
-        private_non_baking_key: private_non_baking_key
+        private_non_baking_key: private_non_baking_key,
+        numberOfFaucetAccounts: 1000,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     },
     "0 0 * * *", cluster.provider, repo);
 
@@ -350,7 +357,11 @@ const mondaynet_chain = new PeriodicChain("mondaynet",
         helmValuesPath: "mondaynet/values.yaml",
         k8sRepoPath: "mondaynet/tezos-k8s",
         private_baking_key: private_baking_key,
-        private_non_baking_key: private_non_baking_key
+        private_non_baking_key: private_non_baking_key,
+        numberOfFaucetAccounts: 0,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     },
     "0 0 * * MON", cluster.provider, repo);
 
@@ -367,7 +378,11 @@ const florencenet_chain = new TezosChain("florencenet",
         helmValuesPath: "florencenet/values.yaml",
         k8sRepoPath: "florencenet/tezos-k8s",
         private_baking_key: private_baking_key,
-        private_non_baking_key: private_non_baking_key
+        private_non_baking_key: private_non_baking_key,
+        numberOfFaucetAccounts: 0,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
 
     }, cluster.provider, repo);
 
@@ -383,7 +398,11 @@ const granadanet_chain = new TezosChain("granadanet",
         helmValuesPath: "granadanet/values.yaml",
         k8sRepoPath: "granadanet/tezos-k8s",
         private_baking_key: private_baking_key,
-        private_non_baking_key: private_non_baking_key
+        private_non_baking_key: private_non_baking_key,
+        numberOfFaucetAccounts: 0,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
 
     }, cluster.provider, repo);
 

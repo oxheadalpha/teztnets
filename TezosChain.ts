@@ -21,6 +21,10 @@ export interface TezosChainParameters {
   k8sRepoPath: string,
   private_baking_key: string,
   private_non_baking_key: string,
+  faucetSeed: string,
+  numberOfFaucetAccounts: number,
+  faucetRecaptchaSiteKey: string,
+  faucetRecaptchaSecretKey: string,
 }
 
 /**
@@ -41,6 +45,10 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly k8sRepoPath: string;
   readonly private_baking_key: string;
   readonly private_non_baking_key: string;
+  readonly faucetSeed: string;
+  readonly numberOfFaucetAccounts: number;
+  readonly faucetRecaptchaSiteKey: string;
+  readonly faucetRecaptchaSecretKey: string;
   readonly provider: k8s.Provider;
   readonly repo: awsx.ecr.Repository;
 
@@ -82,6 +90,10 @@ export class TezosChain extends pulumi.ComponentResource {
     this.k8sRepoPath = params.k8sRepoPath;
     this.private_baking_key = params.private_baking_key;
     this.private_non_baking_key = params.private_non_baking_key;
+    this.faucetSeed = params.faucetSeed;
+    this.numberOfFaucetAccounts = params.numberOfFaucetAccounts;
+    this.faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey;
+    this.faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey;
     this.provider = provider;
     this.repo = repo;
   
@@ -166,6 +178,21 @@ export class TezosChain extends pulumi.ComponentResource {
       path: `${this.k8sRepoPath}/charts/tezos`,
       values: helmValues,
     }, { providers: { "kubernetes": this.provider } });
+
+    if (this.numberOfFaucetAccounts > 0) {
+        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
+          namespace: ns.metadata.name,
+          path: `charts/faucet`,
+          values: { "recaptcha_keys":
+              {
+                  "siteKey": this.faucetRecaptchaSiteKey,
+                  "secretKey": this.faucetRecaptchaSecretKey,
+              },
+              "number_of_accounts": this.numberOfFaucetAccounts,
+              "seed": `${this.faucetSeed}-${this.chainName}`,
+          },
+        }, { providers: { "kubernetes": this.provider } });
+    }
 
     const p2p_lb_service = new k8s.core.v1.Service(
       `${name}-p2p-lb`,
