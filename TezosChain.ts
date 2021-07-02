@@ -180,9 +180,11 @@ export class TezosChain extends pulumi.ComponentResource {
     }, { providers: { "kubernetes": this.provider } });
 
     if (this.numberOfFaucetAccounts > 0) {
+        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
+        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
         var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
           namespace: ns.metadata.name,
-          path: `charts/faucet`,
+          path: `tezos-faucet/charts/faucet`,
           values: { "recaptcha_keys":
               {
                   "siteKey": this.faucetRecaptchaSiteKey,
@@ -190,6 +192,10 @@ export class TezosChain extends pulumi.ComponentResource {
               },
               "number_of_accounts": this.numberOfFaucetAccounts,
               "seed": `${this.faucetSeed}-${this.chainName}`,
+              "images": {
+                  "account_gen": faucetAccountGenImg,
+                  "faucet": faucetAppImg,
+              },
           },
         }, { providers: { "kubernetes": this.provider } });
     }
