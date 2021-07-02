@@ -21,6 +21,10 @@ export interface TezosChainParameters {
   k8sRepoPath: string,
   private_baking_key: string,
   private_non_baking_key: string,
+  faucetSeed: string,
+  numberOfFaucetAccounts: number,
+  faucetRecaptchaSiteKey: string,
+  faucetRecaptchaSecretKey: string,
 }
 
 /**
@@ -41,6 +45,10 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly k8sRepoPath: string;
   readonly private_baking_key: string;
   readonly private_non_baking_key: string;
+  readonly faucetSeed: string;
+  readonly numberOfFaucetAccounts: number;
+  readonly faucetRecaptchaSiteKey: string;
+  readonly faucetRecaptchaSecretKey: string;
   readonly provider: k8s.Provider;
   readonly repo: awsx.ecr.Repository;
 
@@ -82,6 +90,10 @@ export class TezosChain extends pulumi.ComponentResource {
     this.k8sRepoPath = params.k8sRepoPath;
     this.private_baking_key = params.private_baking_key;
     this.private_non_baking_key = params.private_non_baking_key;
+    this.faucetSeed = params.faucetSeed;
+    this.numberOfFaucetAccounts = params.numberOfFaucetAccounts;
+    this.faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey;
+    this.faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey;
     this.provider = provider;
     this.repo = repo;
   
@@ -151,6 +163,37 @@ export class TezosChain extends pulumi.ComponentResource {
     helmValues["tezos_k8s_images"] = pulumiTaggedImages;
 
     this.helmValues = helmValues;
+
+    if (this.numberOfFaucetAccounts > 0) {
+        // deploy a faucet website
+        const chainSpecificSeed = `${this.faucetSeed}-${this.chainName}`;
+        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
+        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
+
+        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
+          namespace: ns.metadata.name,
+          path: `tezos-faucet/charts/faucet`,
+          values: { "recaptcha_keys":
+              {
+                  "siteKey": this.faucetRecaptchaSiteKey,
+                  "secretKey": this.faucetRecaptchaSecretKey,
+              },
+              "number_of_accounts": this.numberOfFaucetAccounts,
+              "seed": chainSpecificSeed,
+              "images": {
+                  "account_gen": faucetAccountGenImg,
+                  "faucet": faucetAppImg,
+              },
+          },
+        }, { providers: { "kubernetes": this.provider } });
+
+        // add the faucet seed to the activation parameters so the accounts given
+        // by the faucet website work on chain
+        helmValues["activation"]["deterministic_faucet"] = {
+            "seed": chainSpecificSeed,
+            "number_of_accounts": this.numberOfFaucetAccounts,
+        }
+    }
 
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
