@@ -164,6 +164,37 @@ export class TezosChain extends pulumi.ComponentResource {
 
     this.helmValues = helmValues;
 
+    if (this.numberOfFaucetAccounts > 0) {
+        // deploy a faucet website
+        const chainSpecificSeed = `${this.faucetSeed}-${this.chainName}`;
+        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
+        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
+
+        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
+          namespace: ns.metadata.name,
+          path: `tezos-faucet/charts/faucet`,
+          values: { "recaptcha_keys":
+              {
+                  "siteKey": this.faucetRecaptchaSiteKey,
+                  "secretKey": this.faucetRecaptchaSecretKey,
+              },
+              "number_of_accounts": this.numberOfFaucetAccounts,
+              "seed": chainSpecificSeed,
+              "images": {
+                  "account_gen": faucetAccountGenImg,
+                  "faucet": faucetAppImg,
+              },
+          },
+        }, { providers: { "kubernetes": this.provider } });
+
+        // add the faucet seed to the activation parameters so the accounts given
+        // by the faucet website work on chain
+        helmValues["activation"]["deterministic_faucet"] = {
+            "seed": chainSpecificSeed,
+            "number_of_accounts": this.numberOfFaucetAccounts,
+        }
+    }
+
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
     //    namespace: this.ns.metadata.name,
@@ -178,27 +209,6 @@ export class TezosChain extends pulumi.ComponentResource {
       path: `${this.k8sRepoPath}/charts/tezos`,
       values: helmValues,
     }, { providers: { "kubernetes": this.provider } });
-
-    if (this.numberOfFaucetAccounts > 0) {
-        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
-        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
-        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
-          namespace: ns.metadata.name,
-          path: `tezos-faucet/charts/faucet`,
-          values: { "recaptcha_keys":
-              {
-                  "siteKey": this.faucetRecaptchaSiteKey,
-                  "secretKey": this.faucetRecaptchaSecretKey,
-              },
-              "number_of_accounts": this.numberOfFaucetAccounts,
-              "seed": `${this.faucetSeed}-${this.chainName}`,
-              "images": {
-                  "account_gen": faucetAccountGenImg,
-                  "faucet": faucetAppImg,
-              },
-          },
-        }, { providers: { "kubernetes": this.provider } });
-    }
 
     const p2p_lb_service = new k8s.core.v1.Service(
       `${name}-p2p-lb`,

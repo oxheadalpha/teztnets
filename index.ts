@@ -98,7 +98,6 @@ const dailynet_chain = new PeriodicChain("dailynet",
     {
         description: "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
         bootstrapContracts: ['taquito1.json'],
-        bootstrapCommitments: "commitments.json",
         helmValuesPath: "mondaynet/values.yaml",
         k8sRepoPath: "mondaynet/tezos-k8s",
         private_baking_key: private_baking_key,
