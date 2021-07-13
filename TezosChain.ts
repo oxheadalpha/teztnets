@@ -30,6 +30,23 @@ export interface TezosInitParameters {
   getPrivateNonbakingKey(): string;
 }
 
+export interface TezosParamsInitializer {
+  readonly name?: string;
+  readonly chainName?: string;
+  readonly description?: string;
+  readonly schedule?: string;
+  readonly containerImage?: string | pulumi.Output<string>;
+  readonly dnsName?: string;
+  readonly bootstrapPeers?: string[];
+  readonly bootstrapContracts?: string[];
+  readonly bootstrapCommitments?: string;
+  readonly chartRepo?: string;
+  readonly privateBakingKey?: string;
+  readonly privateNonbakingKey?: string;
+  readonly yamlFile?: string;
+}
+
+
 export class TezosChainParametersBuilder implements TezosHelmParameters, TezosInitParameters {
   private _helmValues: any;
   private _name: string;
@@ -41,20 +58,44 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _bootstrapCommitments: string;
   private _chartRepoPath: string;
 
-  constructor() {
-    this._name = '';
-    this._description = '';
+  constructor(params: TezosParamsInitializer = {}) {
+    this._name = params.name || params.dnsName || '';
+    this._description = params.description || '';
+    this._dnsName = params.dnsName || params.name || '';
+    this._publicBootstrapPeers = params.bootstrapPeers || [];
+    this._bootstrapContracts = params.bootstrapContracts || [];
+    this._bootstrapCommitments = params.bootstrapCommitments || '';
+    this._chartRepoPath = params.chartRepo || '';
     this._periodic = false;
-    this._dnsName = '';
-    this._publicBootstrapPeers = [];
-    this._bootstrapContracts = [];
-    this._bootstrapCommitments = '';
-    this._chartRepoPath = '';
+    
     this._helmValues = {};
+    if (params.yamlFile) {
+      this.fromFile(params.yamlFile);
+    }
+    if (params.schedule) {
+      this.schedule(params.schedule);
+    }
+    if (params.chainName) {
+      this.chainName(params.chainName);
+    }
+    if (params.containerImage) {
+      this.containerImage(params.containerImage);
+    }
+    if (params.privateBakingKey) {
+      this.privateBakingKey(params.privateBakingKey);
+    }
+    if (params.privateNonbakingKey) {
+      this.privateNonbakingKey(params.privateNonbakingKey);
+    }
   }
 
-  public fromFile(valuesPath: string): TezosChainParametersBuilder {
-    this._helmValues = YAML.parse(fs.readFileSync(valuesPath, 'utf8'));
+  public fromYaml(yaml: string): TezosChainParametersBuilder {
+    this._helmValues = YAML.parse(yaml);
+    return this;
+  }
+
+  public fromFile(yamlPath: string): TezosChainParametersBuilder {
+    this.fromYaml(fs.readFileSync(yamlPath, 'utf8'));
     return this;
   }
 
@@ -117,6 +158,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this;
   }
 
+  public peers(peers: string[]): TezosChainParametersBuilder {
+    this._publicBootstrapPeers = peers;
+    return this;
+  }
   public peer(peer: string): TezosChainParametersBuilder {
     this._publicBootstrapPeers.push(peer);
     return this;
@@ -125,6 +170,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._publicBootstrapPeers;
   }
 
+  public contracts(contracts: string[]): TezosChainParametersBuilder {
+    this._bootstrapContracts = contracts;
+    return this;
+  }
   public contract(contract: string): TezosChainParametersBuilder {
     this._bootstrapContracts.push(contract);
     return this;

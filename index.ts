@@ -329,58 +329,66 @@ const albingresscntlr = new k8s.helm.v2.Chart(
 
 // chains
 const dailynet_chain = new TezosChain(
-    new TezosChainParametersBuilder()
-        .fromFile("mondaynet/values.yaml")
-        .dnsName("dailynet")
-        .description("A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.")
-        .schedule("0 0 * * *")
-        .contract('taquito1.json')
-        .commitments("commitments.json")
-        .chartRepo("mondaynet/tezos-k8s")
-        .privateBakingKey(private_baking_key)
-        .privateNonbakingKey(private_non_baking_key),
+    new TezosChainParametersBuilder({
+        yamlFile: 'mondaynet/values.yaml',
+        dnsName: 'dailynet',
+        description: 'A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.',
+        schedule: '0 0 * * *',
+        bootstrapContracts: ['taquito1.json'],
+        bootstrapCommitments: 'commitments.json',
+        chartRepo: 'mondaynet/tezos-k8s',
+        privateBakingKey: private_baking_key,
+        privateNonbakingKey: private_non_baking_key
+    }),
     cluster.provider, repo);
 
 const mondaynet_chain = new TezosChain(
-    new TezosChainParametersBuilder()
-        .fromFile("mondaynet/values.yaml")
-        .dnsName("mondaynet")
-        .description("A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.")
-        .schedule("0 0 * * MON")
-        .contract('taquito1.json')
-        .commitments("commitments.json")
-        .chartRepo("mondaynet/tezos-k8s")
-        .privateBakingKey(private_baking_key)
-        .privateNonbakingKey(private_non_baking_key),
+    new TezosChainParametersBuilder({
+        yamlFile: 'mondaynet/values.yaml',
+        dnsName: 'mondaynet',
+        description: 'A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.',
+        schedule: '0 0 * * MON',
+        bootstrapContracts: ['taquito1.json'],
+        bootstrapCommitments: 'commitments.json',
+        chartRepo: 'mondaynet/tezos-k8s',
+        privateBakingKey: private_baking_key,
+        privateNonbakingKey: private_non_baking_key
+    }),
     cluster.provider, repo);
 
 const florencenet_chain = new TezosChain(
-    new TezosChainParametersBuilder()
-        .fromFile("florencenet/values.yaml")
-        .name("florencenet")
-        .dnsName("florencenoba")
-        .description("Long-running test network for the florence protocol.")
-        .chartRepo("florencenet/tezos-k8s")
-        .peer("florencenobanet.smartpy.io:9733")
-        .peer("florencenobanet.tezos.co.il")
-        .peer("florencenobanet.kaml.fr")
-        .peer("florencenobanet.boot.tez.ie")
-        .privateBakingKey(private_baking_key)
-        .privateNonbakingKey(private_non_baking_key),
+    new TezosChainParametersBuilder({
+        yamlFile: "florencenet/values.yaml",
+        name: 'florencenet',
+        dnsName: 'florencenoba',
+        description: 'Long-running test network for the Florence protocol.',
+        bootstrapPeers: [
+            'florencenobanet.smartpy.io:9733',
+            'florencenobanet.tezos.co.il',
+            'florencenobanet.kaml.fr',
+            'florencenobanet.boot.tez.ie',
+        ],
+        bootstrapCommitments: 'commitments.json',
+        chartRepo: 'florencenet/tezos-k8s',
+        privateBakingKey: private_baking_key,
+        privateNonbakingKey: private_non_baking_key
+    }),
     cluster.provider, repo);
 
 const granadanet_chain = new TezosChain(
-    new TezosChainParametersBuilder()
-        .fromFile("granadanet/values.yaml")
-        .name("granadanet")
-        .description("Long-running testnet for Granada proposal.")
-        .chartRepo("granadanet/tezos-k8s")
-        .peer("granadanet.smartpy.io")
-        .peer("granadanet.tezos.co.il")
-        .peer("granadanet.kaml.fr")
-        .commitments("commitments.json")
-        .privateBakingKey(private_baking_key)
-        .privateNonbakingKey(private_non_baking_key),
+    new TezosChainParametersBuilder({
+        yamlFile: "granadanet/values.yaml",
+        name: 'granadanet',
+        description: 'Long-running testnet for Granada proposal.',
+        bootstrapPeers: [
+            'granadanet.smartpy.io',
+            'granadanet.tezos.co.il',
+            'granadanet.kaml.fr',
+        ],
+        chartRepo: 'granadanet/tezos-k8s',
+        privateBakingKey: private_baking_key,
+        privateNonbakingKey: private_non_baking_key
+    }),
     cluster.provider, repo);
 
 
