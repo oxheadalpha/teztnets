@@ -10,4 +10,5 @@
 	url = git@github.com:nicolasochem/tezos-k8s.git
 [submodule "tezos-faucet"]
 	path = tezos-faucet
-	url = git@gitlab.com:Ochem/tezos-faucet.git
+        url = https://gitlab.com/Ochem/tezos-faucet.git
+
