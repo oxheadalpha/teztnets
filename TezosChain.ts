@@ -28,6 +28,10 @@ export interface TezosInitParameters {
   getChartRepo(): string;
   getPrivateBakingKey(): string;
   getPrivateNonbakingKey(): string;
+  getNumberOfFaucetAccounts(): number;
+  getFaucetSeed(): string;
+  getFaucetRecaptchaSiteKey(): string;
+  getFaucetRecaptchaSecretKey(): string;
 }
 
 export interface TezosParamsInitializer {
@@ -44,6 +48,10 @@ export interface TezosParamsInitializer {
   readonly privateBakingKey?: string;
   readonly privateNonbakingKey?: string;
   readonly yamlFile?: string;
+  readonly numberOfFaucetAccounts?: number; 
+  readonly faucetSeed?: string;
+  readonly faucetRecaptchaSiteKey?: string;
+  readonly faucetRecaptchaSecretKey?: string;
 }
 
 
@@ -57,6 +65,11 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _bootstrapContracts: string[];
   private _bootstrapCommitments: string;
   private _chartRepoPath: string;
+  private _numberOfFaucetAccounts: number;
+  private _faucetSeed: string;
+  private _faucetRecaptchaSiteKey: string;
+  private _faucetRecaptchaSecretKey: string;
+    
 
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || params.dnsName || '';
@@ -67,6 +80,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._bootstrapCommitments = params.bootstrapCommitments || '';
     this._chartRepoPath = params.chartRepo || '';
     this._periodic = false;
+    this._numberOfFaucetAccounts = params.numberOfFaucetAccounts || 0;
+    this._faucetSeed = params.faucetSeed || '';
+    this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
+    this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
     
     this._helmValues = {};
     if (params.yamlFile) {
@@ -190,6 +207,22 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._bootstrapCommitments;
   }
 
+  public getNumberOfFaucetAccounts(): number {
+    return this._numberOfFaucetAccounts;
+  }
+
+  public getFaucetSeed(): string {
+    return this._faucetSeed;
+  }
+
+  public getFaucetRecaptchaSiteKey(): string {
+    return this._faucetRecaptchaSiteKey;
+  }
+
+  public getFaucetRecaptchaSecretKey(): string {
+    return this._faucetRecaptchaSecretKey;
+  }
+
   public chartRepo(chartRepoPath: string): TezosChainParametersBuilder {
     this._chartRepoPath = chartRepoPath;
     return this;
@@ -309,6 +342,37 @@ export class TezosChain extends pulumi.ComponentResource {
       {}
     );
     params.helmValues["tezos_k8s_images"] = pulumiTaggedImages;
+
+    if (params.getNumberOfFaucetAccounts() > 0) {
+        // deploy a faucet website
+        const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`;
+        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
+        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
+
+        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
+          namespace: ns.metadata.name,
+          path: `tezos-faucet/charts/faucet`,
+          values: { "recaptcha_keys":
+              {
+                  "siteKey": params.getFaucetRecaptchaSiteKey(),
+                  "secretKey": params.getFaucetRecaptchaSecretKey(),
+              },
+              "number_of_accounts": params.getNumberOfFaucetAccounts(),
+              "seed": chainSpecificSeed,
+              "images": {
+                  "account_gen": faucetAccountGenImg,
+                  "faucet": faucetAppImg,
+              },
+          },
+        }, { providers: { "kubernetes": this.provider } });
+
+        // add the faucet seed to the activation parameters so the accounts given
+        // by the faucet website work on chain
+        params.helmValues["activation"]["deterministic_faucet"] = {
+            "seed": chainSpecificSeed,
+            "number_of_accounts": params.getNumberOfFaucetAccounts(),
+        }
+    }
 
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
