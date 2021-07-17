@@ -99,7 +99,6 @@ const dailynet_chain = new TezosChain(
         description: 'A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.',
         schedule: '0 0 * * *',
         bootstrapContracts: ['taquito1.json'],
-        bootstrapCommitments: 'commitments.json',
         chartRepo: 'mondaynet/tezos-k8s',
         privateBakingKey: private_baking_key,
         privateNonbakingKey: private_non_baking_key,

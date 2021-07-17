@@ -1,7 +1,6 @@
 [submodule "mondaynet/tezos-k8s"]
 	path = mondaynet/tezos-k8s
 	url = git@github.com:tqtezos/tezos-k8s.git
-	branch = idempotent_activate
 [submodule "florencenet/tezos-k8s"]
 	path = florencenet/tezos-k8s
 	url = git@github.com:tqtezos/tezos-k8s.git
