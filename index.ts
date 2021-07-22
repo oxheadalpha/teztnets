@@ -91,11 +91,16 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
 
 deployAwsAlbController(cluster)
 
+const periodicCategory = "Periodic Teztnets";
+const longCategory = "Long-Running Teztnets";
+
 // chains
 const dailynet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: 'mondaynet/values.yaml',
         dnsName: 'dailynet',
+        category: periodicCategory,
+        humanName: 'Dailynet',
         description: 'A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.',
         schedule: '0 0 * * *',
         bootstrapContracts: ['taquito1.json'],
@@ -113,6 +118,8 @@ const mondaynet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: 'mondaynet/values.yaml',
         dnsName: 'mondaynet',
+        category: periodicCategory,
+        humanName: 'Mondaynet',
         description: 'A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.',
         schedule: '0 0 * * MON',
         bootstrapContracts: ['taquito1.json'],
@@ -132,6 +139,8 @@ const florencenet_chain = new TezosChain(
         yamlFile: "florencenet/values.yaml",
         name: 'florencenet',
         dnsName: 'florencenoba',
+        category: longCategory,
+        humanName: "Florencenet",
         description: 'Long-running test network for the Florence protocol.',
         bootstrapPeers: [
             'florencenobanet.smartpy.io:9733',
@@ -154,6 +163,8 @@ const granadanet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: "granadanet/values.yaml",
         name: 'granadanet',
+        category: longCategory,
+        humanName: "Granadanet",
         description: 'Long-running testnet for Granada proposal.',
         bootstrapPeers: [
             'granadanet.smartpy.io',
@@ -201,15 +212,24 @@ function getNetworks(chains: TezosChain[]): object {
 }
 
 function getTeztnets(chains: TezosChain[]): object {
-    const teztnets: {[name: string]: object} = {};
+    const teztnets: {[name: string]: {[name: string]: Object}} = {};
 
     chains.forEach(function (chain) {
-        teztnets[chain.params.getName()] = {
+        teztnets[chain.params.getCategory()] = teztnets[chain.params.getCategory()] || {};
+        //
+        // if no faucet accounts are generated, assume that we are using the legacy global faucet
+        let faucetUrl = "https://faucet.tzalpha.net";
+        if (chain.params.getNumberOfFaucetAccounts() >= 0) {
+            faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`;
+        }
+        teztnets[chain.params.getCategory()][chain.params.getName()] = {
             chain_name: chain.getChainName(),
             network_url: chain.getNetworkUrl(),
+            human_name: chain.params.getHumanName(),
             description: chain.getDescription(),
             docker_build: chain.getDockerBuild(),
-            command: chain.getCommand()
+            command: chain.getCommand(),
+            faucet_url: faucetUrl
         };
     })
 

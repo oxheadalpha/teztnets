@@ -19,9 +19,11 @@ export interface TezosInitParameters {
   getName(): string;
   getChainName(): string;
   getDescription(): string;
+  getHumanName(): string;
   isPeriodic(): boolean;
   getContainerImage(): string | pulumi.Output<string>;
   getDnsName(): string;
+  getCategory(): string;
   getPeers(): string[];
   getContracts(): string[];
   getCommitments(): string;
@@ -38,7 +40,9 @@ export interface TezosParamsInitializer {
   readonly name?: string;
   readonly chainName?: string;
   readonly description?: string;
+  readonly humanName?: string;
   readonly schedule?: string;
+  readonly category?: string;
   readonly containerImage?: string | pulumi.Output<string>;
   readonly dnsName?: string;
   readonly bootstrapPeers?: string[];
@@ -59,8 +63,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _helmValues: any;
   private _name: string;
   private _description: string;
+  private _humanName: string;
   private _periodic: boolean;
   private _dnsName: string;
+  private _category: string;
   private _publicBootstrapPeers: string[];
   private _bootstrapContracts: string[];
   private _bootstrapCommitments: string;
@@ -74,7 +80,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || params.dnsName || '';
     this._description = params.description || '';
+    this._humanName = params.humanName || '';
     this._dnsName = params.dnsName || params.name || '';
+    this._category = params.category || '';
     this._publicBootstrapPeers = params.bootstrapPeers || [];
     this._bootstrapContracts = params.bootstrapContracts || [];
     this._bootstrapCommitments = params.bootstrapCommitments || '';
@@ -149,6 +157,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   public getDnsName(): string | any {
     return this._dnsName;
   }
+  public getCategory(): string | any {
+    return this._category;
+  }
 
   public description(description: string): TezosChainParametersBuilder {
     this._description = description;
@@ -156,6 +167,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   public getDescription(): string | any {
     return this._description;
+  }
+
+  public getHumanName(): string | any {
+    return this._humanName;
   }
 
   public isPeriodic(): boolean {
@@ -417,6 +432,10 @@ export class TezosChain extends pulumi.ComponentResource {
 
   getChainName(): string {
     return this.params.getChainName();
+  }
+
+  getCategory(): string {
+    return this.params.getCategory();
   }
 
   getDescription(): string {
