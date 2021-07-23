@@ -1,8 +1,8 @@
 {% for cat_name, cat_teztnets in teztnets.items() %}
-##{{ cat_name }}
+# {{ cat_name }}
 
 {% for k, v in  cat_teztnets.items() %}
-###{{ v["human_name"] }}
+## {{ v["human_name"] }}
 {{ v["description"] }}
 
 To join {{ v["human_name"] }} with docker, run the following commands:
@@ -18,8 +18,7 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 | Baker | `tezos-baker-{{ v["command"] }}` |
 | Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
 | Full network name | `{{ v["chain_name"] }}` |
-| Faucet | [{{ v["chain_name"] }} faucet]](v["faucet_url"]) |
+| Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 {% endfor %}
 {% endfor %}
 
-The list of testnets is also available in [json format](https://teztnets.xyz/teztnets.json).

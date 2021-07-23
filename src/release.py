@@ -3,7 +3,7 @@ import json
 import shutil
 import jinja2
 
-shutil.copytree("src/website", "target/release")
+shutil.copytree("src/website", "target/release", dirs_exist_ok=True)
 
 teztnets = {}
 with open("./teztnets.json", 'r') as teztnets_file:
