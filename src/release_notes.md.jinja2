@@ -15,10 +15,12 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 
 | | |
 |-------|---------------------|
-| Baker | `tezos-baker-{{ v["command"] }}` |
-| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
 | Full network name | `{{ v["chain_name"] }}` |
+| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
+{% for proto in v["protocols"] -%}
+| Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
+{% endfor %}
 {% endfor %}
 {% endfor %}
 

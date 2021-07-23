@@ -457,14 +457,18 @@ export class TezosChain extends pulumi.ComponentResource {
     return this.params.helmValues["images"]["tezos"];
   }
 
-  getCommand(): string {
-    if ("protocols" in this.params.helmValues) {
-      const protocols: [{command: string}] = this.params.helmValues["protocols"];
-      const commands = protocols.map(p => p["command"]);
-      return commands.join(", ");
+  getProtocols(): Array<{level: number, replacement_protocol: string}> {
+    let protocols: Array<{level: number, replacement_protocol: string}> = []
+    if ("activation" in this.params.helmValues) {
+        protocols.push({level: 0, replacement_protocol: this.params.helmValues["activation"]["protocol_hash"]});
+    }
+    if ("user_activated_upgrades" in this.params.helmValues["node_config_network"]) {
+        //protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
+        protocols = protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
     }
 
-    return this.params.helmValues["protocol"]["command"];
+
+    return protocols;
   }
 
 }
