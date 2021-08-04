@@ -1,4 +1,5 @@
-import * as aws from "@pulumi/aws";
+import * as aws from "@pulumi/aws"
+import * as pulumi from "@pulumi/pulumi"
 
 function getDomainAndSubdomain(domain: string) {
   const parts = domain.split('.');
@@ -49,4 +50,60 @@ export function createAliasRecord(targetDomain: string, albUrl: string): aws.rou
       }
     ]
   });
+}
+
+// based on code from tqinfra
+export function createCertValidation(
+  {
+    cert,
+    targetDomain,
+    hostedZone,
+  }: { cert: aws.acm.Certificate; targetDomain: string; hostedZone: string },
+  opts = {}
+) {
+  const zone = pulumi.output(
+    aws.route53.getZone({
+      name: hostedZone,
+      privateZone: false,
+    })
+  )
+
+  // certRecords won't show up in `pulumi preview` but will in `pulumi up`. This
+  // is because certRecords is waiting for async data via the `apply` function.
+  const certRecords = cert.domainValidationOptions.apply(
+    (domainValidations) => {
+      return domainValidations.map(
+        (domainValidation) =>
+          new aws.route53.Record(
+            `${domainValidation.domainName}-certValidationRecord`,
+            {
+              name: domainValidation.resourceRecordName,
+              records: [domainValidation.resourceRecordValue],
+              ttl: 300,
+              type: domainValidation.resourceRecordType,
+              zoneId: zone.id,
+            },
+            {
+              protect: true,
+              ...opts,
+            }
+          )
+      )
+    }
+  )
+
+  const certValidation = new aws.acm.CertificateValidation(
+    `${targetDomain}-certValidation`,
+    {
+      certificateArn: cert.arn,
+      validationRecordFqdns: certRecords.apply((records) =>
+        records.map((record) => record.fqdn)
+      ),
+    },
+    {
+      protect: true,
+      ...opts,
+    }
+  )
+  return { certRecords, certValidation }
 }
