@@ -398,13 +398,22 @@ export class TezosChain extends pulumi.ComponentResource {
     //}, { providers: { "kubernetes": cluster.provider } });
     // Deploy Tezos into our cluster
     // Deploy from file
-    var chain = new k8s.helm.v2.Chart(name, {
-      namespace: ns.metadata.name,
-      path: `${params.getChartRepo()}/charts/tezos`,
-      values: params.helmValues,
-    }, { providers: { "kubernetes": this.provider } });
+    const chain = new k8s.helm.v2.Chart(
+      name,
+      {
+        namespace: ns.metadata.name,
+        path: `${params.getChartRepo()}/charts/tezos`,
+        values: params.helmValues,
+      },
+      { providers: { kubernetes: this.provider } }
+    )
 
-    const p2p_lb_service = new k8s.core.v1.Service(
+    // Hosted zones should really be owned by pulumi. Then we could
+    // reference them instead of hardcoding strings.
+    const teztnetsHostedZone = "teztnets.xyz"
+    const teztnetsDomain = `${name}.${teztnetsHostedZone}`
+
+    new k8s.core.v1.Service(
       `${name}-p2p-lb`,
       {
         metadata: {
@@ -413,21 +422,24 @@ export class TezosChain extends pulumi.ComponentResource {
           annotations: {
             "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
             "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
           },
         },
         spec: {
-          ports: [{
-            port: 9732,
-            targetPort: 9732,
-            protocol: "TCP"
-          }],
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
           selector: { app: "tezos-baking-node" },
-          type: "LoadBalancer"
-        }
+          type: "LoadBalancer",
+        },
       },
       { provider: this.provider }
-    );
-    let aRecord = p2p_lb_service.status.apply((s) => createAliasRecord(`${params.getDnsName()}.tznode.net`, s.loadBalancer.ingress[0].hostname));
+    )
+
   }
 
   getChainName(): string {
