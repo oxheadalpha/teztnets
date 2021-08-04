@@ -5,6 +5,7 @@ import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
 
 import deployAwsAlbController from "./awsAlbController"
+import deployExternalDns from "./externalDns"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain";
 
 let stack = pulumi.getStack();
@@ -90,6 +91,7 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
 );
 
 deployAwsAlbController(cluster)
+deployExternalDns(cluster)
 
 const periodicCategory = "Periodic Teztnets";
 const longCategory = "Long-Running Teztnets";
@@ -188,7 +190,7 @@ function getNetworks(chains: TezosChain[]): object {
     chains.forEach(function (chain) {
         const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()); // clone
         bootstrapPeers.splice(0, 0, `${chain.params.getDnsName()}.tznode.net`);
-    
+
         // genesis_pubkey is the public key associated with the $TEZOS_BAKING_KEY private key in github secrets
         // TODO: generate it dynamically based on privkey
         const genesisPubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n";
@@ -204,7 +206,7 @@ function getNetworks(chains: TezosChain[]): object {
         if ("activation_account_name" in network) {
             delete network["activation_account_name"];
         };
-        
+
         networks[chain.params.getName()] = network;
     })
 
