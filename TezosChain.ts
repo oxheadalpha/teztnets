@@ -3,7 +3,7 @@ import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
 import * as cronParser from "cron-parser";
-import { createAliasRecord } from "./route53";
+import { createCertValidation } from "./route53";
 import { publicReadPolicyForBucket } from "./s3";
 import { TezosImageResolver } from "./TezosImageResolver";
 
@@ -355,39 +355,8 @@ export class TezosChain extends pulumi.ComponentResource {
         return obj;
       },
       {}
-    );
-    params.helmValues["tezos_k8s_images"] = pulumiTaggedImages;
-
-    if (params.getNumberOfFaucetAccounts() > 0) {
-        // deploy a faucet website
-        const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`;
-        const faucetAccountGenImg = this.repo.buildAndPushImage("tezos-faucet/account-gen");
-        const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app");
-
-        var faucet = new k8s.helm.v2.Chart(`${name}-faucet`, {
-          namespace: ns.metadata.name,
-          path: `tezos-faucet/charts/faucet`,
-          values: { "recaptcha_keys":
-              {
-                  "siteKey": params.getFaucetRecaptchaSiteKey(),
-                  "secretKey": params.getFaucetRecaptchaSecretKey(),
-              },
-              "number_of_accounts": params.getNumberOfFaucetAccounts(),
-              "seed": chainSpecificSeed,
-              "images": {
-                  "account_gen": faucetAccountGenImg,
-                  "faucet": faucetAppImg,
-              },
-          },
-        }, { providers: { "kubernetes": this.provider } });
-
-        // add the faucet seed to the activation parameters so the accounts given
-        // by the faucet website work on chain
-        params.helmValues["activation"]["deterministic_faucet"] = {
-            "seed": chainSpecificSeed,
-            "number_of_accounts": params.getNumberOfFaucetAccounts(),
-        }
-    }
+    )
+    params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
 
     // deploy from repository
     //this.chain = new k8s.helm.v2.Chart(this.name, {
@@ -440,7 +409,112 @@ export class TezosChain extends pulumi.ComponentResource {
       { provider: this.provider }
     )
 
+    if (params.getNumberOfFaucetAccounts() > 0) {
+      // deploy a faucet website
+      const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
+      const faucetAccountGenImg = this.repo.buildAndPushImage(
+        "tezos-faucet/account-gen"
+      )
+      const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app")
+
+      new k8s.helm.v2.Chart(
+        `${name}-faucet`,
+        {
+          namespace: ns.metadata.name,
+          path: `tezos-faucet/charts/faucet`,
+          values: {
+            recaptcha_keys: {
+              siteKey: params.getFaucetRecaptchaSiteKey(),
+              secretKey: params.getFaucetRecaptchaSecretKey(),
+            },
+            number_of_accounts: params.getNumberOfFaucetAccounts(),
+            seed: chainSpecificSeed,
+            images: {
+              account_gen: faucetAccountGenImg,
+              faucet: faucetAppImg,
+            },
+          },
+        },
+        { providers: { kubernetes: this.provider } }
+      )
+
+      // add the faucet seed to the activation parameters so the accounts given
+      // by the faucet website work on chain
+      params.helmValues["activation"]["deterministic_faucet"] = {
+        seed: chainSpecificSeed,
+        number_of_accounts: params.getNumberOfFaucetAccounts(),
+      }
+
+      const faucetDomain = `faucet.${teztnetsDomain}`
+      const faucetCert = new aws.acm.Certificate(
+        `${faucetDomain}-cert`,
+        {
+          validationMethod: "DNS",
+          domainName: faucetDomain,
+        },
+        { protect: true, parent: this }
+      )
+      const { certValidation } = createCertValidation(
+        {
+          cert: faucetCert,
+          targetDomain: faucetDomain,
+          hostedZone: teztnetsHostedZone,
+        },
+        { parent: this }
+      )
+
+      const ingressName = `${faucetDomain}-ingress`
+      new k8s.networking.v1beta1.Ingress(
+        ingressName,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: ingressName,
+            annotations: {
+              "kubernetes.io/ingress.class": "alb",
+              "alb.ingress.kubernetes.io/scheme": "internet-facing",
+              "alb.ingress.kubernetes.io/healthcheck-path": "/",
+              "alb.ingress.kubernetes.io/healthcheck-port": "8081",
+              "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
+              "ingress.kubernetes.io/force-ssl-redirect": "true",
+              "alb.ingress.kubernetes.io/actions.ssl-redirect":
+                '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+            },
+            labels: { app: "faucet" },
+          },
+          spec: {
+            rules: [
+              {
+                host: faucetDomain,
+                http: {
+                  paths: [
+                    {
+                      path: "/*",
+                      backend: {
+                        serviceName: "ssl-redirect",
+                        servicePort: "use-annotation",
+                      },
+                    },
+                    {
+                      path: "/*",
+                      backend: {
+                        serviceName: "faucet",
+                        servicePort: "http",
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+        { provider, parent: this, dependsOn: certValidation }
+      )
+    }
+
+
   }
+
 
   getChainName(): string {
     return this.params.getChainName();
