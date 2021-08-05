@@ -28,6 +28,8 @@ export interface TezosInitParameters {
   getContracts(): string[];
   getCommitments(): string;
   getChartRepo(): string;
+  getChartRepoVersion(): string;
+  getChartPath(): string;
   getPrivateBakingKey(): string;
   getPrivateNonbakingKey(): string;
   getNumberOfFaucetAccounts(): number;
@@ -49,6 +51,8 @@ export interface TezosParamsInitializer {
   readonly bootstrapContracts?: string[];
   readonly bootstrapCommitments?: string;
   readonly chartRepo?: string;
+  readonly chartRepoVersion?: string;
+  readonly chartPath?: string;
   readonly privateBakingKey?: string;
   readonly privateNonbakingKey?: string;
   readonly yamlFile?: string;
@@ -70,7 +74,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _publicBootstrapPeers: string[];
   private _bootstrapContracts: string[];
   private _bootstrapCommitments: string;
-  private _chartRepoPath: string;
+  private _chartRepo: string;
+  private _chartRepoVersion: string;
+  private _chartPath: string;
   private _numberOfFaucetAccounts: number;
   private _faucetSeed: string;
   private _faucetRecaptchaSiteKey: string;
@@ -86,7 +92,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._publicBootstrapPeers = params.bootstrapPeers || [];
     this._bootstrapContracts = params.bootstrapContracts || [];
     this._bootstrapCommitments = params.bootstrapCommitments || '';
-    this._chartRepoPath = params.chartRepo || '';
+    this._chartRepo = params.chartRepo || '';
+    this._chartRepoVersion = params.chartRepoVersion || '';
+    this._chartPath = params.chartPath || '';
     this._periodic = false;
     this._numberOfFaucetAccounts = params.numberOfFaucetAccounts || 0;
     this._faucetSeed = params.faucetSeed || '';
@@ -238,12 +246,26 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._faucetRecaptchaSecretKey;
   }
 
-  public chartRepo(chartRepoPath: string): TezosChainParametersBuilder {
-    this._chartRepoPath = chartRepoPath;
+  public chartRepo(chartRepo: string): TezosChainParametersBuilder {
+    this._chartRepo = chartRepo;
+    return this;
+  }
+  public chartRepoVersion(chartRepoVersion: string): TezosChainParametersBuilder {
+    this._chartRepoVersion = chartRepoVersion;
+    return this;
+  }
+  public chartPath(chartPath: string): TezosChainParametersBuilder {
+    this._chartPath = chartPath;
     return this;
   }
   public getChartRepo(): string {
-    return this._chartRepoPath;
+    return this._chartRepo;
+  }
+  public getChartRepoVersion(): string {
+    return this._chartRepoVersion;
+  }
+  public getChartPath(): string {
+    return this._chartPath;
   }
 
   public privateBakingKey(privateBakingKey: string): TezosChainParametersBuilder {
@@ -378,39 +400,48 @@ export class TezosChain extends pulumi.ComponentResource {
         seed: chainSpecificSeed,
         number_of_accounts: params.getNumberOfFaucetAccounts(),
       }
-    const defaultHelmValuesFile = fs.readFileSync(`${params.getChartRepo()}/charts/tezos/values.yaml`, 'utf8');
-    const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
-    const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
-    // do not build zerotier for now since it takes times and it is not used in tqinfra
-    delete tezosK8sImages["zerotier"];
+    if (params.getChartRepo() == '') {
+      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+      const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
+      const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
+      const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
+      // do not build zerotier for now since it takes times and it is not used in tqinfra
+      delete tezosK8sImages["zerotier"];
 
-    const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-      (obj: { [index: string]: any; }, [key]) => {
-        obj[key] = this.repo.buildAndPushImage(`${params.getChartRepo()}/${key.replace(/_/g, "-")}`);
-        return obj;
-      },
-      {}
-    )
-    params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
-
-    // deploy from repository
-    //this.chain = new k8s.helm.v2.Chart(this.name, {
-    //    namespace: this.ns.metadata.name,
-    //    chart: 'tezos-chain',
-    //    fetchOpts: { repo: k8sRepo },
-    //    values: helmValues,
-    //}, { providers: { "kubernetes": cluster.provider } });
-    // Deploy Tezos into our cluster
-    // Deploy from file
-    const chain = new k8s.helm.v2.Chart(
-      name,
-      {
-        namespace: ns.metadata.name,
-        path: `${params.getChartRepo()}/charts/tezos`,
-        values: params.helmValues,
-      },
-      { providers: { kubernetes: this.provider } }
-    )
+      const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
+        (obj: { [index: string]: any; }, [key]) => {
+          obj[key] = this.repo.buildAndPushImage(`${params.getChartPath()}/${key.replace(/_/g, "-")}`);
+          return obj;
+        },
+        {}
+      )
+      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          path: `${params.getChartPath()}/charts/tezos`,
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    } else {
+      // deploy from helm repo with public images
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          chart: 'tezos-chain',
+          fetchOpts:
+           {
+              repo: params.getChartRepo(),
+              version: params.getChartRepoVersion(),
+          },
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    }
 
     // Hosted zones should really be owned by pulumi. Then we could
     // reference them instead of hardcoding strings.
