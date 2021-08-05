@@ -65,14 +65,18 @@ node_config_network:
   - level: 255
     replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 nodes:
-  baking:
-    tezos-baking-node-0:
-      bake_using_account: tqbaker
+  tezos-baking-node:
+    instances:
+    - bake_using_accounts:
+      - tqbaker
       config:
         shell:
           history_mode: archive
       is_bootstrap_node: true
-  regular: null
+    runs:
+    - baker
+    - endorser
+    storage_size: 15Gi
 open_acls: true
 protocols:
 - command: alpha

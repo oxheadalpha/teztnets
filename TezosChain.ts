@@ -343,6 +343,41 @@ export class TezosChain extends pulumi.ComponentResource {
       }
     }
 
+    if (params.getNumberOfFaucetAccounts() > 0) {
+      // deploy a faucet website
+      const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
+      const faucetAccountGenImg = this.repo.buildAndPushImage(
+        "tezos-faucet/account-gen"
+      )
+      const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app")
+
+      new k8s.helm.v2.Chart(
+        `${name}-faucet`,
+        {
+          namespace: ns.metadata.name,
+          path: `tezos-faucet/charts/faucet`,
+          values: {
+            recaptcha_keys: {
+              siteKey: params.getFaucetRecaptchaSiteKey(),
+              secretKey: params.getFaucetRecaptchaSecretKey(),
+            },
+            number_of_accounts: params.getNumberOfFaucetAccounts(),
+            seed: chainSpecificSeed,
+            images: {
+              account_gen: faucetAccountGenImg,
+              faucet: faucetAppImg,
+            },
+          },
+        },
+        { providers: { kubernetes: this.provider } }
+      )
+
+      // add the faucet seed to the activation parameters so the accounts given
+      // by the faucet website work on chain
+      params.helmValues["activation"]["deterministic_faucet"] = {
+        seed: chainSpecificSeed,
+        number_of_accounts: params.getNumberOfFaucetAccounts(),
+      }
     const defaultHelmValuesFile = fs.readFileSync(`${params.getChartRepo()}/charts/tezos/values.yaml`, 'utf8');
     const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
     const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
@@ -408,42 +443,6 @@ export class TezosChain extends pulumi.ComponentResource {
       },
       { provider: this.provider }
     )
-
-    if (params.getNumberOfFaucetAccounts() > 0) {
-      // deploy a faucet website
-      const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
-      const faucetAccountGenImg = this.repo.buildAndPushImage(
-        "tezos-faucet/account-gen"
-      )
-      const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app")
-
-      new k8s.helm.v2.Chart(
-        `${name}-faucet`,
-        {
-          namespace: ns.metadata.name,
-          path: `tezos-faucet/charts/faucet`,
-          values: {
-            recaptcha_keys: {
-              siteKey: params.getFaucetRecaptchaSiteKey(),
-              secretKey: params.getFaucetRecaptchaSecretKey(),
-            },
-            number_of_accounts: params.getNumberOfFaucetAccounts(),
-            seed: chainSpecificSeed,
-            images: {
-              account_gen: faucetAccountGenImg,
-              faucet: faucetAppImg,
-            },
-          },
-        },
-        { providers: { kubernetes: this.provider } }
-      )
-
-      // add the faucet seed to the activation parameters so the accounts given
-      // by the faucet website work on chain
-      params.helmValues["activation"]["deterministic_faucet"] = {
-        seed: chainSpecificSeed,
-        number_of_accounts: params.getNumberOfFaucetAccounts(),
-      }
 
       const faucetDomain = `faucet.${teztnetsDomain}`
       const faucetCert = new aws.acm.Certificate(
