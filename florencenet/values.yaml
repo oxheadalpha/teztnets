@@ -1,12 +1,17 @@
 nodes:
-  baking:
-    tezos-baking-node-0:
-      bake_using_account: tqbaker
+  tezos-baking-node:
+    instances:
+    - bake_using_accounts:
+      - tqbaker
       config:
         shell:
           history_mode: full
       is_bootstrap_node: true
-  regular: {}
+    runs:
+    - baker
+    - endorser
+    storage_size: 15Gi
+  tezos-node: {}
 regular_node_statefulset: # charts/tezos/templates/node.yaml
   name: tezos-node
   node_type: regular
@@ -14,7 +19,7 @@ regular_node_statefulset: # charts/tezos/templates/node.yaml
 node_config_network:
   chain_name: florencenet
 images:
-    tezos: tezos/tezos:v9.1
+    tezos: tezos/tezos:v9.5
 full_snapshot_url: https://florencenet.xtz-shots.io/full
 rolling_snapshot_url: null
 
