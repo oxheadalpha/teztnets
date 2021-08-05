@@ -11,7 +11,7 @@ nodes:
     - baker
     - endorser
     storage_size: 15Gi
-  tezos-node: {}
+  tezos-node: null
 regular_node_statefulset: # charts/tezos/templates/node.yaml
   name: tezos-node
   node_type: regular

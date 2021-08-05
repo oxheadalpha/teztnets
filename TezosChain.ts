@@ -365,6 +365,12 @@ export class TezosChain extends pulumi.ComponentResource {
       }
     }
 
+
+    // Hosted zones should really be owned by pulumi. Then we could
+    // reference them instead of hardcoding strings.
+    const teztnetsHostedZone = "teztnets.xyz"
+    const teztnetsDomain = `${name}.${teztnetsHostedZone}`
+
     if (params.getNumberOfFaucetAccounts() > 0) {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
@@ -400,80 +406,6 @@ export class TezosChain extends pulumi.ComponentResource {
         seed: chainSpecificSeed,
         number_of_accounts: params.getNumberOfFaucetAccounts(),
       }
-    if (params.getChartRepo() == '') {
-      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
-      const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
-      const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
-      const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
-      // do not build zerotier for now since it takes times and it is not used in tqinfra
-      delete tezosK8sImages["zerotier"];
-
-      const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-        (obj: { [index: string]: any; }, [key]) => {
-          obj[key] = this.repo.buildAndPushImage(`${params.getChartPath()}/${key.replace(/_/g, "-")}`);
-          return obj;
-        },
-        {}
-      )
-      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          path: `${params.getChartPath()}/charts/tezos`,
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    } else {
-      // deploy from helm repo with public images
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          chart: 'tezos-chain',
-          fetchOpts:
-           {
-              repo: params.getChartRepo(),
-              version: params.getChartRepoVersion(),
-          },
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    }
-
-    // Hosted zones should really be owned by pulumi. Then we could
-    // reference them instead of hardcoding strings.
-    const teztnetsHostedZone = "teztnets.xyz"
-    const teztnetsDomain = `${name}.${teztnetsHostedZone}`
-
-    new k8s.core.v1.Service(
-      `${name}-p2p-lb`,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: name,
-          annotations: {
-            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
-          },
-        },
-        spec: {
-          ports: [
-            {
-              port: 9732,
-              targetPort: 9732,
-              protocol: "TCP",
-            },
-          ],
-          selector: { app: "tezos-baking-node" },
-          type: "LoadBalancer",
-        },
-      },
-      { provider: this.provider }
-    )
 
       const faucetDomain = `faucet.${teztnetsDomain}`
       const faucetCert = new aws.acm.Certificate(
@@ -541,6 +473,75 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider, parent: this, dependsOn: certValidation }
       )
     }
+    if (params.getChartRepo() == '') {
+      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+      const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
+      const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
+      const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
+      // do not build zerotier for now since it takes times and it is not used in tqinfra
+      delete tezosK8sImages["zerotier"];
+
+      const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
+        (obj: { [index: string]: any; }, [key]) => {
+          obj[key] = this.repo.buildAndPushImage(`${params.getChartPath()}/${key.replace(/_/g, "-")}`);
+          return obj;
+        },
+        {}
+      )
+      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          path: `${params.getChartPath()}/charts/tezos`,
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    } else {
+      // deploy from helm repo with public images
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          chart: 'tezos-chain',
+          fetchOpts:
+           {
+              repo: params.getChartRepo(),
+              version: params.getChartRepoVersion(),
+          },
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    }
+
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb`,
+      {
+        metadata: {
+          namespace: ns.metadata.name,
+          name: name,
+          annotations: {
+            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
+          },
+        },
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { app: "tezos-baking-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: this.provider }
+    )
 
 
   }

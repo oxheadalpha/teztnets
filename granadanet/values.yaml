@@ -25,7 +25,7 @@ nodes:
     - baker
     - endorser
     storage_size: 15Gi
-  tezos-node: {}
+  tezos-node: null
 rpc_auth: false
 zerotier_config:
   zerotier_network: null
