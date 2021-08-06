@@ -10,7 +10,7 @@ accounts:
     type: secret
     # key injected by pulumi
 activation:
-  protocol_hash: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
+  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -55,9 +55,6 @@ node_config_network:
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-  user_activated_upgrades:
-  - level: 255
-    replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 nodes:
   tezos-baking-node:
     instances:
@@ -72,7 +69,6 @@ nodes:
     - endorser
     storage_size: 15Gi
   tezos-node: null
-open_acls: true
 protocols:
 - command: alpha
 - command: 009-PsFLoren

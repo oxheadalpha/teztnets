@@ -126,12 +126,11 @@ const mondaynet_chain = new TezosChain(
         description: 'A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.',
         schedule: '0 0 * * MON',
         bootstrapContracts: ['taquito1.json'],
-        bootstrapCommitments: 'commitments.json',
         chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
         chartRepoVersion: '5.0.2',
         privateBakingKey: private_baking_key,
         privateNonbakingKey: private_non_baking_key,
-        numberOfFaucetAccounts: 0,
+        numberOfFaucetAccounts: 1000,
         faucetSeed: faucetSeed,
         faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
         faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -168,6 +167,7 @@ const granadanet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: "granadanet/values.yaml",
         name: 'granadanet',
+        dnsName: 'granadanet',
         category: longCategory,
         humanName: "Granadanet",
         description: 'Long-running testnet for Granada proposal.',
@@ -193,7 +193,7 @@ function getNetworks(chains: TezosChain[]): object {
 
     chains.forEach(function (chain) {
         const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()); // clone
-        bootstrapPeers.splice(0, 0, `${chain.params.getDnsName()}.tznode.net`);
+        bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`);
 
         // genesis_pubkey is the public key associated with the $TEZOS_BAKING_KEY private key in github secrets
         // TODO: generate it dynamically based on privkey
