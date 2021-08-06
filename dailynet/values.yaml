@@ -69,6 +69,7 @@ nodes:
     - endorser
     storage_size: 15Gi
   tezos-node: null
+open_acls: true
 protocols:
 - command: alpha
 rolling_snapshot_url: null
