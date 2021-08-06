@@ -18,8 +18,8 @@ activation:
     blocks_per_roll_snapshot: 64
     blocks_per_voting_period: 10240
     time_between_blocks:
-      - "30"
-      - "20"
+      - "15"
+      - "7"
     endorsers_per_block: 32
     hard_gas_limit_per_operation: "1040000"
     hard_gas_limit_per_block: "10400000"
@@ -43,7 +43,7 @@ activation:
     min_proposal_quorum: 500
     initial_endorsers: 24
     delay_per_missing_endorsement: "8"
-    minimal_block_delay: "2"
+    minimal_block_delay: "15"
     liquidity_baking_subsidy: "2500000"
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000

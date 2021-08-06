@@ -99,7 +99,7 @@ const longCategory = "Long-Running Teztnets";
 // chains
 const dailynet_chain = new TezosChain(
     new TezosChainParametersBuilder({
-        yamlFile: 'mondaynet/values.yaml',
+        yamlFile: 'dailynet/values.yaml',
         dnsName: 'dailynet',
         category: periodicCategory,
         humanName: 'Dailynet',
