@@ -135,5 +135,4 @@ accounts:
       #    test_chain_duration: "1966080"
 
 protocols:
-- command: 009-PsFLoren
 - command: 010-PtGRANAD
