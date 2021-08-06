@@ -145,6 +145,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._helmValues["node_config_network"]["chain_name"] = chainName;
     return this;
   }
+  public timestamp(timestamp: string): TezosChainParametersBuilder {
+    this._helmValues["node_config_network"]["genesis"]["timestamp"] = timestamp;
+    return this;
+  }
   public getChainName(): string {
     return this._helmValues["node_config_network"]["chain_name"];
   }
@@ -193,6 +197,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
 
     this.name(`${this.getDnsName().toLowerCase()}-${deployDate.toISOString().split('T')[0]}`);
     this.chainName(`TEZOS-${this.getDnsName().toUpperCase()}-${deployDate.toISOString()}`);
+    this.timestamp(deployDate.toISOString());
     this._periodic = true;
 
     return this;
@@ -364,7 +369,6 @@ export class TezosChain extends pulumi.ComponentResource {
         params.helmValues["activation"]["commitments_url"] = pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${commitmentFile}`;
       }
     }
-
 
     // Hosted zones should really be owned by pulumi. Then we could
     // reference them instead of hardcoding strings.
