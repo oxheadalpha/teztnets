@@ -414,7 +414,7 @@ export class TezosChain extends pulumi.ComponentResource {
           validationMethod: "DNS",
           domainName: faucetDomain,
         },
-        { protect: true, parent: this }
+        { parent: this }
       )
       const { certValidation } = createCertValidation(
         {
@@ -562,7 +562,7 @@ export class TezosChain extends pulumi.ComponentResource {
   getNetworkUrl(baseUrl?: string, relativeUrl?: string): string {
     if ("activation_account_name" in this.params.helmValues["node_config_network"]) {
       baseUrl = baseUrl || 'https://teztnets.xyz';
-      relativeUrl = relativeUrl || (this.params.isPeriodic() ? this.params.getDnsName() : this.params.getName());
+      relativeUrl = relativeUrl || this.params.getName();
       return `${baseUrl}/${relativeUrl}`;
     }
 

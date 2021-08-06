@@ -84,7 +84,6 @@ export function createCertValidation(
               zoneId: zone.id,
             },
             {
-              protect: true,
               ...opts,
             }
           )
@@ -101,7 +100,6 @@ export function createCertValidation(
       ),
     },
     {
-      protect: true,
       ...opts,
     }
   )
