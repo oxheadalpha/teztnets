@@ -71,7 +71,6 @@ nodes:
   tezos-node: null
 protocols:
 - command: alpha
-- command: 009-PsFLoren
 rolling_snapshot_url: null
 rpc_auth: false
 zerotier_config:

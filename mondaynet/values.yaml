@@ -75,7 +75,7 @@ nodes:
 open_acls: true
 protocols:
 - command: alpha
-- command: 009-PsFLoren
+- command: 010-PtGRANAD
 rolling_snapshot_url: null
 rpc_auth: false
 zerotier_config:
