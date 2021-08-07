@@ -56,18 +56,17 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_d83405ff_20210805155252
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_133ce19d_20210806150157
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-08-07
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-08-06T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_d83405ff_20210805155252](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_d83405ff_20210805155252) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-06.teztnets.xyz) |
-| Protocol at level 0 |  `PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i` |
-| Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
+| Full network name | `TEZOS-DAILYNET-2021-08-07T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_133ce19d_20210806150157](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_133ce19d_20210806150157) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-07.teztnets.xyz) |
+| Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
 ## Mondaynet
@@ -77,7 +76,7 @@ To join Mondaynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_4982781a_20210730152321
-~ $ tezos-node config init --network https://teztnets.xyz/mondaynet
+~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-08-02
 ~ $ tezos-node run
 ```
 
@@ -85,8 +84,8 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_4982781a_20210730152321
 |-------|---------------------|
 | Full network name | `TEZOS-MONDAYNET-2021-08-02T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_4982781a_20210730152321](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_4982781a_20210730152321) |
-| Faucet | [Mondaynet faucet](https://faucet.tzalpha.net) |
-| Protocol at level 0 |  `PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i` |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-08-02.teztnets.xyz) |
+| Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
