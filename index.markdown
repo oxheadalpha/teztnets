@@ -56,21 +56,21 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_d475722d_20210809135012
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-08-10
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_cae99072_20210810203025
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-08-11
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-08-10T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_d475722d_20210809135012](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_d475722d_20210809135012) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-10.teztnets.xyz) |
+| Full network name | `TEZOS-DAILYNET-2021-08-11T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_cae99072_20210810203025](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_cae99072_20210810203025) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-11.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
 ## Mondaynet
-A testnet that restarts every Monday launched from tezos/tezos master branch and protocol alpha.
+A testnet that restarts every Monday launched from tezos/tezos master branch and Granadanet protocl, upgrading to alpha at block 255.
 
 To join Mondaynet with docker, run the following commands:
 
