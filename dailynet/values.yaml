@@ -25,7 +25,6 @@ activation:
     hard_gas_limit_per_block: "10400000"
     proof_of_work_threshold: "70368744177663"
     tokens_per_roll: "8000000000"
-    michelson_maximum_type_size: 1000
     seed_nonce_revelation_tip: "125000"
     origination_size: 257
     block_security_deposit: "512000000"
