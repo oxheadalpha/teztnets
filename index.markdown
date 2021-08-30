@@ -57,15 +57,15 @@ To join Dailynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_8fd4aa1d_20210827164012
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-08-29
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-08-30
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-08-29T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2021-08-30T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_8fd4aa1d_20210827164012](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_8fd4aa1d_20210827164012) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-29.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-08-30.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -75,16 +75,16 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 To join Mondaynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_86fa76b2_20210820140815
-~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-08-23
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_8fd4aa1d_20210827164012
+~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-08-30
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-MONDAYNET-2021-08-23T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_86fa76b2_20210820140815](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_86fa76b2_20210820140815) |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-08-23.teztnets.xyz) |
+| Full network name | `TEZOS-MONDAYNET-2021-08-30T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_8fd4aa1d_20210827164012](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_8fd4aa1d_20210827164012) |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-08-30.teztnets.xyz) |
 | Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
