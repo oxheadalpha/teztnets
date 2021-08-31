@@ -13,7 +13,7 @@ node_config_network:
   - level: 4095
     replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
 images:
-  tezos: tezos/tezos:v9.5
+  tezos: tezos/tezos:v10.1
 is_invitation: false
 nodes:
   tezos-baking-node:
@@ -27,7 +27,7 @@ nodes:
     runs:
     - baker
     - endorser
-    storage_size: 15Gi
+    storage_size: 30Gi
   tezos-node: null
 rpc_auth: false
 zerotier_config:
