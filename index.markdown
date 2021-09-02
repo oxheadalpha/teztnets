@@ -33,7 +33,7 @@ Long-running testnet for Granada proposal.
 To join Granadanet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v10.1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v10.2
 ~ $ tezos-node config init --network https://teztnets.xyz/granadanet
 ~ $ tezos-node run
 ```
@@ -41,7 +41,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v10.1
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v10.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v10.1) |
+| Tezos docker build | [tezos/tezos:v10.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v10.2) |
 | Faucet | [Granadanet faucet](https://faucet.tzalpha.net) |
 | Protocol at level 4095 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 
@@ -56,16 +56,16 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_6c7c3e06_20210831165554
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-09-01
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_163b312a_20210901182040
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-09-02
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-09-01T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_6c7c3e06_20210831165554](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_6c7c3e06_20210831165554) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-09-01.teztnets.xyz) |
+| Full network name | `TEZOS-DAILYNET-2021-09-02T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_163b312a_20210901182040](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_163b312a_20210901182040) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-09-02.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
