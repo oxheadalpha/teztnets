@@ -496,12 +496,12 @@ export class TezosChain extends pulumi.ComponentResource {
       { parent: this }
     )
 
-    const rpcIngName = `${ns.metadata.name}-rpc-ingress`
+    const rpcIngName = `${name}-rpc-ingress`
     const rpc_ingress = new k8s.networking.v1beta1.Ingress(
       rpcIngName,
       {
         metadata: {
-          namespace: ns.metadata.name,
+          namespace: name,
           name: rpcIngName,
           annotations: {
             "kubernetes.io/ingress.class": "alb",
