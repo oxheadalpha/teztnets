@@ -1,16 +1,17 @@
 # Teztnets
 
-Infrastructure-as-code repo to activate and bootstrap tezos testnets in a repeatable, automated way.
+Infrastructure-as-code repo to activate and bootstrap Tezos testnets in a repeatable, automated way.
 
-Deployed at [Teztnets.xyz](https://teztnets.xyz)
+See [teztnets.xyz](https://teztnets.xyz) for the list of active Teztnets.
 
 ## Features
 
-### Based on Tezos-k8s
+### Based on tezos-k8s
 
-[Tezos-k8s](https://github.com/oxheadalpha/tezos-k8s) is a framework to deploy Tezos nodes or chains using Kubernetes and Helm.
+[tezos-k8s](https://github.com/oxheadalpha/tezos-k8s) is a framework to deploy Tezos nodes or chains using Kubernetes and Helm.
 
-See the [Tezos-k8s documentation](https://github.com/oxheadalpha/tezos-k8s/blob/master/README.md)
+See the [tezos-k8s documentation](https://github.com/oxheadalpha/tezos-k8s/blob/master/README.md)
+
 ### Faucet support
 
 The [commitments](https://github.com/oxheadalpha/teztnets/tree/main/bootstrap_commitments) are precursor accounts that can be used to fund real account with the faucet.
@@ -21,11 +22,15 @@ A [collection of raw Michelson contracts](https://github.com/oxheadalpha/teztnet
 
 ### Bootstrap baker and bootstrap p2p endpoint
 
-Upon deployment of a teztnet, a genesis baker will run and its p2p endpoint will be exposed externally.
+Upon deployment of a Teztnet, a genesis baker will run and its p2p and rpc endpoints will be exposed externally.
+Example:
+
+- p2p: `granadanet.teztnets.xyz`
+- rpc `rpc.granadanet.teztnets.xyz`
 
 ### `--network` endpoint for Tezos node
 
-Tezos nodes supports downloading of network specification from a json endpoint: `tezos-node config init --network https://teztnets.xyz/teztnet_name`
+Tezos nodes supports downloading of network specification from a json endpoint: `tezos-node config init --network https://teztnets.xyz/<TEZTNET NAME>`
 
 The Teztnet platform creates and exposes such endpoints.
 
@@ -44,32 +49,22 @@ You are encouraged to build automation to ensure your Tezos project keeps runnin
 
 ## Add new Teztnets or modify existing Teztnets
 
-Every teztnet is defined in a directory in this repository. The teztnet directory must contain the following files:
+Every Teztnet is defined in a directory in this repository. The Teztnet directory must contain the following files:
 
-* `values.yaml`
-* `metadata.yaml`
-* optionally, a submodule of Tezos-k8s (in case you need an unreleased or custom version of the tezos-k8s software)
+- A Helm chart `values.yaml` file
+- optionally, a submodule of tezos-k8s (in case you need an unreleased or custom version of the tezos-k8s software)
 
 ### Helm chart values.yaml
 
 The Helm chart values.yaml lets you customize your chain in many ways:
 
-* specify activation parameters, such as:
-  * list of genesis bakers
-  * list of accounts funded at genesis
-  * chains parameters (blocks per cycle, time between blocks...)
-* specify user-activated upgrades for hard-forks at a given length
-* specify the list of baker/endorser binaries to run.
+- specify activation parameters, such as:
+  - list of genesis bakers
+  - list of accounts funded at genesis
+  - chains parameters (blocks per cycle, time between blocks...)
+- specify user-activated upgrades for hard-forks at a given length
+- specify the list of baker/endorser binaries to run.
 
- The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
+Look in any Teztnet directory's values.yaml file for reference as to how to configure your own Teztnet.
 
- ### Metadata.yaml file
-
-This metadata file specifies:
-
-* the external bootstrap peers p2p endpoints (not managed by the teztnets platform)
-* description of the teztnet
-* the commitments file (for faucet), if desired
-* the list of Michelson contracts to inject at genesis, if desired
-
-[Example of metadata.yaml](https://github.com/oxheadalpha/teztnets/blob/main/mondaynet/metadata.yaml)
+The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
