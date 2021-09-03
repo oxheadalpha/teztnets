@@ -17,6 +17,7 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 |-------|---------------------|
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
+| RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 {% for proto in v["protocols"] -%}
 | Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
