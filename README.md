@@ -8,16 +8,16 @@ Deployed at [Teztnets.xyz](https://teztnets.xyz)
 
 ### Based on Tezos-k8s
 
-[Tezos-k8s](https://github.com/tqtezos/tezos-k8s) is a framework to deploy Tezos nodes or chains using Kubernetes and Helm.
+[Tezos-k8s](https://github.com/oxheadalpha/tezos-k8s) is a framework to deploy Tezos nodes or chains using Kubernetes and Helm.
 
-See the [Tezos-k8s documentation](https://github.com/tqtezos/tezos-k8s/blob/master/README.md)
+See the [Tezos-k8s documentation](https://github.com/oxheadalpha/tezos-k8s/blob/master/README.md)
 ### Faucet support
 
-The [commitments](https://github.com/tqtezos/teztnets/tree/main/bootstrap_commitments) are precursor accounts that can be used to fund real account with the faucet.
+The [commitments](https://github.com/oxheadalpha/teztnets/tree/main/bootstrap_commitments) are precursor accounts that can be used to fund real account with the faucet.
 
 ### Injection of contracts at genesis
 
-A [collection of raw Michelson contracts](https://github.com/tqtezos/teztnets/tree/main/bootstrap_contracts) can be optionally deployed in any Teztnet at genesis.
+A [collection of raw Michelson contracts](https://github.com/oxheadalpha/teztnets/tree/main/bootstrap_contracts) can be optionally deployed in any Teztnet at genesis.
 
 ### Bootstrap baker and bootstrap p2p endpoint
 
@@ -33,7 +33,7 @@ The Teztnet platform creates and exposes such endpoints.
 
 Deployment of new testnets is performed with Github Releases.
 
-The most recent release on the [Release page](https://github.com/tqtezos/teztnets/releases) has a list of currently deployed testnets, with URLs to connect to them.
+The most recent release on the [Release page](https://github.com/oxheadalpha/teztnets/releases) has a list of currently deployed testnets, with URLs to connect to them.
 
 ## Automate on Teztnets
 
@@ -61,7 +61,7 @@ The Helm chart values.yaml lets you customize your chain in many ways:
 * specify user-activated upgrades for hard-forks at a given length
 * specify the list of baker/endorser binaries to run.
 
- The [default Helm values.yaml](https://github.com/tqtezos/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
+ The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
 
  ### Metadata.yaml file
 
@@ -72,4 +72,4 @@ This metadata file specifies:
 * the commitments file (for faucet), if desired
 * the list of Michelson contracts to inject at genesis, if desired
 
-[Example of metadata.yaml](https://github.com/tqtezos/teztnets/blob/main/mondaynet/metadata.yaml)
+[Example of metadata.yaml](https://github.com/oxheadalpha/teztnets/blob/main/mondaynet/metadata.yaml)

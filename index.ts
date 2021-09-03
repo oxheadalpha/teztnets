@@ -137,32 +137,6 @@ const mondaynet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
-const florencenet_chain = new TezosChain(
-    new TezosChainParametersBuilder({
-        yamlFile: "florencenet/values.yaml",
-        name: 'florencenet',
-        dnsName: 'florencenoba',
-        category: longCategory,
-        humanName: "Florencenet",
-        description: 'Long-running test network for the Florence protocol.',
-        bootstrapPeers: [
-            'florencenobanet.smartpy.io:9733',
-            'florencenobanet.tezos.co.il',
-            'florencenobanet.kaml.fr',
-            'florencenobanet.boot.tez.ie',
-        ],
-        bootstrapCommitments: 'commitments.json',
-        chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
-        chartRepoVersion: '5.0.2',
-        privateBakingKey: private_baking_key,
-        privateNonbakingKey: private_non_baking_key,
-        numberOfFaucetAccounts: 0,
-        faucetSeed: faucetSeed,
-        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    }),
-    cluster.provider, repo);
-
 const granadanet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: "granadanet/values.yaml",
@@ -242,5 +216,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, florencenet_chain, granadanet_chain]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, florencenet_chain, granadanet_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain]);
