@@ -496,7 +496,7 @@ export class TezosChain extends pulumi.ComponentResource {
       { parent: this }
     )
 
-    const rpcIngName = `${name}-rpc-ingress`
+    const rpcIngName = `${rpcDomain}-ingress`
     const rpc_ingress = new k8s.networking.v1beta1.Ingress(
       rpcIngName,
       {
