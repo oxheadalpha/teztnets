@@ -520,16 +520,9 @@ export class TezosChain extends pulumi.ComponentResource {
           labels: { app: "tezos-node" },
         },
         spec: {
-          // https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/ingress/cert_discovery/#discover-via-ingress-tls
-          tls: [
-            {
-              hosts: rpcCert.domainValidationOptions.apply((dvos) =>
-                dvos.map((dvo) => dvo.domainName)
-              ),
-            },
-          ],
           rules: [
             {
+              host: rpcDomain,
               http: {
                 paths: [
                   {
@@ -552,7 +545,7 @@ export class TezosChain extends pulumi.ComponentResource {
           ],
         },
       },
-        { provider, parent: this, dependsOn: rpcCertValidation.certValidation }
+      { provider, parent: this, dependsOn: rpcCertValidation.certValidation }
     )
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
