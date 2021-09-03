@@ -477,6 +477,83 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider, parent: this, dependsOn: certValidation }
       )
     }
+    // RPC Ingress
+    const rpcDomain = `rpc.${teztnetsDomain}`
+    const rpcCert = new aws.acm.Certificate(
+      `${rpcDomain}-cert`,
+      {
+        validationMethod: "DNS",
+        domainName: rpcDomain,
+      },
+      { parent: this }
+    )
+    const rpcCertValidation = createCertValidation(
+      {
+        cert: rpcCert,
+        targetDomain: rpcDomain,
+        hostedZone: teztnetsHostedZone,
+      },
+      { parent: this }
+    )
+
+    const rpcIngName = `${ns.metadata.name}-rpc-ingress`
+    const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+      rpcIngName,
+      {
+        metadata: {
+          namespace: ns.metadata.name,
+          name: rpcIngName,
+          annotations: {
+            "kubernetes.io/ingress.class": "alb",
+            "alb.ingress.kubernetes.io/scheme": "internet-facing",
+            "alb.ingress.kubernetes.io/healthcheck-path":
+              "/chains/main/chain_id",
+            "alb.ingress.kubernetes.io/healthcheck-port": "8732",
+            "alb.ingress.kubernetes.io/listen-ports":
+            '[{"HTTP": 80}, {"HTTPS":443}]',
+            "ingress.kubernetes.io/force-ssl-redirect": "true",
+            "alb.ingress.kubernetes.io/actions.ssl-redirect":
+              '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+            // Prevent pulumi erroring if ingress doesn't resolve immediately
+            "pulumi.com/skipAwait": "true",
+          },
+          labels: { app: "tezos-node" },
+        },
+        spec: {
+          // https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/ingress/cert_discovery/#discover-via-ingress-tls
+          tls: [
+            {
+              hosts: rpcCert.domainValidationOptions.apply((dvos) =>
+                dvos.map((dvo) => dvo.domainName)
+              ),
+            },
+          ],
+          rules: [
+            {
+              http: {
+                paths: [
+                  {
+                    path: "/*",
+                    backend: {
+                      serviceName: "ssl-redirect",
+                      servicePort: "use-annotation",
+                    },
+                  },
+                  {
+                    path: "/*",
+                    backend: {
+                      serviceName: "tezos-node-rpc",
+                      servicePort: "rpc",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+        { provider, parent: this, dependsOn: rpcCertValidation.certValidation }
+    )
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
       const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
