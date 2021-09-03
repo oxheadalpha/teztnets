@@ -501,7 +501,7 @@ export class TezosChain extends pulumi.ComponentResource {
       rpcIngName,
       {
         metadata: {
-          namespace: name,
+          namespace: ns.metadata.name,
           name: rpcIngName,
           annotations: {
             "kubernetes.io/ingress.class": "alb",
