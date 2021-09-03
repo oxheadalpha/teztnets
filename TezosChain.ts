@@ -487,7 +487,7 @@ export class TezosChain extends pulumi.ComponentResource {
       },
       { parent: this }
     )
-    const rpcCertValidation = createCertValidation(
+    const { certValidation } = createCertValidation(
       {
         cert: rpcCert,
         targetDomain: rpcDomain,
@@ -545,7 +545,7 @@ export class TezosChain extends pulumi.ComponentResource {
           ],
         },
       },
-      { provider, parent: this, dependsOn: rpcCertValidation.certValidation }
+      { provider, parent: this, dependsOn: certValidation }
     )
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
