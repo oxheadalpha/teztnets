@@ -1,14 +1,28 @@
 accounts:
   tqbaker:
-    bootstrap_balance: '7500000000000'
+    bootstrap_balance: "7500000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
   tqfree:
-    bootstrap_balance: '5000000000000000'
+    bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: secret
     # key injected by pulumi
+
+node_config_network:
+  activation_account_name: tqbaker
+  genesis:
+    block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
+    protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
+  user_activated_upgrades:
+    - level: 255
+      replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+
+protocols:
+  - command: alpha
+  - command: 010-PtGRANAD
+
 activation:
   protocol_hash: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
   protocol_parameters:
@@ -47,39 +61,23 @@ activation:
     liquidity_baking_subsidy: "2500000"
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000
-bootstrap_peers: []
-full_snapshot_url: null
-is_invitation: false
-node_config_network:
-  activation_account_name: tqbaker
-  genesis:
-    block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
-    protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-  user_activated_upgrades:
-  - level: 255
-    replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+
 nodes:
   tezos-baking-node:
     instances:
-    - bake_using_accounts:
-      - tqbaker
-      config:
-        shell:
-          history_mode: archive
-      is_bootstrap_node: true
+      - bake_using_accounts:
+          - tqbaker
+        config:
+          shell:
+            history_mode: archive
+        is_bootstrap_node: true
     runs:
-    - baker
-    - endorser
+      - baker
+      - endorser
     storage_size: 15Gi
-  tezos-node: null
+
 open_acls: true
-protocols:
-- command: alpha
-- command: 010-PtGRANAD
+
+bootstrap_peers: []
+full_snapshot_url: null
 rolling_snapshot_url: null
-rpc_auth: false
-zerotier_config:
-  zerotier_network: null
-  zerotier_token: null
-zerotier_in_use: false
-images: {}
