@@ -81,3 +81,5 @@ open_acls: true
 bootstrap_peers: []
 full_snapshot_url: null
 rolling_snapshot_url: null
+
+images: {}
