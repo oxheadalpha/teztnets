@@ -556,6 +556,8 @@ export class TezosChain extends pulumi.ComponentResource {
       // do not build zerotier for now since it takes times and it is not used in tqinfra
       delete tezosK8sImages["zerotier"];
 
+      const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
+      
       const registry = repo.repository.registryId.apply(async id => {
         let credentials = await aws.ecr.getCredentials({
           registryId: id
