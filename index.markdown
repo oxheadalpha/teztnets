@@ -39,17 +39,17 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_f44b58fc_20210903111010
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-09-06
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_0f27a92b_20210906093102
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-09-07
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-09-06T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_f44b58fc_20210903111010](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_f44b58fc_20210903111010) |
-| RPC endpoint | [https://rpc.dailynet-2021-09-06.teztnets.xyz](https://rpc.dailynet-2021-09-06.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-09-06.teztnets.xyz) |
+| Full network name | `TEZOS-DAILYNET-2021-09-07T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_0f27a92b_20210906093102](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_0f27a92b_20210906093102) |
+| RPC endpoint | [https://rpc.dailynet-2021-09-07.teztnets.xyz](https://rpc.dailynet-2021-09-07.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-09-07.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
