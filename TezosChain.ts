@@ -6,6 +6,7 @@ import * as cronParser from "cron-parser";
 import { createCertValidation } from "./route53";
 import { publicReadPolicyForBucket } from "./s3";
 import { TezosImageResolver } from "./TezosImageResolver";
+import * as docker from "@pulumi/docker";
 
 import * as fs from 'fs';
 import * as YAML from 'yaml';
@@ -555,13 +556,44 @@ export class TezosChain extends pulumi.ComponentResource {
       // do not build zerotier for now since it takes times and it is not used in tqinfra
       delete tezosK8sImages["zerotier"];
 
+      const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
+      
+      const registry = repo.repository.registryId.apply(async id => {
+        let credentials = await aws.ecr.getCredentials({
+          registryId: id
+        }, {
+          ...defaultResourceOptions,
+          async: true,
+        });
+
+        let decodedCredentials = Buffer.from(credentials.authorizationToken, "base64").toString();
+        let [username, password] = decodedCredentials.split(":");
+        if (!password || !username) {
+          throw new Error("Invalid credentials");
+        }
+
+        return {
+          registry: credentials.proxyEndpoint,
+          username: username,
+          password: password,
+        };
+      })
+
+      let _cacheFrom: docker.CacheFrom = {}
+
       const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-        (obj: { [index: string]: any; }, [key]) => {
-          obj[key] = this.repo.buildAndPushImage(`${params.getChartPath()}/${key.replace(/_/g, "-")}`);
-          return obj;
+        (obj: { [index: string]: any }, [key, value]) => {
+          let dockerBuild: docker.DockerBuild = {
+            dockerfile: `${params.getChartPath()}/${key}/Dockerfile`,
+            cacheFrom: _cacheFrom,
+            context: `${params.getChartPath()}/${key}`
+          };
+          obj[key] = docker.buildAndPushImage((value as string).replace(/:.*/, ""), dockerBuild, repo.repository.repositoryUrl, this, () => registry);
+          return obj
         },
         {}
       )
+      
       params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
       const chain = new k8s.helm.v2.Chart(
         name,
