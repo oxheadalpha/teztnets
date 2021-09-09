@@ -90,6 +90,8 @@ nodes:
       - baker
       - endorser
     storage_size: 30Gi
+  # Overwrite default values.yaml tezos-node
+  tezos-node: null
 
 ## Chain has already been activated. `activation` is commented out to indicate
 ## internally that it shouldn't try and activate the chain again.
