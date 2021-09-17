@@ -72,13 +72,12 @@ nodes:
             history_mode: archive
         is_bootstrap_node: true
     runs:
+      - octez_node
       - baker
       - endorser
     storage_size: 15Gi
   # Overwrite default values.yaml tezos-node
   tezos-node: null
-
-open_acls: true
 
 bootstrap_peers: []
 full_snapshot_url: null
