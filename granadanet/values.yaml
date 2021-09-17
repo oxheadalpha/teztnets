@@ -85,6 +85,9 @@ nodes:
         config:
           shell:
             history_mode: archive
+          rpc:
+            cors-headers: [ "content-type" ]
+            cors-origin: [ "*" ]
         is_bootstrap_node: true
     runs:
       - baker
