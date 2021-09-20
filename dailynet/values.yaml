@@ -38,6 +38,7 @@ activation:
     seed_nonce_revelation_tip: "125000"
     origination_size: 257
     block_security_deposit: "512000000"
+    michelson_maximum_type_size: 1000
     endorsement_security_deposit: "64000000"
     baking_reward_per_endorsement:
       - "1250000"
