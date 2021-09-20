@@ -155,11 +155,11 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   
   public containerImage(containerImage: string | pulumi.Output<String>): TezosChainParametersBuilder {
-    this._helmValues["images"]["tezos"] = containerImage
+    this._helmValues["images"]["octez"] = containerImage
     return this;
   }
   public getContainerImage(): string {
-    return this._helmValues["images"]["tezos"];
+    return this._helmValues["images"]["octez"];
   }
 
   public dnsName(dnsName: string): TezosChainParametersBuilder {
@@ -677,7 +677,7 @@ export class TezosChain extends pulumi.ComponentResource {
   }
 
   getDockerBuild(): string {
-    return this.params.helmValues["images"]["tezos"];
+    return this.params.helmValues["images"]["octez"];
   }
 
   getProtocols(): Array<{level: number, replacement_protocol: string}> {
