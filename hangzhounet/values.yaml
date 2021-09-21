@@ -111,8 +111,8 @@ activation:
      blocks_per_roll_snapshot: 256
      blocks_per_voting_period: 20480
      time_between_blocks:
-       - "10"
        - "20"
+       - "10"
      endorsers_per_block: 256
      hard_gas_limit_per_operation: "1040000"
      hard_gas_limit_per_block: "5200000"
