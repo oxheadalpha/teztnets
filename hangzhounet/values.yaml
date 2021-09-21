@@ -134,7 +134,7 @@ activation:
      quorum_max: 7000
      min_proposal_quorum: 500
      initial_endorsers: 8
-     delay_per_missing_endorsement: "4"
+     delay_per_missing_endorsement: "2"
      liquidity_baking_escape_ema_threshold: 100000
      liquidity_baking_subsidy: '2500000'
      liquidity_baking_sunset_level: 525600
