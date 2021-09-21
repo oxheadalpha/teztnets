@@ -28,9 +28,8 @@ accounts:
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   pirbo:
-    # unconfirmed
-    # tz1NFs6yP2sXd5vAAbR43bbDRpV2nahDZope
-    key: edpkuGH2TWTQ5JrwzBLGRu5is1h7vcv5e5LN45VfqmXS5zaTUMpopH
+    # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
+    key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
