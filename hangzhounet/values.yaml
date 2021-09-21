@@ -7,9 +7,8 @@ accounts:
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   smartpy:
-    # unconfirmed
-    # tz1VpvtSaSxKvykrqajFJTZqCXgoVJ5cKaM1
-    key: edpktv8Advoagbpo5TiyyDnmC1Mqne6vJMaXQ2vvuzUfJnBfMKJmdC
+    # tz1SMARcpWCydHsGgz4MRoK9NkbpBmmUAfNe
+    key: edpkuyuJirNU14hEma1u7f3Qhx7uHZxzuXDyvmjRwaAsFFFqYGkzHx
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
