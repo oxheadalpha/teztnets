@@ -47,7 +47,7 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000000"
-  tqbaker:
+  oxheadbaker:
     bootstrap_balance: "5000000000000"
     is_bootstrap_baker_account: true
     type: secret
@@ -59,7 +59,7 @@ accounts:
     # key injected by pulumi
 
 node_config_network:
-  activation_account_name: tqbaker
+  activation_account_name: oxheadbaker
   chain_name: TEZOS_GRANADANET_2021-05-21T15:00:00Z
   genesis:
     block: BLockGenesisGenesisGenesisGenesisGenesisd4299hBGVoU
@@ -81,7 +81,7 @@ nodes:
   tezos-baking-node:
     instances:
       - bake_using_accounts:
-          - tqbaker
+          - oxheadbaker
         config:
           shell:
             history_mode: archive

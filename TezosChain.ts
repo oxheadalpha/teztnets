@@ -275,11 +275,11 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
 
   public privateBakingKey(privateBakingKey: string): TezosChainParametersBuilder {
-    this._helmValues["accounts"]["tqbaker"]["key"] = privateBakingKey;
+    this._helmValues["accounts"]["oxheadbaker"]["key"] = privateBakingKey;
     return this;
   }
   public getPrivateBakingKey(): string {
-    return this._helmValues["accounts"]["tqbaker"]["key"];
+    return this._helmValues["accounts"]["oxheadbaker"]["key"];
   }
 
   public privateNonbakingKey(privateNonbakingKey: string): TezosChainParametersBuilder {
