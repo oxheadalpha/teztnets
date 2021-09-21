@@ -40,6 +40,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000"
+  blockwatch:
+    # tz1cXeGHP8Urj2pQRwpAkCdPGbCdqFUPsQwU
+    key: edpktqRmZsGN2WEyghfqrZvn8c7xmA1xs3vDta71CsCjtHiSRMkG1z
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
