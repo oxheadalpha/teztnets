@@ -175,6 +175,7 @@ const hangzhounet_chain = new TezosChain(
             'hangzhounet.smartpy.io',
             'hangzhounet.tezos.co.il',
             'hangzhounet.kaml.fr',
+            'hangzhounet.boot.tez.ie',
         ],
         chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
         chartRepoVersion: '5.1.1',

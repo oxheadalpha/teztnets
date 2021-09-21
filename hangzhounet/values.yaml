@@ -90,6 +90,7 @@ bootstrap_peers:
   - hangzhounet.smartpy.io
   - hangzhounet.tezos.co.il
   - hangzhounet.kaml.fr
+  - hangzhounet.boot.tez.ie
 
 images:
   octez: tezos/tezos:v11.0-rc1
