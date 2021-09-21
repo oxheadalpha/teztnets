@@ -30,13 +30,6 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
-  marco:
-    # unconfirmed
-    # tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3
-    key: edpkvMWHXeETjH4i2h2ngkG2y6aVdgtW99pQ3SuHJoWNEPKANzVRLT
-    type: public
-    is_bootstrap_baker_account: false
-    bootstrap_balance: "5000000000000"
   andrewk:
     key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
     type: public
@@ -45,6 +38,11 @@ accounts:
   blockwatch:
     # tz1cXeGHP8Urj2pQRwpAkCdPGbCdqFUPsQwU
     key: edpktqRmZsGN2WEyghfqrZvn8c7xmA1xs3vDta71CsCjtHiSRMkG1z
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
+  marco:
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
