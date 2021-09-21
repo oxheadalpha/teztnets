@@ -162,7 +162,6 @@ const granadanet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
-
 const hangzhounet_chain = new TezosChain(
     new TezosChainParametersBuilder({
         yamlFile: "hangzhounet/values.yaml",
