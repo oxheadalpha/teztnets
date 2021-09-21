@@ -67,7 +67,7 @@ node_config_network:
   activation_account_name: oxheadbaker
   chain_name: TEZOS_HANGZHOUNET_2021-09-22T15:00:00Z
   genesis:
-    block: BLockGenesisGenesisGenesisGenesisGenesisd4299hBGVoU
+    block: BLockGenesisGenesisGenesisGenesisGenesis94ee4bjQDg5
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
     timestamp: "2021-09-22T15:00:00Z"
   user_activated_upgrades:
