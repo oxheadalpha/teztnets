@@ -39,10 +39,10 @@ activation:
     origination_size: 257
     block_security_deposit: "512000000"
     endorsement_security_deposit: "64000000"
-     baking_reward_per_endorsement:
+    baking_reward_per_endorsement:
        - "78125"
        - "11719"
-     endorsement_reward:
+    endorsement_reward:
        - "78125"
        - "52083"
     cost_per_byte: "250"
