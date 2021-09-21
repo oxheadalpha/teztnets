@@ -57,6 +57,13 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "500000000000000"
+  julien:
+    # for stress testing
+    # tz1PicoD6HTZFNkRpN84VFUvdpT7D6xoR2QD
+    key: edpktnArvYkSArFUGiBN4cmDmor9qwyTFCbAKEMbeSdT3z563SdTXm
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000000"
   oxheadbaker:
     # Oxhead Alpha's baker hosted in teztnets.xyz infra
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
