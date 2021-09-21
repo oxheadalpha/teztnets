@@ -195,8 +195,14 @@ function getNetworks(chains: TezosChain[]): object {
 
         // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
         // TODO: generate it dynamically based on privkey
-        const genesisPubkey = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC";
-
+        let genesisPubkey: string;
+        if (chain.params.getName().includes("granadanet") || chain.params.getName().includes("mondaynet")) {
+            // legacy tq key
+            genesisPubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n";
+        } else {
+            // new oxhead key
+            genesisPubkey = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC";
+        }
         const network = Object.assign({}, chain.params.helmValues["node_config_network"]); // clone
         network["sandboxed_chain_name"] = "SANDBOXED_TEZOS";
         network["default_bootstrap_peers"] = bootstrapPeers;
@@ -242,5 +248,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
