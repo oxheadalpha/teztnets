@@ -1,81 +1,86 @@
 accounts:
   ecadlabs:
+    # unconfirmed
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
     key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   smartpy:
+    # unconfirmed
+    # tz1VpvtSaSxKvykrqajFJTZqCXgoVJ5cKaM1
     key: edpktv8Advoagbpo5TiyyDnmC1Mqne6vJMaXQ2vvuzUfJnBfMKJmdC
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   bruno:
+    # unconfirmed
+    # tz1SqQebt7jSyf5pUKKBjx34kySkGr1hXqtw
     key: edpkuu3jmS3kbaLYTmyVaPHaxowC1KP8fDSrLoJhcvip1Cm2tK5QCd
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   tezosil:
+    # unconfirmed
+    # tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8
     key: edpkvQj8r3YigN6QFsDRaKQCoxDNhKK4whDUkFkw6Gom36d86uhEbv
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   pirbo:
+    # unconfirmed
+    # tz1NFs6yP2sXd5vAAbR43bbDRpV2nahDZope
     key: edpkuGH2TWTQ5JrwzBLGRu5is1h7vcv5e5LN45VfqmXS5zaTUMpopH
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
-  luke:
-    key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
-    type: public
-    is_bootstrap_baker_account: false
-    bootstrap_balance: "5000000000000"
   marco:
+    # unconfirmed
+    # tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3
     key: edpkvMWHXeETjH4i2h2ngkG2y6aVdgtW99pQ3SuHJoWNEPKANzVRLT
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000"
   tz1THUNA:
+    # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "500000000000000"
-  tzbtc_admin:
-    # admin for the test token contract that stands in for tzBTC.
-    # (put here to test liquidity baking)
-    key: edpkuBknW28nW72KG6RoHtYW7p12T6GKc7nAbwYX5m8Wd9sDVC9yav
-    type: public
-    is_bootstrap_baker_account: false
-    bootstrap_balance: "5000000000000000"
   oxheadbaker:
+    # Oxhead Alpha's baker hosted in teztnets.xyz infra
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
     bootstrap_balance: "5000000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-  tqfree:
+  oxheadfree:
+    # an account with a lot of money in it
+    # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
+    key: edpkubSgCoMjB2a6vPWRNRHfGa6HUFfFyEUKoEQhWC8osnav8QzBdJ
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
-    type: secret
-    # key injected by pulumi
+    type: public
 
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_GRANADANET_2021-05-21T15:00:00Z
+  chain_name: TEZOS_HANGZHOUNET_2021-09-22T15:00:00Z
   genesis:
     block: BLockGenesisGenesisGenesisGenesisGenesisd4299hBGVoU
     protocol: PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex
-    timestamp: "2021-05-21T15:00:00Z"
+    timestamp: "2021-09-22T15:00:00Z"
   user_activated_upgrades:
     - level: 4095
-      replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
+      replacement_protocol: PtHangzHogokSuiMHemCuowEavgYTP8J5qQ9fQS793MHYFpCY3r
 
 bootstrap_peers:
-  - granadanet.smartpy.io
-  - granadanet.tezos.co.il
-  - granadanet.kaml.fr
+  - hangzhounet.smartpy.io
+  - hangzhounet.tezos.co.il
+  - hangzhounet.kaml.fr
 
 images:
-  octez: tezos/tezos:v10.2
+  octez: tezos/tezos:v11.0-rc1
 
 nodes:
   tezos-baking-node:
@@ -97,47 +102,48 @@ nodes:
   # Overwrite default values.yaml tezos-node
   tezos-node: null
 
-## Chain has already been activated. `activation` is commented out to indicate
-## internally that it shouldn't try and activate the chain again.
-##
-# activation:
-#   protocol_hash: PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i
-#   protocol_parameters:
-#     preserved_cycles: 3
-#     blocks_per_cycle: 2048
-#     blocks_per_commitment: 16
-#     blocks_per_roll_snapshot: 128
-#     blocks_per_voting_period: 10240
-#     time_between_blocks:
-#       - "30"
-#       - "20"
-#     endorsers_per_block: 32
-#     hard_gas_limit_per_operation: "1040000"
-#     hard_gas_limit_per_block: "10400000"
-#     proof_of_work_threshold: "70368744177663"
-#     tokens_per_roll: "8000000000"
-#     michelson_maximum_type_size: 1000
-#     seed_nonce_revelation_tip: "125000"
-#     origination_size: 257
-#     block_security_deposit: "512000000"
-#     endorsement_security_deposit: "64000000"
-#     baking_reward_per_endorsement:
-#       - "1250000"
-#       - "187500"
-#     endorsement_reward:
-#       - "1250000"
-#       - "833333"
-#     cost_per_byte: "250"
-#     hard_storage_limit_per_operation: "60000"
-#     quorum_min: 2000
-#     quorum_max: 7000
-#     min_proposal_quorum: 500
-#     initial_endorsers: 24
-#     delay_per_missing_endorsement: "4"
-#     test_chain_duration: "1966080"
+activation:
+  protocol_hash: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
+  protocol_parameters:
+     preserved_cycles: 3
+     blocks_per_cycle: 4096
+     blocks_per_commitment: 32
+     blocks_per_roll_snapshot: 256
+     blocks_per_voting_period: 20480
+     time_between_blocks:
+       - "10"
+       - "20"
+     endorsers_per_block: 256
+     hard_gas_limit_per_operation: "1040000"
+     hard_gas_limit_per_block: "5200000"
+     proof_of_work_threshold: "70368744177663"
+     tokens_per_roll: "8000000000"
+     seed_nonce_revelation_tip: "125000"
+     origination_size: 257
+     block_security_deposit: "512000000"
+     endorsement_security_deposit: "64000000"
+     baking_reward_per_endorsement:
+       - "78125"
+       - "11719"
+     endorsement_reward:
+       - "78125"
+       - "52083"
+     cost_per_byte: "250"
+     hard_storage_limit_per_operation: "32768"
+     quorum_min: 2000
+     quorum_max: 7000
+     min_proposal_quorum: 500
+     initial_endorsers: 8
+     delay_per_missing_endorsement: "4"
+     liquidity_baking_escape_ema_threshold: 100000
+     liquidity_baking_subsidy: '2500000'
+     liquidity_baking_sunset_level: 525600
+     minimal_block_delay: '15'
+     michelson_maximum_type_size: 1000
 
 protocols:
   - command: 010-PtGRANAD
+  - command: 011-PtHangzH
 
 full_snapshot_url: null
 rolling_snapshot_url: null
