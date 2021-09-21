@@ -193,9 +193,9 @@ function getNetworks(chains: TezosChain[]): object {
         const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()); // clone
         bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`);
 
-        // genesis_pubkey is the public key associated with the $TEZOS_BAKING_KEY private key in github secrets
+        // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
         // TODO: generate it dynamically based on privkey
-        const genesisPubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n";
+        const genesisPubkey = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC";
 
         const network = Object.assign({}, chain.params.helmValues["node_config_network"]); // clone
         network["sandboxed_chain_name"] = "SANDBOXED_TEZOS";
