@@ -63,6 +63,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  vincent_xtzmaster:
+    # tz1Kr7EBSj86kbQFgCSLKo8JtvFQvYEU4SuH
+    key: edpkuVw1DAAJ1bucCkNJ48e9L8Md8meXogKnMUp1Z6sey1NFhCxmvU
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
