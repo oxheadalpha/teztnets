@@ -46,6 +46,11 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  fifthelement:
+    key: edpkujqmLUVGNbSNZV7CBMdtXAMGTTwJDQoXp2aRGrotys51rYvaRi
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
