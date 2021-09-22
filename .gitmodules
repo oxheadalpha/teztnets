@@ -2,3 +2,6 @@
 	path = tezos-faucet
         url = https://gitlab.com/Ochem/tezos-faucet.git
 
+[submodule "hangzhounet/tezos-k8s"]
+	path = hangzhounet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git
