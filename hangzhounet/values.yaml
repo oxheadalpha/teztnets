@@ -75,6 +75,30 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  nekotalabs_julien:
+    # tz1gECNgGXb4vzsEhAvX6a72AsAGJiQS8DLf
+    key: edpkv99446esWVTgGSNsfeZCpeLYbq1e69tae3Fpw22GXcMHQeRSVg
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
+  coredump:
+    # tz1Wn7JnLVf7PpTbaLQNzmNaF9z9UudWHGBR
+    key: edpkttKzcNNCjanS2De2Nagnpg9Bk1SoNhxDC1hqCFvHHFjfeeBK1m
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
+  ping:
+    # tz1MvCE9dczhoij2bd4sLL2AfVuMtWfFAoCN
+    key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "2500000000000"
+  ping2:
+    # tz1fvMQJmnuf3ALYrH5rvSDJhDA7haLSXTy3
+    key: edpkvCZf77hCCzBvnbxUyUUpA8ZYgGsd6G7E71HPMaejx9jncVHQiK
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "2500000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
