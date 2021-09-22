@@ -63,6 +63,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  N1029676:
+    # tz1N1W47vNFSBPqnWbUoAw65LFHzv2PGqS4x
+    key: edpkuZ6pf5esZLnVJ7XGZbfQ6s9yFsrGW49nhrRVrCZ6ghqRvGR1n5
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
   vincent_xtzmaster:
     # tz1Kr7EBSj86kbQFgCSLKo8JtvFQvYEU4SuH
     key: edpkuVw1DAAJ1bucCkNJ48e9L8Md8meXogKnMUp1Z6sey1NFhCxmvU
