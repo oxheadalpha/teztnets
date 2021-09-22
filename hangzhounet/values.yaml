@@ -75,7 +75,7 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
-  nekotalabs_julien:
+  neoktalabs_julien:
     # tz1gECNgGXb4vzsEhAvX6a72AsAGJiQS8DLf
     key: edpkv99446esWVTgGSNsfeZCpeLYbq1e69tae3Fpw22GXcMHQeRSVg
     type: public
