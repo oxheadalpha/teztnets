@@ -57,6 +57,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  primate:
+    # tz1S9Z6VAERuwQ1QQ6FqnREiT99ZB9wdGE9z
+    key: edpkvM7PAJiTMTAeRB1W77U5jF17aCV1vkBoKPScs8vmAd56t2BE72
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
