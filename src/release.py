@@ -17,7 +17,14 @@ for network_name in networks:
     with open(f"target/release/{network_name}", "w") as out_file:
         print(json.dumps(networks[network_name]), file=out_file)
 
-index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=teztnets)
+# group by category for human rendering
+nested_teztnets = {}
+for t in teztnets:
+    if teztnets["category"] not in nested_teztnets:
+        nested_teztnets[teztnets["category"]] = []
+    nested_teztnets[teztnets["category"]].append(t)
+
+index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=nested_teztnets)
 with open("target/release-notes.markdown", "w") as out_file:
     print(index, file=out_file)
 with open("target/release/index.markdown", "a") as out_file:

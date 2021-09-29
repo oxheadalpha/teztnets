@@ -233,7 +233,7 @@ function getTeztnets(chains: TezosChain[]): object {
             faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`;
         }
         let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`;
-        teztnets[chain.params.getCategory()][chain.params.getName()] = {
+        teztnets[chain.params.getName()] = {
             chain_name: chain.getChainName(),
             network_url: chain.getNetworkUrl(),
             human_name: chain.params.getHumanName(),
@@ -241,6 +241,7 @@ function getTeztnets(chains: TezosChain[]): object {
             docker_build: chain.getDockerBuild(),
             protocols: chain.getProtocols(),
             faucet_url: faucetUrl,
+            category: chain.params.getCategory(),
             rpc_url: rpcUrl
         };
     })
