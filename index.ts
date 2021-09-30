@@ -225,8 +225,6 @@ function getTeztnets(chains: TezosChain[]): object {
     const teztnets: {[name: string]: {[name: string]: Object}} = {};
 
     chains.forEach(function (chain) {
-        teztnets[chain.params.getCategory()] = teztnets[chain.params.getCategory()] || {};
-        //
         // if no faucet accounts are generated, assume that we are using the legacy global faucet
         let faucetUrl = "https://faucet.tzalpha.net";
         if (chain.params.getNumberOfFaucetAccounts() > 0) {
