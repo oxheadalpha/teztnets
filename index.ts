@@ -186,6 +186,25 @@ const hangzhounet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
+const usdtznet_chain = new TezosChain(
+    new TezosChainParametersBuilder({
+        yamlFile: "usdtznet/values.yaml",
+        name: 'usdtznet',
+        dnsName: 'usdtznet',
+        category: longCategory,
+        humanName: "Usdtznet",
+        description: 'Long-running testnet for Hangzhou + usdtz liquidity baking proposal.',
+        bootstrapPeers: [],
+        chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
+        chartRepoVersion: '5.1.1',
+        privateBakingKey: private_oxhead_baking_key,
+        numberOfFaucetAccounts: 10000,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    }),
+    cluster.provider, repo);
+
 function getNetworks(chains: TezosChain[]): object {
     const networks: {[name: string]: object} = {};
 

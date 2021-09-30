@@ -48,3 +48,7 @@ Addr tz1KhnTgwoRRALBX6vRHRnydDGSBFsWtcJxc
 ```
 
 Note that the usdtznet fork of hangzhounet has it configured already.
+
+### Faucet should have a manual
+
+The faucet has no explanation whatsoever on how to use it. Fix this.
