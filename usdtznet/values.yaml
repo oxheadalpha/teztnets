@@ -32,6 +32,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  primate:
+    # tz1fptewGRqdDvtKbTpZxUT9H9Susp2yVG3m
+    key: edpkutGqCeJtRqWKiPDpxH6NRwGjG18oaYT8WETzZgXEtYm4o3j4jr
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
 
 node_config_network:
   activation_account_name: oxheadbaker
