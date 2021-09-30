@@ -611,10 +611,10 @@ export class TezosChain extends pulumi.ComponentResource {
         {
           namespace: ns.metadata.name,
           chart: 'tezos-chain',
+          version: params.getChartRepoVersion(),
           fetchOpts:
-           {
+          {
               repo: params.getChartRepo(),
-              version: params.getChartRepoVersion(),
           },
           values: params.helmValues,
         },
