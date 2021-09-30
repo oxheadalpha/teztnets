@@ -38,6 +38,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
+  tessellated:
+    # tz1VgVShBoiHHKN9yx82Q8csXxVbUqYDDVb5
+    key: edpkuFFYar63GYpjqZURiJk9zM4z3jtvrpwWQP7fnqYVxdmh79ZGdG
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "5000000000000"
 
 node_config_network:
   activation_account_name: oxheadbaker
