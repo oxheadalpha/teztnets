@@ -38,3 +38,6 @@ The [PR](https://github.com/oxheadalpha/teztnets/pull/51) has more comments from
 
 Our block 0 is alays `PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex` which is the proto genesis of carthagenet. Instead, we should switch to using mainnet's genesis proto `proto_000_Ps9mPmXa`. We will do it first in dailynet/mondaynet and if it works, do I network this way.
 
+### Faucet should have a manual
+
+The faucet has no explanation whatsoever on how to use it. Fix this.
