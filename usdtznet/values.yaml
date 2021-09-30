@@ -13,6 +13,13 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
+  bakingbadfaucetbot:
+    # an account with a lot of money in it
+    # tz1KhnTgwoRRALBX6vRHRnydDGSBFsWtcJxc
+    key: edpkuFRauFAdhipQu9s4xmfNJWmtLxPKpoaoG41gYGq5AgUA43Vxqx
+    bootstrap_balance: "500000000000000"
+    is_bootstrap_baker_account: false
+    type: public
   coredump:
     # tz1Wn7JnLVf7PpTbaLQNzmNaF9z9UudWHGBR
     key: edpkttKzcNNCjanS2De2Nagnpg9Bk1SoNhxDC1hqCFvHHFjfeeBK1m
