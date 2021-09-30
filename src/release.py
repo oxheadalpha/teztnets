@@ -19,10 +19,10 @@ for network_name in networks:
 
 # group by category for human rendering
 nested_teztnets = {}
-for t in teztnets:
-    if t["category"] not in nested_teztnets:
-        nested_teztnets[t["category"]] = []
-    nested_teztnets[t["category"]].append(t)
+for k,v in teztnets.items():
+    if v["category"] not in nested_teztnets:
+        nested_teztnets[v["category"]] = {}
+    nested_teztnets[t["category"]][k] = v
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=nested_teztnets)
 with open("target/release-notes.markdown", "w") as out_file:
