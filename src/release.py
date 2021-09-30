@@ -22,7 +22,7 @@ nested_teztnets = {}
 for k,v in teztnets.items():
     if v["category"] not in nested_teztnets:
         nested_teztnets[v["category"]] = {}
-    nested_teztnets[t["category"]][k] = v
+    nested_teztnets[v["category"]][k] = v
 
 index = jinja2.Template(open('src/release_notes.md.jinja2').read()).render(teztnets=nested_teztnets)
 with open("target/release-notes.markdown", "w") as out_file:
