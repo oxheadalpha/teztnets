@@ -1,3 +1,18 @@
+accounts:
+  oxheadbaker:
+    # Oxhead Alpha's baker hosted in teztnets.xyz infra
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    bootstrap_balance: "5000000000000"
+    is_bootstrap_baker_account: true
+    type: secret
+    # key injected by pulumi
+  oxheadfree:
+    # an account with a lot of money in it
+    # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
+    key: edpkubSgCoMjB2a6vPWRNRHfGa6HUFfFyEUKoEQhWC8osnav8QzBdJ
+    bootstrap_balance: "5000000000000000"
+    is_bootstrap_baker_account: false
+    type: public
 node_config_network:
   activation_account_name: oxheadbaker
   chain_name: TEZOS_USDTZNET_2021-09-30T15:00:00Z

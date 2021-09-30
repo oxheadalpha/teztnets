@@ -376,7 +376,7 @@ export class TezosChain extends pulumi.ComponentResource {
     const teztnetsHostedZone = "teztnets.xyz"
     const teztnetsDomain = `${name}.${teztnetsHostedZone}`
 
-    if (params.getNumberOfFaucetAccounts() > 0) {
+    if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
       const faucetAccountGenImg = this.repo.buildAndPushImage(
