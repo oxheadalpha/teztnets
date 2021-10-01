@@ -266,5 +266,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, usdtznet]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, usdtznet]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, usdtznet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, usdtznet_chain]);
