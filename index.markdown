@@ -95,5 +95,25 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v11.0-rc1
 | Protocol at level 8191 |  `PtHangzHogokSuiMHemCuowEavgYTP8J5qQ9fQS793MHYFpCY3r` |
 
 
+## Usdtznet
+Long-running testnet for Hangzhou + usdtz liquidity baking proposal.
+
+To join Usdtznet with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt
+~ $ tezos-node config init --network https://teztnets.xyz/usdtznet
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Full network name | `TEZOS_USDTZNET_2021-10-01T15:00:00Z` |
+| Tezos docker build | [registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt) |
+| RPC endpoint | [https://rpc.usdtznet.teztnets.xyz](https://rpc.usdtznet.teztnets.xyz) |
+| Faucet | [Usdtznet faucet](https://faucet.usdtznet.teztnets.xyz) |
+| Protocol at level 4095 |  `PsCUKj6wydGtDNGPRdxasZDs4esZcVD9tf44MMiVy46FkD9q1h9` |
+
+
 
 
