@@ -27,8 +27,8 @@ accounts:
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   baketzforme:
-    # tz1ctdqnKaPTLfHhUih2EeUSD4Rvdmvja6Gp
-    key: edpkv5k4hzJRisqiN41ajLTwxvvAf5TEs4R9pyhXwrFQCFf85fJ87m
+    # tz1USDtztxNs85GtuLehmwAYMuXHGHFVVhUN
+    key: edpkuB1rdeQyDHNdS2uh82aNEMSTEFq2RxBw3di99PPQsJ3BWJbSeA
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
