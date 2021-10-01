@@ -112,6 +112,7 @@ docker run -it --entrypoint=/bin/sh registry.gitlab.com/tessellatedgeometry/stab
 | Tezos docker build | [registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt) |
 | RPC endpoint | [https://rpc.usdtznet.teztnets.xyz](https://rpc.usdtznet.teztnets.xyz) |
 | Faucet | [Usdtznet faucet](https://faucet.usdtznet.teztnets.xyz) |
+| Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 4095 |  `PsCUKj6wydGtDNGPRdxasZDs4esZcVD9tf44MMiVy46FkD9q1h9` |
 
 
