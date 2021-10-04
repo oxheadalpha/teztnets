@@ -16,16 +16,16 @@ To join Dailynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_dc7b1cd8_20211001132110
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-03
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-04
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-10-03T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2021-10-04T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_dc7b1cd8_20211001132110](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_dc7b1cd8_20211001132110) |
-| RPC endpoint | [https://rpc.dailynet-2021-10-03.teztnets.xyz](https://rpc.dailynet-2021-10-03.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-03.teztnets.xyz) |
+| RPC endpoint | [https://rpc.dailynet-2021-10-04.teztnets.xyz](https://rpc.dailynet-2021-10-04.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-04.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -35,17 +35,17 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 To join Mondaynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_541776f8_20210924212143
-~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-09-27
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_dc7b1cd8_20211001132110
+~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-10-04
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-MONDAYNET-2021-09-27T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_541776f8_20210924212143](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_541776f8_20210924212143) |
-| RPC endpoint | [https://rpc.mondaynet-2021-09-27.teztnets.xyz](https://rpc.mondaynet-2021-09-27.teztnets.xyz) |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-09-27.teztnets.xyz) |
+| Full network name | `TEZOS-MONDAYNET-2021-10-04T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_dc7b1cd8_20211001132110](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_dc7b1cd8_20211001132110) |
+| RPC endpoint | [https://rpc.mondaynet-2021-10-04.teztnets.xyz](https://rpc.mondaynet-2021-10-04.teztnets.xyz) |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-10-04.teztnets.xyz) |
 | Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
