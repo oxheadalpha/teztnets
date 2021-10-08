@@ -15,17 +15,17 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, run the following commands:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_cadfa363_20211006222720
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-07
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_c8610c43_20211007201828
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-08
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-10-07T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_cadfa363_20211006222720](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_cadfa363_20211006222720) |
-| RPC endpoint | [https://rpc.dailynet-2021-10-07.teztnets.xyz](https://rpc.dailynet-2021-10-07.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-07.teztnets.xyz) |
+| Full network name | `TEZOS-DAILYNET-2021-10-08T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_c8610c43_20211007201828](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_c8610c43_20211007201828) |
+| RPC endpoint | [https://rpc.dailynet-2021-10-08.teztnets.xyz](https://rpc.dailynet-2021-10-08.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-08.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -93,27 +93,6 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v11.0-rc1
 | Faucet | [Hangzhounet faucet](https://faucet.hangzhounet.teztnets.xyz) |
 | Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 8191 |  `PtHangzHogokSuiMHemCuowEavgYTP8J5qQ9fQS793MHYFpCY3r` |
-
-
-## Usdtznet
-Long-running testnet for Hangzhou + usdtz liquidity baking proposal.
-
-To join Usdtznet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt
-~ $ tezos-node config init --network https://teztnets.xyz/usdtznet
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Full network name | `TEZOS_USDTZNET_2021-10-01T15:00:00Z` |
-| Tezos docker build | [registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/tessellatedgeometry/stabletech:hangzhou_usdt) |
-| RPC endpoint | [https://rpc.usdtznet.teztnets.xyz](https://rpc.usdtznet.teztnets.xyz) |
-| Faucet | [Usdtznet faucet](https://faucet.usdtznet.teztnets.xyz) |
-| Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
-| Protocol at level 4095 |  `PsCUKj6wydGtDNGPRdxasZDs4esZcVD9tf44MMiVy46FkD9q1h9` |
 
 
 
