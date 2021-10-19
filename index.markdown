@@ -16,16 +16,16 @@ To join Dailynet with docker, run the following commands:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_da7b5343_20211015161914
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-18
+~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-10-19
 ~ $ tezos-node run
 ```
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-10-18T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2021-10-19T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_da7b5343_20211015161914](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_da7b5343_20211015161914) |
-| RPC endpoint | [https://rpc.dailynet-2021-10-18.teztnets.xyz](https://rpc.dailynet-2021-10-18.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-18.teztnets.xyz) |
+| RPC endpoint | [https://rpc.dailynet-2021-10-19.teztnets.xyz](https://rpc.dailynet-2021-10-19.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-10-19.teztnets.xyz) |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
