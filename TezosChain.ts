@@ -573,7 +573,7 @@ export class TezosChain extends pulumi.ComponentResource {
         }
 
         return {
-          registry: credentials.proxyEndpoint,
+          registry: credentials.proxyEndpoint.replace("https://",""),
           username: username,
           password: password,
         };

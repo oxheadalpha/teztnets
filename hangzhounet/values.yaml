@@ -164,7 +164,7 @@ nodes:
       - baker
       - endorser
       - octez_node
-    storage_size: 30Gi
+    storage_size: 80Gi
   # Overwrite default values.yaml tezos-node
   tezos-node: null
 
