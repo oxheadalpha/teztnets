@@ -186,6 +186,26 @@ const hangzhounet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
+const tenderbake_chain = new TezosChain(
+    new TezosChainParametersBuilder({
+        yamlFile: "tenderbakenet/values.yaml",
+        name: 'tenderbakenet',
+        dnsName: 'tenderbakenet',
+        category: longCategory,
+        humanName: "tenderbakenet",
+        description: 'Long-running testnet for testing Tenderbake.',
+        bootstrapPeers: [ ],
+        chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
+        chartRepoVersion: '5.2.0',
+        privateBakingKey: private_oxhead_baking_key,
+        numberOfFaucetAccounts: 10000,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    }),
+    cluster.provider, repo);
+
+
 function getNetworks(chains: TezosChain[]): object {
     const networks: {[name: string]: object} = {};
 
@@ -247,5 +267,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, tenderbake_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, tenderbake_chain]);
