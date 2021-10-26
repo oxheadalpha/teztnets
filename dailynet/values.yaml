@@ -4,11 +4,13 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-  tqfree:
+  oxheadfree:
+    # an account with a lot of money in it
+    # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
+    key: edpkubSgCoMjB2a6vPWRNRHfGa6HUFfFyEUKoEQhWC8osnav8QzBdJ
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
-    type: secret
-    # key injected by pulumi
+    type: public
 
 node_config_network:
   activation_account_name: oxheadbaker
