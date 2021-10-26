@@ -376,13 +376,49 @@ export class TezosChain extends pulumi.ComponentResource {
     const teztnetsHostedZone = "teztnets.xyz"
     const teztnetsDomain = `${name}.${teztnetsHostedZone}`
 
+    const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
+    const registry = repo.repository.registryId.apply(async id => {
+      let credentials = await aws.ecr.getCredentials({
+        registryId: id
+      }, {
+        ...defaultResourceOptions,
+        async: true,
+      });
+
+      let decodedCredentials = Buffer.from(credentials.authorizationToken, "base64").toString();
+      let [username, password] = decodedCredentials.split(":");
+      if (!password || !username) {
+        throw new Error("Invalid credentials");
+      }
+
+      return {
+        registry: credentials.proxyEndpoint.replace("https://",""),
+        username: username,
+        password: password,
+      };
+    })
+
+      let _cacheFrom: docker.CacheFrom = {}
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
-      const faucetAccountGenImg = this.repo.buildAndPushImage(
-        "tezos-faucet/account-gen"
-      )
-      const faucetAppImg = this.repo.buildAndPushImage("tezos-faucet/app")
+
+      let faucetAccountDockerBuild: docker.DockerBuild = {
+        dockerfile: "tezos-faucet/account-gen/Dockerfile",
+        cacheFrom: _cacheFrom,
+        context: "tezos-faucet/account-gen"
+      };
+
+      let faucetAppDockerBuild: docker.DockerBuild = {
+        dockerfile: "tezos-faucet/app/Dockerfile",
+        cacheFrom: _cacheFrom,
+        context: "tezos-faucet/app"
+      };
+
+      const faucetAccountGenImg = docker.buildAndPushImage(
+        "account-gen", faucetAccountDockerBuild, repo.repository.repositoryUrl, this, () => registry);
+      const faucetAppImg = docker.buildAndPushImage(
+        "faucet-app", faucetAppDockerBuild, repo.repository.repositoryUrl, this, () => registry);
 
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
@@ -556,30 +592,7 @@ export class TezosChain extends pulumi.ComponentResource {
       // do not build zerotier for now since it takes times and it is not used in tqinfra
       delete tezosK8sImages["zerotier"];
 
-      const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
       
-      const registry = repo.repository.registryId.apply(async id => {
-        let credentials = await aws.ecr.getCredentials({
-          registryId: id
-        }, {
-          ...defaultResourceOptions,
-          async: true,
-        });
-
-        let decodedCredentials = Buffer.from(credentials.authorizationToken, "base64").toString();
-        let [username, password] = decodedCredentials.split(":");
-        if (!password || !username) {
-          throw new Error("Invalid credentials");
-        }
-
-        return {
-          registry: credentials.proxyEndpoint.replace("https://",""),
-          username: username,
-          password: password,
-        };
-      })
-
-      let _cacheFrom: docker.CacheFrom = {}
 
       const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
         (obj: { [index: string]: any }, [key, value]) => {
