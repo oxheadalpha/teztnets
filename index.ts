@@ -175,7 +175,7 @@ const hangzhounet_chain = new TezosChain(
             'hangzhounet.boot.tez.ie',
         ],
         chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
-        chartRepoVersion: '5.1.1',
+        chartRepoVersion: '5.2.0',
         privateBakingKey: private_oxhead_baking_key,
         numberOfFaucetAccounts: 10000,
         faucetSeed: faucetSeed,
