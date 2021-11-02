@@ -398,33 +398,170 @@ export class TezosChain extends pulumi.ComponentResource {
       };
     })
 
-      let _cacheFrom: docker.CacheFrom = {}
+    let _cacheFrom: docker.CacheFrom = {}
+    // RPC Ingress
+    const rpcDomain = `rpc.${teztnetsDomain}`
+    const rpcCert = new aws.acm.Certificate(
+      `${rpcDomain}-cert`,
+      {
+        validationMethod: "DNS",
+        domainName: rpcDomain,
+      },
+      { parent: this }
+    )
+    const { certValidation } = createCertValidation(
+      {
+        cert: rpcCert,
+        targetDomain: rpcDomain,
+        hostedZone: teztnetsHostedZone,
+      },
+      { parent: this }
+    )
+
+    const rpcIngName = `${rpcDomain}-ingress`
+    const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+      rpcIngName,
+      {
+        metadata: {
+          namespace: ns.metadata.name,
+          name: rpcIngName,
+          annotations: {
+            "kubernetes.io/ingress.class": "alb",
+            "alb.ingress.kubernetes.io/scheme": "internet-facing",
+            "alb.ingress.kubernetes.io/healthcheck-path":
+              "/chains/main/chain_id",
+            "alb.ingress.kubernetes.io/healthcheck-port": "8732",
+            "alb.ingress.kubernetes.io/listen-ports":
+            '[{"HTTP": 80}, {"HTTPS":443}]',
+            "ingress.kubernetes.io/force-ssl-redirect": "true",
+            "alb.ingress.kubernetes.io/actions.ssl-redirect":
+              '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+            // Prevent pulumi erroring if ingress doesn't resolve immediately
+            "pulumi.com/skipAwait": "true",
+          },
+          labels: { app: "tezos-node" },
+        },
+        spec: {
+          rules: [
+            {
+              host: rpcDomain,
+              http: {
+                paths: [
+                  {
+                    path: "/*",
+                    backend: {
+                      serviceName: "ssl-redirect",
+                      servicePort: "use-annotation",
+                    },
+                  },
+                  {
+                    path: "/*",
+                    backend: {
+                      serviceName: "tezos-node-rpc",
+                      servicePort: "rpc",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      { provider, parent: this, dependsOn: certValidation }
+    )
+
+    //make list of images to build in case we are using submodules
+    const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
+    const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
+    const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
+    // do not build zerotier for now since it takes times and it is not used in tqinfra
+    delete tezosK8sImages["zerotier"];
+    // build faucet container
+    tezosK8sImages.faucet = "faucet:dev";
+    let pulumiTaggedImages;
+
+    if (params.getChartRepo() == '') {
+      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+
+      
+
+      pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
+        (obj: { [index: string]: any }, [key, value]) => {
+          let dockerBuild: docker.DockerBuild = {
+            dockerfile: `${params.getChartPath()}/${key}/Dockerfile`,
+            cacheFrom: _cacheFrom,
+            context: `${params.getChartPath()}/${key}`
+          };
+          obj[key] = docker.buildAndPushImage((value as string).replace(/:.*/, ""), dockerBuild, repo.repository.repositoryUrl, this, () => registry);
+          return obj
+        },
+        {}
+      )
+      
+      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          path: `${params.getChartPath()}/charts/tezos`,
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    } else {
+      // deploy from helm repo with public images
+      const chain = new k8s.helm.v2.Chart(
+        name,
+        {
+          namespace: ns.metadata.name,
+          chart: 'tezos-chain',
+          version: params.getChartRepoVersion(),
+          fetchOpts:
+          {
+              repo: params.getChartRepo(),
+          },
+          values: params.helmValues,
+        },
+        { providers: { kubernetes: this.provider } }
+      );
+    }
+
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb`,
+      {
+        metadata: {
+          namespace: ns.metadata.name,
+          name: name,
+          annotations: {
+            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
+          },
+        },
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { app: "tezos-baking-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: this.provider }
+    )
+
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
-
-      let faucetUtilsDockerBuild: docker.DockerBuild = {
-        dockerfile: "hangzhounet/tezos-k8s/utils/Dockerfile",
-        cacheFrom: _cacheFrom,
-        context: "hangzhounet/tezos-k8s/utils/"
-      };
-
-      let faucetAppDockerBuild: docker.DockerBuild = {
-        dockerfile: "hangzhounet/tezos-k8s/faucet/Dockerfile",
-        cacheFrom: _cacheFrom,
-        context: "hangzhounet/tezos-k8s/faucet/"
-      };
-
-      const faucetUtilsImg = docker.buildAndPushImage(
-        "faucet-utils", faucetUtilsDockerBuild, repo.repository.repositoryUrl, this, () => registry);
-      const faucetAppImg = docker.buildAndPushImage(
-        "faucet-app", faucetAppDockerBuild, repo.repository.repositoryUrl, this, () => registry);
 
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
         {
           namespace: ns.metadata.name,
-          path: `hangzhounet/tezos-k8s/charts/tezos-faucet`,
+          path: `${params.getChartPath()}/charts/tezos-faucet`,
           values: {
             recaptcha_keys: {
               siteKey: params.getFaucetRecaptchaSiteKey(),
@@ -432,10 +569,7 @@ export class TezosChain extends pulumi.ComponentResource {
             },
             number_of_accounts: params.getNumberOfFaucetAccounts(),
             seed: chainSpecificSeed,
-            tezos_k8s_images: {
-              utils: faucetUtilsImg,
-              faucet: faucetAppImg,
-            },
+            tezos_k8s_images: pulumiTaggedImages,
           },
         },
         { providers: { kubernetes: this.provider } }
@@ -514,154 +648,6 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider, parent: this, dependsOn: certValidation }
       )
     }
-    // RPC Ingress
-    const rpcDomain = `rpc.${teztnetsDomain}`
-    const rpcCert = new aws.acm.Certificate(
-      `${rpcDomain}-cert`,
-      {
-        validationMethod: "DNS",
-        domainName: rpcDomain,
-      },
-      { parent: this }
-    )
-    const { certValidation } = createCertValidation(
-      {
-        cert: rpcCert,
-        targetDomain: rpcDomain,
-        hostedZone: teztnetsHostedZone,
-      },
-      { parent: this }
-    )
-
-    const rpcIngName = `${rpcDomain}-ingress`
-    const rpc_ingress = new k8s.networking.v1beta1.Ingress(
-      rpcIngName,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: rpcIngName,
-          annotations: {
-            "kubernetes.io/ingress.class": "alb",
-            "alb.ingress.kubernetes.io/scheme": "internet-facing",
-            "alb.ingress.kubernetes.io/healthcheck-path":
-              "/chains/main/chain_id",
-            "alb.ingress.kubernetes.io/healthcheck-port": "8732",
-            "alb.ingress.kubernetes.io/listen-ports":
-            '[{"HTTP": 80}, {"HTTPS":443}]',
-            "ingress.kubernetes.io/force-ssl-redirect": "true",
-            "alb.ingress.kubernetes.io/actions.ssl-redirect":
-              '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-            // Prevent pulumi erroring if ingress doesn't resolve immediately
-            "pulumi.com/skipAwait": "true",
-          },
-          labels: { app: "tezos-node" },
-        },
-        spec: {
-          rules: [
-            {
-              host: rpcDomain,
-              http: {
-                paths: [
-                  {
-                    path: "/*",
-                    backend: {
-                      serviceName: "ssl-redirect",
-                      servicePort: "use-annotation",
-                    },
-                  },
-                  {
-                    path: "/*",
-                    backend: {
-                      serviceName: "tezos-node-rpc",
-                      servicePort: "rpc",
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-      { provider, parent: this, dependsOn: certValidation }
-    )
-    if (params.getChartRepo() == '') {
-      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
-      const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
-      const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
-      const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
-      // do not build zerotier for now since it takes times and it is not used in tqinfra
-      delete tezosK8sImages["zerotier"];
-
-      
-
-      const pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-        (obj: { [index: string]: any }, [key, value]) => {
-          let dockerBuild: docker.DockerBuild = {
-            dockerfile: `${params.getChartPath()}/${key}/Dockerfile`,
-            cacheFrom: _cacheFrom,
-            context: `${params.getChartPath()}/${key}`
-          };
-          obj[key] = docker.buildAndPushImage((value as string).replace(/:.*/, ""), dockerBuild, repo.repository.repositoryUrl, this, () => registry);
-          return obj
-        },
-        {}
-      )
-      
-      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          path: `${params.getChartPath()}/charts/tezos`,
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    } else {
-      // deploy from helm repo with public images
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          chart: 'tezos-chain',
-          version: params.getChartRepoVersion(),
-          fetchOpts:
-          {
-              repo: params.getChartRepo(),
-          },
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    }
-
-    new k8s.core.v1.Service(
-      `${name}-p2p-lb`,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: name,
-          annotations: {
-            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
-          },
-        },
-        spec: {
-          ports: [
-            {
-              port: 9732,
-              targetPort: 9732,
-              protocol: "TCP",
-            },
-          ],
-          selector: { app: "tezos-baking-node" },
-          type: "LoadBalancer",
-        },
-      },
-      { provider: this.provider }
-    )
-
 
   }
 
