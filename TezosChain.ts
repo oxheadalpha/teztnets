@@ -403,20 +403,20 @@ export class TezosChain extends pulumi.ComponentResource {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
 
-      let faucetAccountDockerBuild: docker.DockerBuild = {
-        dockerfile: "tezos-faucet/account-gen/Dockerfile",
+      let faucetUtilsDockerBuild: docker.DockerBuild = {
+        dockerfile: "hangzhounet/tezos-k8s/utils/Dockerfile",
         cacheFrom: _cacheFrom,
-        context: "tezos-faucet/account-gen"
+        context: "hangzhounet/tezos-k8s/utils/"
       };
 
       let faucetAppDockerBuild: docker.DockerBuild = {
-        dockerfile: "tezos-faucet/app/Dockerfile",
+        dockerfile: "hangzhounet/tezos-k8s/faucet/Dockerfile",
         cacheFrom: _cacheFrom,
-        context: "tezos-faucet/app"
+        context: "hangzhounet/tezos-k8s/faucet/"
       };
 
-      const faucetAccountGenImg = docker.buildAndPushImage(
-        "account-gen", faucetAccountDockerBuild, repo.repository.repositoryUrl, this, () => registry);
+      const faucetUtilsImg = docker.buildAndPushImage(
+        "faucet-utils", faucetUtilsDockerBuild, repo.repository.repositoryUrl, this, () => registry);
       const faucetAppImg = docker.buildAndPushImage(
         "faucet-app", faucetAppDockerBuild, repo.repository.repositoryUrl, this, () => registry);
 
@@ -424,7 +424,7 @@ export class TezosChain extends pulumi.ComponentResource {
         `${name}-faucet`,
         {
           namespace: ns.metadata.name,
-          path: `tezos-faucet/charts/faucet`,
+          path: `hangzhounet/tezos-k8s/charts/tezos-faucet`,
           values: {
             recaptcha_keys: {
               siteKey: params.getFaucetRecaptchaSiteKey(),
@@ -432,8 +432,8 @@ export class TezosChain extends pulumi.ComponentResource {
             },
             number_of_accounts: params.getNumberOfFaucetAccounts(),
             seed: chainSpecificSeed,
-            images: {
-              account_gen: faucetAccountGenImg,
+            tezos_k8s_images: {
+              utils: faucetUtilsImg,
               faucet: faucetAppImg,
             },
           },
