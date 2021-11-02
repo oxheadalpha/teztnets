@@ -557,21 +557,32 @@ export class TezosChain extends pulumi.ComponentResource {
       // deploy a faucet website
       const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
 
+      let faucetChartValues: any = {
+        namespace: ns.metadata.name,
+        values: {
+          recaptcha_keys: {
+            siteKey: params.getFaucetRecaptchaSiteKey(),
+            secretKey: params.getFaucetRecaptchaSecretKey(),
+          },
+          number_of_accounts: params.getNumberOfFaucetAccounts(),
+          seed: chainSpecificSeed,
+          tezos_k8s_images: pulumiTaggedImages,
+        },
+      };
+      if (params.getChartRepo() == '') {
+        // deploy from submodule
+        faucetChartValues["path"] = `${params.getChartPath()}/charts/tezos-faucet`;
+      } else {
+        // deploy from helm repo with public images
+        faucetChartValues["chart"] = 'tezos-faucet';
+        faucetChartValues["version"] = params.getChartRepoVersion();
+        faucetChartValues["fetchOpts"] = {
+            repo: params.getChartRepo(),
+        };
+      }
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
-        {
-          namespace: ns.metadata.name,
-          path: `${params.getChartPath()}/charts/tezos-faucet`,
-          values: {
-            recaptcha_keys: {
-              siteKey: params.getFaucetRecaptchaSiteKey(),
-              secretKey: params.getFaucetRecaptchaSecretKey(),
-            },
-            number_of_accounts: params.getNumberOfFaucetAccounts(),
-            seed: chainSpecificSeed,
-            tezos_k8s_images: pulumiTaggedImages,
-          },
-        },
+        faucetChartValues,
         { providers: { kubernetes: this.provider } }
       )
 
