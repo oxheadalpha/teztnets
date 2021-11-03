@@ -1,0 +1,20 @@
+## {{ v["human_name"] }}
+{{ v["description"] }}
+
+To join {{ v["human_name"] }} with docker, run the following commands:
+
+```
+docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
+~ $ tezos-node config init --network {{ v["network_url"] }}
+~ $ tezos-node run
+```
+
+| | |
+|-------|---------------------|
+| Full network name | `{{ v["chain_name"] }}` |
+| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
+| RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
+| Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
+{% for proto in v["protocols"] -%}
+| Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
+{% endfor %}

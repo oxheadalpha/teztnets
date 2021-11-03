@@ -31,3 +31,9 @@ with open("target/release/index.markdown", "a") as out_file:
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
     print(json.dumps(teztnets), file=out_file)
+
+for k,v in teztnets.items():
+    teztnet_md = jinja2.Template(open('src/teztnet_page.md.jinja2').read()).render(v=v)
+    with open(f"target/release/about-{k}.markdown", "a") as out_file:
+        print(teztnet_md, file=out_file)
+
