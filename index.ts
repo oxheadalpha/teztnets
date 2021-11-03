@@ -95,7 +95,7 @@ deployAwsAlbController(cluster)
 deployExternalDns(cluster)
 
 const periodicCategory = "Periodic Teztnets";
-const longCategory = "Long-Running Teztnets";
+const protocolCategory = "Protocol Teztnets";
 
 // chains
 const dailynet_chain = new TezosChain(
@@ -139,7 +139,7 @@ const granadanet_chain = new TezosChain(
         yamlFile: "granadanet/values.yaml",
         name: 'granadanet',
         dnsName: 'granadanet',
-        category: longCategory,
+        category: protocolCategory,
         humanName: "Granadanet",
         description: 'Long-running testnet for Granada proposal.',
         bootstrapPeers: [
@@ -164,7 +164,7 @@ const hangzhounet_chain = new TezosChain(
         yamlFile: "hangzhounet/values.yaml",
         name: 'hangzhounet',
         dnsName: 'hangzhounet',
-        category: longCategory,
+        category: protocolCategory,
         humanName: "Hangzhounet",
         description: 'Long-running testnet for Hangzhou proposal.',
         bootstrapPeers: [
@@ -236,6 +236,7 @@ function getTeztnets(chains: TezosChain[]): object {
             protocols: chain.getProtocols(),
             faucet_url: faucetUrl,
             category: chain.params.getCategory(),
+            faucet_recaptcha_site_key: faucetRecaptchaSiteKey,
             rpc_url: rpcUrl
         };
     })

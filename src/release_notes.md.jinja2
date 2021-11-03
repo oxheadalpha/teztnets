@@ -1,27 +1,13 @@
 {% for cat_name, cat_teztnets in teztnets.items() %}
 # {{ cat_name }}
 
-{% for k, v in  cat_teztnets.items() %}
-## {{ v["human_name"] }}
-{{ v["description"] }}
+{{ category_desc[cat_name] }}
 
-To join {{ v["human_name"] }} with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
-~ $ tezos-node config init --network {{ v["network_url"] }}
-~ $ tezos-node run
-```
-
-| | |
+| | Activated on |
 |-------|---------------------|
-| Full network name | `{{ v["chain_name"] }}` |
-| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
-| RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
-| Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
-{% for proto in v["protocols"] -%}
-| Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
+{% for k, v in  cat_teztnets.items() -%}
+| [{{ v["human_name"] }}](/{{ k }}-about) | `{{ v["activated_on"] }}` |
 {% endfor %}
-{% endfor %}
+
 {% endfor %}
 

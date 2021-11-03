@@ -1,0 +1,50 @@
+---
+layout: page
+title: {{ v["human_name"] }}
+permalink: /{{ k }}-about
+---
+
+{{ v["description"] }}
+
+| | |
+|-------|---------------------|
+| Full network name | `{{ v["chain_name"] }}` |
+| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
+| RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
+| Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
+| Activated on | {{ network_params["genesis"]["timestamp"] }} |
+{% for proto in v["protocols"] -%}
+| Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
+{% endfor %}
+
+### How to peer with {{ v["human_name"] }} using Docker
+
+To join {{ v["human_name"] }} with docker, open a shell in the container:
+
+```
+docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
+```
+
+Then run the following commands:
+
+```
+tezos-node config init --network {{ v["network_url"] }}
+tezos-node run
+```
+
+### How to peer with {{ v["human_name"] }} building from source
+
+```
+git clone git@gitlab.com:tezos/tezos.git -b {{ v["git_ref"] }}
+cd tezos
+make build-deps
+eval $(opam env)
+make
+```
+
+Then run the following commands:
+
+```
+./tezos-node config init --network {{ v["network_url"] }}
+./tezos-node run
+```
