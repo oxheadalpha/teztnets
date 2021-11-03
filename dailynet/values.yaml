@@ -58,7 +58,7 @@ activation:
     liquidity_baking_subsidy: "2500000"
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000
-    max_operation_time_to_live: 120
+    max_operations_time_to_live: 120
 
 nodes:
   tezos-baking-node:

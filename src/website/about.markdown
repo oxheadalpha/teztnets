@@ -1,10 +1,10 @@
 ---
 layout: page
-title: About Teztnets
+title: About Teztnets.xyz
 permalink: /about/
 ---
 
-Testnets for the [Tezos](https://tezos.com) blockchain, operated by the team at [Oxhead Alpha](https://oxheadalpha.com).
+This is a resource for coordinating Testnets for the [Tezos](https://tezos.com) blockchain, operated by the team at [Oxhead Alpha](https://oxheadalpha.com).
 
 The [github repo](https://github.com/oxheadalpha/teztnets) has more information regarding these testnets, how they are configured, and how to deploy new ones.
 
