@@ -10,3 +10,6 @@
 [submodule "granadanet/tezos-k8s"]
 	path = granadanet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
+[submodule "idiazabalnet/tezos-k8s"]
+	path = idiazabalnet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git

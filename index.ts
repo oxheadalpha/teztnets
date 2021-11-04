@@ -182,17 +182,16 @@ const hangzhounet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
-const tenderbake_chain = new TezosChain(
+const idiazabalnet_chain = new TezosChain(
     new TezosChainParametersBuilder({
-        yamlFile: "tenderbakenet/values.yaml",
-        name: 'tenderbakenet',
-        dnsName: 'tenderbakenet',
-        category: longCategory,
-        humanName: "tenderbakenet",
-        description: 'Long-running testnet for testing Tenderbake.',
+        yamlFile: "idiazabalnet/values.yaml",
+        name: 'idiazabalnet',
+        dnsName: 'idiazabalnet',
+        category: protocolCategory,
+        humanName: "idiazabalnet",
+        description: 'Testnet for future I proposal testing (includes Tenderbake!)',
         bootstrapPeers: [ ],
-        chartRepo: 'https://oxheadalpha.github.io/tezos-helm-charts/',
-        chartRepoVersion: '5.2.0',
+        chartPath: 'idiazabalnet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
         numberOfFaucetAccounts: 10000,
         faucetSeed: faucetSeed,
@@ -263,5 +262,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, tenderbake_chain]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, tenderbake_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, idiazabalnet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, idiazabalnet_chain]);

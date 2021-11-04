@@ -1,10 +1,10 @@
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_TENDERBAKENET_2021-10-20T15:00:00Z
+  chain_name: TEZOS_IDIAZABALNET_2021-11-05T15:00:00Z
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2021-10-20T15:00:00Z"
+    timestamp: "2021-11-05T15:00:00Z"
 
 protocols:
   - command: alpha
@@ -15,7 +15,7 @@ activation:
     preserved_cycles: 5
     blocks_per_cycle: 8192
     blocks_per_commitment: 64
-    blocks_per_roll_snapshot: 512
+    blocks_per_stake_snapshot: 512
     blocks_per_voting_period: 40960
     hard_gas_limit_per_operation: '1040000'
     hard_gas_limit_per_block: '5200000'
@@ -34,6 +34,7 @@ activation:
     liquidity_baking_subsidy: '2500000'
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000
+    max_operations_time_to_live: 120
     round_durations:
       - "30"
       - "45"
@@ -43,9 +44,9 @@ activation:
       numerator: 2
       denominator: 3
     max_slashing_period: 2
-    frozen_bonds_percentage: 10
+    frozen_deposits_percentage: 10
     double_baking_punishment: "640000000"
-    ratio_of_frozen_bonds_slashed_per_double_endorsement:
+    ratio_of_frozen_deposits_slashed_per_double_endorsement:
       numerator: 1
       denominator: 2
     delegate_selection: "random"
@@ -74,7 +75,7 @@ full_snapshot_url: null
 rolling_snapshot_url: null
 
 images:
-  octez: registry.gitlab.com/nomadic-labs/tezos:amd64-tenderbake
+  octez: tezos/tezos:master_a8e1dd3c_20211104172223
 accounts:
   oxheadbaker:
     bootstrap_balance: "7500000000000"
