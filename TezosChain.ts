@@ -480,6 +480,18 @@ export class TezosChain extends pulumi.ComponentResource {
     tezosK8sImages.faucet = "faucet:dev";
     let pulumiTaggedImages;
 
+    let chainSpecificSeed;
+    if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
+      // deploy a faucet website
+      chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
+
+      // add the faucet seed to the activation parameters so the accounts given
+      // by the faucet website work on chain
+      params.helmValues["activation"]["deterministic_faucet"] = {
+        seed: chainSpecificSeed,
+        number_of_accounts: params.getNumberOfFaucetAccounts(),
+      }
+    }
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
@@ -555,7 +567,6 @@ export class TezosChain extends pulumi.ComponentResource {
 
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
-      const chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
 
       let faucetChartValues: any = {
         namespace: ns.metadata.name,
@@ -585,13 +596,6 @@ export class TezosChain extends pulumi.ComponentResource {
         faucetChartValues,
         { providers: { kubernetes: this.provider } }
       )
-
-      // add the faucet seed to the activation parameters so the accounts given
-      // by the faucet website work on chain
-      params.helmValues["activation"]["deterministic_faucet"] = {
-        seed: chainSpecificSeed,
-        number_of_accounts: params.getNumberOfFaucetAccounts(),
-      }
 
       const faucetDomain = `faucet.${teztnetsDomain}`
       const faucetCert = new aws.acm.Certificate(
