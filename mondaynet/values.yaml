@@ -23,10 +23,10 @@ node_config_network:
 
 protocols:
   - command: alpha
-  - command: 010-PtGRANAD
+  - command: 011-PtHangz2
 
 activation:
-  protocol_hash: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
+  protocol_hash: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -41,7 +41,6 @@ activation:
     hard_gas_limit_per_block: "10400000"
     proof_of_work_threshold: "70368744177663"
     tokens_per_roll: "8000000000"
-    michelson_maximum_type_size: 1000
     seed_nonce_revelation_tip: "125000"
     origination_size: 257
     block_security_deposit: "640000000"
