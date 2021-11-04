@@ -92,13 +92,7 @@ accounts:
     key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"
-  ping2:
-    # tz1fvMQJmnuf3ALYrH5rvSDJhDA7haLSXTy3
-    key: edpkvCZf77hCCzBvnbxUyUUpA8ZYgGsd6G7E71HPMaejx9jncVHQiK
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"
+    bootstrap_balance: "2000000000000"
   tz1THUNA:
     # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
     # Romain's faucet
