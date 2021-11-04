@@ -95,12 +95,14 @@ accounts:
     bootstrap_balance: "2000000000000"
   saroupille:
     # françois wants to be a baker, but not bootstrap
+    # tz1QXAAasy8TciwfvDC4a7MWo1tm3K37uN9Y
     key: edpkvMBeXH4h8H97b8qfPkv2mA9TE6McfsffLGgG2Jg5nhUESaVt5J
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "2000000000000"
   saroupille2:
     # françois wants to be a baker, but not bootstrap
+    # tz1ZaHCkooCR63bSsQhLf8WLKj9sQG5RTthP
     key: edpkueS4HbicvgHo1Y9uPp6ZaZ8kgMJBJg2uB4Zm539Wf7qvJA5g1U
     type: public
     is_bootstrap_baker_account: false
