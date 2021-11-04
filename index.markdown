@@ -6,72 +6,24 @@ Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. 
 
 This list of Teztnets is also available in [json format](https://teztnets.xyz/teztnets.json).
 
+# Protocol Teztnets
+
+Testnets deployed specifically to test new Tezos protocol proposals.
+
+| | Activated on |
+|-------|---------------------|
+| [Granadanet](/granadanet-about) | `2021-05-21` |
+
+
+
 # Periodic Teztnets
 
+Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/).
 
-## Dailynet
-A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.
-
-To join Dailynet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_5958282c_20211102205114
-~ $ tezos-node config init --network https://teztnets.xyz/dailynet-2021-11-03
-~ $ tezos-node run
-```
-
-| | |
+| | Activated on |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-11-03T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_5958282c_20211102205114](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_5958282c_20211102205114) |
-| RPC endpoint | [https://rpc.dailynet-2021-11-03.teztnets.xyz](https://rpc.dailynet-2021-11-03.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2021-11-03.teztnets.xyz) |
-| Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
-
-
-## Mondaynet
-A testnet that restarts every Monday launched from tezos/tezos master branch and Granadanet protocol, upgrading to alpha at block 255.
-
-To join Mondaynet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_507ff54c_20211029163546
-~ $ tezos-node config init --network https://teztnets.xyz/mondaynet-2021-11-01
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Full network name | `TEZOS-MONDAYNET-2021-11-01T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_507ff54c_20211029163546](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_507ff54c_20211029163546) |
-| RPC endpoint | [https://rpc.mondaynet-2021-11-01.teztnets.xyz](https://rpc.mondaynet-2021-11-01.teztnets.xyz) |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2021-11-01.teztnets.xyz) |
-| Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
-| Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
-
-
-
-# Long-Running Teztnets
-
-
-## Granadanet
-Long-running testnet for Granada proposal.
-
-To join Granadanet with docker, run the following commands:
-
-```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v10.2
-~ $ tezos-node config init --network https://teztnets.xyz/granadanet
-~ $ tezos-node run
-```
-
-| | |
-|-------|---------------------|
-| Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v10.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v10.2) |
-| RPC endpoint | [https://rpc.granadanet.teztnets.xyz](https://rpc.granadanet.teztnets.xyz) |
-| Faucet | [Granadanet faucet](https://faucet.tzalpha.net) |
-| Protocol at level 4095 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
+| [Dailynet](/dailynet-2021-11-04-about) | `2021-11-04` |
+| [Mondaynet](/mondaynet-2021-11-01-about) | `2021-11-01` |
 
 
 
