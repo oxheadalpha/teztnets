@@ -10,9 +10,9 @@ This list of Teztnets is also available in [json format](https://teztnets.xyz/te
 
 Testnets deployed specifically to test new Tezos protocol proposals.
 
-| | Activated on |
-|-------|---------------------|
-| [Granadanet](/granadanet-about) | `2021-05-21` |
+| | Activated on | Faucet |
+|-------|---------------------|--|
+| [Granadanet](/granadanet-about) | `2021-05-21` | [Granadanet faucet](https://faucet.tzalpha.net) |
 
 
 
@@ -20,10 +20,10 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/).
 
-| | Activated on |
-|-------|---------------------|
-| [Dailynet](/dailynet-2021-11-04-about) | `2021-11-04` |
-| [Mondaynet](/mondaynet-2021-11-01-about) | `2021-11-01` |
+| | Activated on | Faucet |
+|-------|---------------------|--|
+| [Dailynet](/dailynet-2021-11-04-about) | `2021-11-04` | [Dailynet faucet](https://faucet.dailynet-2021-11-04.teztnets.xyz) |
+| [Mondaynet](/mondaynet-2021-11-01-about) | `2021-11-01` | [Mondaynet faucet](https://faucet.mondaynet-2021-11-01.teztnets.xyz) |
 
 
 
