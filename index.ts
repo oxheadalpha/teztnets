@@ -237,7 +237,6 @@ function getTeztnets(chains: TezosChain[]): object {
             protocols: chain.getProtocols(),
             faucet_url: faucetUrl,
             category: chain.params.getCategory(),
-            faucet_recaptcha_site_key: faucetRecaptchaSiteKey,
             rpc_url: rpcUrl
         };
     })
