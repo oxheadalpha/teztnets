@@ -13,6 +13,7 @@ Long-running testnet for Hangzhou proposal.
 | RPC endpoint | [https://rpc.hangzhounet.teztnets.xyz](https://rpc.hangzhounet.teztnets.xyz) |
 | Faucet | [Hangzhounet faucet](https://faucet.hangzhounet.teztnets.xyz) |
 | Activated on | 2021-11-04T15:00:00Z |
+| Protocol at level 0 |  `PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV` |
 | Protocol at level 8191 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 
 
