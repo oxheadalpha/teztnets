@@ -16,11 +16,11 @@ function captchaDone(response) {
 }
 
 //https://stackoverflow.com/a/6960586/207209
-$("faucet_form").submit(function(e){
+$("#faucet_form").submit(function(e){
   e.preventDefault();
   var form = $(this);
   var url = form.attr('action');
-  
+
   $.ajax({
     type: "POST",
     url: url,
