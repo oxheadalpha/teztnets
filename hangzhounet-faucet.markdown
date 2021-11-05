@@ -14,13 +14,22 @@ Please use responsibly as the number of addresses is limited. For special reques
 function captchaDone(response) {
   $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
 }
+
 function submitted() {
   $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
+  //https://stackoverflow.com/a/47675314/207209
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://faucet.hangzhounet.teztnets.xyz");
+  xhr.onload = function(event){
+    alert("Success, server responded with: " + event.target.response);
+  };
+  var formData = new FormData(document.getElementById("myForm"));
+  xhr.send(formData);
 }
 </script>
 
 
-<form method='POST' action='https://faucet.hangzhounet.teztnets.xyz' onsubmit="submitted()">
+<form id="faucet_form" method='POST'>
     <div>
         <div class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
