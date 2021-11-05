@@ -40,8 +40,8 @@ $("#faucet_form").submit(function(e){
     data: form.serialize(), // serializes the form's elements.
     success: function(data)
     {
-      console.log(data.json);
-      $("#faucet_textarea").val(data.json);
+      console.log(data);
+      $("#faucet_textarea").val(data);
       $("#faucet_textarea").show();
     }
   });
