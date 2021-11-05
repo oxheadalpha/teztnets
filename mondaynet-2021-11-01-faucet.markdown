@@ -15,21 +15,26 @@ function captchaDone(response) {
   $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
 }
 
-function submitted() {
-  $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
-  //https://stackoverflow.com/a/47675314/207209
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://faucet.mondaynet-2021-11-01.teztnets.xyz");
-  xhr.onload = function(event){
-    alert("Success, server responded with: " + event.target.response);
-  };
-  var formData = new FormData(document.getElementById("myForm"));
-  xhr.send(formData);
-}
+//https://stackoverflow.com/a/6960586/207209
+$("faucet_form").submit(function(e){
+  e.preventDefault();
+  var form = $(this);
+  var url = form.attr('action');
+  
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: form.serialize(), // serializes the form's elements.
+    success: function(data)
+    {
+      alert(data);
+    }
+  });
+});
 </script>
 
 
-<form id="faucet_form" method='POST'>
+<form id="faucet_form" action='https://faucet.mondaynet-2021-11-01.teztnets.xyz'>
     <div>
         <div class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
