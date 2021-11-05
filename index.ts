@@ -190,7 +190,7 @@ const idiazabalnet_chain = new TezosChain(
         category: protocolCategory,
         humanName: "Idiazabalnet DRY RUN",
         //description: 'Testnet for future I proposal testing (includes Tenderbake!)',
-        description: 'Dry-run for Idiazabalnet. Do not use! The real one starts on 11/09",
+        description: 'Dry-run for Idiazabalnet. Do not use! The real one starts on 11/09',
         bootstrapPeers: [ ],
         chartPath: 'idiazabalnet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
