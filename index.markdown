@@ -14,6 +14,7 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 |-------|---------------------|--|
 | [Granadanet](/granadanet-about) | `2021-05-21` | [Granadanet faucet](https://faucet.tzalpha.net) |
 | [Hangzhounet](/hangzhounet-about) | `2021-11-04` | [Hangzhounet faucet](https://faucet.hangzhounet.teztnets.xyz) |
+| [Idiazabalnet DRY RUN](/idiazabalnet-about) | `2021-11-04` | [Idiazabalnet DRY RUN faucet](https://faucet.idiazabalnet.teztnets.xyz) |
 
 
 
