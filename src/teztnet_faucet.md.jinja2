@@ -15,23 +15,26 @@ function captchaDone(response) {
   $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
 }
 
+//https://stackoverflow.com/a/6960586/207209
 $("faucet_form").submit(function(e){
   e.preventDefault();
-  $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
-  //https://stackoverflow.com/a/47675314/207209
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://faucet.{{ k }}.teztnets.xyz");
-  xhr.onload = function(event){
-    alert("Success, server responded with: " + event.target.response);
-  };
-  var formData = new FormData(document.getElementById("myForm"));
-  xhr.send(formData);
-  return false;
+  var form = $(this);
+  var url = form.attr('action');
+  
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: form.serialize(), // serializes the form's elements.
+    success: function(data)
+    {
+      alert(data);
+    }
+  });
 });
 </script>
 
 
-<form id="faucet_form">
+<form id="faucet_form" action='https://faucet.{{ k }}.teztnets.xyz'>
     <div>
         <div class="g-recaptcha" data-sitekey="{{ faucet_recaptcha_site_key }}" data-callback="captchaDone"></div>
         <br/>
