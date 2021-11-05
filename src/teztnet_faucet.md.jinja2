@@ -9,20 +9,49 @@ This faucet is for `{{ k }}` only. It will not work on other networks. First, ve
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<script>
-function captchaDone(response) {
-  $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
-}
-function submitted() {
-  $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
-}
-</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 
-
-<form method='POST' action='https://faucet.{{ k }}.teztnets.xyz' onsubmit="submitted()">
+<form id="faucet_form" mathod="POST" action='https://faucet.{{ k }}.teztnets.xyz'>
     <div>
-        <div class="g-recaptcha" data-sitekey="{{ faucet_recaptcha_site_key }}" data-callback="captchaDone"></div>
+        <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="{{ faucet_recaptcha_site_key }}" data-callback="captchaDone"></div>
         <br/>
         <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get {{ v["human_name"] }} ꜩ</button>
     </div>
 </form>
+
+<textarea id="faucet_textarea" readonly cols="50" rows="20" style="visibility:hidden;"></textarea>
+
+<script>
+function captchaDone(response) {
+  $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
+}
+
+//https://stackoverflow.com/a/6960586/207209
+$("#faucet_form").submit(function(e){
+  e.preventDefault();
+  $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
+  $("#faucet_recaptcha").hide();
+  var form = $(this);
+  var url = form.attr('action');
+
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: form.serialize(), // serializes the form's elements.
+    success: function(data)
+    {
+      console.log(data);
+      $("#faucet_textarea").val(data);
+      $("#faucet_textarea").show();
+    }
+  });
+});
+</script>
+
+## How to use
+
+Download the file above, store it locally (for example in `/tmp/faucet.json`) then run:
+
+```
+tezos-client activate account testnet_tez with /tmp/faucet.json
+```

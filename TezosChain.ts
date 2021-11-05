@@ -473,11 +473,11 @@ export class TezosChain extends pulumi.ComponentResource {
     //make list of images to build in case we are using submodules
     const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
     const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
-    const tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
+    let tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
     // do not build zerotier for now since it takes times and it is not used in tqinfra
     delete tezosK8sImages["zerotier"];
     // build faucet container
-    tezosK8sImages.faucet = "faucet:dev";
+    tezosK8sImages["faucet"] = "faucet:dev";
     let pulumiTaggedImages;
 
     let chainSpecificSeed;
