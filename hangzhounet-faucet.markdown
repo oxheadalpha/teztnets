@@ -13,11 +13,13 @@ Please use responsibly as the number of addresses is limited. For special reques
 
 <form id="faucet_form" mathod="POST" action='https://faucet.hangzhounet.teztnets.xyz'>
     <div>
-        <div class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
+        <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
         <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Hangzhounet ꜩ</button>
     </div>
 </form>
+
+<textarea id="faucet_textarea" readonly cols="50" rows="20" style="visibility:hidden;"></textarea>
 
 <script>
 function captchaDone(response) {
@@ -28,6 +30,7 @@ function captchaDone(response) {
 $("#faucet_form").submit(function(e){
   e.preventDefault();
   $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
+  #("#faucet_recaptcha").hide();
   var form = $(this);
   var url = form.attr('action');
 
@@ -37,8 +40,18 @@ $("#faucet_form").submit(function(e){
     data: form.serialize(), // serializes the form's elements.
     success: function(data)
     {
-      alert(data);
+      console.log(data.json);
+      $("#faucet_textarea").val(data.json);
+      $("#faucet_textarea").show();
     }
   });
 });
 </script>
+
+## How to use
+
+Download the file above, store it locally (for example in `/tmp/faucet.json` then run:
+
+```
+tezos-client activate account testnet_tez with /tmp/faucet.json
+```
