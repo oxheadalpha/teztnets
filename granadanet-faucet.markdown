@@ -30,7 +30,7 @@ function captchaDone(response) {
 $("#faucet_form").submit(function(e){
   e.preventDefault();
   $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
-  #("#faucet_recaptcha").hide();
+  $("#faucet_recaptcha").hide();
   var form = $(this);
   var url = form.attr('action');
 
