@@ -1,10 +1,10 @@
 ---
 layout: page
 title: Dailynet Faucet
-permalink: /dailynet-2021-11-04-faucet
+permalink: /dailynet-2021-11-05-faucet
 ---
 
-This faucet is for `dailynet-2021-11-04` only. It will not work on other networks. First, verify that you are a human.
+This faucet is for `dailynet-2021-11-05` only. It will not work on other networks. First, verify that you are a human.
 
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
@@ -20,7 +20,7 @@ function submitted() {
 </script>
 
 
-<form method='POST' action='https://faucet.dailynet-2021-11-04.teztnets.xyz' onsubmit="submitted()">
+<form method='POST' action='https://faucet.dailynet-2021-11-05.teztnets.xyz' onsubmit="submitted()">
     <div>
         <div class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
