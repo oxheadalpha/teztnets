@@ -15,7 +15,8 @@ function captchaDone(response) {
   $("#gettz").prop('disabled',false); $("#gettz").addClass('btn-b');
 }
 
-function submitted() {
+$("faucet_form").submit(function(e){
+  e.preventDefault();
   $("#gettz").prop('disabled',true); $("#gettz").removeClass('btn-b');
   //https://stackoverflow.com/a/47675314/207209
   var xhr = new XMLHttpRequest();
@@ -25,11 +26,12 @@ function submitted() {
   };
   var formData = new FormData(document.getElementById("myForm"));
   xhr.send(formData);
-}
+  return false;
+});
 </script>
 
 
-<form id="faucet_form" method='POST'>
+<form id="faucet_form">
     <div>
         <div class="g-recaptcha" data-sitekey="{{ faucet_recaptcha_site_key }}" data-callback="captchaDone"></div>
         <br/>
