@@ -8,11 +8,11 @@ Dry-run for Idiazabalnet. Do not use! The real one starts on 11/09
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS_IDIAZABALNET_2021-11-04T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:master_a8e1dd3c_20211104172223](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a8e1dd3c_20211104172223) |
+| Full network name | `TEZOS_IDIAZABALNET_2021-11-06T15:00:00Z` |
+| Tezos docker build | [tezos/tezos:master_ad57ec91_20211105162538](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_ad57ec91_20211105162538) |
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
 | Faucet | [Idiazabalnet DRY RUN faucet](https://teztnets.xyz/idiazabalnet-faucet) |
-| Activated on | 2021-11-04T15:00:00Z |
+| Activated on | 2021-11-06T15:00:00Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -32,8 +32,8 @@ Note: tenderbake has been megred to octez master branch. This testnet runs the "
 
 Be aware that Tenderbake is not a final product. The software which is provided may contain bugs that you can report as issues.
 
-1. Check that your issue is not [already referenced](https://gitlab.com/tezos/tezos/-/issues?scope=all&utf8=%E2%9C%93&state=opened&milestone_title=%5BConsensus%5D%20Tenderbake). Your issue is possibly under investigation as of now and we invite you to wait patiently.
-2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bassignee_id%5D=&issue%5Bmilestone_id%5D=1980085).
+1. Check that your issue is not [already referenced](https://gitlab.com/tezos/tezos/-/issues?label_name[]=testnet%3A%3Aidiazabalnet). Your issue is possibly under investigation as of now and we invite you to wait patiently.
+2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bmilestone_id%5D=) and use tag **testnet::idiazabalnet**.
 3. You can also ask for help on Slack using the [`#idiazabalnet`](https://app.slack.com/client/TAHVDMZ44/C02LCFZLPAP) channel of [tezos-baking.slack.com](https://tezos-baking.slack.com).
 
 
@@ -45,7 +45,7 @@ Be aware that Tenderbake is not a final product. The software which is provided 
 To join Idiazabalnet DRY RUN with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_a8e1dd3c_20211104172223
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_ad57ec91_20211105162538
 ```
 
 #### Build the software
@@ -55,7 +55,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_a8e1dd3c_20211104172223
 - ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:tezos/tezos.git -b a8e1dd3c
+git clone git@gitlab.com:tezos/tezos.git -b ad57ec91
 cd tezos
 opam init # if this is your first time using OPAM
 make build-deps
