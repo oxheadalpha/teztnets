@@ -19,7 +19,7 @@ Please use responsibly as the number of addresses is limited. For special reques
 </form>
 
 <p class="faucet_response" style="display:none;">Here is your activation key:</p>
-<p class="faucet_response" style="display:none;"> <textarea id="faucet_textarea" readonly cols="80" rows="50"></textarea> </p>
+<p class="faucet_response" style="display:none;"> <textarea id="faucet_textarea" readonly cols="80" rows="25"></textarea> </p>
 <p class="faucet_response" style="display:none;">
   <button onclick="copyToClipboard()">Copy to clipboard</button>
   <a id="download_button"><button>Download</button></a>
