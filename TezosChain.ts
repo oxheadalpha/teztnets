@@ -704,8 +704,11 @@ export class TezosChain extends pulumi.ComponentResource {
         protocols = protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
     }
 
-
     return protocols;
+  }
+
+  getLastBakingDaemon(): string {
+    return this.params.helmValues["protocols"].slice(-1)[0]["command"];
   }
 
 }
