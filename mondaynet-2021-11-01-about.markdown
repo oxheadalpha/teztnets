@@ -55,7 +55,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
->[color=purple]
+>
 > ```bash=13
 > nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2021-11-01.log &
 > ```

@@ -74,7 +74,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
->[color=purple]
+>
 > ```bash=13
 > nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-idiazabalnet.log &
 > ```
@@ -95,11 +95,11 @@ tezos-baker-alpha run with local node ~/.tezos-node faucet
 ```
 
 > 💡 Again, to keep your processes alive in background:
-> [color=purple]
+>
 > ```bash=4
 > nohup tezos-baker-alpha run with local node ~/.tezos-node faucet > ./baker-idiazabalnet.log &
 > ```
 
-Note that you need a minimum amount of tez to get rights.
+Note that you need a minimum amount of tez to get baking rights, and it will take you several cycles to start baking.
 
 
