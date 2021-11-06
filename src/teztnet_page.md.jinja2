@@ -10,14 +10,18 @@ permalink: /{{ k }}-about
 |-------|---------------------|
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
-| RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
+| Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
 {% for proto in v["protocols"] -%}
 | Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
 {% endfor %}
 
-### How to peer with {{ v["human_name"] }} using Docker
+{{ readme }}
+
+### Install the software
+
+#### Using docker
 
 To join {{ v["human_name"] }} with docker, open a shell in the container:
 
@@ -25,26 +29,58 @@ To join {{ v["human_name"] }} with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 ```
 
-Then run the following commands:
+#### Build the software
 
-```
-tezos-node config init --network {{ v["network_url"] }}
-tezos-node run
-```
 
-### How to peer with {{ v["human_name"] }} building from source
+- ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
+- ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
 git clone git@gitlab.com:tezos/tezos.git -b {{ v["git_ref"] }}
 cd tezos
+opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
+export PATH=$(pwd):$PATH
 ```
 
-Then run the following commands:
+### Join the {{ v["human_name"] }} network
+
+Run the following commands:
 
 ```
-./tezos-node config init --network {{ v["network_url"] }}
-./tezos-node run
+tezos-node config init --network {{ v["network_url"] }}
+tezos-node run --rpc-addr 127.0.0.1:8732
 ```
+
+> 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
+>[color=purple]
+> ```bash=13
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-{{ k }}.log &
+> ```
+
+{% if v["category"] == "Protocol Teztnets" %}
+### Bake on the {{ v["human_name"] }} network
+
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet]({{ v["faucet_url"] }}).
+
+Register your key as a delegate using your alias or `pkh`. For instance:
+```bash=2
+./tezos-client register key faucet as delegate
+```
+
+You may now launch the baker process.
+```bash=3
+tezos-baker-alpha run with local node ~/.tezos-node faucet
+```
+
+> 💡 Again, to keep your processes alive in background:
+> [color=purple]
+> ```bash=4
+> nohup tezos-baker-alpha run with local node ~/.tezos-node faucet > ./baker-{{ k }}.log &
+> ```
+
+Note that you need a minimum amount of tez to get rights.
+
+{% endif %}

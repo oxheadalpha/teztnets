@@ -244,7 +244,7 @@ function getTeztnets(chains: TezosChain[]): object {
         // if no faucet accounts are generated, assume that we are using the legacy global faucet
         let faucetUrl = "https://faucet.tzalpha.net";
         if (chain.params.getNumberOfFaucetAccounts() > 0) {
-            faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`;
+            faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`;
         }
         let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`;
         teztnets[chain.params.getName()] = {

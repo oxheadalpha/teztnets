@@ -42,7 +42,11 @@ for k,v in teztnets.items():
     v["git_ref"] = v["docker_build"].split(":")[1]
     if "master_" in v["docker_build"]:
        v["git_ref"] = v["git_ref"].split("_")[1]
-    teztnet_md = jinja2.Template(open('src/teztnet_page.md.jinja2').read()).render(k=k,v=v, network_params=networks[k])
+    readme = ""
+    if os.path.exists(f"{k.split('-')[0]}/README.md"):
+        with open(f"{k.split('-')[0]}/README.md") as readme_file:
+            readme = readme_file.read()
+    teztnet_md = jinja2.Template(open('src/teztnet_page.md.jinja2').read()).render(k=k,v=v, network_params=networks[k], readme=readme)
     faucet_md = jinja2.Template(open('src/teztnet_faucet.md.jinja2').read()).render(k=k,v=v, faucet_recaptcha_site_key=os.environ["FAUCET_RECAPTCHA_SITE_KEY"])
     with open(f"target/release/{k}-about.markdown", "w") as out_file:
         print(teztnet_md, file=out_file)
