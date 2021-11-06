@@ -14,7 +14,7 @@ Note: tenderbake has been megred to octez master branch. This testnet runs the "
 
 Be aware that Tenderbake is not a final product. The software which is provided may contain bugs that you can report as issues.
 
-1. Check that your issue is not [already referenced](https://gitlab.com/tezos/tezos/-/issues?scope=all&utf8=%E2%9C%93&state=opened&milestone_title=%5BConsensus%5D%20Tenderbake). Your issue is possibly under investigation as of now and we invite you to wait patiently.
-2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bassignee_id%5D=&issue%5Bmilestone_id%5D=1980085).
+1. Check that your issue is not [already referenced](https://gitlab.com/tezos/tezos/-/issues?label_name[]=testnet%3A%3Aidiazabalnet). Your issue is possibly under investigation as of now and we invite you to wait patiently.
+2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bmilestone_id%5D=) and use tag **testnet::idiazabalnet**.
 3. You can also ask for help on Slack using the [`#idiazabalnet`](https://app.slack.com/client/TAHVDMZ44/C02LCFZLPAP) channel of [tezos-baking.slack.com](https://tezos-baking.slack.com).
 

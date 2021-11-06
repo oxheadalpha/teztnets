@@ -22,6 +22,7 @@ export interface TezosInitParameters {
   getDescription(): string;
   getHumanName(): string;
   isPeriodic(): boolean;
+  isMaskedFromMainPage(): boolean;
   getContainerImage(): string | pulumi.Output<string>;
   getDnsName(): string;
   getCategory(): string;
@@ -58,6 +59,7 @@ export interface TezosParamsInitializer {
   readonly privateNonbakingKey?: string;
   readonly yamlFile?: string;
   readonly numberOfFaucetAccounts?: number; 
+  readonly maskedFromMainPage?: boolean;
   readonly faucetSeed?: string;
   readonly faucetRecaptchaSiteKey?: string;
   readonly faucetRecaptchaSecretKey?: string;
@@ -79,6 +81,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _chartRepoVersion: string;
   private _chartPath: string;
   private _numberOfFaucetAccounts: number;
+  private _maskedFromMainPage: boolean;
   private _faucetSeed: string;
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
@@ -97,6 +100,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._chartRepoVersion = params.chartRepoVersion || '';
     this._chartPath = params.chartPath || '';
     this._periodic = false;
+    this._maskedFromMainPage = params.maskedFromMainPage || false;
     this._numberOfFaucetAccounts = params.numberOfFaucetAccounts || 0;
     this._faucetSeed = params.faucetSeed || '';
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
@@ -184,6 +188,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
 
   public getHumanName(): string | any {
     return this._humanName;
+  }
+
+  public isMaskedFromMainPage(): boolean {
+    return this._maskedFromMainPage;
   }
 
   public isPeriodic(): boolean {
@@ -710,5 +718,6 @@ export class TezosChain extends pulumi.ComponentResource {
   getLastBakingDaemon(): string {
     return this.params.helmValues["protocols"].slice(-1)[0]["command"];
   }
+
 
 }

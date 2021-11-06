@@ -198,6 +198,7 @@ const idiazabalnet_chain = new TezosChain(
         faucetSeed: faucetSeed,
         faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
         faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+        maskedFromMainPage: true,
     }),
     cluster.provider, repo);
 
@@ -257,7 +258,8 @@ function getTeztnets(chains: TezosChain[]): object {
             last_baking_daemon: chain.getLastBakingDaemon(),
             faucet_url: faucetUrl,
             category: chain.params.getCategory(),
-            rpc_url: rpcUrl
+            rpc_url: rpcUrl,
+            masked_from_main_page: chain.params.isMaskedFromMainPage(),
         };
     })
 

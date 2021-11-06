@@ -24,6 +24,8 @@ category_desc = {"Protocol Teztnets":"Testnets deployed specifically to test new
         "Periodic Teztnets": "Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/)." }
 nested_teztnets = {"Protocol Teztnets":{}}
 for k,v in teztnets.items():
+    if v["masked_from_main_page"]:
+        continue
     if v["category"] not in nested_teztnets:
         nested_teztnets[v["category"]] = {}
     nested_teztnets[v["category"]][k] = v
