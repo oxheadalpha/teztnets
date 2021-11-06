@@ -19,7 +19,7 @@ Please use responsibly as the number of addresses is limited. For special reques
 </form>
 
 <p class="faucet_response" style="display:none;">Here is your activation key:</p>
-<p class="faucet_response" style="display:none;"> <textarea id="faucet_textarea" readonly cols="50" rows="20"></textarea> </p>
+<p class="faucet_response" style="display:none;"> <textarea id="faucet_textarea" readonly cols="80" rows="50"></textarea> </p>
 <p class="faucet_response" style="display:none;">
   <button onclick="copyToClipboard()">Copy to clipboard</button>
   <a id="download_button"><button>Download</button></a>
@@ -33,7 +33,7 @@ Download the activation file, store it locally (for example in `/tmp/hangzhounet
 tezos-client activate account faucet with /tmp/hangzhounet.json
 ```
 
-<p class="faucet_response" style="display:none;">Or directly use the snippet:</p>
+<p class="faucet_response" style="display:none;">Or directly use the snippet below:</p>
 
 <div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/hangzhounet.json
 <span id="inline_snippet"></span>
@@ -61,8 +61,8 @@ $("#faucet_form").submit(function(e){
     success: function(data)
     {
       $("#faucet_textarea").val(JSON.stringify(data,null,'\t'));
+      $("#inline_snippet").text(JSON.stringify(data, null, '\t'));
       $(".faucet_response").show();
-      $("#inline_snippet").text(JSON.stringify(bite, null, '\t'));
     }
   });
 });
