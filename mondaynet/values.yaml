@@ -23,8 +23,7 @@ node_config_network:
 
 protocols:
   - command: alpha
-    # uncommit before next monday
-    #- command: 011-PtHangz2
+  - command: 011-PtHangz2
 
 activation:
   protocol_hash: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx
