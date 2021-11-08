@@ -44,6 +44,11 @@ for k,v in teztnets.items():
     v["git_ref"] = v["docker_build"].split(":")[1]
     if "master_" in v["docker_build"]:
        v["git_ref"] = v["git_ref"].split("_")[1]
+    v["git_repo"] = "git@gitlab.com:tezos/tezos.git"
+    if k == "idiazabalnet":
+        v["git_repo"] = "git@gitlab.com:nomadic-labs/tezos.git"
+        v["git_ref"] = "testnet/idiazabalnet"
+
     readme = ""
     if os.path.exists(f"{k.split('-')[0]}/README.md"):
         with open(f"{k.split('-')[0]}/README.md") as readme_file:

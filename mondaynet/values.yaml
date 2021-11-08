@@ -78,7 +78,6 @@ nodes:
     runs:
       - octez_node
       - baker
-      - endorser
     storage_size: 15Gi
   # Overwrite default values.yaml tezos-node
   tezos-node: null

@@ -1,10 +1,10 @@
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_IDIAZABALNET_2021-11-06T15:00:00Z
+  chain_name: TEZOS_IDIAZABALNET_2021-11-09T15:00:00Z
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2021-11-06T15:00:00Z"
+    timestamp: "2021-11-09T15:00:00Z"
 
 protocols:
   - command: alpha
@@ -12,8 +12,8 @@ protocols:
 activation:
   protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
   protocol_parameters:
-    preserved_cycles: 5
-    blocks_per_cycle: 8192
+    preserved_cycles: 3
+    blocks_per_cycle: 2048
     blocks_per_commitment: 64
     blocks_per_stake_snapshot: 512
     blocks_per_voting_period: 40960
@@ -70,123 +70,219 @@ nodes:
   # Overwrite default values.yaml tezos-node
   tezos-node: null
 
-bootstrap_peers: []
+bootstrap_peers:
+  - idiazabalnet.smartpy.io
+  - idiazabalnet.kaml.fr
+  - idiazabalnet.boot.ecadinfra.com
+
 full_snapshot_url: null
 rolling_snapshot_url: null
 
 images:
-  octez: tezos/tezos:master_ad57ec91_20211105162538
+  octez: registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnet
+
+# Total stake is 50 million:
+# * 40 million for 20 nomadic bakers (80%) so 2 million per baker
+# * 10 million for community (15 bakers) so 667k per baker
 accounts:
   oxheadbaker:
-    bootstrap_balance: '720000000000000'
+    bootstrap_balance: '667000000000'
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
+  pirbo:
+    # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
+    key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  andrewk:
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  saroupille:
+    # tz1QXAAasy8TciwfvDC4a7MWo1tm3K37uN9Y
+    key: edpkvMBeXH4h8H97b8qfPkv2mA9TE6McfsffLGgG2Jg5nhUESaVt5J
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  saroupille2:
+    # tz1ZaHCkooCR63bSsQhLf8WLKj9sQG5RTthP
+    key: edpkueS4HbicvgHo1Y9uPp6ZaZ8kgMJBJg2uB4Zm539Wf7qvJA5g1U
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mariano_ceibo:
+    # tz1T7bTfbw1PsDAKFfBN24ediaqgw8FTu3qd
+    key: edpkv9xYGRddWjy9XMVeUq5d7gxWm3eVgYarrpmNW1qVvvRpmJq76G
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  fifthelement:
+    key: edpkujqmLUVGNbSNZV7CBMdtXAMGTTwJDQoXp2aRGrotys51rYvaRi
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  coredump:
+    # tz1Wn7JnLVf7PpTbaLQNzmNaF9z9UudWHGBR
+    key: edpkttKzcNNCjanS2De2Nagnpg9Bk1SoNhxDC1hqCFvHHFjfeeBK1m
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  marco:
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  baketzforme:
+    # tz1edUYGqBtteStneTGDBrQWTFmq9cnEELiW
+    key: edpkuEoVW7HM9ehiec9exPfHrsFkT1f3jV8JxFWQHP23VX6K5EnVtD
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  vincent_xtzmaster:
+    # tz1XMiZwHpHZ8a1AfwRWKfzLskJgZNyV8PHs
+    key: edpkvaZQ6tt9XgJJTonjFpzwaqDV7RWUQMT7TmntBJ5yXmDsPb8T7L
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  daniel_jean:
+    # tz1RBECWBXv4tKcuDbxYmBguvdn8wzjrejHg
+    key: edpkucJ7Nccy2wyaU4B2Ch4rxS4reiTfc7349pKtemcd4yLeXmbAwb
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  olivier_blockwatch:
+    # tz1cXeGHP8Urj2pQRwpAkCdPGbCdqFUPsQwU
+    key: edpktqRmZsGN2WEyghfqrZvn8c7xmA1xs3vDta71CsCjtHiSRMkG1z
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  ecadlabs:
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
+    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  smartpy:
+    # tz1SMARcpWCydHsGgz4MRoK9NkbpBmmUAfNe
+    key: edpkuyuJirNU14hEma1u7f3Qhx7uHZxzuXDyvmjRwaAsFFFqYGkzHx
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
     key: edpkubSgCoMjB2a6vPWRNRHfGa6HUFfFyEUKoEQhWC8osnav8QzBdJ
-    bootstrap_balance: "5000000000000000"
+    bootstrap_balance: "500000000000000"
     is_bootstrap_baker_account: false
     type: public
+  tz1THUNA:
+    # tz1THUNARo58aD5YdNGYPnWNnvd8yHPrMdsF 
+    # Romain's faucet
+    key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000000"
 
   nomadic00:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpku3HFqm2abDUPG16fKXZHCCDCNLpBRvqbgQC1Ka4kFQHYi6S7Pf
     type: public
   nomadic01:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuQLedLGSNjfVXoT1PkJcERiQutZdMKWSzKHCSnEhpYjUXeE8LT
     type: public
   nomadic02:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpku5JHHNN4CV9XVZ2na4zwSjRaRABHBUsc9ujTGDfe98VDmrbt6N
     type: public
   nomadic03:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuf7dqkv617ZsQhavosmT5qXQxvQa3Ud2ZBQi6cKx5QEjkXm9TG
     type: public
   nomadic04:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkto7unE5dMgguDMkVbAp6u6PRnEjzCCdULspJjdqJRzLHZUXN54
     type: public
   nomadic05:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkum5U9Dcu8HswLaG4wDeih7HD3PJefRGLoMZSuStksbmYJeVaSe
     type: public
   nomadic06:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuyZsQw1ioHijuNSfPTJmou2HN672R3haywPotaP3LVRodbnkbD
     type: public
   nomadic07:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuGwsxhqqKN8xTTg66mFTgUuA3jU7AMH9ZwDETBg33QqKc7Xr1z
     type: public
   nomadic08:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkupMPSkJKpSQxSpBD1jHdc53F1y79Ranvr1Twg7CY2i9RDqkQ3H
     type: public
   nomadic09:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkukX7M9muTnqgxY3aBGkVXEXuhnxobVZKhT5zxbisbU49eD1crA
     type: public
   nomadic10:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkteJqof5RFHc8JeTwTL6J9ZgMNxJT8MspjLUL7AuCAnytDxcjs5
     type: public
   nomadic11:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuEyuPpyUszCPTJeUmAVmpCaFyXah9Q1jschvyX9Z6haL5YBJ4Z
     type: public
   nomadic12:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuJUgU6iSL7xwiuFWkX8HRwTScHJTsGzPLH7g7bv9Y9WnepXBbA
     type: public
   nomadic13:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpktn5KiKPSrUnDkfP515rvL9okpxvzcpjev2xcCSCWJLHNkRA7Md
     type: public
   nomadic14:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkvZVz1aWhgdB4QUTzwBcAhhBiiEVfHR3sWvXWJ9tUzyzopnbKdM
     type: public
   nomadic15:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkvFwYwnkVMQcPC36usdkd7Vp8PMSam2asxtLg6iepvaXxerRKZE
     type: public
   nomadic16:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkv9HowGporsaQNauuv8gJX1FqPTn36A4AAjfeA1bGEncZe5wg3D
     type: public
   nomadic17:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkuH8anpAFPNa1NPsWeymqLgyWJ1bDSWSqnyP2dod6rqf8Mi6yw6
     type: public
   nomadic18:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkvAKQvhm6PPaPh4AQp4SjxFEkjyGohoz9DMsCNUXC6GdHzzAo54
     type: public
   nomadic19:
-    bootstrap_balance: '36000000000000'
+    bootstrap_balance: '2000000000000'
     is_bootstrap_baker_account: true
     key: edpkvUf8SABxhiUXz9dhKvPqEWhanzYHpfzaKp4oBzR1ft8C8NtRCo
     type: public

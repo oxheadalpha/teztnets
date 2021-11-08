@@ -188,9 +188,8 @@ const idiazabalnet_chain = new TezosChain(
         name: 'idiazabalnet',
         dnsName: 'idiazabalnet',
         category: protocolCategory,
-        humanName: "Idiazabalnet DRY RUN",
-        //description: 'Testnet for future I proposal testing (includes Tenderbake!)',
-        description: 'Dry-run for Idiazabalnet. Do not use! The real one starts on 11/09',
+        humanName: "Idiazabalnet",
+        description: 'Testnet for future I proposal testing (includes Tenderbake!)',
         bootstrapPeers: [ ],
         chartPath: 'idiazabalnet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
@@ -198,7 +197,6 @@ const idiazabalnet_chain = new TezosChain(
         faucetSeed: faucetSeed,
         faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
         faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-        maskedFromMainPage: true,
     }),
     cluster.provider, repo);
 
@@ -242,9 +240,11 @@ function getTeztnets(chains: TezosChain[]): object {
     const teztnets: {[name: string]: {[name: string]: Object}} = {};
 
     chains.forEach(function (chain) {
-        // if no faucet accounts are generated, assume that we are using the legacy global faucet
-        let faucetUrl = "https://faucet.tzalpha.net";
-        if (chain.params.getNumberOfFaucetAccounts() > 0) {
+        let faucetUrl;
+        if (chain.params.getName() == "granadanet") {
+            // legacy faucet
+            faucetUrl = "https://faucet.tzalpha.net";
+        } else {
             faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`;
         }
         let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`;
