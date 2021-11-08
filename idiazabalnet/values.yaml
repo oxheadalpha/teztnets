@@ -70,10 +70,7 @@ nodes:
   # Overwrite default values.yaml tezos-node
   tezos-node: null
 
-bootstrap_peers:
-  - idiazabalnet.smartpy.io
-  - idiazabalnet.kaml.fr
-  - idiazabalnet.boot.ecadinfra.com
+bootstrap_peers: []
 
 full_snapshot_url: null
 rolling_snapshot_url: null
