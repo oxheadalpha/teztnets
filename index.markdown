@@ -14,6 +14,7 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 |-------|---------------------|--|
 | [Granadanet](/granadanet-about) | `2021-05-21` | [Granadanet faucet](https://faucet.tzalpha.net) |
 | [Hangzhounet](/hangzhounet-about) | `2021-11-04` | [Hangzhounet faucet](https://teztnets.xyz/hangzhounet-faucet) |
+| [Idiazabalnet](/idiazabalnet-about) | `2021-11-09` | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
 
 
 
@@ -23,8 +24,8 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-2021-11-07-about) | `2021-11-07` | [Dailynet faucet](https://teztnets.xyz/dailynet-2021-11-07-faucet) |
-| [Mondaynet](/mondaynet-2021-11-01-about) | `2021-11-01` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2021-11-01-faucet) |
+| [Dailynet](/dailynet-2021-11-08-about) | `2021-11-08` | [Dailynet faucet](https://teztnets.xyz/dailynet-2021-11-08-faucet) |
+| [Mondaynet](/mondaynet-2021-11-08-about) | `2021-11-08` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2021-11-08-faucet) |
 
 
 

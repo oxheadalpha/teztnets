@@ -1,34 +1,39 @@
 ---
 layout: page
-title: Idiazabalnet DRY RUN
+title: Idiazabalnet
 permalink: /idiazabalnet-about
 ---
 
-Dry-run for Idiazabalnet. Do not use! The real one starts on 11/09
+Testnet for future I proposal testing (includes Tenderbake!)
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS_IDIAZABALNET_2021-11-06T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:master_ad57ec91_20211105162538](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_ad57ec91_20211105162538) |
+| Full network name | `TEZOS_IDIAZABALNET_2021-11-09T15:00:00Z` |
+| Tezos docker build | [registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnet](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnet) |
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
-| Faucet | [Idiazabalnet DRY RUN faucet](https://teztnets.xyz/idiazabalnet-faucet) |
-| Activated on | 2021-11-06T15:00:00Z |
-| Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
+| Faucet | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
+| Activated on | 2021-11-09T15:00:00Z |
 
 
 🔥 If you're here, this means you belong to one of the few lucky people to take part into the testnet using the brand new consensus algorithm [Tenderbake](https://blog.nomadic-labs.com/a-look-ahead-to-tenderbake.html). Congratulations and thanks in advance! This page shows you how to set up your system and actively participate in testing Tenderbake.
 
-You may want to run the software in debug mode:
+⚠️  We are maintaining a [`teztnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-06. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
+
+⚠️  Tenderbake has no endorser. The endorser binary does not exist. This is normal. Running the baker daemon is enough.
+
+⚠️  You can not sign with Ledger for now. You need to use a hot wallet address.
+
+⚠️  Idiazabalnet does not upgrade and stays on the same protocol from genesis.
+
+⚠️  initially, 80% of the stake will belong to Nomadic Labs bakers, in order to faciliate debugging.
+
+### Report bugs
+
+You are encouraged to run the baker in debug mode:
 
 ```
 export TEZOS_LOG="* -> debug"
 ```
-
-Note: Idiazabalnet does not upgrade and stays on the same protocol from genesis.
-
-Note: tenderbake has been megred to octez master branch. This testnet runs the "alpha protocol" as of 2021-11-09 which contains tenderbakenet as well as a [few other changes](https://tezos.gitlab.io/protocols/alpha.html).
-
-### Report bugs
 
 Be aware that Tenderbake is not a final product. The software which is provided may contain bugs that you can report as issues.
 
@@ -42,10 +47,10 @@ Be aware that Tenderbake is not a final product. The software which is provided 
 
 #### Using docker
 
-To join Idiazabalnet DRY RUN with docker, open a shell in the container:
+To join Idiazabalnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_ad57ec91_20211105162538
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnet
 ```
 
 #### Build the software
@@ -55,7 +60,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_ad57ec91_20211105162538
 - ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:tezos/tezos.git -b ad57ec91
+git clone git@gitlab.com:nomadic-labs/tezos.git -b testnet/idiazabalnet
 cd tezos
 opam init # if this is your first time using OPAM
 make build-deps
@@ -64,7 +69,7 @@ make
 export PATH=$(pwd):$PATH
 ```
 
-### Join the Idiazabalnet DRY RUN network
+### Join the Idiazabalnet network
 
 Run the following commands:
 
@@ -80,7 +85,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > ```
 
 
-### Bake on the Idiazabalnet DRY RUN network
+### Bake on the Idiazabalnet network
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/idiazabalnet-faucet).
 
