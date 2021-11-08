@@ -190,7 +190,11 @@ const idiazabalnet_chain = new TezosChain(
         category: protocolCategory,
         humanName: "Idiazabalnet",
         description: 'Testnet for future I proposal testing (includes Tenderbake!)',
-        bootstrapPeers: [ ],
+        bootstrapPeers: [
+            'idiazabalnet.smartpy.io',
+            'hangzhounet.boot.ecadinfra.com',
+            'idiazabalnet.kaml.fr',
+        ],
         chartPath: 'idiazabalnet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
         numberOfFaucetAccounts: 0, //FIXME put it back to 10000
