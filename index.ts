@@ -192,7 +192,7 @@ const idiazabalnet_chain = new TezosChain(
         description: 'Testnet for future I proposal testing (includes Tenderbake!)',
         bootstrapPeers: [
             'idiazabalnet.smartpy.io',
-            'hangzhounet.boot.ecadinfra.com',
+            'idiazabalnet.boot.ecadinfra.com',
             'idiazabalnet.kaml.fr',
         ],
         chartPath: 'idiazabalnet/tezos-k8s',
