@@ -197,7 +197,8 @@ const idiazabalnet_chain = new TezosChain(
         ],
         chartPath: 'idiazabalnet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
-        numberOfFaucetAccounts: 10000,
+        //numberOfFaucetAccounts: 10000,
+        numberOfFaucetAccounts: 0, // FIXME
         faucetSeed: faucetSeed,
         faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
         faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
