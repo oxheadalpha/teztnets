@@ -125,7 +125,7 @@ const mondaynet_chain = new TezosChain(
         description: 'A testnet that restarts every Monday launched from tezos/tezos master branch and Granadanet protocol, upgrading to alpha at block 255.',
         schedule: '0 0 * * MON',
         bootstrapContracts: ['taquito1.json'],
-        chartPath: 'dailynet/tezos-k8s',
+        chartPath: 'mondaynet/tezos-k8s',
         privateBakingKey: private_oxhead_baking_key,
         numberOfFaucetAccounts: 1000,
         faucetSeed: faucetSeed,
