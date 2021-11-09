@@ -65,7 +65,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/hangzhounet-faucet).
 
-Register your key as a delegate using your alias or `pkh`. For instance:
+If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
 ./tezos-client register key faucet as delegate
 ```
@@ -81,6 +81,6 @@ tezos-baker-011-PtHangz2 run with local node ~/.tezos-node faucet
 > nohup tezos-baker-011-PtHangz2 run with local node ~/.tezos-node faucet > ./baker-hangzhounet.log &
 > ```
 
-Note that you need a minimum amount of tez to get baking rights, and it will take you several cycles to start baking.
+Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
 
 

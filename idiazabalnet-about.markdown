@@ -19,6 +19,8 @@ Testnet for future I proposal testing (includes Tenderbake!)
 
 ⚠️  We are maintaining a [`teztnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-06. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
 
+⚠️  There are no released packages or binaries for this testnet. You must build from source or use Docker.
+
 ⚠️  Tenderbake has no endorser. The endorser binary does not exist. This is normal. Running the baker daemon is enough.
 
 ⚠️  You can not sign with Ledger for now. You need to use a hot wallet address.
@@ -60,7 +62,7 @@ docker run -it --entrypoint=/bin/sh registry.gitlab.com/nomadic-labs/tezos:amd64
 - ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:nomadic-labs/tezos.git -b testnet/idiazabalnet
+git clone https://gitlab.com/nomadic-labs/tezos.git -b testnet/idiazabalnet
 cd tezos
 opam init # if this is your first time using OPAM
 make build-deps
@@ -89,7 +91,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/idiazabalnet-faucet).
 
-Register your key as a delegate using your alias or `pkh`. For instance:
+If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
 ./tezos-client register key faucet as delegate
 ```
@@ -105,6 +107,6 @@ tezos-baker-alpha run with local node ~/.tezos-node faucet
 > nohup tezos-baker-alpha run with local node ~/.tezos-node faucet > ./baker-idiazabalnet.log &
 > ```
 
-Note that you need a minimum amount of tez to get baking rights, and it will take you several cycles to start baking.
+Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
 
 
