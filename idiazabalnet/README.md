@@ -10,7 +10,7 @@
 
 ⚠️  Idiazabalnet does not upgrade and stays on the same protocol from genesis.
 
-⚠️  initially, 80% of the stake will belong to Nomadic Labs bakers, in order to faciliate debugging.
+⚠️  initially, 67% of the stake will belong to Nomadic Labs bakers, in order to faciliate debugging.
 
 ### Report bugs
 
@@ -23,6 +23,6 @@ export TEZOS_LOG="* -> debug"
 Be aware that Tenderbake is not a final product. The software which is provided may contain bugs that you can report as issues.
 
 1. Check that your issue is not [already referenced](https://gitlab.com/tezos/tezos/-/issues?label_name[]=testnet%3A%3Aidiazabalnet). Your issue is possibly under investigation as of now and we invite you to wait patiently.
-2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bmilestone_id%5D=) and use tag **testnet::idiazabalnet**.
+2. If not, you can [open a new one](https://gitlab.com/tezos/tezos/-/issues/new?issue%5Bmilestone_id%5D=) and use label **testnet::idiazabalnet**.
 3. You can also ask for help on Slack using the [`#idiazabalnet`](https://app.slack.com/client/TAHVDMZ44/C02LCFZLPAP) channel of [tezos-baking.slack.com](https://tezos-baking.slack.com).
 
