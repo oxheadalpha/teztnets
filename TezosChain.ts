@@ -566,7 +566,7 @@ export class TezosChain extends pulumi.ComponentResource {
               protocol: "TCP",
             },
           ],
-          selector: { app: "tezos-baking-node" },
+          selector: { node_class: "tezos-baking-node" },
           type: "LoadBalancer",
         },
       },
