@@ -488,17 +488,15 @@ export class TezosChain extends pulumi.ComponentResource {
     tezosK8sImages["faucet"] = "faucet:dev";
     let pulumiTaggedImages;
 
-    let chainSpecificSeed;
+    let faucetConfig;
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
-      chainSpecificSeed = `${params.getFaucetSeed()}-${params.getChainName()}`
 
-      // add the faucet seed to the activation parameters so the accounts given
-      // by the faucet website work on chain
-      params.helmValues["activation"]["deterministic_faucet"] = {
-        seed: chainSpecificSeed,
+      faucetConfig = {
+        seed: `${params.getFaucetSeed()}-${params.getChainName()}`,
         number_of_accounts: params.getNumberOfFaucetAccounts(),
       }
+      params.helmValues["activation"]["faucet"] = faucetConfig;
     }
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
@@ -583,8 +581,9 @@ export class TezosChain extends pulumi.ComponentResource {
             siteKey: params.getFaucetRecaptchaSiteKey(),
             secretKey: params.getFaucetRecaptchaSecretKey(),
           },
-          number_of_accounts: params.getNumberOfFaucetAccounts(),
-          seed: chainSpecificSeed,
+          activation: {
+            faucet: faucetConfig,
+          },
           tezos_k8s_images: pulumiTaggedImages,
         },
       };
