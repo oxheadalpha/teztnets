@@ -68,3 +68,19 @@ The Helm chart values.yaml lets you customize your chain in many ways:
 Look in any Teztnet directory's values.yaml file for reference as to how to configure your own Teztnet.
 
 The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
+
+## Teztnets.xyz website
+
+The website is created with Jekyll from Markdown files generated from Jinja templates based on Pulumi outputs.
+
+To build the website locally, from the top-level dir of the repo:
+
+1. `source .env` to populate the secret env vars
+1. run `pulumi stack output networks > networks.json`
+1. run `pulumi stack output teztnets > teztnets.json`
+1. run `python src/release.py`
+1. `cd target/release`
+1. run `bundle install`
+1. run `bundle exec jekyll serve`
+
+The website will be rendered on `localhost:4000`.
