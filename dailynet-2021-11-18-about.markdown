@@ -1,18 +1,18 @@
 ---
 layout: page
 title: Dailynet
-permalink: /dailynet-2021-11-11-about
+permalink: /dailynet-2021-11-18-about
 ---
 
 A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2021-11-11T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_66869858_20211110184244](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_66869858_20211110184244) |
-| Public RPC endpoint | [https://rpc.dailynet-2021-11-11.teztnets.xyz](https://rpc.dailynet-2021-11-11.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2021-11-11-faucet) |
-| Activated on | 2021-11-11T00:00:00.000Z |
+| Full network name | `TEZOS-DAILYNET-2021-11-18T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_259b04fc_20211117201909](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_259b04fc_20211117201909) |
+| Public RPC endpoint | [https://rpc.dailynet-2021-11-18.teztnets.xyz](https://rpc.dailynet-2021-11-18.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2021-11-18-faucet) |
+| Activated on | 2021-11-18T00:00:00.000Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -25,7 +25,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_66869858_20211110184244
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_259b04fc_20211117201909
 ```
 
 #### Build the software
@@ -35,7 +35,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_66869858_20211110184244
 - ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:tezos/tezos.git -b 66869858
+git clone git@gitlab.com:tezos/tezos.git -b 259b04fc
 cd tezos
 opam init # if this is your first time using OPAM
 make build-deps
@@ -49,14 +49,14 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/dailynet-2021-11-11
+tezos-node config init --network https://teztnets.xyz/dailynet-2021-11-18
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2021-11-11.log &
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2021-11-18.log &
 > ```
 
 
