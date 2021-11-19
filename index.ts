@@ -182,6 +182,28 @@ const hangzhounet_chain = new TezosChain(
     }),
     cluster.provider, repo);
 
+const idiazabalnet_chain = new TezosChain(
+    new TezosChainParametersBuilder({
+        yamlFile: "idiazabalnet/values.yaml",
+        name: 'idiazabalnet',
+        dnsName: 'idiazabalnet',
+        category: protocolCategory,
+        humanName: "Idiazabalnet",
+        description: 'Second iteration of testnet for future I proposal testing',
+        bootstrapPeers: [
+            'idiazabalnet.smartpy.io',
+            'idiazabalnet.boot.ecadinfra.com',
+            'idiazabalnet.kaml.fr',
+        ],
+        chartPath: 'idiazabalnet/tezos-k8s',
+        privateBakingKey: private_oxhead_baking_key,
+        numberOfFaucetAccounts: 0,
+        faucetSeed: faucetSeed,
+        faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+        faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    }),
+    cluster.provider, repo);
+
 
 function getNetworks(chains: TezosChain[]): object {
     const networks: {[name: string]: object} = {};
@@ -248,5 +270,5 @@ function getTeztnets(chains: TezosChain[]): object {
     return teztnets;
 }
 
-export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
-export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain]);
+export const networks = getNetworks([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, idiazabalnet_chain]);
+export const teztnets = getTeztnets([dailynet_chain, mondaynet_chain, granadanet_chain, hangzhounet_chain, idiazabalnet_chain]);

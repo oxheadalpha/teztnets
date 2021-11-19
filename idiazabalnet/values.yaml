@@ -1,55 +1,55 @@
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_IDIAZABALNET_2021-11-09T15:00:00Z
+  chain_name: TEZOS_IDIAZABALNET_2021-11-23T15:00:00Z
   genesis:
-    block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
+    block: BLockGenesisGenesisGenesisGenesisGenesis761b2dAGmbT
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2021-11-09T15:00:00Z"
+    timestamp: "2021-11-23T15:00:00Z"
 
 protocols:
   - command: alpha
 
-activation:
-  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
-  protocol_parameters:
-    preserved_cycles: 3
-    blocks_per_cycle: 2048
-    blocks_per_commitment: 64
-    blocks_per_stake_snapshot: 512
-    blocks_per_voting_period: 40960
-    hard_gas_limit_per_operation: '1040000'
-    hard_gas_limit_per_block: '5200000'
-    proof_of_work_threshold: '-1'
-    tokens_per_roll: '8000000000'
-    seed_nonce_revelation_tip: '125000'
-    baking_reward_fixed_portion: '10000000'
-    baking_reward_bonus_per_slot: '4286'
-    endorsing_reward_per_slot: '2857'
-    hard_storage_limit_per_operation: '60000'
-    origination_size: 257
-    cost_per_byte: '1000'
-    quorum_max: 7000
-    quorum_min: 2000
-    min_proposal_quorum: 500
-    liquidity_baking_subsidy: '2500000'
-    liquidity_baking_sunset_level: 525600
-    liquidity_baking_escape_ema_threshold: 100000
-    max_operations_time_to_live: 120
-    round_durations:
-      - "30"
-      - "45"
-    consensus_committee_size: 7000
-    consensus_threshold: 4667
-    minimal_participation_ratio:
-      numerator: 2
-      denominator: 3
-    max_slashing_period: 2
-    frozen_deposits_percentage: 10
-    double_baking_punishment: "640000000"
-    ratio_of_frozen_deposits_slashed_per_double_endorsement:
-      numerator: 1
-      denominator: 2
-    delegate_selection: "random"
+    #activation:
+    #  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+    #  protocol_parameters:
+    #    preserved_cycles: 3
+    #    blocks_per_cycle: 2048
+    #    blocks_per_commitment: 64
+    #    blocks_per_stake_snapshot: 512
+    #    blocks_per_voting_period: 40960
+    #    hard_gas_limit_per_operation: '1040000'
+    #    hard_gas_limit_per_block: '5200000'
+    #    proof_of_work_threshold: '-1'
+    #    tokens_per_roll: '8000000000'
+    #    seed_nonce_revelation_tip: '125000'
+    #    baking_reward_fixed_portion: '10000000'
+    #    baking_reward_bonus_per_slot: '4286'
+    #    endorsing_reward_per_slot: '2857'
+    #    hard_storage_limit_per_operation: '60000'
+    #    origination_size: 257
+    #    cost_per_byte: '250'
+    #    quorum_max: 7000
+    #    quorum_min: 2000
+    #    min_proposal_quorum: 500
+    #    liquidity_baking_subsidy: '2500000'
+    #    liquidity_baking_sunset_level: 525600
+    #    liquidity_baking_escape_ema_threshold: 100000
+    #    max_operations_time_to_live: 120
+    #    round_durations:
+    #      - "30"
+    #      - "45"
+    #    consensus_committee_size: 7000
+    #    consensus_threshold: 4667
+    #    minimal_participation_ratio:
+    #      numerator: 2
+    #      denominator: 3
+    #    max_slashing_period: 2
+    #    frozen_deposits_percentage: 10
+    #    double_baking_punishment: "640000000"
+    #    ratio_of_frozen_deposits_slashed_per_double_endorsement:
+    #      numerator: 1
+    #      denominator: 2
+    #    delegate_selection: "random"
 
 nodes:
   tezos-baking-node:
@@ -76,13 +76,16 @@ full_snapshot_url: null
 rolling_snapshot_url: null
 
 images:
-  octez: registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnet
+  # the container tag is moving as more code is merged to the branch
+  # here, put the actual container digest to make sure we pick the right one
+  octez: registry.gitlab.com/nomadic-labs/tezos:amd64-testnet_idiazabalnetFIXMEFIXME
 
-# Total stake is 30 million:
-# * 20 million for 20 nomadic bakers (67%) so 1 million per baker
-# * 10 million for community (15 bakers) so 667k per baker
+# We give:
+# * 1 million for each of nomadic's 20 "training wheels" bakers
+# * 667k per community baker
 accounts:
   oxheadbaker:
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
     bootstrap_balance: '667000000000'
     is_bootstrap_baker_account: true
     type: secret
@@ -173,7 +176,67 @@ accounts:
     key: edpkvHUTQtgDaY89rm6f27RUfEesWqZZKh1WYEosY11uDvuDWuFpLt
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "2000000000000"
+    bootstrap_balance: "667000000000"
+  michael_kernaghan:
+    # tz1e42w8ZaGAbM3gucbBy8iRypdbnqUj7oWY
+    key: edpkuRkcStobJ569XFxmE6edyRQQzMmtf4ZnmPkTPfSQnt6P3Nym2V
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_1:
+    # tz1SHw5vBDYNgGdUPJi57kVrEb2kFue4Yxa4
+    key: edpkvKJ9voHuSBi8TApVowCu7D8hQneXGWdEHuSEMDjQDyxD9h6PYk
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_2:
+    # tz1ituzNz9MGaMSL9dVDN7jE5SArCEWNmZbS
+    key: edpkuty8oXRwNH5zRLfGkTyL2ukMVhGiht3qG8VNU5beD4NgP8X3gw
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_3:
+    # tz1gGQJZxoPnAdbugNL5UJW6fc85DwpiV8Z5
+    key: edpkuKa8XHD1QKLtsc5hUqPG9CS5wAK5vEaSgW4sKvCUUEAMTWGbts
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_4:
+    # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
+    key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_5:
+    # tz1ddhequpvmn4LJamJWMjHEh4PsGaofEmxS
+    key: edpkvAJL5AN5qj3qkFaNnMpggsKUqGaoJJJEBYUnJj7SEmk4wh3McQ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  functori:
+    # tz1funU3PjPsuXvmtXMgnAckY1s4pNT6V7WJ
+    key: edpkv2fhuhS4947m64XexZw2vMvr7C4zYTBFweXuWVCLbmaSqpFaT3
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  pierre_chambart:
+    # tz1QvBzVmzN7F37ay4ZX12Tm2VEUmEbXJus7
+    key: edpkvGiC27B2WJRC6AoFS8wwSC4rrhnTULWxq53PkoJjJSRSCvFwJn
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_6:
+    # tz1dqPQn5HXNJ7yjcqBx2w6sozjPXTV1kpfh
+    key: edpkupKuAv85MDjsfAEFeNMS4jHwkS1dT1dRajVwoYeSs6jEbwcTPm
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  mystery_baker_7:
+    # tz1aZUu1x7qvopFRHgtuZ9UChVzQ9rjF1bkN
+    key: edpkuWXxZqTG6ahJgkiw2nxjoXeQsx1aHGeZ8CEUjDq9qKybBiKEsB
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
