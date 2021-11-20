@@ -9,7 +9,7 @@ Long-running testnet for Granada proposal.
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_GRANADANET_2021-05-21T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v10.3](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v10.3) |
+| Tezos docker build | [tezos/tezos:v11.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v11.0) |
 | Public RPC endpoint | [https://rpc.granadanet.teztnets.xyz](https://rpc.granadanet.teztnets.xyz) |
 | Faucet | [Granadanet faucet](https://faucet.tzalpha.net) |
 | Activated on | 2021-05-21T15:00:00Z |
@@ -25,7 +25,7 @@ Long-running testnet for Granada proposal.
 To join Granadanet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v10.3
+docker run -it --entrypoint=/bin/sh tezos/tezos:v11.0
 ```
 
 #### Build the software
@@ -35,7 +35,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v10.3
 - ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:tezos/tezos.git -b v10.3
+git clone git@gitlab.com:tezos/tezos.git -b v11.0
 cd tezos
 opam init # if this is your first time using OPAM
 make build-deps
