@@ -1,9 +1,0 @@
-[submodule "hangzhounet/tezos-k8s"]
-	path = hangzhounet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "mondaynet/tezos-k8s"]
-	path = mondaynet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "idiazabalnet/tezos-k8s"]
-	path = idiazabalnet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
