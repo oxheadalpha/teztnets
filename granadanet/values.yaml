@@ -75,7 +75,7 @@ bootstrap_peers:
   - granadanet.kaml.fr
 
 images:
-  octez: tezos/tezos:v10.3
+  octez: tezos/tezos:v11.0
 
 nodes:
   tezos-baking-node:
