@@ -301,10 +301,12 @@ export const networks = getNetworks([
   mondaynet_chain,
   granadanet_chain,
   hangzhounet_chain,
+  idiazabalnet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   granadanet_chain,
   hangzhounet_chain,
+  idiazabalnet_chain,
 ])
