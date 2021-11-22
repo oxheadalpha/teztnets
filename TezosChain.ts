@@ -478,15 +478,19 @@ export class TezosChain extends pulumi.ComponentResource {
       { provider, parent: this, dependsOn: certValidation }
     )
 
-    //make list of images to build in case we are using submodules
-    const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
-    const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
-    let tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
-    // do not build zerotier for now since it takes times and it is not used in tqinfra
-    delete tezosK8sImages["zerotier"];
-    // build faucet container
-    tezosK8sImages["faucet"] = "faucet:dev";
+    let tezosK8sImages;
     let pulumiTaggedImages;
+    if (params.getChartRepo() == '') {
+      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+      //make list of images to build in case we are using submodules
+      const defaultHelmValuesFile = fs.readFileSync(`${params.getChartPath()}/charts/tezos/values.yaml`, 'utf8');
+      const defaultHelmValues = YAML.parse(defaultHelmValuesFile);
+      tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
+      // do not build zerotier for now since it takes times and it is not used in tqinfra
+      delete tezosK8sImages["zerotier"];
+      // build faucet container
+      tezosK8sImages["faucet"] = "faucet:dev";
+    }
 
     let faucetConfig;
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
@@ -584,11 +588,11 @@ export class TezosChain extends pulumi.ComponentResource {
           activation: {
             faucet: faucetConfig,
           },
-          tezos_k8s_images: pulumiTaggedImages,
         },
       };
       if (params.getChartRepo() == '') {
         // deploy from submodule
+        faucetChartValues["values"]["tezos_k8s_images"] = pulumiTaggedImages;
         faucetChartValues["path"] = `${params.getChartPath()}/charts/tezos-faucet`;
       } else {
         // deploy from helm repo with public images
