@@ -270,10 +270,15 @@ function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
   chains.forEach(function (chain) {
+    const chainName = chain.params.getName()
     let faucetUrl
-    if (chain.params.getName() == "granadanet") {
+
+    if (chainName === "granadanet") {
       // legacy faucet
       faucetUrl = "https://faucet.tzalpha.net"
+    } else if (chainName === "idiazabalnet") {
+      // Baking Bad's faucet Telegram bot
+      faucetUrl = "https://t.me/tezos_faucet_bot"
     } else {
       faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
     }
