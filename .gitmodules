@@ -1,0 +1,6 @@
+[submodule "idiazabalnet/tezos-k8s"]
+	path = idiazabalnet/tezos-k8s
+	url = git@github.com:tqtezos/tezos-k8s.git
+[submodule "dailynet/tezos-k8s"]
+	path = dailynet/tezos-k8s
+	url = git@github.com:tqtezos/tezos-k8s.git
