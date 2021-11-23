@@ -11,14 +11,14 @@ Second iteration of testnet for future I proposal testing
 | Full network name | `TEZOS_IDIAZABALNET_2021-11-23T15:00:00Z` |
 | Tezos docker build | [registry.gitlab.com/nomadic-labs/tezos@sha256:d727e2b564509e5768fca1a955743c9c05428c0a723de8ccf3f8cc9ba811d420](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/nomadic-labs/tezos@sha256:d727e2b564509e5768fca1a955743c9c05428c0a723de8ccf3f8cc9ba811d420) |
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
-| Faucet | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
+| Faucet | [Idiazabalnet faucet](https://t.me/tezos_faucet_bot) |
 | Activated on | 2021-11-23T15:00:00Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
 🔥 If you're here, this means you belong to one of the few lucky people to take part into the testnet using the brand new consensus algorithm [Tenderbake](https://blog.nomadic-labs.com/a-look-ahead-to-tenderbake.html). Congratulations and thanks in advance! This page shows you how to set up your system and actively participate in testing Tenderbake.
 
-⚠️  We are maintaining a [`testnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-06. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
+⚠️  We are maintaining a [`testnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-22. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
 
 ⚠️  There are no released packages or binaries for this testnet. You must build from source or use Docker.
 
@@ -28,8 +28,9 @@ Second iteration of testnet for future I proposal testing
 
 ⚠️  Idiazabalnet does not upgrade and stays on the same protocol from genesis.
 
-⚠️  initially, 67% of the stake will belong to Nomadic Labs bakers, in order to faciliate debugging.
+⚠️  initially, 67% of the stake will belong to Nomadic Labs bakers, in order to facilitate debugging.
 
+⚠️ Our regular faucets created for each testnet does not work Idiazabalnet. The Baking Bad team's Telegram bot faucet should be used instead: https://t.me/tezos_faucet_bot
 ### Report bugs
 
 You are encouraged to run the baker in debug mode:
@@ -90,7 +91,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Idiazabalnet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/idiazabalnet-faucet).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://t.me/tezos_faucet_bot).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
