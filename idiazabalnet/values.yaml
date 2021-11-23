@@ -256,6 +256,13 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "500000000000000"
+  bakingbadfaucet:
+    # baking bad maintains a telegram faucet bot
+    # tz1KhnTgwoRRALBX6vRHRnydDGSBFsWtcJxc
+    key: edpkuFRauFAdhipQu9s4xmfNJWmtLxPKpoaoG41gYGq5AgUA43Vxqx
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000000"
   julien:
     # julien.tesson@tezcore.com
     # for stress testing
