@@ -229,8 +229,9 @@ activation:
      michelson_maximum_type_size: 1000
 
 protocols:
-  - command: 010-PtGRANAD
   - command: 011-PtHangz2
 
 full_snapshot_url: null
 rolling_snapshot_url: null
+rolling_tarball_url: null
+archive_tarball_url: null

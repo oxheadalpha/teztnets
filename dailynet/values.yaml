@@ -85,4 +85,6 @@ nodes:
 bootstrap_peers: []
 full_snapshot_url: null
 rolling_snapshot_url: null
+rolling_tarball_url: null
+archive_tarball_url: null
 images: {}
