@@ -48,8 +48,8 @@ activation:
     liquidity_baking_escape_ema_threshold: 100000
     max_operations_time_to_live: 120
     round_durations:
-      - "5"
-      - "8"
+      round0: "5"
+      round1: "8"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
