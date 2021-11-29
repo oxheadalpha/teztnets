@@ -199,31 +199,31 @@ const hangzhounet_chain = new TezosChain(
   cluster.provider,
   repo
 )
-
-const idiazabalnet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "idiazabalnet/values.yaml",
-    name: "idiazabalnet",
-    dnsName: "idiazabalnet",
-    category: protocolCategory,
-    humanName: "Idiazabalnet",
-    description: "Second iteration of testnet for future I proposal testing",
-    bootstrapPeers: [
-      "idiazabalnet.smartpy.io",
-      "idiazabalnet.boot.ecadinfra.com",
-      "idiazabalnet.kaml.fr",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "5.3.3",
-    privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo
-)
+//
+//const idiazabalnet_chain = new TezosChain(
+//  new TezosChainParametersBuilder({
+//    yamlFile: "idiazabalnet/values.yaml",
+//    name: "idiazabalnet",
+//    dnsName: "idiazabalnet",
+//    category: protocolCategory,
+//    humanName: "Idiazabalnet",
+//    description: "Second iteration of testnet for future I proposal testing",
+//    bootstrapPeers: [
+//      "idiazabalnet.smartpy.io",
+//      "idiazabalnet.boot.ecadinfra.com",
+//      "idiazabalnet.kaml.fr",
+//    ],
+//    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+//    chartRepoVersion: "5.3.3",
+//    privateBakingKey: private_oxhead_baking_key,
+//    numberOfFaucetAccounts: 10000,
+//    faucetSeed: faucetSeed,
+//    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+//    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+//  }),
+//  cluster.provider,
+//  repo
+//)
 
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
@@ -276,9 +276,6 @@ function getTeztnets(chains: TezosChain[]): object {
     if (chainName === "granadanet") {
       // legacy faucet
       faucetUrl = "https://faucet.tzalpha.net"
-    } else if (chainName === "idiazabalnet") {
-      // Baking Bad's faucet Telegram bot
-      faucetUrl = "https://t.me/tezos_faucet_bot"
     } else {
       faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
     }
@@ -306,12 +303,10 @@ export const networks = getNetworks([
   mondaynet_chain,
   granadanet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   granadanet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
 ])
