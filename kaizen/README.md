@@ -14,6 +14,6 @@ Kaizen will hard-fork from Granadanet and upgrade to Hangzhou shortly before mai
 
 Your node is now configured to switch protocols to Kaizen at the end of cycle 185 (block 757,759) and subsequently bake using the Hangzhou protocol.
 
-To verify that your configuration is correct, run `tezos-node config`. The configuration should mention a `user_activate_upgrade` at block `757759`.
+To verify that your configuration is correct, run `tezos-node config` or open your node config file with an editor. The configuration should mention a `user_activated_upgrade` at block `757759`.
 
 We expect the transition to take place on December 3rd. If you do not change your node configuration by then, you will be on a different chain which remained on Granada protocol. Past that point, the only way to get back to Kaizen is to flush your storage and sync from scratch, or from a [snapshot](https://xtz-shots.io).
