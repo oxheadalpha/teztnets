@@ -1,20 +1,20 @@
 ---
 layout: page
-title: Granadanet Faucet
-permalink: /granadanet-faucet
+title: Kaizen Faucet
+permalink: /kaizen-faucet
 ---
 
-This faucet is for `granadanet` only. It will not work on other networks.
+This faucet is for `kaizen` only. It will not work on other networks.
 
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<form id="faucet_form" mathod="POST" action='https://faucet.granadanet.teztnets.xyz'>
+<form id="faucet_form" mathod="POST" action='https://faucet.kaizen.teztnets.xyz'>
     <div>
         <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
-        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Granadanet ꜩ</button>
+        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Kaizen ꜩ</button>
     </div>
 </form>
 
@@ -27,18 +27,18 @@ Please use responsibly as the number of addresses is limited. For special reques
 
 ## How to use
 
-Download the activation file, store it locally (for example in `/tmp/granadanet.json`) then run:
+Download the activation file, store it locally (for example in `/tmp/kaizen.json`) then run:
 
 ```
-tezos-client activate account faucet with /tmp/granadanet.json
+tezos-client activate account faucet with /tmp/kaizen.json
 ```
 
 <p class="faucet_response" style="display:none;">Or directly use the snippet below:</p>
 
-<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/granadanet.json
+<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/kaizen.json
 <span id="inline_snippet"></span>
 EOF
-tezos-client activate account faucet with /tmp/granadanet.json
+tezos-client activate account faucet with /tmp/kaizen.json
 </code></pre></div></div>
 
 <script>
@@ -75,6 +75,6 @@ $("#download_button").click(function() {
     contentType =  'data:application/json,';
     uriContent = contentType + encodeURIComponent($('#faucet_textarea').val());
     this.setAttribute('href', uriContent);
-    this.setAttribute('download', 'granadanet.json');
+    this.setAttribute('download', 'kaizen.json');
 })
 </script>

@@ -4,7 +4,7 @@ title: Hangzhounet
 permalink: /hangzhounet-about
 ---
 
-Long-running testnet for Hangzhou proposal.
+Testnet for Hangzhou protocol proposal.
 
 | | |
 |-------|---------------------|
