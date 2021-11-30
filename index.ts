@@ -217,7 +217,7 @@ const idiazabalnet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "5.3.4",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 0,
+    numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
