@@ -1,6 +1,6 @@
 🔥 If you're here, this means you belong to one of the few lucky people to take part into the testnet using the brand new consensus algorithm [Tenderbake](https://blog.nomadic-labs.com/a-look-ahead-to-tenderbake.html). Congratulations and thanks in advance! This page shows you how to set up your system and actively participate in testing Tenderbake.
 
-⚠️  We are maintaining a [`testnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-22. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
+⚠️  We are maintaining a [`testnet/idiazabalnet`](https://gitlab.com/nomadic-labs/tezos/-/tree/testnet/idiazabalnet) branch with a snapshot of protocol alpha from 2021-11-30. If any upgrades are needed, they will go to this branch. **Do not use most recent master branch**.
 
 ⚠️  There are no released packages or binaries for this testnet. You must build from source or use Docker.
 
@@ -12,7 +12,6 @@
 
 ⚠️  initially, 67% of the stake will belong to Nomadic Labs bakers, in order to facilitate debugging.
 
-⚠️ Our regular faucets created for each testnet does not work Idiazabalnet. The Baking Bad team's Telegram bot faucet should be used instead: https://t.me/tezos_faucet_bot
 ### Report bugs
 
 You are encouraged to run the baker in debug mode:

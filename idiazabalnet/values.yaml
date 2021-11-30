@@ -80,7 +80,7 @@ archive_tarball_url: null
 images:
   # the container tag is moving as more code is merged to the branch
   # here, put the actual container digest to make sure we pick the right one
-  octez: registry.gitlab.com/nomadic-labs/tezos@sha256:d727e2b564509e5768fca1a955743c9c05428c0a723de8ccf3f8cc9ba811d420
+  octez: registry.gitlab.com/tezos/tezos@sha256:109da4d520824e0314b572b5431054653cf15c608070cec6715d499c8115f4f6
 
 # We give:
 # * 2 million for each of nomadic's 20 "training wheels" bakers
