@@ -68,6 +68,8 @@ node_config_network:
   user_activated_upgrades:
     - level: 4095
       replacement_protocol: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
+    - level: 757759
+      replacement_protocol: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx
 
 bootstrap_peers:
   - granadanet.smartpy.io
@@ -138,6 +140,7 @@ nodes:
 
 protocols:
   - command: 010-PtGRANAD
+  - command: 011-PtHangz2
 
 full_snapshot_url: null
 rolling_snapshot_url: null

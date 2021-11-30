@@ -102,6 +102,7 @@ deployExternalDns(cluster)
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
+const longCategory = "Long-running Teztnets"
 
 // chains
 const dailynet_chain = new TezosChain(
@@ -133,7 +134,7 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch and Granadanet protocol, upgrading to alpha at block 255.",
+      "A testnet that restarts every Monday launched from tezos/tezos master branch and Hangzhou protocol, upgrading to alpha at block 255.",
     schedule: "0 0 * * MON",
     bootstrapContracts: ["taquito1.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
@@ -148,14 +149,14 @@ const mondaynet_chain = new TezosChain(
   repo
 )
 
-const granadanet_chain = new TezosChain(
+const kaizen_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "granadanet/values.yaml",
-    name: "granadanet",
-    dnsName: "granadanet",
-    category: protocolCategory,
-    humanName: "Granadanet",
-    description: "Long-running testnet for Granada proposal.",
+    yamlFile: "kaizen/values.yaml",
+    name: "kaizen",
+    dnsName: "kaizen",
+    category: longCategory,
+    humanName: "Kaizen",
+    description: "Long-running Tezos testnet that closely follows mainnet proto upgrades",
     bootstrapPeers: [
       "granadanet.smartpy.io",
       "granadanet.tezos.co.il",
@@ -181,7 +182,7 @@ const hangzhounet_chain = new TezosChain(
     dnsName: "hangzhounet",
     category: protocolCategory,
     humanName: "Hangzhounet",
-    description: "Long-running testnet for Hangzhou proposal.",
+    description: "Testnet for Hangzhou protocol proposal.",
     bootstrapPeers: [
       "hangzhounet.smartpy.io",
       "hangzhounet.tezos.co.il",
@@ -236,7 +237,7 @@ function getNetworks(chains: TezosChain[]): object {
     // TODO: generate it dynamically based on privkey
     let genesisPubkey: string
     if (
-      chain.params.getName().includes("granadanet") ||
+      chain.params.getName().includes("kaizen") ||
       chain.params.getName().includes("mondaynet")
     ) {
       // legacy tq key
@@ -273,7 +274,7 @@ function getTeztnets(chains: TezosChain[]): object {
     const chainName = chain.params.getName()
     let faucetUrl
 
-    if (chainName === "granadanet") {
+    if (chainName === "kaizen") {
       // legacy faucet
       faucetUrl = "https://faucet.tzalpha.net"
     } else {
@@ -301,12 +302,12 @@ function getTeztnets(chains: TezosChain[]): object {
 export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
-  granadanet_chain,
+  kaizen_chain,
   hangzhounet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
-  granadanet_chain,
+  kaizen_chain,
   hangzhounet_chain,
 ])

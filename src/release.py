@@ -20,9 +20,10 @@ for network_name in networks:
 
 # group by category for human rendering
 # Order manually. Start with long-running.
-category_desc = {"Protocol Teztnets":"Testnets deployed specifically to test new Tezos protocol proposals.",
+category_desc = {"Long-running Teztnets": "Testnets that follow mainnet upgrades",
+        "Protocol Teztnets":"Testnets deployed specifically to test new Tezos protocol proposals.",
         "Periodic Teztnets": "Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/)." }
-nested_teztnets = {"Protocol Teztnets":{}}
+nested_teztnets = {"Long-running Teztnets": {}, "Protocol Teztnets":{}}
 for k,v in teztnets.items():
     if v["masked_from_main_page"]:
         continue
