@@ -1,35 +1,49 @@
 accounts:
   ecadlabs:
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
+    # currently on 11.0
     key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   smartpy:
+    # tz1VpvtSaSxKvykrqajFJTZqCXgoVJ5cKaM1
+    # actively baking, still on 10.2 (gave thumbs up on slack)
     key: edpktv8Advoagbpo5TiyyDnmC1Mqne6vJMaXQ2vvuzUfJnBfMKJmdC
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   bruno:
+    # tz1SqQebt7jSyf5pUKKBjx34kySkGr1hXqtw
+    # this account never baked
     key: edpkuu3jmS3kbaLYTmyVaPHaxowC1KP8fDSrLoJhcvip1Cm2tK5QCd
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   tezosil:
+    # tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8
+    # actively endorsing, but not baking. still on v9.2
     key: edpkvQj8r3YigN6QFsDRaKQCoxDNhKK4whDUkFkw6Gom36d86uhEbv
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   pirbo:
+    # tz1NFs6yP2sXd5vAAbR43bbDRpV2nahDZope
+    # still baking. currently on 10.2
     key: edpkuGH2TWTQ5JrwzBLGRu5is1h7vcv5e5LN45VfqmXS5zaTUMpopH
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "5000000000000"
   luke:
+    # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
+    # this account never baked
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "5000000000000"
   marco:
+    # tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3
+    # actively baking, upgraded to v11
     key: edpkvMWHXeETjH4i2h2ngkG2y6aVdgtW99pQ3SuHJoWNEPKANzVRLT
     type: public
     is_bootstrap_baker_account: false
