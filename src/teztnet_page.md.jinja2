@@ -9,7 +9,7 @@ permalink: /{{ k }}-about
 | | |
 |-------|---------------------|
 | Full network name | `{{ v["chain_name"] }}` |
-| Tezos docker build | [{{ v["docker_build"] }}](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name={{ v["docker_build"] |replace("tezos/tezos:", "") }}) |
+| Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
@@ -21,7 +21,13 @@ permalink: /{{ k }}-about
 
 ### Install the software
 
-#### Using docker
+{% if v["release"] %}
+#### Download and install Tezos version {{ v["release"] }}
+
+Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
+{% endif%}
+
+#### Alternative: Use docker
 
 To join {{ v["human_name"] }} with docker, open a shell in the container:
 
@@ -29,7 +35,7 @@ To join {{ v["human_name"] }} with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
@@ -60,7 +66,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-{{ k }}.log &
 > ```
 
-{% if v["category"] == "Protocol Teztnets" %}
+{% if v["category"] in [ "Protocol Teztnets", "Long-running Teztnets" ] %}
 ### Bake on the {{ v["human_name"] }} network
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet]({{ v["faucet_url"] }}).
