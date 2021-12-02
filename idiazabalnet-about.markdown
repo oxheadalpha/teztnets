@@ -9,7 +9,7 @@ Third iteration of testnet for future I proposal testing
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_IDIAZABALNET_2021-11-30T15:00:00Z` |
-| Tezos docker build | [registry.gitlab.com/tezos/tezos@sha256:109da4d520824e0314b572b5431054653cf15c608070cec6715d499c8115f4f6](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=registry.gitlab.com/tezos/tezos@sha256:109da4d520824e0314b572b5431054653cf15c608070cec6715d499c8115f4f6) |
+| Tezos docker build | registry.gitlab.com/tezos/tezos@sha256:109da4d520824e0314b572b5431054653cf15c608070cec6715d499c8115f4f6 |
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
 | Faucet | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
 | Activated on | 2021-11-30T15:00:00Z |
@@ -48,7 +48,9 @@ Be aware that Tenderbake is not a final product. The software which is provided 
 
 ### Install the software
 
-#### Using docker
+
+
+#### Alternative: Use docker
 
 To join Idiazabalnet with docker, open a shell in the container:
 
@@ -56,7 +58,7 @@ To join Idiazabalnet with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos@sha256:109da4d520824e0314b572b5431054653cf15c608070cec6715d499c8115f4f6
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.

@@ -37,10 +37,18 @@ To verify that your configuration is correct, run `tezos-node config` or open yo
 
 We expect the transition to take place on December 3rd. If you do not change your node configuration by then, you will be on a different chain which remained on Granada protocol. Past that point, the only way to get back to Kaizen is to flush your storage and sync from scratch, or from a [snapshot](https://xtz-shots.io).
 
+To start a new baker on Kaizen, follow instructions below.
+
 
 ### Install the software
 
-#### Using docker
+
+#### Download and install Tezos version v11.0
+
+Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
+
+
+#### Alternative: Use docker
 
 To join Kaizen with docker, open a shell in the container:
 
@@ -48,7 +56,7 @@ To join Kaizen with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh tezos/tezos:v11.0
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
@@ -78,5 +86,28 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > ```bash=13
 > nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-kaizen.log &
 > ```
+
+
+### Bake on the Kaizen network
+
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.tzalpha.net).
+
+If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
+```bash=2
+./tezos-client register key faucet as delegate
+```
+
+You may now launch the baker process.
+```bash=3
+tezos-baker-011-PtHangz2 run with local node ~/.tezos-node faucet
+```
+
+> 💡 Again, to keep your processes alive in background:
+>
+> ```bash=4
+> nohup tezos-baker-011-PtHangz2 run with local node ~/.tezos-node faucet > ./baker-kaizen.log &
+> ```
+
+Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
 
 

@@ -21,7 +21,9 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 
 ### Install the software
 
-#### Using docker
+
+
+#### Alternative: Use docker
 
 To join Mondaynet with docker, open a shell in the container:
 
@@ -29,7 +31,7 @@ To join Mondaynet with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_575f1c84_20211128165147
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.

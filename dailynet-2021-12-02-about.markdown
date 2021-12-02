@@ -20,7 +20,9 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 ### Install the software
 
-#### Using docker
+
+
+#### Alternative: Use docker
 
 To join Dailynet with docker, open a shell in the container:
 
@@ -28,7 +30,7 @@ To join Dailynet with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh tezos/tezos:master_583c8dfe_20211129121831
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.

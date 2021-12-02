@@ -21,7 +21,13 @@ Testnet for Hangzhou protocol proposal.
 
 ### Install the software
 
-#### Using docker
+
+#### Download and install Tezos version v11.0
+
+Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
+
+
+#### Alternative: Use docker
 
 To join Hangzhounet with docker, open a shell in the container:
 
@@ -29,7 +35,7 @@ To join Hangzhounet with docker, open a shell in the container:
 docker run -it --entrypoint=/bin/sh tezos/tezos:v11.0
 ```
 
-#### Build the software
+#### Alternative: Build the software
 
 
 - ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
