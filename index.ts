@@ -158,9 +158,7 @@ const kaizen_chain = new TezosChain(
     humanName: "Kaizen",
     description: "Long-running Tezos testnet that closely follows mainnet proto upgrades",
     bootstrapPeers: [
-      "granadanet.smartpy.io",
-      "granadanet.tezos.co.il",
-      "granadanet.kaml.fr",
+      "kaizen-boot.ecadinfra.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "5.3.4",
