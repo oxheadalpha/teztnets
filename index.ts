@@ -156,7 +156,7 @@ const kaizen_chain = new TezosChain(
     dnsName: "kaizen",
     category: longCategory,
     humanName: "Kaizen",
-    description: "Long-running Tezos testnet that closely follows mainnet proto upgrades",
+    description: "Experimental - long-running Tezos testnet that closely follows mainnet proto upgrades",
     bootstrapPeers: [
       "kaizen-boot.ecadinfra.com",
     ],
