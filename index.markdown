@@ -8,7 +8,7 @@ This list of Teztnets is also available in [json format](https://teztnets.xyz/te
 
 # Long-running Teztnets
 
-Testnets that follow mainnet upgrades
+EXPERIMENTAL - an attempt at a long-running testnet that follows mainnet upgrades.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
