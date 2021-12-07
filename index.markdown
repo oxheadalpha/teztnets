@@ -30,7 +30,7 @@ Testnets that restart regularly and track the development of the master branch o
 
 # Long-running Teztnets
 
-EXPERIMENTAL - an attempt at a long-running testnet that follows mainnet upgrades.
+
 
 | | Activated on | Faucet |
 |-------|---------------------|--|

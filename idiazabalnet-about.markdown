@@ -30,6 +30,8 @@ Third iteration of testnet for future I proposal testing
 
 ⚠️  initially, 67% of the stake will belong to Nomadic Labs bakers, in order to facilitate debugging.
 
+⚠️  Idiazabalnet restarts regularly. To prepare for a network restart, you must clear your node and client files, backing private keys up if applicable.
+
 ### Report bugs
 
 You are encouraged to run the baker in debug mode:
