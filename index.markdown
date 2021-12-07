@@ -34,7 +34,6 @@ EXPERIMENTAL - an attempt at a long-running testnet that follows mainnet upgrade
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Kaizen](/kaizen-about) | `2021-05-21` | [Kaizen faucet](https://faucet.tzalpha.net) |
 
 
 
