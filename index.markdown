@@ -28,13 +28,4 @@ Testnets that restart regularly and track the development of the master branch o
 
 
 
-# Long-running Teztnets
-
-
-
-| | Activated on | Faucet |
-|-------|---------------------|--|
-
-
-
 
