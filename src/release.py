@@ -22,8 +22,7 @@ for network_name in networks:
 # Order manually. Start with long-running.
 category_desc = {
         "Protocol Teztnets":"Testnets deployed specifically to test new Tezos protocol proposals.",
-        "Periodic Teztnets": "Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/).",
-        "Long-running Teztnets": "EXPERIMENTAL - an attempt at a long-running testnet that follows mainnet upgrades." }
+        "Periodic Teztnets": "Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/)." }
 nested_teztnets = {"Protocol Teztnets":{}, "Periodic Teztnets":{}, "Long-running Teztnets": {}}
 for k,v in teztnets.items():
     if v["masked_from_main_page"]:
