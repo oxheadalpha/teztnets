@@ -9,6 +9,48 @@ node_config_network:
 protocols:
   - command: alpha
 
+activation:
+  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+  protocol_parameters:
+    preserved_cycles: 3
+    blocks_per_cycle: 2048
+    blocks_per_commitment: 64
+    blocks_per_stake_snapshot: 512
+    blocks_per_voting_period: 40960
+    hard_gas_limit_per_operation: '1040000'
+    hard_gas_limit_per_block: '5200000'
+    proof_of_work_threshold: '-1'
+    tokens_per_roll: '8000000000'
+    seed_nonce_revelation_tip: '125000'
+    baking_reward_fixed_portion: '10000000'
+    baking_reward_bonus_per_slot: '4286'
+    endorsing_reward_per_slot: '2857'
+    hard_storage_limit_per_operation: '60000'
+    origination_size: 257
+    cost_per_byte: '250'
+    quorum_max: 7000
+    quorum_min: 2000
+    min_proposal_quorum: 500
+    liquidity_baking_subsidy: '2500000'
+    liquidity_baking_sunset_level: 525600
+    liquidity_baking_escape_ema_threshold: 100000
+    max_operations_time_to_live: 120
+    round_durations:
+      round0: "30"
+      round1: "45"
+    consensus_committee_size: 7000
+    consensus_threshold: 4667
+    minimal_participation_ratio:
+      numerator: 2
+      denominator: 3
+    max_slashing_period: 2
+    frozen_deposits_percentage: 10
+    double_baking_punishment: "640000000"
+    ratio_of_frozen_deposits_slashed_per_double_endorsement:
+      numerator: 1
+      denominator: 2
+    delegate_selection: "random"
+
 nodes:
   tezos-baking-node:
     instances:
@@ -72,7 +114,7 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
-  saroupille2:
+  hai:
     # tz1ZaHCkooCR63bSsQhLf8WLKj9sQG5RTthP
     key: edpkueS4HbicvgHo1Y9uPp6ZaZ8kgMJBJg2uB4Zm539Wf7qvJA5g1U
     type: public
@@ -148,13 +190,19 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
-  mystery_baker_2:
+  mack_baise:
+    # tz1SHw5vBDYNgGdUPJi57kVrEb2kFue4Yxa4
+    key: edpkvKJ9voHuSBi8TApVowCu7D8hQneXGWdEHuSEMDjQDyxD9h6PYk
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
+  richard_ayotte:
     # tz1ituzNz9MGaMSL9dVDN7jE5SArCEWNmZbS
     key: edpkuty8oXRwNH5zRLfGkTyL2ukMVhGiht3qG8VNU5beD4NgP8X3gw
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
-  mystery_baker_4:
+  fredcy:
     # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
     key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
     type: public

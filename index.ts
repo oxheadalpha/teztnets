@@ -149,30 +149,6 @@ const mondaynet_chain = new TezosChain(
   repo
 )
 
-const kaizen_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "kaizen/values.yaml",
-    name: "kaizen",
-    dnsName: "kaizen",
-    category: longCategory,
-    humanName: "Kaizen",
-    description: "Experimental - long-running Tezos testnet that closely follows mainnet proto upgrades",
-    bootstrapPeers: [
-      "kaizen-boot.ecadinfra.com",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "5.3.4",
-    privateBakingKey: private_baking_key,
-    privateNonbakingKey: private_non_baking_key,
-    numberOfFaucetAccounts: 0,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo
-)
-
 const hangzhounet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "hangzhounet/values.yaml",
@@ -215,7 +191,7 @@ const idiazabalnet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "5.3.4",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 0,
+    numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -272,12 +248,7 @@ function getTeztnets(chains: TezosChain[]): object {
     const chainName = chain.params.getName()
     let faucetUrl
 
-    if (chainName === "kaizen") {
-      // legacy faucet
-      faucetUrl = "https://faucet.tzalpha.net"
-    } else {
-      faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
-    }
+    faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
     let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
@@ -300,14 +271,12 @@ function getTeztnets(chains: TezosChain[]): object {
 export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
-  kaizen_chain,
   hangzhounet_chain,
   idiazabalnet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
-  kaizen_chain,
   hangzhounet_chain,
   idiazabalnet_chain,
 ])
