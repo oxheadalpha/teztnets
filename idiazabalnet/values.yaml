@@ -255,6 +255,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "50000000000000"
+  tf:
+    # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
+    key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "667000000000"
 
   nomadic00:
     bootstrap_balance: '2000000000000'
