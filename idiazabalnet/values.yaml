@@ -259,7 +259,7 @@ accounts:
     # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     type: public
-    is_bootstrap_baker_account: false
+    is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
   german:
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
