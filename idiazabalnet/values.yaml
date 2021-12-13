@@ -1,10 +1,10 @@
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_IDIAZABALNET_2021-12-07T15:00:00Z
+  chain_name: TEZOS_IDIAZABALNET_2021-12-14T15:00:00Z
   genesis:
     block: BLockGenesisGenesisGenesisGenesisGenesis761b2dAGmbT
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2021-12-07T15:00:00Z"
+    timestamp: "2021-12-14T15:00:00Z"
 
 protocols:
   - command: alpha
@@ -35,9 +35,8 @@ activation:
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000
     max_operations_time_to_live: 120
-    round_durations:
-      round0: "30"
-      round1: "45"
+    minimal_block_delay: "30"
+    delay_increment_per_round: "15"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
@@ -80,7 +79,8 @@ archive_tarball_url: null
 images:
   # the container tag is moving as more code is merged to the branch
   # here, put the actual container digest to make sure we pick the right one
-  octez: registry.gitlab.com/nomadic-labs/tezos@sha256:e242f52636fcc4e6704c46e2ea6d3463ad1b5574ad2ccaf15053d6a73060be0c
+  # commit aa8abfc47bff2e3bd22761c83a286e6dede0ca64
+  octez: registry.gitlab.com/nomadic-labs/tezos@sha256:43f5a25ba7f51650d2ce35d4930858978ffce4f7da7b4fc1fc01fdefab252855
 
 # We give:
 # * 2 million for each of nomadic's 20 "training wheels" bakers
@@ -260,6 +260,12 @@ accounts:
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     type: public
     is_bootstrap_baker_account: false
+    bootstrap_balance: "667000000000"
+  jdsika:
+    #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
+    key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
+    type: public
+    is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
   german:
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
