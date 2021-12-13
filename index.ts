@@ -175,30 +175,30 @@ const hangzhounet_chain = new TezosChain(
   repo
 )
 
-const idiazabalnet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "idiazabalnet/values.yaml",
-    name: "idiazabalnet",
-    dnsName: "idiazabalnet",
-    category: protocolCategory,
-    humanName: "Idiazabalnet",
-    description: "Third iteration of testnet for future I proposal testing",
-    bootstrapPeers: [
-      "idiazabalnet.smartpy.io",
-      "idiazabalnet.boot.ecadinfra.com",
-      "idiazabalnet.kaml.fr",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "5.3.4",
-    privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo
-)
+//const idiazabalnet_chain = new TezosChain(
+//  new TezosChainParametersBuilder({
+//    yamlFile: "idiazabalnet/values.yaml",
+//    name: "idiazabalnet",
+//    dnsName: "idiazabalnet",
+//    category: protocolCategory,
+//    humanName: "Idiazabalnet",
+//    description: "Third iteration of testnet for future I proposal testing",
+//    bootstrapPeers: [
+//      "idiazabalnet.smartpy.io",
+//      "idiazabalnet.boot.ecadinfra.com",
+//      "idiazabalnet.kaml.fr",
+//    ],
+//    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+//    chartRepoVersion: "5.3.4",
+//    privateBakingKey: private_oxhead_baking_key,
+//    numberOfFaucetAccounts: 10000,
+//    faucetSeed: faucetSeed,
+//    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+//    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+//  }),
+//  cluster.provider,
+//  repo
+//)
 
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
@@ -272,11 +272,11 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
+  //idiazabalnet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
+  //idiazabalnet_chain,
 ])
