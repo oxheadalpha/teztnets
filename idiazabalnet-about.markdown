@@ -4,16 +4,15 @@ title: Idiazabalnet
 permalink: /idiazabalnet-about
 ---
 
-Third iteration of testnet for future I proposal testing
+Fourth iteration of testnet for future I proposal testing
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS_IDIAZABALNET_2021-12-07T15:00:00Z` |
-| Tezos docker build | registry.gitlab.com/nomadic-labs/tezos@sha256:e242f52636fcc4e6704c46e2ea6d3463ad1b5574ad2ccaf15053d6a73060be0c |
+| Full network name | `TEZOS_IDIAZABALNET_2021-12-14T15:00:00Z` |
+| Tezos docker build | registry.gitlab.com/nomadic-labs/tezos@sha256:43f5a25ba7f51650d2ce35d4930858978ffce4f7da7b4fc1fc01fdefab252855 |
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
 | Faucet | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
-| Activated on | 2021-12-07T15:00:00Z |
-| Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
+| Activated on | 2021-12-14T15:00:00Z |
 
 
 🔥 If you're here, this means you belong to one of the few lucky people to take part into the testnet using the brand new consensus algorithm [Tenderbake](https://blog.nomadic-labs.com/a-look-ahead-to-tenderbake.html). Congratulations and thanks in advance! This page shows you how to set up your system and actively participate in testing Tenderbake.
@@ -57,7 +56,7 @@ Be aware that Tenderbake is not a final product. The software which is provided 
 To join Idiazabalnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh registry.gitlab.com/nomadic-labs/tezos@sha256:e242f52636fcc4e6704c46e2ea6d3463ad1b5574ad2ccaf15053d6a73060be0c
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/nomadic-labs/tezos@sha256:43f5a25ba7f51650d2ce35d4930858978ffce4f7da7b4fc1fc01fdefab252855
 ```
 
 #### Alternative: Build the software

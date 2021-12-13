@@ -13,7 +13,7 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 | | Activated on | Faucet |
 |-------|---------------------|--|
 | [Hangzhounet](/hangzhounet-about) | `2021-11-04` | [Hangzhounet faucet](https://teztnets.xyz/hangzhounet-faucet) |
-| [Idiazabalnet](/idiazabalnet-about) | `2021-12-07` | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
+| [Idiazabalnet](/idiazabalnet-about) | `2021-12-14` | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
 
 
 
