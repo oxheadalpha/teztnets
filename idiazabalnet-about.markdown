@@ -13,6 +13,7 @@ Fourth iteration of testnet for future I proposal testing
 | Public RPC endpoint | [https://rpc.idiazabalnet.teztnets.xyz](https://rpc.idiazabalnet.teztnets.xyz) |
 | Faucet | [Idiazabalnet faucet](https://teztnets.xyz/idiazabalnet-faucet) |
 | Activated on | 2021-12-14T15:00:00Z |
+| Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
 🔥 If you're here, this means you belong to one of the few lucky people to take part into the testnet using the brand new consensus algorithm [Tenderbake](https://blog.nomadic-labs.com/a-look-ahead-to-tenderbake.html). Congratulations and thanks in advance! This page shows you how to set up your system and actively participate in testing Tenderbake.
