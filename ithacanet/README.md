@@ -8,6 +8,8 @@ If you choose to participate as a bootstrap baker, **you must run a node** from 
 
 We are tracking the list of bootstrap bakers at the bottom of [this file](https://github.com/oxheadalpha/teztnets/blob/v6.18/ithacanet/values.yaml). You must provide your public key (starting with `edpk`, NOT the hash starting with `tz`) to get rights at genesis.
 
+You can run ithaca testnet by passing the argument `--network ithacanet` to `tezos-node run`.
+
 ⚠️  Tenderbake has no endorser. The endorser binary does not exist. This is normal. Running the baker daemon is enough.
 
 ⚠️  You can not sign with Ledger for now. You need to use a hot wallet address.
