@@ -175,23 +175,24 @@ const hangzhounet_chain = new TezosChain(
   repo
 )
 
-const idiazabalnet_chain = new TezosChain(
+const ithacanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "idiazabalnet/values.yaml",
-    name: "idiazabalnet",
-    dnsName: "idiazabalnet",
+    yamlFile: "ithacanet/values.yaml",
+    name: "ithacanet",
+    dnsName: "ithacanet",
     category: protocolCategory,
-    humanName: "Idiazabalnet",
-    description: "Fourth iteration of testnet for future I proposal testing",
+    humanName: "Ithacanet",
+    description: "Testnet for the Ithaca protocol proposal",
     bootstrapPeers: [
-      "idiazabalnet.smartpy.io",
-      "idiazabalnet.boot.ecadinfra.com",
-      "idiazabalnet.kaml.fr",
+      "ithacanet.smartpy.io",
+      "ithacanet.boot.ecadinfra.com",
+      "ithacanet.kaml.fr",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.0.0",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
+    //numberOfFaucetAccounts: 10000,
+    numberOfFaucetAccounts: 0,
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -272,11 +273,11 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
+  ithacanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   hangzhounet_chain,
-  idiazabalnet_chain,
+  ithacanet_chain,
 ])
