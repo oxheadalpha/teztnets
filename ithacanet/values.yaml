@@ -79,7 +79,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:amd64_v12.0-rc1
+  octez: tezos/tezos:v12.0-rc1
 
 # We give:
 accounts:
