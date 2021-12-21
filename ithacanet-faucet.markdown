@@ -1,20 +1,20 @@
 ---
 layout: page
-title: Idiazabalnet Faucet
-permalink: /idiazabalnet-faucet
+title: Ithacanet Faucet
+permalink: /ithacanet-faucet
 ---
 
-This faucet is for `idiazabalnet` only. It will not work on other networks.
+This faucet is for `ithacanet` only. It will not work on other networks.
 
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<form id="faucet_form" mathod="POST" action='https://faucet.idiazabalnet.teztnets.xyz'>
+<form id="faucet_form" mathod="POST" action='https://faucet.ithacanet.teztnets.xyz'>
     <div>
         <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
-        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Idiazabalnet ꜩ</button>
+        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Ithacanet ꜩ</button>
     </div>
 </form>
 
@@ -27,18 +27,18 @@ Please use responsibly as the number of addresses is limited. For special reques
 
 ## How to use
 
-Download the activation file, store it locally (for example in `/tmp/idiazabalnet.json`) then run:
+Download the activation file, store it locally (for example in `/tmp/ithacanet.json`) then run:
 
 ```
-tezos-client activate account faucet with /tmp/idiazabalnet.json
+tezos-client activate account faucet with /tmp/ithacanet.json
 ```
 
 <p class="faucet_response" style="display:none;">Or directly use the snippet below:</p>
 
-<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/idiazabalnet.json
+<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/ithacanet.json
 <span id="inline_snippet"></span>
 EOF
-tezos-client activate account faucet with /tmp/idiazabalnet.json
+tezos-client activate account faucet with /tmp/ithacanet.json
 </code></pre></div></div>
 
 <script>
@@ -75,6 +75,6 @@ $("#download_button").click(function() {
     contentType =  'data:application/json,';
     uriContent = contentType + encodeURIComponent($('#faucet_textarea').val());
     this.setAttribute('href', uriContent);
-    this.setAttribute('download', 'idiazabalnet.json');
+    this.setAttribute('download', 'ithacanet.json');
 })
 </script>
