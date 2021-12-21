@@ -1,8 +1,8 @@
-Ithacanet will launch on **Wednesday, December 22nd at 15:00 UTC**.
+Ithacanet will launch on **Wednesday, December 22nd at 15:00 UTC**. We expect Octez release `v12.0-rc1` to be out on Tuesday, December 21st. Octez v12 is needed to run Ithacanet.
 
 Ithacanet will run Hangzhou for two cycles then perform an upgrade to Ithaca at block 8192.
 
-Ithaca changes are massive, we are looking for as many Tezos bakers as possible to participate in this testnet. Please make yourself known in the Tezos Baking Slack #test-networks channel if you wish to participate as a bootstrap baker.
+We are looking for as many Tezos bakers as possible to participate in this testnet. Please make yourself known in the Tezos Baking Slack #test-networks channel if you wish to participate as a bootstrap baker.
 
 If you choose to participate as a bootstrap baker, **you must run a node** from genesis. Ithaca is introducing a new consensus mechanism called Tenderbake, where the chain will not produce new blocks if more than one third of the bakers are offline. If you participate, it is your responsibility to keep your node in good working order, so that the chain does not stall.
 
@@ -19,8 +19,6 @@ You can run ithaca testnet by passing the argument `--network ithacanet` to `tez
 Tenderbake consensus algorithm significantly increases the amount of consensus messages. There are 7000 endorsing slots per block. On mainnet, we expect several hundred preendorsements and endorsement messages to be gossiped at every block.
 
 To simulate this behavior, it is important to have many participating bakers in Ithacanet. If you desire, you may run several bakers, in order to generate more consensus messages. If you choose to run several bakers, you must ensure that each one of them is in good working order during the lifecycle of the testnet.
-
-Advanced users may choose to run several bakers.
 
 ### Report bugs
 
