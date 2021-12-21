@@ -106,12 +106,6 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
-  hai:
-    # tz1ZaHCkooCR63bSsQhLf8WLKj9sQG5RTthP
-    key: edpkueS4HbicvgHo1Y9uPp6ZaZ8kgMJBJg2uB4Zm539Wf7qvJA5g1U
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "667000000000"
   mariano_ceibo:
     # tz1T7bTfbw1PsDAKFfBN24ediaqgw8FTu3qd
     key: edpkv9xYGRddWjy9XMVeUq5d7gxWm3eVgYarrpmNW1qVvvRpmJq76G
