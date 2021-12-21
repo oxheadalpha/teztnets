@@ -54,9 +54,6 @@ for k,v in teztnets.items():
         v["docker_build_hyperlinked"] = "[" + v['docker_build'] + "](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=" + v['docker_build'].replace('tezos/tezos:', '') + ")"
     
     v["git_repo"] = "git@gitlab.com:tezos/tezos.git"
-    if k == "idiazabalnet":
-        v["git_repo"] = "https://gitlab.com/nomadic-labs/tezos.git"
-        v["git_ref"] = "testnet/idiazabalnet"
 
     readme = ""
     if os.path.exists(f"{k.split('-')[0]}/README.md"):
