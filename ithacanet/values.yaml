@@ -158,6 +158,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "667000000000"
+  ecadlabs_2:
+    # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
+    key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "667000000000"
   smartpy:
     # tz1SMARcpWCydHsGgz4MRoK9NkbpBmmUAfNe
     key: edpkuyuJirNU14hEma1u7f3Qhx7uHZxzuXDyvmjRwaAsFFFqYGkzHx
