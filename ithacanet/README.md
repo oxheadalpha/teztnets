@@ -1,5 +1,4 @@
-Ithacanet will launch on **Wednesday, December 22nd at 15:00 UTC**. We expect Octez release `v12.0-rc1` to be out on Tuesday, December 21st. Octez v12 is needed to run Ithacanet.
-
+Ithacanet will launch on **Wednesday, December 22nd at 15:00 UTC**. Octez v12.0-rc1 is needed to run Ithacanet.
 
 We are looking for as many Tezos bakers as possible to participate in this testnet. Please make yourself known in the Tezos Baking Slack #test-networks channel if you wish to participate as a bootstrap baker.
 
