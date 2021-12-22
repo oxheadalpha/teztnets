@@ -13,6 +13,7 @@ Testnet for the Ithaca protocol proposal
 | Public RPC endpoint | [https://rpc.ithacanet.teztnets.xyz](https://rpc.ithacanet.teztnets.xyz) |
 | Faucet | [Ithacanet faucet](https://teztnets.xyz/ithacanet-faucet) |
 | Activated on | 2021-12-22T15:00:00Z |
+| Protocol at level 0 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 | Protocol at level 8191 |  `PsiThaCaT47Zboaw71QWScM8sXeMM7bbQFncK9FLqYc6EKdpjVP` |
 
 
