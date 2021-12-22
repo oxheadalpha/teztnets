@@ -21,6 +21,8 @@ permalink: /{{ k }}-about
 
 ### Install the software
 
+⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
+
 {% if v["release"] %}
 #### Download and install Tezos version {{ v["release"] }}
 
@@ -37,9 +39,7 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 
 #### Alternative: Build the software
 
-
-- ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
-- ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
+⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
 git clone {{ v["git_repo"] }} -b {{ v["git_ref"] }}
