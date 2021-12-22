@@ -52,7 +52,9 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
+
 tezos-node config init --network https://teztnets.xyz/mondaynet-2021-12-20
+
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 

@@ -56,7 +56,9 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/hangzhounet
+
+tezos-node config init --network hangzhounet
+
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 
@@ -79,6 +81,11 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 You may now launch the baker process.
 ```bash=3
 tezos-baker-011-PtHangz2 run with local node ~/.tezos-node faucet
+```
+
+You may run the accuser as well:
+```bash=3
+tezos-accuser-011-PtHangz2 run
 ```
 
 > 💡 Again, to keep your processes alive in background:
