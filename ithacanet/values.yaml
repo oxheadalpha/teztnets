@@ -50,7 +50,6 @@ protocols:
     #     liquidity_baking_subsidy: '2500000'
     #     liquidity_baking_sunset_level: 525600
     #     minimal_block_delay: '15'
-    #     michelson_maximum_type_size: 1000
 
 nodes:
   tezos-baking-node:
