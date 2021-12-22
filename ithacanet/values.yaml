@@ -279,4 +279,10 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  cryptodad:
+    #  tz1cwuYcQi22C2SX9m1z78UyUzYKFztXgX7t
+    key: edpktk3ywyYujAUpAfWZwtNn9xRpVYDvRCd3EPGNyry9y9txUrnxhp
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
 
