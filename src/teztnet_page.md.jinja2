@@ -56,9 +56,9 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
-{% if v["release"] %}
+{% if v["release"] -%}
 tezos-node config init --network {{ k }}
-{% else%}
+{% else -%}
 tezos-node config init --network {{ v["network_url"] }}
 {% endif%}
 tezos-node run --rpc-addr 127.0.0.1:8732
