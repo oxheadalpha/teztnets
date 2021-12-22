@@ -1,11 +1,3 @@
-Ithacanet will launch on **Wednesday, December 22nd at 15:00 UTC**. Octez v12.0-rc1 is needed to run Ithacanet.
-
-We are looking for as many Tezos bakers as possible to participate in this testnet. Please make yourself known in the Tezos Baking Slack #test-networks channel if you wish to participate as a bootstrap baker.
-
-If you choose to participate as a bootstrap baker, **you must run a node** from genesis. Ithaca is introducing a new consensus mechanism called Tenderbake, where the chain will not produce new blocks if more than one third of the bakers are offline. If you participate, it is your responsibility to keep your node in good working order, so that the chain does not stall.
-
-We are tracking the list of bootstrap bakers at the bottom of [this file](https://github.com/oxheadalpha/teztnets/blob/v6.18/ithacanet/values.yaml). You must provide your public key (starting with `edpk`, NOT the hash starting with `tz`) to get rights at genesis.
-
 You can run ithaca testnet by passing the argument `--network ithacanet` to `tezos-node run`.
 
 ⚠️  Ithacanet will run Hangzhou for two cycles then perform an upgrade to Ithaca at block 8192. You must run the **Hangzhou baker and endorser** for the first few days.
@@ -13,8 +5,6 @@ You can run ithaca testnet by passing the argument `--network ithacanet` to `tez
 ⚠️  Tenderbake has no endorser. The endorser binary does not exist. This is normal. Running the baker daemon is enough.
 
 ⚠️  You can not sign with Ledger for now. You need to use a hot wallet address.
-
-⚠️  If you participated in the previous Tenderbake test networks (Idiazabalnet), you are presumed to be participating in Ithacanet. If this is not the case, please let us know in the slack channel.
 
 ### Advanced
 

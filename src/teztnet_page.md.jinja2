@@ -56,7 +56,11 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
+{% if v["release"] %}
+tezos-node config init --network {{ k }}
+{% else%}
 tezos-node config init --network {{ v["network_url"] }}
+{% endif%}
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
 
@@ -79,6 +83,11 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 You may now launch the baker process.
 ```bash=3
 tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node faucet
+```
+
+You may run the accuser as well:
+```bash=3
+tezos-accuser-{{ v["last_baking_daemon"] }} run
 ```
 
 > 💡 Again, to keep your processes alive in background:
