@@ -1,16 +1,16 @@
 ---
 layout: page
 title: Dailynet Faucet
-permalink: /dailynet-2021-12-27-faucet
+permalink: /dailynet-2021-12-28-faucet
 ---
 
-This faucet is for `dailynet-2021-12-27` only. It will not work on other networks.
+This faucet is for `dailynet-2021-12-28` only. It will not work on other networks.
 
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<form id="faucet_form" mathod="POST" action='https://faucet.dailynet-2021-12-27.teztnets.xyz'>
+<form id="faucet_form" mathod="POST" action='https://faucet.dailynet-2021-12-28.teztnets.xyz'>
     <div>
         <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
@@ -27,18 +27,18 @@ Please use responsibly as the number of addresses is limited. For special reques
 
 ## How to use
 
-Download the activation file, store it locally (for example in `/tmp/dailynet-2021-12-27.json`) then run:
+Download the activation file, store it locally (for example in `/tmp/dailynet-2021-12-28.json`) then run:
 
 ```
-tezos-client activate account faucet with /tmp/dailynet-2021-12-27.json
+tezos-client activate account faucet with /tmp/dailynet-2021-12-28.json
 ```
 
 <p class="faucet_response" style="display:none;">Or directly use the snippet below:</p>
 
-<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/dailynet-2021-12-27.json
+<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/dailynet-2021-12-28.json
 <span id="inline_snippet"></span>
 EOF
-tezos-client activate account faucet with /tmp/dailynet-2021-12-27.json
+tezos-client activate account faucet with /tmp/dailynet-2021-12-28.json
 </code></pre></div></div>
 
 <script>
@@ -75,6 +75,6 @@ $("#download_button").click(function() {
     contentType =  'data:application/json,';
     uriContent = contentType + encodeURIComponent($('#faucet_textarea').val());
     this.setAttribute('href', uriContent);
-    this.setAttribute('download', 'dailynet-2021-12-27.json');
+    this.setAttribute('download', 'dailynet-2021-12-28.json');
 })
 </script>
