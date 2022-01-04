@@ -47,9 +47,8 @@ activation:
     liquidity_baking_sunset_level: 525600
     liquidity_baking_escape_ema_threshold: 100000
     max_operations_time_to_live: 120
-    round_durations:
-      round0: "5"
-      round1: "8"
+    minimal_block_delay: "30"
+    delay_increment_per_round: "15"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
@@ -61,7 +60,10 @@ activation:
     ratio_of_frozen_deposits_slashed_per_double_endorsement:
       numerator: 1
       denominator: 2
-    delegate_selection: "random"
+    tx_rollup_enable: false
+    tx_rollup_origination_size: 60000
+    sc_rollup_enable: false
+    sc_rollup_origination_size: 6314
 
 nodes:
   tezos-baking-node:
