@@ -60,9 +60,9 @@ activation:
     ratio_of_frozen_deposits_slashed_per_double_endorsement:
       numerator: 1
       denominator: 2
-    tx_rollup_enable: false
+    tx_rollup_enable: true
     tx_rollup_origination_size: 60000
-    sc_rollup_enable: false
+    sc_rollup_enable: true
     sc_rollup_origination_size: 6314
 
 nodes:
