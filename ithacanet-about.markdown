@@ -23,7 +23,7 @@ You can run ithaca testnet by passing the argument `--network ithacanet` to `tez
 
 ⚠️  Tenderbake has no endorser. The endorser binary does not exist. This is normal. Running the baker daemon is enough.
 
-⚠️  You can not sign with Ledger for now. You need to use a hot wallet address.
+⚠️  You can not bake with a Ledger device yet. You need to use a hot wallet address. See Ledger [PR 27](https://github.com/LedgerHQ/app-tezos/pull/27) for details.
 
 ### Advanced
 
