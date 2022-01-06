@@ -281,3 +281,28 @@ export const teztnets = getTeztnets([
   hangzhounet_chain,
   ithacanet_chain,
 ])
+
+const pyrometerChart = new k8s.helm.v2.Chart(
+  "pyrometer",
+  {
+    path: "pyrometer-temp/charts/pyrometer",
+    values: {
+      config: {
+        "node_monitor": {
+          "nodes": Object.keys(networks).map(network => "http://tezos-node-rpc." + network + ":8732" ),
+        },
+        "ui": {
+          "enabled": true,
+          "host": "0.0.0.0",
+          "port": 80,
+        },
+        "log": {
+          "level": "info",
+          "timestamp": false
+        }
+      }
+    }
+  },
+  { providers: { kubernetes: cluster.provider } }
+);
+
