@@ -61,7 +61,7 @@ for k,v in teztnets.items():
             readme = readme_file.read()
     teztnet_md = jinja2.Template(open('src/teztnet_page.md.jinja2').read()).render(k=k,v=v, network_params=networks[k], readme=readme)
     faucet_md = jinja2.Template(open('src/teztnet_faucet.md.jinja2').read()).render(k=k,v=v, faucet_recaptcha_site_key=os.environ["FAUCET_RECAPTCHA_SITE_KEY"])
-    with open(f"target/release/{k}-about.markdown", "w") as out_file:
+    with open(f"target/release/{v['human_name'].lower()}-about.markdown", "w") as out_file:
         print(teztnet_md, file=out_file)
     with open(f"target/release/{k}-faucet.markdown", "w") as out_file:
         print(faucet_md, file=out_file)
