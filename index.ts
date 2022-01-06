@@ -25,8 +25,6 @@ const repo = new awsx.ecr.Repository(stack)
 const desiredClusterCapacity = 2
 const aws_account_id = getEnvVariable("AWS_ACCOUNT_ID")
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
-const private_baking_key = getEnvVariable("PRIVATE_BAKING_KEY")
-const private_non_baking_key = getEnvVariable("PRIVATE_NON_BAKING_KEY")
 const faucetSeed = getEnvVariable("FAUCET_SEED")
 const faucetRecaptchaSiteKey = getEnvVariable("FAUCET_RECAPTCHA_SITE_KEY")
 const faucetRecaptchaSecretKey = getEnvVariable("FAUCET_RECAPTCHA_SECRET_KEY")
@@ -210,17 +208,7 @@ function getNetworks(chains: TezosChain[]): object {
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
     // TODO: generate it dynamically based on privkey
-    let genesisPubkey: string
-    if (
-      chain.params.getName().includes("kaizen") ||
-      chain.params.getName().includes("mondaynet")
-    ) {
-      // legacy tq key
-      genesisPubkey = "edpkuix6Lv8vnrz6uDe1w8uaXY7YktitAxn6EHdy2jdzq5n5hZo94n"
-    } else {
-      // new oxhead key
-      genesisPubkey = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-    }
+    let genesisPubkey: string = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
     const network = Object.assign(
       {},
       chain.params.helmValues["node_config_network"]

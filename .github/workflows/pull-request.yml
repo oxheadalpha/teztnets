@@ -40,9 +40,7 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          PRIVATE_BAKING_KEY: ${{secrets.PRIVATE_BAKING_KEY }}
           PRIVATE_OXHEAD_BAKING_KEY: ${{secrets.PRIVATE_OXHEAD_BAKING_KEY }}
-          PRIVATE_NON_BAKING_KEY: ${{secrets.PRIVATE_NON_BAKING_KEY }}
           FAUCET_SEED: ${{secrets.FAUCET_SEED }}
           FAUCET_RECAPTCHA_SITE_KEY: ${{secrets.FAUCET_RECAPTCHA_SITE_KEY }}
           FAUCET_RECAPTCHA_SECRET_KEY: ${{secrets.FAUCET_RECAPTCHA_SECRET_KEY }}
