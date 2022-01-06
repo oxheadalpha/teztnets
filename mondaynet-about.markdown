@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Mondaynet
-permalink: /mondaynet-2022-01-03-about
+permalink: /mondaynet-about
 ---
 
 A testnet that restarts every Monday launched from tezos/tezos master branch and Hangzhou protocol, upgrading to alpha at block 255.

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Dailynet
-permalink: /dailynet-2022-01-06-about
+permalink: /dailynet-about
 ---
 
 A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.
