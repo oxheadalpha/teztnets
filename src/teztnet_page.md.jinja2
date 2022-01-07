@@ -1,7 +1,7 @@
 ---
 layout: page
 title: {{ v["human_name"] }}
-permalink: /{{ k }}-about
+permalink: /{{ v["human_name"] | lower }}-about
 ---
 
 {{ v["description"] }}
