@@ -29,3 +29,4 @@ Testnets that restart regularly and track the development of the master branch o
 
 
 
+See Teztnets nodes and network status with [Pyrometer](https://pyrometer.teztnets.xyz).
