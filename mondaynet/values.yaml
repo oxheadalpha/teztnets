@@ -24,9 +24,6 @@ node_config_network:
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-  user_activated_upgrades:
-    - level: 255
-      replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 protocols:
   - command: alpha
