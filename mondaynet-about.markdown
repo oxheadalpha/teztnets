@@ -4,7 +4,7 @@ title: Mondaynet
 permalink: /mondaynet-about
 ---
 
-A testnet that restarts every Monday launched from tezos/tezos master branch and Hangzhou protocol, upgrading to alpha at block 255.
+A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU eature flags on.
 
 | | |
 |-------|---------------------|
@@ -14,7 +14,6 @@ A testnet that restarts every Monday launched from tezos/tezos master branch and
 | Faucet | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-01-10-faucet) |
 | Activated on | 2022-01-10T00:00:00.000Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
-| Protocol at level 255 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
 
