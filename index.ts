@@ -133,7 +133,7 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU eature flags on."
+      "A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU eature flags on.",
     schedule: "0 0 * * MON",
     bootstrapContracts: ["taquito1.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
