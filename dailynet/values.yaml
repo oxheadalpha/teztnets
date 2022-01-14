@@ -4,6 +4,31 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
+  tf1:
+    key: edpktnhkGfR4GWZ2BWthxB796zDQtcRDaiTDbUGMwXA9stoLqzPncb
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
+  tf2:
+    key: edpkvJ4yYhB4VUv2QS3pW7dRVxs4n2gVRJakD5k3TDHPkuWMPxLU5t
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
+  tf3:
+    key: edpktfnVodSwFtQdnRLYvWQmEmihP6NBndknAY7Ld2hnpFBXiLVL6v
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
+  tf4:
+    key: edpkv5DKpGgMCLmxkCh2q4chNwZDsKykQe1A5MqQHvMSaka584C38x
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
+  tf5:
+    key: edpkur3eJCphrFcopko2onAMu4PBv7q68TL7yWxN3mB3teLhgogioq
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
@@ -11,6 +36,7 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
+  tf1:
 
 node_config_network:
   activation_account_name: oxheadbaker
