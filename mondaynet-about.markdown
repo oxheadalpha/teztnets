@@ -4,7 +4,7 @@ title: Mondaynet
 permalink: /mondaynet-about
 ---
 
-A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU eature flags on.
+A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU feature flags on.
 
 | | |
 |-------|---------------------|
