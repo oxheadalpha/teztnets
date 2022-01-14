@@ -46,6 +46,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "100000000000"
+  jdsika:
+    #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
+    key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
