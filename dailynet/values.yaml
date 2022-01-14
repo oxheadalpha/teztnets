@@ -36,7 +36,6 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
-  tf1:
 
 node_config_network:
   activation_account_name: oxheadbaker
