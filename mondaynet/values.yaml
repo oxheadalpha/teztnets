@@ -41,6 +41,11 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "100000000000"
+  fifthelement:
+    key: edpkujqmLUVGNbSNZV7CBMdtXAMGTTwJDQoXp2aRGrotys51rYvaRi
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
