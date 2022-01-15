@@ -63,8 +63,9 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v12.0-rc1
 ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
-git clone git@gitlab.com:tezos/tezos.git -b v12.0-rc1
+git clone git@gitlab.com:tezos/tezos.git
 cd tezos
+git checkout v12.0-rc1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
