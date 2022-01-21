@@ -274,7 +274,12 @@ export const teztnets = getTeztnets([
 const pyrometerChart = new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    path: "pyrometer-temp/charts/pyrometer",
+    chart: "pyrometer",
+    version: "6.1.0",
+    fetchOpts:
+    {
+        repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    },
     values: {
       config: {
         "node_monitor": {
