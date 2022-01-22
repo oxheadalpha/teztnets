@@ -295,4 +295,9 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-
+  sirneb:
+    #  tz1LQ32syCNyGj6FdAuJfko42Wep87iYZk8k
+    key: edpkuqjXrnDW2HAGj62ggEAMUp7o4Pv7V2saqTrXomuBQmrwjexViX
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"    
