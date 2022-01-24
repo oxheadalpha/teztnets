@@ -181,7 +181,7 @@ const ithacanet_chain = new TezosChain(
     dnsName: "ithacanet",
     category: protocolCategory,
     humanName: "Ithacanet",
-    description: "Testnet for the Ithaca protocol proposal",
+    description: "Testnet for the Ithaca2 protocol proposal, proposed January 2022",
     bootstrapPeers: [
       "ithacanet.smartpy.io",
       "ithacanet.boot.ecadinfra.com",
@@ -191,7 +191,7 @@ const ithacanet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.0.0",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
+    numberOfFaucetAccounts: 0,
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
