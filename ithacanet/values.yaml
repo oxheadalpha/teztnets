@@ -300,4 +300,10 @@ accounts:
     key: edpkuqjXrnDW2HAGj62ggEAMUp7o4Pv7V2saqTrXomuBQmrwjexViX
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"    
+    bootstrap_balance: "1000000000000"
+  albin:
+    #  tz1cg5EqC3WdZgRSvGJeW328S4KQNrT4jvyv
+    key: edpkuHrekeeUN2KmNzUmcebVGWT6qVKfTRD8VZRtjMa139RqAghoio
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
