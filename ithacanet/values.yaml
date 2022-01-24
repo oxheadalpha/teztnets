@@ -300,4 +300,11 @@ accounts:
     key: edpkuqjXrnDW2HAGj62ggEAMUp7o4Pv7V2saqTrXomuBQmrwjexViX
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"    
+    bootstrap_balance: "1000000000000"
+  picdc:
+    # pierrick.couderc@omadic-labs.com
+    #  tz1NiaviJwtMbpEcNqSP6neeoBYj8Brb3QPv
+    key: edpkuW6Gxowy96xsQAHtz5v3Duqi19gUfC9a4CML14baQkXgy9YbTC
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
