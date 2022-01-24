@@ -52,6 +52,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "100000000000"
+  ecadlabs:
+    # tz1ck3EJwzFpbLVmXVuEn5Ptwzc6Aj14mHSH
+    key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
@@ -59,6 +65,7 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
+    
 
 
 node_config_network:
