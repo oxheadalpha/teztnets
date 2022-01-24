@@ -1,3 +1,0 @@
-[submodule "pyrometer-temp"]
-	path = pyrometer-temp
-	url = git@github.com:oxheadalpha/tezos-k8s.git
