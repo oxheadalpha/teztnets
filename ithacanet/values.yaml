@@ -70,7 +70,8 @@ nodes:
   # Overwrite default values.yaml tezos-node
   tezos-node: null
 
-bootstrap_peers: []
+bootstrap_peers:
+  - ithacanet.visualtez.com
 
 full_snapshot_url: null
 rolling_snapshot_url: null
@@ -300,4 +301,10 @@ accounts:
     key: edpkuqjXrnDW2HAGj62ggEAMUp7o4Pv7V2saqTrXomuBQmrwjexViX
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"    
+    bootstrap_balance: "1000000000000"
+  rodrigo_quelhas:
+    # tz1ViTezAvcip62Hnu2WYBFEruWEurGPbFX4
+    key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
