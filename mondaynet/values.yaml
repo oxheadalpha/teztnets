@@ -1,63 +1,58 @@
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
-    bootstrap_balance: "7500000000000"
+    bootstrap_balance: "6700000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-  michael_kernaghan:
-    # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
-    key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
   tf_london:
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   tf_london2:
     key: edpktwQ93eJwcJUTkZYRKzDpMqNmY76av4xDmcYP6jTHKMHAvmwToi
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   tf_london3:
     key: edpkue21EdnYUyHU9WHHMGEHA7E1HdTNy8pTZ4QQYodns7NUMFk1Fe
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   tf_paris:
     key: edpktsx1JxD7cgTBXrgM7B8xUHVQ6cpFEk4rSUAEcuBPzi5wjjf3hZ
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   tf_stockholm:
     key: edpkuiioYPwFA14hgSxnTFcS2enn2BqcMDkMrPVA3r7oZ86zGyphP3
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   tf_frankfurt:
     key: edpkumfPbLdeawfWNWootvBMYGi83NDuPYvsaHgUoEL3BFRRLDGJQ3
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   fifthelement:
+    # tz1MeT8NACB8Q4uV9dPQ3YxXBmYgapbxQxQ5
     key: edpkujqmLUVGNbSNZV7CBMdtXAMGTTwJDQoXp2aRGrotys51rYvaRi
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   jdsika:
-    #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
+    # tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   ecadlabs:
     # tz1ck3EJwzFpbLVmXVuEn5Ptwzc6Aj14mHSH
     key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "470000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
@@ -66,8 +61,6 @@ accounts:
     is_bootstrap_baker_account: false
     type: public
     
-
-
 node_config_network:
   activation_account_name: oxheadbaker
   genesis:
