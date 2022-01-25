@@ -90,8 +90,8 @@ accounts:
     type: secret
     # key injected by pulumi
   pirbo:
-    # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
-    key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
+    # tz1NFs6yP2sXd5vAAbR43bbDRpV2nahDZope
+    key: edpkuGH2TWTQ5JrwzBLGRu5is1h7vcv5e5LN45VfqmXS5zaTUMpopH
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
