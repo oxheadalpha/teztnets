@@ -110,7 +110,7 @@ nodes:
       - baker
     storage_size: 15Gi
   # Overwrite default values.yaml tezos-node
-  tezos-node: null
+  rolling-node: null
 
 bootstrap_peers: []
 full_snapshot_url: null

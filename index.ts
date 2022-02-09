@@ -115,7 +115,7 @@ const dailynet_chain = new TezosChain(
     schedule: "0 0 * * *",
     bootstrapContracts: ["taquito1.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "5.3.4",
+    chartRepoVersion: "6.1.0",
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 1000,
     faucetSeed: faucetSeed,
