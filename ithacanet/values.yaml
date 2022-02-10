@@ -67,8 +67,8 @@ nodes:
       - octez_node
       - baker
     storage_size: 80Gi
-  # Overwrite default values.yaml tezos-node
-  tezos-node: null
+  # Overwrite default values.yaml rolling-node
+  rolling-node: null
 
 bootstrap_peers: []
 

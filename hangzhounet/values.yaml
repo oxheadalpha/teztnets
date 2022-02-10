@@ -162,7 +162,6 @@ node_config_network:
 
 bootstrap_peers:
   - hangzhounet.smartpy.io
-  - hangzhounet.tezos.co.il
   - hangzhounet.kaml.fr
   - hangzhounet.boot.tez.ie
 
@@ -186,8 +185,8 @@ nodes:
       - endorser
       - octez_node
     storage_size: 80Gi
-  # Overwrite default values.yaml tezos-node
-  tezos-node: null
+  # Overwrite default values.yaml rolling-node
+  rolling-node: null
 
 activation:
   protocol_hash: PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV
