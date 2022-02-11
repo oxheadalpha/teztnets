@@ -10,7 +10,6 @@ node_config_network:
       replacement_protocol: Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A
 
 protocols:
-  - command: 011-PtHangz2
   - command: 012-Psithaca
 
 activation:
@@ -66,6 +65,7 @@ nodes:
     runs:
       - octez_node
       - baker
+      - accuser
     storage_size: 80Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null

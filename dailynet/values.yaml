@@ -108,6 +108,7 @@ nodes:
     runs:
       - octez_node
       - baker
+      - accuser
     storage_size: 15Gi
   # Overwrite default values.yaml tezos-node
   rolling-node: null

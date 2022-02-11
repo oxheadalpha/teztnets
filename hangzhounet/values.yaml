@@ -184,6 +184,7 @@ nodes:
       - baker
       - endorser
       - octez_node
+      - accuser
     storage_size: 80Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
