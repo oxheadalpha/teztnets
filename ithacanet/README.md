@@ -17,5 +17,5 @@ To simulate this behavior, it is important to have many participating bakers in 
 You are encouraged to run the baker in debug mode:
 
 ```
-export TEZOS_LOG="* -> debug"
+export TEZOS_LOG="baker* -> debug"
 ```
