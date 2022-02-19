@@ -113,7 +113,7 @@ const dailynet_chain = new TezosChain(
     description:
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
-    bootstrapContracts: ["taquito1.json"],
+    bootstrapContracts: [],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.2.1",
     privateBakingKey: private_oxhead_baking_key,
@@ -135,7 +135,7 @@ const mondaynet_chain = new TezosChain(
     description:
       "A testnet that restarts every Monday launched from tezos/tezos master branch and alpha protocol with TORU + SCORU feature flags on.",
     schedule: "0 0 * * MON",
-    bootstrapContracts: ["taquito1.json"],
+    bootstrapContracts: [],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.2.1",
     privateBakingKey: private_oxhead_baking_key,
