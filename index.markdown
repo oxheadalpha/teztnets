@@ -21,11 +21,11 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/).
  
-☠️ You probably don't want this unless you are a core protocol developper.
+☠️ You probably don't want this unless you are a core protocol developer.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-02-19` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-02-19-faucet) |
+| [Dailynet](/dailynet-about) | `2022-02-20` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-02-20-faucet) |
 | [Mondaynet](/mondaynet-about) | `2022-02-14` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-02-14-faucet) |
 
 
