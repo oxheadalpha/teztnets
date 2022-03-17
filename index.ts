@@ -113,7 +113,7 @@ const dailynet_chain = new TezosChain(
     description:
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
-    bootstrapContracts: [ "taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    bootstrapContracts: [],
     //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     //chartRepoVersion: "6.2.1",
     chartPath: "dailynet/tezos-k8s",
