@@ -9,23 +9,10 @@
                         "prim": "list",
                         "args": [
                             {
-                                "prim": "pair",
+                                "prim": "sapling_transaction",
                                 "args": [
                                     {
-                                        "prim": "sapling_transaction",
-                                        "args": [
-                                            {
-                                                "int": "8"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "prim": "option",
-                                        "args": [
-                                            {
-                                                "prim": "key_hash"
-                                            }
-                                        ]
+                                        "int": "8"
                                     }
                                 ]
                             }
@@ -95,19 +82,6 @@
                             "args": [
                                 [
                                     {
-                                        "prim": "UNPAIR"
-                                    },
-                                    {
-                                        "prim": "DIP",
-                                        "args": [
-                                            [
-                                                {
-                                                    "prim": "SWAP"
-                                                }
-                                            ]
-                                        ]
-                                    },
-                                    {
                                         "prim": "SAPLING_VERIFY_UPDATE"
                                     },
                                     [
@@ -128,6 +102,12 @@
                                             ]
                                         }
                                     ],
+                                    {
+                                        "prim": "UNPAIR"
+                                    },
+                                    {
+                                        "prim": "SWAP"
+                                    },
                                     {
                                         "prim": "UNPAIR"
                                     },
@@ -173,6 +153,14 @@
                                                                 "int": "2"
                                                             },
                                                             [
+                                                                {
+                                                                    "prim": "UNPACK",
+                                                                    "args": [
+                                                                        {
+                                                                            "prim": "key_hash"
+                                                                        }
+                                                                    ]
+                                                                },
                                                                 [
                                                                     {
                                                                         "prim": "IF_NONE",
@@ -282,9 +270,31 @@
                                                                 "int": "2"
                                                             },
                                                             [
+                                                                {
+                                                                    "prim": "SIZE"
+                                                                },
+                                                                {
+                                                                    "prim": "PUSH",
+                                                                    "args": [
+                                                                        {
+                                                                            "prim": "nat"
+                                                                        },
+                                                                        {
+                                                                            "int": "0"
+                                                                        }
+                                                                    ]
+                                                                },
                                                                 [
+                                                                    [
+                                                                        {
+                                                                            "prim": "COMPARE"
+                                                                        },
+                                                                        {
+                                                                            "prim": "EQ"
+                                                                        }
+                                                                    ],
                                                                     {
-                                                                        "prim": "IF_NONE",
+                                                                        "prim": "IF",
                                                                         "args": [
                                                                             [],
                                                                             [
