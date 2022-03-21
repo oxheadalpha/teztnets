@@ -1,16 +1,16 @@
 ---
 layout: page
 title: Mondaynet Faucet
-permalink: /mondaynet-2022-03-14-faucet
+permalink: /mondaynet-2022-03-21-faucet
 ---
 
-This faucet is for `mondaynet-2022-03-14` only. It will not work on other networks.
+This faucet is for `mondaynet-2022-03-21` only. It will not work on other networks.
 
 Please use responsibly as the number of addresses is limited. For special requests, contact us.
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<form id="faucet_form" mathod="POST" action='https://faucet.mondaynet-2022-03-14.teztnets.xyz'>
+<form id="faucet_form" mathod="POST" action='https://faucet.mondaynet-2022-03-21.teztnets.xyz'>
     <div>
         <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
@@ -27,18 +27,18 @@ Please use responsibly as the number of addresses is limited. For special reques
 
 ## How to use
 
-Download the activation file, store it locally (for example in `/tmp/mondaynet-2022-03-14.json`) then run:
+Download the activation file, store it locally (for example in `/tmp/mondaynet-2022-03-21.json`) then run:
 
 ```
-tezos-client activate account faucet with /tmp/mondaynet-2022-03-14.json
+tezos-client activate account faucet with /tmp/mondaynet-2022-03-21.json
 ```
 
 <p class="faucet_response" style="display:none;">Or directly use the snippet below:</p>
 
-<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/mondaynet-2022-03-14.json
+<div class="faucet_response language-plaintext highlighter-rouge" style="display:none;"><div class="highlight"><pre class="highlight"><code>cat &lt;&lt; EOF &gt; /tmp/mondaynet-2022-03-21.json
 <span id="inline_snippet"></span>
 EOF
-tezos-client activate account faucet with /tmp/mondaynet-2022-03-14.json
+tezos-client activate account faucet with /tmp/mondaynet-2022-03-21.json
 </code></pre></div></div>
 
 <script>
@@ -75,6 +75,6 @@ $("#download_button").click(function() {
     contentType =  'data:application/json,';
     uriContent = contentType + encodeURIComponent($('#faucet_textarea').val());
     this.setAttribute('href', uriContent);
-    this.setAttribute('download', 'mondaynet-2022-03-14.json');
+    this.setAttribute('download', 'mondaynet-2022-03-21.json');
 })
 </script>
