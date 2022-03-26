@@ -134,6 +134,7 @@ activation:
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 20160
+    sc_rollup_max_available_messages: 1000000
 
 nodes:
   tezos-baking-node:
@@ -151,6 +152,7 @@ nodes:
       - octez_node
       - baker
       - accuser
+    readiness_probe: false
     storage_size: 15Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
