@@ -66,23 +66,18 @@ node_config_network:
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-
-protocols:
-  - command: alpha
+  user_activated_upgrades:
+    - level: 1024
+      replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+  protocol_hash: Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
     blocks_per_commitment: 16
     blocks_per_stake_snapshot: 64
-    ## blocks_per_voting_period: 10240
-    # blocks_per_voting_period is replaced by cycles_per_voting_period as of
-    # https://gitlab.com/tezos/tezos/-/commit/12e4f156e533fd6ce0b3b37291aee6d16c1d5792
-    # The value for cycles_per_voting_period is determined by
-    # "blocks_per_voting_period / blocks_per_cycle".
-    cycles_per_voting_period: 80
+    blocks_per_voting_period: 128
     hard_gas_limit_per_operation: '1040000'
     hard_gas_limit_per_block: '5200000'
     proof_of_work_threshold: '-1'
@@ -99,9 +94,9 @@ activation:
     min_proposal_quorum: 500
     liquidity_baking_subsidy: '2500000'
     liquidity_baking_sunset_level: 525600
-    liquidity_baking_toggle_ema_threshold: 100000
+    liquidity_baking_escape_ema_threshold: 100000
     max_operations_time_to_live: 120
-    minimal_block_delay: "30"
+    minimal_block_delay: "15"
     delay_increment_per_round: "15"
     consensus_committee_size: 7000
     consensus_threshold: 4667
@@ -114,27 +109,6 @@ activation:
     ratio_of_frozen_deposits_slashed_per_double_endorsement:
       numerator: 1
       denominator: 2
-    cache_script_size: 100000000
-    cache_stake_distribution_cycles: 8
-    cache_sampler_state_cycles: 8
-    tx_rollup_enable: true
-    tx_rollup_origination_size: 60000
-    tx_rollup_hard_size_limit_per_inbox: 100000
-    tx_rollup_hard_size_limit_per_message: 5000
-    tx_rollup_max_withdrawals_per_batch: 255
-    tx_rollup_commitment_bond: "10000000000"
-    tx_rollup_finality_period: 2000
-    tx_rollup_max_inboxes_count: 2101
-    tx_rollup_withdraw_period: 60000
-    tx_rollup_max_messages_per_inbox: 1010
-    tx_rollup_max_commitments_count: 4100
-    tx_rollup_cost_per_byte_ema_factor: 120
-    tx_rollup_max_ticket_payload_size: 10240
-    tx_rollup_rejection_max_proof_size: 30000
-    sc_rollup_enable: true
-    sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 20160
-    sc_rollup_max_available_messages: 1000000
 
 nodes:
   tezos-baking-node:
@@ -164,3 +138,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images: {}
+
+protocols:
+  - command: 012-Psithaca
+  - command: alpha
