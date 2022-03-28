@@ -131,7 +131,9 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-bootstrap_peers: []
+bootstrap_peers:
+  - mondaynet.ecadinfra.com
+
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
