@@ -63,7 +63,8 @@ nodes:
             cors-origin: [ "*" ]
         is_bootstrap_node: true
     runs:
-      - octez_node
+      - 
+      _node
       - baker
       - accuser
     storage_size: 80Gi
@@ -83,7 +84,7 @@ rolling_tarball_url: null
 archive_tarball_url: "https://ithacanet.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v12.0
+  octez: tezos/tezos:v12.1
 
 # We give:
 accounts:
