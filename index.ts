@@ -130,7 +130,8 @@ const dailynet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const mondaynet_chain = new TezosChain(
@@ -156,7 +157,8 @@ const mondaynet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const hangzhounet_chain = new TezosChain(
@@ -181,7 +183,8 @@ const hangzhounet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const ithacanet_chain = new TezosChain(
@@ -208,7 +211,8 @@ const ithacanet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 function getNetworks(chains: TezosChain[]): object {
