@@ -25,8 +25,8 @@ A [collection of raw Michelson contracts](https://github.com/oxheadalpha/teztnet
 Upon deployment of a Teztnet, a genesis baker will run and its p2p and rpc endpoints will be exposed externally.
 Example:
 
-- p2p: `hangzhounet.teztnets.xyz`
-- rpc `rpc.hangzhounet.teztnets.xyz`
+- p2p: `ithacanet.teztnets.xyz`
+- rpc `rpc.ithacanet.teztnets.xyz`
 
 ### `--network` endpoint for Tezos node
 

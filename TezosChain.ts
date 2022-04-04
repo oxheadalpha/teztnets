@@ -313,6 +313,7 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly params: TezosHelmParameters & TezosInitParameters;
   readonly provider: k8s.Provider;
   readonly repo: awsx.ecr.Repository;
+  readonly zone: aws.route53.Zone;
 
   // readonly ns: k8s.core.v1.Namespace;
   // readonly chain: k8s.helm.v2.Chart;
@@ -327,6 +328,7 @@ export class TezosChain extends pulumi.ComponentResource {
   constructor(params: TezosHelmParameters & TezosInitParameters,
               provider: k8s.Provider,
               repo: awsx.ecr.Repository,
+              zone: aws.route53.Zone,
               opts?: pulumi.ResourceOptions) {
 
     const inputs: pulumi.Inputs = {
@@ -339,6 +341,7 @@ export class TezosChain extends pulumi.ComponentResource {
     this.params = params;
     this.provider = provider;
     this.repo = repo;
+    this.zone = zone;
   
     var ns = new k8s.core.v1.Namespace(name,
       { metadata: { name: name, } },
@@ -379,10 +382,7 @@ export class TezosChain extends pulumi.ComponentResource {
       }
     }
 
-    // Hosted zones should really be owned by pulumi. Then we could
-    // reference them instead of hardcoding strings.
-    const teztnetsHostedZone = "teztnets.xyz"
-    const teztnetsDomain = `${name}.${teztnetsHostedZone}`
+    const teztnetsDomain = `${name}.teztnets.xyz`
 
     const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
     const registry = repo.repository.registryId.apply(async id => {
@@ -421,7 +421,7 @@ export class TezosChain extends pulumi.ComponentResource {
       {
         cert: rpcCert,
         targetDomain: rpcDomain,
-        hostedZone: teztnetsHostedZone,
+        hostedZone: this.zone,
       },
       { parent: this }
     )
@@ -621,7 +621,7 @@ export class TezosChain extends pulumi.ComponentResource {
         {
           cert: faucetCert,
           targetDomain: faucetDomain,
-          hostedZone: teztnetsHostedZone,
+          hostedZone: this.zone,
         },
         { parent: this }
       )

@@ -89,6 +89,12 @@ const cluster = new eks.Cluster(stack, {
   privateSubnetIds: vpc.privateSubnetIds,
 })
 
+const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
+  comment: "Teztnets Hosted Zone",
+  forceDestroy: false,
+  name: "teztnets.xyz",
+})
+
 // Export the cluster's kubeconfig.
 export const kubeconfig = cluster.kubeconfig
 export const clusterName = cluster.eksCluster.name
@@ -124,7 +130,8 @@ const dailynet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const mondaynet_chain = new TezosChain(
@@ -150,7 +157,8 @@ const mondaynet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const hangzhounet_chain = new TezosChain(
@@ -175,7 +183,8 @@ const hangzhounet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 const ithacanet_chain = new TezosChain(
@@ -202,7 +211,8 @@ const ithacanet_chain = new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
   }),
   cluster.provider,
-  repo
+  repo,
+  teztnetsHostedZone,
 )
 
 function getNetworks(chains: TezosChain[]): object {
@@ -317,7 +327,7 @@ const { certValidation } = createCertValidation(
   {
     cert: pyrometerCert,
     targetDomain: pyrometerDomain,
-    hostedZone: "teztnets.xyz",
+    hostedZone: teztnetsHostedZone
   },
 )
 
