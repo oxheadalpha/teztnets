@@ -42,7 +42,7 @@ jobs:
       - uses: pulumi/actions@v3
         with:
           command: preview
-          stack-name: tqtezos/teztnets/dev
+          stack-name: tqtezos/teztnets/teztnets
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
