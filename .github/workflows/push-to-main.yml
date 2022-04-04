@@ -23,8 +23,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-region: ${{ secrets.AWS_REGION }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          role-to-assume: KubernetesAdmin
+          role-to-assume: tempKubernetesAdmin
 
+
+      - name: Add profile credentials to ~/.aws/credentials
+        env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v1.0.1
         with:
