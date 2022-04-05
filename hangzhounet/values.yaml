@@ -166,7 +166,7 @@ bootstrap_peers:
   - hangzhounet.boot.tez.ie
 
 images:
-  octez: tezos/tezos:v12.0
+  octez: tezos/tezos:v12.2
 
 nodes:
   tezos-baking-node:

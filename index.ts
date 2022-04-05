@@ -101,8 +101,8 @@ const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
  * see: "configure an apex domain"
  * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
  */
-const xtzshotsRootRecords = new aws.route53.Record("teztnetsRootRecords", {
-  zoneId: xtzshotsZone.zoneId,
+const teztnetsRootRecords = new aws.route53.Record("teztnetsRootRecords", {
+  zoneId: teztnetsHostedZone.zoneId,
   name: "teztnets.xyz",
   type: "A",
   ttl: 300,
