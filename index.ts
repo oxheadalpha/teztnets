@@ -69,18 +69,19 @@ const vpc = new awsx.ec2.Vpc(
   }
 )
 
+const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
   instanceType: "t3.2xlarge",
   desiredCapacity: desiredClusterCapacity,
   minSize: 1,
   maxSize: 5,
   providerCredentialOpts: {
-    roleArn: `arn:aws:iam::${aws_account_id}:role/KubernetesAdmin`,
+    profileName: aws.config.profile,
   },
   roleMappings: [
     {
       groups: ["system:masters"],
-      roleArn: `arn:aws:iam::${aws_account_id}:role/KubernetesAdmin`,
+      roleArn: kubeAdminRoleARN,
       username: "admin",
     },
   ],
@@ -93,6 +94,24 @@ const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
   forceDestroy: false,
   name: "teztnets.xyz",
+})
+
+/**
+ * Top level A records points to github pages
+ * see: "configure an apex domain"
+ * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+ */
+const xtzshotsRootRecords = new aws.route53.Record("teztnetsRootRecords", {
+  zoneId: xtzshotsZone.zoneId,
+  name: "teztnets.xyz",
+  type: "A",
+  ttl: 300,
+  records: [
+    "185.199.108.153",
+    "185.199.109.153",
+    "185.199.110.153",
+    "185.199.111.153",
+  ],
 })
 
 // Export the cluster's kubeconfig.
