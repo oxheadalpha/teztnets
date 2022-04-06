@@ -133,6 +133,11 @@ nodes:
 
 bootstrap_peers:
   - mondaynet.ecadinfra.com
+    # tf
+  - 18.132.213.248
+  - 18.134.9.200
+  - 18.134.13.112
+    # end tf
 
 full_snapshot_url: null
 rolling_snapshot_url: null
