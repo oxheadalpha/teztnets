@@ -9,7 +9,7 @@ Testnet for Hangzhou protocol proposal.
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_HANGZHOUNET_2021-11-04T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v12.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v12.0) |
+| Tezos docker build | [tezos/tezos:v12.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v12.2) |
 | Public RPC endpoint | [https://rpc.hangzhounet.teztnets.xyz](https://rpc.hangzhounet.teztnets.xyz) |
 | Faucet | [Hangzhounet faucet](https://teztnets.xyz/hangzhounet-faucet) |
 | Activated on | 2021-11-04T15:00:00Z |
@@ -24,7 +24,7 @@ Testnet for Hangzhou protocol proposal.
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v12.0
+#### Download and install Tezos version v12.2
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -34,7 +34,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Hangzhounet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v12.0
+docker run -it --entrypoint=/bin/sh tezos/tezos:v12.2
 ```
 
 #### Alternative: Build the software
@@ -44,7 +44,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v12.0
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v12.0
+git checkout v12.2
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
