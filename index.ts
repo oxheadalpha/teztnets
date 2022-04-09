@@ -180,32 +180,6 @@ const mondaynet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const hangzhounet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "hangzhounet/values.yaml",
-    name: "hangzhounet",
-    dnsName: "hangzhounet",
-    category: protocolCategory,
-    humanName: "Hangzhounet",
-    description: "Testnet for Hangzhou protocol proposal.",
-    bootstrapPeers: [
-      "hangzhounet.smartpy.io",
-      "hangzhounet.kaml.fr",
-      "hangzhounet.boot.tez.ie",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.3.0",
-    privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
 const ithacanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "ithacanet/values.yaml",
@@ -295,13 +269,11 @@ function getTeztnets(chains: TezosChain[]): object {
 export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
-  hangzhounet_chain,
   ithacanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
-  hangzhounet_chain,
   ithacanet_chain,
 ])
 
