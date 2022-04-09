@@ -12,7 +12,6 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Hangzhounet](/hangzhounet-about) | `2021-11-04` | [Hangzhounet faucet](https://teztnets.xyz/hangzhounet-faucet) |
 | [Ithacanet](/ithacanet-about) | `2022-01-25` | [Ithacanet faucet](https://teztnets.xyz/ithacanet-faucet) |
 
 
@@ -25,7 +24,7 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-04-07` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-04-07-faucet) |
+| [Dailynet](/dailynet-about) | `2022-04-09` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-04-09-faucet) |
 | [Mondaynet](/mondaynet-about) | `2022-04-04` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-04-04-faucet) |
 
 
