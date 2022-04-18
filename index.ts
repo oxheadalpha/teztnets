@@ -165,7 +165,8 @@ const mondaynet_chain = new TezosChain(
     bootstrapPeers: [
       "mondaynet.ecadinfra.com",
     ],
-    bootstrapContracts: [ "taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    //bootstrapContracts: [ "taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    bootstrapContracts: [],
     //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     //chartRepoVersion: "6.2.1",
     chartPath: "mondaynet/tezos-k8s",
