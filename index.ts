@@ -4,6 +4,8 @@ import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
 
+require('dotenv').config();
+
 import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./externalDns"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"

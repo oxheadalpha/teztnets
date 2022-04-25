@@ -37,6 +37,11 @@ accounts:
     is_bootstrap_baker_account: false
     type: public
 
+signers:
+  tezos-signer-0:
+    sign_for_accounts:
+    - oxheadbaker
+
 node_config_network:
   activation_account_name: oxheadbaker
   genesis:
