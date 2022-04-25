@@ -53,6 +53,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "470000000000"
+  german:
+    #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
+    key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "300000000000"
   oxheadfree:
     # an account with a lot of money in it
     # tz1foxFdz2ieSj8P9YxKYBTEqYbgFXXEeiQY
