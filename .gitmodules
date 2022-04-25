@@ -4,3 +4,6 @@
 [submodule "mondaynet/tezos-k8s"]
 	path = mondaynet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
+[submodule "jakartanet/tezos-k8s"]
+	path = jakartanet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git
