@@ -37,6 +37,17 @@ accounts:
     is_bootstrap_baker_account: false
     type: public
 
+signers: {}
+tezos-signer-0:
+  sign_for_accounts:
+  - oxheadbaker
+  - tf1
+  - tf2
+  - tf3
+  - tf4
+  - tf5
+  - oxheadfree
+
 node_config_network:
   activation_account_name: oxheadbaker
   genesis:
