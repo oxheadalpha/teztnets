@@ -38,11 +38,12 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #andrewk:
-      #  key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  andrewk:
+    # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #saroupille:
       #  # tz1QXAAasy8TciwfvDC4a7MWo1tm3K37uN9Y
       #  key: edpkvMBeXH4h8H97b8qfPkv2mA9TE6McfsffLGgG2Jg5nhUESaVt5J
