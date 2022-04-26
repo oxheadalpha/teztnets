@@ -196,11 +196,13 @@ accounts:
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
   ping:
+    #tz1hm7NuCGNSKZQLQSawjUnehJcX8yCBcCAq
     key: edpkty9Zdoxxc8BCCseTaeKtBpAVctrzVmzhkj3dkgmbFkWduu4SCB
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
   ping_bob:
+    #tz1MvCE9dczhoij2bd4sLL2AfVuMtWfFAoCN
     key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
     type: public
     is_bootstrap_baker_account: true
@@ -296,12 +298,13 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-bootstrap_peers:
-  - jakartanet.smartpy.io
-  - jakartanet.kaml.fr
-  - jakartanet.boot.ecadinfra.com
-  - jakartanet.stakenow.de:9733
-  - jakartanet.visualtez.com
+    # FIXME uncomment this
+    #bootstrap_peers:
+    #  - jakartanet.smartpy.io
+    #  - jakartanet.kaml.fr
+    #  - jakartanet.boot.ecadinfra.com
+    #  - jakartanet.stakenow.de:9733
+    #  - jakartanet.visualtez.com
 
 full_snapshot_url: null
 rolling_snapshot_url: null
@@ -312,5 +315,5 @@ images:
   octez: tezos/tezos:v13.0-rc1
 
 protocols:
-  - command: 012-PtJakart
-  - command: alpha
+  - command: 013-PtJakart
+  - command: 012-Psithaca
