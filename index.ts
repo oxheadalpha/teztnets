@@ -211,6 +211,33 @@ const ithacanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const jakartanet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "jakartanet/values.yaml",
+    name: "jakartanet",
+    dnsName: "jakartanet",
+    category: protocolCategory,
+    humanName: "jakartanet",
+    description: "Testnet for the Jakarta protocol proposal, proposed April 2022",
+    bootstrapPeers: [
+      "jakartanet.smartpy.io",
+      "jakartanet.boot.ecadinfra.com",
+      "jakarjakart.kaml.fr",
+      "jakartanet.stakenow.de:9733",
+    ],
+    chartPath: "jakartanet/tezos-k8s",
+    privateBakingKey: private_oxhead_baking_key,
+    // FIXME should be 10000
+    numberOfFaucetAccounts: 0,
+    faucetSeed: faucetSeed,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -273,11 +300,13 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
+  jakartanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
+  jakartanet_chain,
 ])
 
 const pyrometerChart = new k8s.helm.v2.Chart(
