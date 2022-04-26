@@ -65,12 +65,12 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #baketzforme:
-      #  # tz1edUYGqBtteStneTGDBrQWTFmq9cnEELiW
-      #  key: edpkuEoVW7HM9ehiec9exPfHrsFkT1f3jV8JxFWQHP23VX6K5EnVtD
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  baketzforme:
+    # tz1edUYGqBtteStneTGDBrQWTFmq9cnEELiW
+    key: edpkuEoVW7HM9ehiec9exPfHrsFkT1f3jV8JxFWQHP23VX6K5EnVtD
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #vincent_xtzmaster:
       #  # tz1XMiZwHpHZ8a1AfwRWKfzLskJgZNyV8PHs
       #  key: edpkvaZQ6tt9XgJJTonjFpzwaqDV7RWUQMT7TmntBJ5yXmDsPb8T7L
