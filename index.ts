@@ -227,7 +227,8 @@ const jakartanet_chain = new TezosChain(
     ],
     chartPath: "jakartanet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
+    // FIXME should be 10000
+    numberOfFaucetAccounts: 0,
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
