@@ -181,6 +181,12 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  tf2:
+    # tz3RVmZur8VMGniUpSEmoA851J7nUSe6R9dH
+    key: p2pk67WaNJGC3VE4dhunamqKpMHXzxshf8REycJ5zvRf7HksaH3ir2F
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #jdsika:
       #  key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
       #  type: public
