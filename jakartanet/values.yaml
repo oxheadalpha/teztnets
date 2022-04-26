@@ -119,12 +119,12 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #michael_kernaghan:
-      #  # tz1e42w8ZaGAbM3gucbBy8iRypdbnqUj7oWY
-      #  key: edpkuRkcStobJ569XFxmE6edyRQQzMmtf4ZnmPkTPfSQnt6P3Nym2V
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  michael_kernaghan:
+    # tz1e42w8ZaGAbM3gucbBy8iRypdbnqUj7oWY
+    key: edpkuRkcStobJ569XFxmE6edyRQQzMmtf4ZnmPkTPfSQnt6P3Nym2V
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #mack_baise:
       #  # tz1SHw5vBDYNgGdUPJi57kVrEb2kFue4Yxa4
       #  key: edpkvKJ9voHuSBi8TApVowCu7D8hQneXGWdEHuSEMDjQDyxD9h6PYk
