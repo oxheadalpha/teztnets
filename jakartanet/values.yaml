@@ -195,16 +195,16 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #ping:
-      #  key: edpkty9Zdoxxc8BCCseTaeKtBpAVctrzVmzhkj3dkgmbFkWduu4SCB
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
-      #ping2:
-      #  key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  ping:
+    key: edpkty9Zdoxxc8BCCseTaeKtBpAVctrzVmzhkj3dkgmbFkWduu4SCB
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  ping_bob:
+    key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #cryptodad:
       #  #  tz1cwuYcQi22C2SX9m1z78UyUzYKFztXgX7t
       #  key: edpktk3ywyYujAUpAfWZwtNn9xRpVYDvRCd3EPGNyry9y9txUrnxhp
