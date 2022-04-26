@@ -155,21 +155,18 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #primate_1:
-      #  key: edpktuBstbzSXPY2Quht2ijPtn8Wz5K8FfCL8GyeDdKmqkrt3np8Xh
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
-      #primate_2:
-      #  key: edpkuYrv6f4zopEWWtiSVzfH3RqLVjj3tr73oipQGgz9yd971ksA32
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
-      #primate_3:
-      #  key: edpkuvPH36bzsLzo1YDPxiZpKPJHSmcDpTKMTtiTMgcJGYLQp1WvEo
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  baking_benjamins:
+    # tz1WzwobH5AFz3ea8n2UEramfYm1LY96hKJK
+    key: edpkuT6dsU7krrQFBnk7c72EnrycvFeKQoL63EoiMz1AdQJGR9ux57
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  bake_buddy:
+    # tz1XpntqFmUYqAJw3qMxjGMR4m8rJUrvuMnp
+    key: edpkvBxh9o7dFhrXGfxZKVuTTQHaS7YrorCaUndmLhqncU4ebKTxL9
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #julien:
       #  # julien.tesson@tezcore.com
       #  # for stress testing
