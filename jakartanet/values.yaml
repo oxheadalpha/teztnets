@@ -211,6 +211,12 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
+  pasqualepinto:
+    # ???
+    key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
 
 node_config_network:
   activation_account_name: oxheadbaker
