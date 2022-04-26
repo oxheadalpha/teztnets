@@ -1,6 +1,6 @@
 ---
 layout: page
-title: jakartanet
+title: Jakartanet
 permalink: /jakartanet-about
 ---
 
@@ -11,7 +11,7 @@ Testnet for the Jakarta protocol proposal, proposed April 2022
 | Full network name | `TEZOS_JAKARTANET_2022-04-27T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v13.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0-rc1) |
 | Public RPC endpoint | [https://rpc.jakartanet.teztnets.xyz](https://rpc.jakartanet.teztnets.xyz) |
-| Faucet | [jakartanet faucet](https://teztnets.xyz/jakartanet-faucet) |
+| Faucet | [Jakartanet faucet](https://teztnets.xyz/jakartanet-faucet) |
 | Activated on | 2022-04-27T15:00:00Z |
 | Protocol at level 8192 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 
@@ -19,7 +19,7 @@ Testnet for the Jakarta protocol proposal, proposed April 2022
 To run Jakartanet, you must:
 
 * download and run Octez 13.0-rc1
-* pass the argument `--network https://teztnets.xyz/jakartanet` to `tezos-node run`.
+* pass the argument `--network https://teztnets.xyz/jakartanet` to `tezos-node config init`.
 
 **New**: `--network jakartanet` will not work this time. This will be added to the final 13.0 release.
 
@@ -38,7 +38,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 
 #### Alternative: Use docker
 
-To join jakartanet with docker, open a shell in the container:
+To join Jakartanet with docker, open a shell in the container:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:v13.0-rc1
@@ -59,12 +59,12 @@ make
 export PATH=$(pwd):$PATH
 ```
 
-### Join the jakartanet network
+### Join the Jakartanet network
 
 Run the following commands:
 
 ```
-tezos-node config init --network jakartanet
+tezos-node config init --network https://teztnets.xyz/jakartanet
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -76,7 +76,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > ```
 
 
-### Bake on the jakartanet network
+### Bake on the Jakartanet network
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/jakartanet-faucet).
 

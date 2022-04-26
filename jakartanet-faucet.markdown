@@ -1,6 +1,6 @@
 ---
 layout: page
-title: jakartanet Faucet
+title: Jakartanet Faucet
 permalink: /jakartanet-faucet
 ---
 
@@ -14,7 +14,7 @@ Please use responsibly as the number of addresses is limited. For special reques
     <div>
         <div id="faucet_recaptcha" class="g-recaptcha" data-sitekey="6LcARlgbAAAAAHfqADFawmaQ5U4dceyrdMi1Rtpj" data-callback="captchaDone"></div>
         <br/>
-        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get jakartanet ꜩ</button>
+        <button id="gettz" style='display: block; margin: 0 auto; width: 304px; height: 64px;' disabled=true>Get Jakartanet ꜩ</button>
     </div>
 </form>
 
