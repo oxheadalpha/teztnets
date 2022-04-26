@@ -57,7 +57,7 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
-{% if v["release"] -%}
+{% if v["release"] and "rc" not in v["release"] -%}
 tezos-node config init --network {{ k }}
 {% else -%}
 tezos-node config init --network {{ v["network_url"] }}
