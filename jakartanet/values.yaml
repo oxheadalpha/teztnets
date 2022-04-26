@@ -120,8 +120,8 @@ accounts:
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
   michael_kernaghan:
-    # tz1e42w8ZaGAbM3gucbBy8iRypdbnqUj7oWY
-    key: edpkuRkcStobJ569XFxmE6edyRQQzMmtf4ZnmPkTPfSQnt6P3Nym2V
+    # tz1XGwK6kkiJaq2ZEJYcWEj5Tc8bcV6pNHqV
+    key: edpkufKizMFA2EfbLdrUPLGcwe9EHad4MwtgGeVPCBP2x5VZeKHqsh
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
