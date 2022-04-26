@@ -1,7 +1,7 @@
 To run Jakartanet, you must:
 
 * download and run Octez 13.0-rc1
-* pass the argument `--network https://teztnets.xyz/jakartanet` to `tezos-node run`.
+* pass the argument `--network https://teztnets.xyz/jakartanet` to `tezos-node config init`.
 
 **New**: `--network jakartanet` will not work this time. This will be added to the final 13.0 release.
 

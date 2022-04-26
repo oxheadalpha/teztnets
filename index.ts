@@ -217,7 +217,7 @@ const jakartanet_chain = new TezosChain(
     name: "jakartanet",
     dnsName: "jakartanet",
     category: protocolCategory,
-    humanName: "jakartanet",
+    humanName: "Jakartanet",
     description: "Testnet for the Jakarta protocol proposal, proposed April 2022",
     bootstrapPeers: [
       "jakartanet.smartpy.io",
