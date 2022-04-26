@@ -66,11 +66,11 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #marco:
-      #  key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  marco:
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   baketzforme:
     # tz1edUYGqBtteStneTGDBrQWTFmq9cnEELiW
     key: edpkuEoVW7HM9ehiec9exPfHrsFkT1f3jV8JxFWQHP23VX6K5EnVtD
