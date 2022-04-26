@@ -1,11 +1,8 @@
-You can run Jakartanet by passing the argument `--network jakartanet` to `tezos-node run`.
+To run Jakartanet, you must:
 
-Jakartanet will run Ithaca for 2 cycles then switch to Jakarta at block 8192.
+* download and run Octez 13.0-rc1
+* pass the argument `--network https://teztnets.xyz/jakartanet` to `tezos-node run`.
 
-### Report bugs
+**New**: `--network jakartanet` will not work this time. This will be added to the final 13.0 release.
 
-You are encouraged to run the baker in debug mode:
-
-```
-export TEZOS_LOG="*baker* -> debug"
-```
+Jakartanet will run Ithaca for 2 cycles then switch to Jakarta at block 8192. **You must run Ithaca baker during the first 2 cycles**.
