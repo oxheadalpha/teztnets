@@ -301,7 +301,8 @@ rolling_snapshot_url: null
 rolling_tarball_url: null
 archive_tarball_url: null
 
-images: {}
+images:
+  octez: tezos/tezos:v13.0-rc1
 
 protocols:
   - command: 012-PtJakart
