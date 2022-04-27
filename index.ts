@@ -221,7 +221,7 @@ const jakartanet_chain = new TezosChain(
     description: "Testnet for the Jakarta protocol proposal, proposed April 2022",
     bootstrapPeers: [
       "jakartanet.boot.ecadinfra.com",
-      "jakarjakart.kaml.fr",
+      "jakartanet.kaml.fr",
       "jakartanet.visualtez.com",
     ],
     chartPath: "jakartanet/tezos-k8s",
