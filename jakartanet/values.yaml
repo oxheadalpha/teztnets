@@ -31,7 +31,7 @@ accounts:
     key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "6700000000000"
+    bootstrap_balance: "1000000000000"
   pirbo:
     # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
     key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
