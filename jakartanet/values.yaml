@@ -308,13 +308,12 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-    # FIXME uncomment this
-    #bootstrap_peers:
-    #  - jakartanet.smartpy.io
-    #  - jakartanet.kaml.fr
-    #  - jakartanet.boot.ecadinfra.com
-    #  - jakartanet.stakenow.de:9733
-    #  - jakartanet.visualtez.com
+bootstrap_peers:
+  - jakartanet.smartpy.io
+  - jakartanet.kaml.fr
+  - jakartanet.boot.ecadinfra.com
+  - jakartanet.stakenow.de:9733
+  - jakartanet.visualtez.com
 
 full_snapshot_url: null
 rolling_snapshot_url: null
