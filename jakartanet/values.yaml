@@ -114,12 +114,12 @@ accounts:
       #  type: public
       #  is_bootstrap_baker_account: true
       #  bootstrap_balance: "1000000000000"
-      #neoktalabs_julien:
-      #  # tz1RJ74UepJA9tigjoEeUEFajowzVB3QQaVx
-      #  key: edpktnHv9X4PjoSHqzMGZf7oF6arxZbedxKTmEgcL6xS3XZ3TA1MUE
-      #  type: public
-      #  is_bootstrap_baker_account: true
-      #  bootstrap_balance: "1000000000000"
+  neoktalabs_julien:
+      # tz1iTzWpFhURP5EnWqAc9hUkuVe2b2tSAGXC
+      key: edpkuMRJewemWYJcfGUe3DLvemke3BZEitc3vVPbBFfnfwrynimuzY
+      type: public
+      is_bootstrap_baker_account: true
+      bootstrap_balance: "1000000000000"
   michael_kernaghan:
     # tz1XGwK6kkiJaq2ZEJYcWEj5Tc8bcV6pNHqV
     key: edpkufKizMFA2EfbLdrUPLGcwe9EHad4MwtgGeVPCBP2x5VZeKHqsh
