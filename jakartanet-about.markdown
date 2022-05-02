@@ -88,18 +88,18 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-012-Psithaca run with local node ~/.tezos-node faucet
+tezos-baker-013-PtJakart run with local node ~/.tezos-node faucet
 ```
 
 You may run the accuser as well:
 ```bash=3
-tezos-accuser-012-Psithaca run
+tezos-accuser-013-PtJakart run
 ```
 
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-012-Psithaca run with local node ~/.tezos-node faucet > ./baker-jakartanet.log &
+> nohup tezos-baker-013-PtJakart run with local node ~/.tezos-node faucet > ./baker-jakartanet.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
