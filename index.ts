@@ -162,7 +162,7 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs ithaca for 8 cycles then upgrades to proto Alpha.",
+      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs jakarta for 8 cycles then upgrades to proto Alpha.",
     schedule: "0 0 * * MON",
     bootstrapPeers: [
       "mondaynet.ecadinfra.com",
