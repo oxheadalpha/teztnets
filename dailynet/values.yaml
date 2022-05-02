@@ -58,12 +58,7 @@ activation:
     blocks_per_cycle: 128
     blocks_per_commitment: 16
     blocks_per_stake_snapshot: 64
-    ## blocks_per_voting_period: 10240
-    # blocks_per_voting_period is replaced by cycles_per_voting_period as of
-    # https://gitlab.com/tezos/tezos/-/commit/12e4f156e533fd6ce0b3b37291aee6d16c1d5792
-    # The value for cycles_per_voting_period is determined by
-    # "blocks_per_voting_period / blocks_per_cycle".
-    cycles_per_voting_period: 80
+    cycles_per_voting_period: 1
     hard_gas_limit_per_operation: '1040000'
     hard_gas_limit_per_block: '5200000'
     proof_of_work_threshold: '-1'
