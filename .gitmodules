@@ -7,3 +7,6 @@
 [submodule "jakartanet/tezos-k8s"]
 	path = jakartanet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
+[submodule "ithacanet/tezos-k8s"]
+	path = ithacanet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git
