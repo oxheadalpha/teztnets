@@ -140,7 +140,7 @@ const dailynet_chain = new TezosChain(
     description:
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
-    bootstrapContracts: [ "taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     //chartRepoVersion: "6.2.1",
     chartPath: "dailynet/tezos-k8s",
@@ -162,7 +162,7 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs jakarta for 8 cycles then upgrades to proto Alpha.",
+      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Jakarta with SCORU feature flags on for 8 cycles then upgrades to proto Alpha.",
     schedule: "0 0 * * MON",
     bootstrapPeers: [
       "mondaynet.ecadinfra.com",
@@ -240,7 +240,7 @@ const jakartanet_chain = new TezosChain(
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
     bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
 
@@ -271,7 +271,7 @@ function getNetworks(chains: TezosChain[]): object {
 function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     const chainName = chain.params.getName()
     let faucetUrl
 
@@ -315,12 +315,12 @@ const pyrometerChart = new k8s.helm.v2.Chart(
     version: "6.1.0",
     fetchOpts:
     {
-        repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     },
     values: {
       config: {
         "node_monitor": {
-          "nodes": Object.keys(networks).map(network => "http://tezos-node-rpc." + network + ":8732" ),
+          "nodes": Object.keys(networks).map(network => "http://tezos-node-rpc." + network + ":8732"),
         },
         "ui": {
           "enabled": true,
