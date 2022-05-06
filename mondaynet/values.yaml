@@ -135,7 +135,7 @@ activation:
     tx_rollup_sunset_level: 10000000
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 20160
+    sc_rollup_challenge_window_in_blocks: 40
     sc_rollup_max_available_messages: 1000000
 
 nodes:
