@@ -58,7 +58,7 @@ export interface TezosParamsInitializer {
   readonly privateBakingKey?: string;
   readonly privateNonbakingKey?: string;
   readonly yamlFile?: string;
-  readonly numberOfFaucetAccounts?: number; 
+  readonly numberOfFaucetAccounts?: number;
   readonly maskedFromMainPage?: boolean;
   readonly faucetSeed?: string;
   readonly faucetRecaptchaSiteKey?: string;
@@ -85,7 +85,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetSeed: string;
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
-    
+
 
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || params.dnsName || '';
@@ -105,7 +105,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetSeed = params.faucetSeed || '';
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
-    
+
     this._helmValues = {};
     if (params.yamlFile) {
       this.fromFile(params.yamlFile);
@@ -157,7 +157,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   public getChainName(): string {
     return this._helmValues["node_config_network"]["chain_name"];
   }
-  
+
   public containerImage(containerImage: string | pulumi.Output<String>): TezosChainParametersBuilder {
     this._helmValues["images"]["octez"] = containerImage
     return this;
@@ -199,10 +199,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
 
   public schedule(cronExpr: string): TezosChainParametersBuilder {
-    const deployDate = new Date(cronParser.parseExpression(cronExpr, {utc: true}).prev().toLocaleString());
+    const deployDate = new Date(cronParser.parseExpression(cronExpr, { utc: true }).prev().toLocaleString());
     const imageResolver = new TezosImageResolver();
     this.containerImage(pulumi.output(imageResolver.getLatestTagAsync(deployDate))
-                          .apply(tag => `${imageResolver.image}:${tag}`));
+      .apply(tag => `${imageResolver.image}:${tag}`));
 
     this.name(`${this.getDnsName().toLowerCase()}-${deployDate.toISOString().split('T')[0]}`);
     this.chainName(`TEZOS-${this.getDnsName().toUpperCase()}-${deployDate.toISOString()}`);
@@ -326,10 +326,10 @@ export class TezosChain extends pulumi.ComponentResource {
   * @param repo The container repository where to push the custom images for this chain.
   */
   constructor(params: TezosHelmParameters & TezosInitParameters,
-              provider: k8s.Provider,
-              repo: awsx.ecr.Repository,
-              zone: aws.route53.Zone,
-              opts?: pulumi.ResourceOptions) {
+    provider: k8s.Provider,
+    repo: awsx.ecr.Repository,
+    zone: aws.route53.Zone,
+    opts?: pulumi.ResourceOptions) {
 
     const inputs: pulumi.Inputs = {
       options: opts,
@@ -342,7 +342,7 @@ export class TezosChain extends pulumi.ComponentResource {
     this.provider = provider;
     this.repo = repo;
     this.zone = zone;
-  
+
     var ns = new k8s.core.v1.Namespace(name,
       { metadata: { name: name, } },
       { provider: this.provider }
@@ -357,15 +357,15 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues["activation"]["bootstrap_contract_urls"] = [];
 
       if (params.getContracts()) {
-        params.getContracts().forEach(function (contractFile: any) {
-            const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
-                bucket: activationBucket.bucket,
-                key: contractFile,
-                source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
-                contentType: mime.getType(contractFile),
-                acl: 'public-read'
-            });
-            params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate `https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
+        params.getContracts().forEach(function(contractFile: any) {
+          const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
+            bucket: activationBucket.bucket,
+            key: contractFile,
+            source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
+            contentType: mime.getType(contractFile),
+            acl: 'public-read'
+          });
+          params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
       }
 
@@ -400,7 +400,7 @@ export class TezosChain extends pulumi.ComponentResource {
       }
 
       return {
-        registry: credentials.proxyEndpoint.replace("https://",""),
+        registry: credentials.proxyEndpoint.replace("https://", ""),
         username: username,
         password: password,
       };
@@ -440,7 +440,7 @@ export class TezosChain extends pulumi.ComponentResource {
               "/chains/main/chain_id",
             "alb.ingress.kubernetes.io/healthcheck-port": "8732",
             "alb.ingress.kubernetes.io/listen-ports":
-            '[{"HTTP": 80}, {"HTTPS":443}]',
+              '[{"HTTP": 80}, {"HTTPS":443}]',
             "ingress.kubernetes.io/force-ssl-redirect": "true",
             "alb.ingress.kubernetes.io/actions.ssl-redirect":
               '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
@@ -505,7 +505,7 @@ export class TezosChain extends pulumi.ComponentResource {
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
-      
+
 
       pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
         (obj: { [index: string]: any }, [key, value]) => {
@@ -519,7 +519,7 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         {}
       )
-      
+
       params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
       const chain = new k8s.helm.v2.Chart(
         name,
@@ -540,7 +540,7 @@ export class TezosChain extends pulumi.ComponentResource {
           version: params.getChartRepoVersion(),
           fetchOpts:
           {
-              repo: params.getChartRepo(),
+            repo: params.getChartRepo(),
           },
           values: params.helmValues,
         },
@@ -599,7 +599,7 @@ export class TezosChain extends pulumi.ComponentResource {
         faucetChartValues["chart"] = 'tezos-faucet';
         faucetChartValues["version"] = params.getChartRepoVersion();
         faucetChartValues["fetchOpts"] = {
-            repo: params.getChartRepo(),
+          repo: params.getChartRepo(),
         };
       }
       new k8s.helm.v2.Chart(
@@ -705,14 +705,27 @@ export class TezosChain extends pulumi.ComponentResource {
     return this.params.helmValues["images"]["octez"];
   }
 
-  getProtocols(): Array<{level: number, replacement_protocol: string}> {
-    let protocols: Array<{level: number, replacement_protocol: string}> = []
+  getGitRef(): pulumi.Output<string> {
+    // guessing git version or release version based on docker naming convention
+    // This will fail if octez changes repo tagging convention.
+    let dockerBuild = pulumi.output(this.params.helmValues["images"]["octez"]);
+    return dockerBuild.apply((s: string) => {
+      let o = s.split(":")[1];
+      if (s.includes("master_")) {
+        o = o.split("_")[1];
+      }
+      return o;
+    });
+  }
+
+  getProtocols(): Array<{ level: number, replacement_protocol: string }> {
+    let protocols: Array<{ level: number, replacement_protocol: string }> = []
     if ("activation" in this.params.helmValues) {
-        protocols.push({level: 0, replacement_protocol: this.params.helmValues["activation"]["protocol_hash"]});
+      protocols.push({ level: 0, replacement_protocol: this.params.helmValues["activation"]["protocol_hash"] });
     }
     if ("user_activated_upgrades" in this.params.helmValues["node_config_network"]) {
-        //protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
-        protocols = protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
+      //protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
+      protocols = protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
     }
 
     return protocols;

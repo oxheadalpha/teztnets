@@ -41,12 +41,8 @@ with open("target/release/teztnets.json", "w") as out_file:
     print(json.dumps(teztnets), file=out_file)
 
 for k,v in teztnets.items():
-    # guessing git version or release version based on docker naming convention (could fail later)
-    v["git_ref"] = v["docker_build"].split(":")[1]
     v["release"] = None
-    if "master_" in v["docker_build"]:
-       v["git_ref"] = v["git_ref"].split("_")[1]
-    elif "tezos/tezos:v" in v["docker_build"]:
+    if "tezos/tezos:v" in v["docker_build"]:
        v["release"] = v["docker_build"].split("tezos/tezos:")[1]
     v["docker_build_hyperlinked"] = v["docker_build"]
     if v["docker_build"].startswith("tezos/tezos"):

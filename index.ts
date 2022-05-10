@@ -282,6 +282,7 @@ function getTeztnets(chains: TezosChain[]): object {
       human_name: chain.params.getHumanName(),
       description: chain.getDescription(),
       docker_build: chain.getDockerBuild(),
+      git_ref: chain.getGitRef(),
       protocols: chain.getProtocols(),
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
