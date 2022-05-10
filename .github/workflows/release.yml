@@ -46,7 +46,7 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v1.0.1
         with:
-          pulumi-version: 3.4.0
+          pulumi-version: 3.32.1
       - run: npm install
 
       - uses: pulumi/actions@v3
