@@ -1,14 +1,14 @@
 {
-    "name": "tqinfra",
-    "devDependencies": {
-        "@types/node": "^10.17.60"
-    },
-    "dependencies": {
-        "@pulumi/awsx": "^0.30.0",
-        "@pulumi/eks": "^0.31.0",
-        "@pulumi/pulumi": "^3.19.0",
-        "cron-parser": "^3.5.0",
-        "dotenv": "^16.0.0",
-        "yaml": "^1.10.0"
-    }
+  "name": "tqinfra",
+  "devDependencies": {
+    "@types/node": "^10.17.60"
+  },
+  "dependencies": {
+    "@pulumi/awsx": "^0.40.0",
+    "@pulumi/eks": "^0.39.0",
+    "@pulumi/pulumi": "^3.32.1",
+    "cron-parser": "^3.5.0",
+    "dotenv": "^16.0.0",
+    "yaml": "^1.10.0"
+  }
 }
