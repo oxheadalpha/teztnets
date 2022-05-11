@@ -83,7 +83,7 @@ rolling_tarball_url: null
 archive_tarball_url: "https://ithacanet.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v12.2
+  octez: tezos/tezos:v13.0
 
 # We give:
 accounts:
