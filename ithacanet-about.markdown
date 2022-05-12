@@ -9,7 +9,7 @@ Testnet for the Ithaca2 protocol proposal, proposed January 2022
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v12.2](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v12.2) |
+| Tezos docker build | [tezos/tezos:v13.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0) |
 | Public RPC endpoint | [https://rpc.ithacanet.teztnets.xyz](https://rpc.ithacanet.teztnets.xyz) |
 | Faucet | [Ithacanet faucet](https://teztnets.xyz/ithacanet-faucet) |
 | Activated on | 2022-01-25T15:00:00Z |
@@ -37,7 +37,7 @@ export TEZOS_LOG="*baker* -> debug"
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v12.2
+#### Download and install Tezos version v13.0
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -47,7 +47,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Ithacanet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v12.2
+docker run -it --entrypoint=/bin/sh tezos/tezos:v13.0
 ```
 
 #### Alternative: Build the software
@@ -57,7 +57,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v12.2
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v12.2
+git checkout v13.0
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
