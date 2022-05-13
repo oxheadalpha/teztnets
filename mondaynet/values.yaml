@@ -66,6 +66,14 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
+  scoru_rollup_operator:
+    key: edpktnY9kXbEW1HjqDbQ4AG3hYkNunxHiRsZe72gEaHxddxNBtjG7B
+    bootstrap_balance: "1000000000000"
+    is_bootstrap_baker_account: false
+  scoru_enduser:
+    key: edpkuet91oSH1Q9i4nGJRDjdsF9W7XcAteqLQe1VqSjtMHRtDpCVFp
+    bootstrap_balance: "1000000000000"
+    is_bootstrap_baker_account: false
 
 node_config_network:
   activation_account_name: oxheadbaker
