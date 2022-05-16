@@ -8,11 +8,11 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-MONDAYNET-2022-05-09T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_041a5ccb_20220507123235](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_041a5ccb_20220507123235) |
-| Public RPC endpoint | [https://rpc.mondaynet-2022-05-09.teztnets.xyz](https://rpc.mondaynet-2022-05-09.teztnets.xyz) |
-| Faucet | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-05-09-faucet) |
-| Activated on | 2022-05-09T00:00:00.000Z |
+| Full network name | `TEZOS-MONDAYNET-2022-05-16T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_d6ffb338_20220513231318](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_d6ffb338_20220513231318) |
+| Public RPC endpoint | [https://rpc.mondaynet-2022-05-16.teztnets.xyz](https://rpc.mondaynet-2022-05-16.teztnets.xyz) |
+| Faucet | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-05-16-faucet) |
+| Activated on | 2022-05-16T00:00:00.000Z |
 | Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 | Protocol at level 1024 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
@@ -30,7 +30,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 To join Mondaynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_041a5ccb_20220507123235
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_d6ffb338_20220513231318
 ```
 
 #### Alternative: Build the software
@@ -40,7 +40,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_041a5ccb_20220507123235
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 041a5ccb
+git checkout d6ffb338
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -53,7 +53,7 @@ export PATH=$(pwd):$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/mondaynet-2022-05-09
+tezos-node config init --network https://teztnets.xyz/mondaynet-2022-05-16
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -61,7 +61,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2022-05-09.log &
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2022-05-16.log &
 > ```
 
 
