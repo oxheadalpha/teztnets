@@ -102,20 +102,20 @@ activation:
     cache_stake_distribution_cycles: 8
     cache_sampler_state_cycles: 8
     tx_rollup_enable: true
-    tx_rollup_origination_size: 60000
-    tx_rollup_hard_size_limit_per_inbox: 100000
+    tx_rollup_origination_size: 4000
+    tx_rollup_hard_size_limit_per_inbox: 500000
     tx_rollup_hard_size_limit_per_message: 5000
-    tx_rollup_max_withdrawals_per_batch: 255
+    tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_commitment_bond: "10000000000"
-    tx_rollup_finality_period: 2000
-    tx_rollup_max_inboxes_count: 2101
-    tx_rollup_withdraw_period: 60000
+    tx_rollup_finality_period: 10
+    tx_rollup_max_inboxes_count: 15
+    tx_rollup_withdraw_period: 10
     tx_rollup_max_messages_per_inbox: 1010
-    tx_rollup_max_commitments_count: 4100
+    tx_rollup_max_commitments_count: 30
     tx_rollup_cost_per_byte_ema_factor: 120
-    tx_rollup_max_ticket_payload_size: 10240
+    tx_rollup_max_ticket_payload_size: 2048
     tx_rollup_rejection_max_proof_size: 30000
-    tx_rollup_sunset_level: 3473409
+    tx_rollup_sunset_level: 2760
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40
