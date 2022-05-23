@@ -1,0 +1,13 @@
+---
+nodes:
+  rolling-node: null
+signers:
+  tezos-signer-0:
+    sign_for_accounts:
+      - archive-baking-node-0
+accounts:
+  archive-baking-node-0:
+    bootstrap_balance: '4000000000000'
+    is_bootstrap_baker_account: true
+    key: edsk3XLJne6L9wUPeoeqbdj117nrN9kogPxWrG9QF6rWfhTPDGkHDd
+    type: private
