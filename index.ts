@@ -208,6 +208,26 @@ const ithacanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const ithacanet_signer = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "ithacanet/values.yaml",
+    name: "ithacanet-signer",
+    dnsName: "ithacanet-signer",
+    category: protocolCategory,
+    humanName: "Ithacanet-Signer",
+    description: "Signer for the Ithaca2 protocol proposal, proposed January 2022",
+    chartPath: "ithacanet-signer/tezos-k8s",
+    privateBakingKey: private_oxhead_baking_key,
+    numberOfFaucetAccounts: 10000,
+    faucetSeed: faucetSeed,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 const jakartanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "jakartanet/values.yaml",
@@ -297,12 +317,14 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
+  ithacanet_signer,
   jakartanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
+  ithacanet_signer,
   jakartanet_chain,
 ])
 

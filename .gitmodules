@@ -1,0 +1,3 @@
+[submodule "ithacanet-signer/tezos-k8s"]
+	path = ithacanet-signer/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git
