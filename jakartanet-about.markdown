@@ -50,7 +50,7 @@ opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
-export PATH=$(pwd):$PATH
+export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 ```
 
 ### Join the Jakartanet network
