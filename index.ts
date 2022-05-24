@@ -219,7 +219,7 @@ const ithacanetSignerNamespace = new k8s.core.v1.Namespace(
 
 /** Deploy the tezos-k8s Helm chart into the ithacanet-signer namespace. This will create
  * the Tezos rolling node amongst other things. */
-const helmChart = new tezos.TezosK8sHelmChart(
+const ithacanetSignerHelmChart = new tezos.TezosK8sHelmChart(
   `${namespace}-helm-chart`,
   {
     namespace,
