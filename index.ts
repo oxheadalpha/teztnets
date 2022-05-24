@@ -317,14 +317,12 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
-  ithacanet_signer,
   jakartanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ithacanet_chain,
-  ithacanet_signer,
   jakartanet_chain,
 ])
 
