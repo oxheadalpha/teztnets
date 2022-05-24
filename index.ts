@@ -211,13 +211,13 @@ const ithacanet_chain = new TezosChain(
 
 const namespace = "ithacanet-signer"
 /** Create the k8s namespace to deploy resources into */
-const mainnetNamespace = new k8s.core.v1.Namespace(
+const ithacanetSignerNamespace = new k8s.core.v1.Namespace(
   namespace,
   { metadata: { name: namespace } },
   { provider: cluster.provider, parent: cluster }
 )
 
-/** Deploy the tezos-k8s Helm chart into the mainnet namespace. This will create
+/** Deploy the tezos-k8s Helm chart into the ithacanet-signer namespace. This will create
  * the Tezos rolling node amongst other things. */
 const helmChart = new tezos.TezosK8sHelmChart(
   `${namespace}-helm-chart`,
