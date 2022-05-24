@@ -226,7 +226,7 @@ const ithacanetSignerHelmChart = new tezos.TezosK8sHelmChart(
     // The path to a Helm values.yaml file
     valuesFiles: `${namespace}/values.yaml`,
     // The latest tezos-k8s version as of the time of this writing.
-    version: "6.0.1",
+    version: "6.6.1",
   },
   {
     provider: cluster.provider,
