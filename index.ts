@@ -230,6 +230,7 @@ const helmChart = new tezos.TezosK8sHelmChart(
   },
   {
     provider: cluster.provider,
+    parent: ithacanetSignerNamespace,
   }
 )
 
