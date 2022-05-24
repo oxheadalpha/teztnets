@@ -3,6 +3,7 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
+import * as tezos from "@oxheadalpha/tezos-pulumi"
 
 require('dotenv').config();
 
@@ -208,24 +209,28 @@ const ithacanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const ithacanet_signer = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "ithacanet/values.yaml",
-    name: "ithacanet-signer",
-    dnsName: "ithacanet-signer",
-    category: protocolCategory,
-    humanName: "Ithacanet-Signer",
-    description: "Signer for the Ithaca2 protocol proposal, proposed January 2022",
-    chartPath: "ithacanet-signer/tezos-k8s",
-    privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
+const namespace = "ithacanet-signer"
+/** Create the k8s namespace to deploy resources into */
+const mainnetNamespace = new k8s.core.v1.Namespace(
+  namespace,
+  { metadata: { name: namespace } },
+  { provider: cluster.provider, parent: cluster }
+)
+
+/** Deploy the tezos-k8s Helm chart into the mainnet namespace. This will create
+ * the Tezos rolling node amongst other things. */
+const helmChart = new tezos.TezosK8sHelmChart(
+  `${namespace}-helm-chart`,
+  {
+    namespace,
+    // The path to a Helm values.yaml file
+    valuesFiles: `${namespace}/values.yaml`,
+    // The latest tezos-k8s version as of the time of this writing.
+    version: "6.0.1",
+  },
+  {
+    provider: cluster.provider,
+  }
 )
 
 const jakartanet_chain = new TezosChain(
