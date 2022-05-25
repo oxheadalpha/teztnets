@@ -6,7 +6,6 @@ import * as tezos from "@oxheadalpha/tezos-pulumi"
 
 import * as fs from 'fs';
 import * as YAML from 'yaml';
-const mime = require("mime");
 
 export interface TezosHelmParameters {
   readonly helmValues: any;
@@ -14,35 +13,27 @@ export interface TezosHelmParameters {
 
 export interface TezosInitParameters {
   getName(): string;
-  getChainName(): string;
-  getDescription(): string;
-  getHumanName(): string;
+  getPrivateBakingKey(): string;
 }
 
 export interface TezosParamsInitializer {
   readonly name ? : string;
-  readonly chainName ? : string;
-  readonly description ? : string;
-  readonly humanName ? : string;
   readonly privateBakingKey ? : string;
+  readonly yamlFile?: string;
 }
 
 
 export class TezosSignerParametersBuilder implements TezosHelmParameters, TezosInitParameters {
   private _helmValues: any;
   private _name: string;
-  private _description: string;
-  private _humanName: string;
-  private _privateBakingKey: string;
-
-
+  
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || '';
-    this._description = params.description || '';
-    this._humanName = params.humanName || '';
-    this._privateBakingKey = params.privateBakingKey || '';
-
     this._helmValues = {};
+
+    if (params.yamlFile) {
+      this.fromFile(params.yamlFile);
+    }
 
     if (params.privateBakingKey) {
       this.privateBakingKey(params.privateBakingKey);
@@ -63,33 +54,14 @@ export class TezosSignerParametersBuilder implements TezosHelmParameters, TezosI
     return this._name;
   }
 
-  public chainName(chainName: string): TezosSignerParametersBuilder {
-    this._helmValues["node_config_network"]["chain_name"] = chainName;
-    return this;
-  }
-
-  public getChainName(): string {
-    return this._helmValues["node_config_network"]["chain_name"];
-  }
-
-  public description(description: string): TezosSignerParametersBuilder {
-    this._description = description;
-    return this;
-  }
-  public getDescription(): string | any {
-    return this._description;
-  }
-
-  public getHumanName(): string | any {
-    return this._humanName;
-  }
-
   public privateBakingKey(privateBakingKey: string): TezosSignerParametersBuilder {
-    this._privateBakingKey = privateBakingKey;
+    this._helmValues["accounts"]["oxheadbaker"] = {
+      ["key"]: privateBakingKey
+    }
     return this;
   }
   public getPrivateBakingKey(): string {
-    return this._privateBakingKey;
+    return this._helmValues["accounts"]["oxheadbaker"]["key"];
   }
 
   public get helmValues(): string {
@@ -149,7 +121,7 @@ export class TezosSigner extends pulumi.ComponentResource {
       `${name}-helm-chart`, {
         namespace: name,
         // The path to a Helm values.yaml file
-        valuesFiles: `${name}/values.yaml`,
+        values: params.helmValues,
         // The latest tezos-k8s version as of the time of this writing.
         version: "6.6.1",
       }, {

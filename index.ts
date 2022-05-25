@@ -212,6 +212,7 @@ const ithacanet_chain = new TezosChain(
 
 const ithacanet_signer = new TezosSigner(
   new TezosSignerParametersBuilder({
+    yamlFile: "ithacanet-signer/values.yaml",
     name: "ithacanet-signer",
     privateBakingKey: private_oxhead_baking_key,
   }),
