@@ -3,12 +3,14 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
+import * as tezos from "@oxheadalpha/tezos-pulumi"
 
 require('dotenv').config();
 
 import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./externalDns"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
+import { TezosSigner, TezosSignerParametersBuilder } from "./TezosSigner"
 import { createCertValidation } from "./route53";
 
 let stack = pulumi.getStack()
@@ -202,6 +204,17 @@ const ithacanet_chain = new TezosChain(
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
+const ithacanet_signer = new TezosSigner(
+  new TezosSignerParametersBuilder({
+    yamlFile: "ithacanet-signer/values.yaml",
+    name: "ithacanet-signer",
+    privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
   repo,
