@@ -202,7 +202,7 @@ nodes:
       - baker
       - accuser
     readiness_probe: false
-    storage_size: 15Gi
+    storage_size: 160Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
@@ -214,7 +214,7 @@ bootstrap_peers:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: null
+archive_tarball_url: "https://jakartanet.xtz-shots.io/archive-tarball"
 
 images:
   octez: tezos/tezos:v13.0
