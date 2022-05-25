@@ -10,6 +10,7 @@ require('dotenv').config();
 import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./externalDns"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
+import { TezosSigner, TezosSignerParametersBuilder } from "./TezosSigner"
 import { createCertValidation } from "./route53";
 
 let stack = pulumi.getStack()
@@ -209,29 +210,14 @@ const ithacanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const namespace = "ithacanet-signer"
-/** Create the k8s namespace to deploy resources into */
-const ithacanetSignerNamespace = new k8s.core.v1.Namespace(
-  namespace,
-  { metadata: { name: namespace } },
-  { provider: cluster.provider, parent: cluster }
-)
-
-/** Deploy the tezos-k8s Helm chart into the ithacanet-signer namespace. This will create
- * the Tezos rolling node amongst other things. */
-const ithacanetSignerHelmChart = new tezos.TezosK8sHelmChart(
-  `${namespace}-helm-chart`,
-  {
-    namespace,
-    // The path to a Helm values.yaml file
-    valuesFiles: `${namespace}/values.yaml`,
-    // The latest tezos-k8s version as of the time of this writing.
-    version: "6.6.1",
-  },
-  {
-    provider: cluster.provider,
-    parent: ithacanetSignerNamespace,
-  }
+const ithacanet_signer = new TezosSigner(
+  new TezosSignerParametersBuilder({
+    name: "ithacanet-signer",
+    privateBakingKey: private_oxhead_baking_key,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
 )
 
 const jakartanet_chain = new TezosChain(
