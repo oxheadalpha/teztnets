@@ -114,18 +114,20 @@ export class TezosSigner extends pulumi.ComponentResource {
         name: name,
       }
     }, {
+      parent: this,
       provider: this.provider
     });
 
     const signer = new tezos.TezosK8sHelmChart(
-      `${name}-helm-chart`, {
-        namespace: name,
-        // The path to a Helm values.yaml file
+      name, 
+      {
+        namespace: ns.metadata.name,
         values: params.helmValues,
         // The latest tezos-k8s version as of the time of this writing.
         version: "6.6.1",
       }, {
         parent: this,
+        provider: this.provider,
       }
     )
   }
