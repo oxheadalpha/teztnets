@@ -40,8 +40,8 @@ jobs:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile temp_kube_admin
-            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile temp_kube_admin
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile oxheadalpha
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile oxheadalpha
 
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v1.0.1
