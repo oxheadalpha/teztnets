@@ -105,7 +105,6 @@ activation:
     tx_rollup_origination_size: 4000
     tx_rollup_hard_size_limit_per_inbox: 500000
     tx_rollup_hard_size_limit_per_message: 5000
-    tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_commitment_bond: "10000000000"
     tx_rollup_finality_period: 10
     tx_rollup_max_inboxes_count: 15
@@ -113,16 +112,21 @@ activation:
     tx_rollup_max_messages_per_inbox: 1010
     tx_rollup_max_commitments_count: 30
     tx_rollup_cost_per_byte_ema_factor: 120
+    tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_max_ticket_payload_size: 2048
     tx_rollup_rejection_max_proof_size: 30000
     tx_rollup_sunset_level: 2760
+    dal_feature_enable: true
+    dal_number_of_slots: 256
+    dal_number_of_shards: 2048
+    dal_endorsement_lag: 2
+    dal_availability_threshold: 50
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40
     sc_rollup_max_available_messages: 1000000
-    sc_rollup_stake_amount_in_mutez: 32000000
+    sc_rollup_stake_amount: 32000000
     sc_rollup_commitment_period_in_blocks: 20
-    sc_rollup_commitment_storage_size_in_bytes: 84
     sc_rollup_max_lookahead_in_blocks: 30000
     sc_rollup_max_active_outbox_levels: 20160
     sc_rollup_max_outbox_messages_per_level: 100
