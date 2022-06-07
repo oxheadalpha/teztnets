@@ -33,7 +33,7 @@ const deployExternalDns = (cluster: eks.Cluster) => {
     "external-dns",
     {
       chart: "external-dns",
-      version: "5.1.4",
+      version: "6.5.3",
       namespace: "default",
       fetchOpts: {
         repo: "https://charts.bitnami.com/bitnami",
