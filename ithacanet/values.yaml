@@ -8,6 +8,9 @@ node_config_network:
   user_activated_upgrades:
     - level: 8191
       replacement_protocol: Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A
+      # update to jakarta at the end of cycle 186, estimated to be on June 28th at 08:30 UTC
+    - level: 765952
+      replacement_protocol: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
 
 protocols:
   - command: 012-Psithaca
