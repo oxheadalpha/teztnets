@@ -15,6 +15,7 @@ Testnet for the Ithaca2 protocol proposal, proposed January 2022
 | Activated on | 2022-01-25T15:00:00Z |
 | Protocol at level 0 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 | Protocol at level 8191 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
+| Protocol at level 765952 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 
 
 You can run ithaca testnet by passing the argument `--network ithacanet` to `tezos-node run`.
