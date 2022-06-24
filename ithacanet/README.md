@@ -10,7 +10,9 @@ If you open it, you will find the following line:
   "network": "ithacanet"
 ```
 
-Replace it with:
+Upgdate your configuration by running `tezos-node config update --network https://teztnets.xyz/ithacanet`
+
+You should now see in your config:
 
 ```
   "network": {
@@ -40,4 +42,4 @@ Replace it with:
   }
 ```
 
-When done, restart your node. If it fails to start, check that the json syntax is valid.
+Alternatively, you can paste this network configuration manually in your config. When done, restart your node.
