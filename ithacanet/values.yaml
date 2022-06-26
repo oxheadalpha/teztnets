@@ -14,6 +14,7 @@ node_config_network:
 
 protocols:
   - command: 012-Psithaca
+  - command: 013-PtJakart
 
 activation:
   protocol_hash: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx

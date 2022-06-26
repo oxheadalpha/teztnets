@@ -189,7 +189,7 @@ const ithacanet_chain = new TezosChain(
     dnsName: "ithacanet",
     category: protocolCategory,
     humanName: "Ithacanet",
-    description: "Testnet for the Ithaca2 protocol proposal, proposed January 2022",
+    description: "Ithacanet/Ghostnet is the long-running testnet for Tezos",
     bootstrapPeers: [
       "ithacanet.smartpy.io",
       "ithacanet.boot.ecadinfra.com",
