@@ -192,10 +192,10 @@ const ithacanet_chain = new TezosChain(
     description: "Ithacanet/Ghostnet is the long-running testnet for Tezos",
     bootstrapPeers: [
       "ithacanet.smartpy.io",
-      "ithacanet.boot.ecadinfra.com",
+      "ghostnet.boot.ecadinfra.com",
       "ithacanet.kaml.fr",
       "ithacanet.stakenow.de:9733",
-      "ithacanet.visualtez.com",
+      "ghostnet.visualtez.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.7.0",
