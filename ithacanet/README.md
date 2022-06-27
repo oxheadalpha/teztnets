@@ -1,6 +1,6 @@
 Ithacanet is turning into a long running testnet callled ghostnet. As a first step, we are going to do an user-activated upgrade of the network to Jakarta on January 28th, on block 765,952.
 
-In order to remain on the network, every baker will have to upgrade to 13.0, turn on their ithaca baker and change their node's configuration.
+In order to remain on the network, every baker will have to upgrade to 13.0, turn on their jakarta baker and change their node's configuration.
 
 The tezos json configuration file is typically at `~/.tezos-node/config.json` but may be in a different location.
 
