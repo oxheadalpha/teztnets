@@ -185,8 +185,9 @@ const mondaynet_chain = new TezosChain(
 const ghostnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "ghostnet/values.yaml",
-    name: "ithacanet",
-    dnsName: "ithacanet",
+    name: "ghostnet",
+    aliases: ["ithacanet"],
+    dnsName: "ghostnet",
     category: longCategory,
     humanName: "Ghostnet",
     description: "Ghostnet is the long-running testnet for Tezos",

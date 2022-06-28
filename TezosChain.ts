@@ -38,6 +38,7 @@ export interface TezosInitParameters {
   getFaucetSeed(): string;
   getFaucetRecaptchaSiteKey(): string;
   getFaucetRecaptchaSecretKey(): string;
+  getAliases(): string[];
 }
 
 export interface TezosParamsInitializer {
@@ -63,6 +64,7 @@ export interface TezosParamsInitializer {
   readonly faucetSeed?: string;
   readonly faucetRecaptchaSiteKey?: string;
   readonly faucetRecaptchaSecretKey?: string;
+  readonly aliases?: string[];
 }
 
 
@@ -85,6 +87,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetSeed: string;
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
+  private _aliases: string[];
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -105,6 +108,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetSeed = params.faucetSeed || '';
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
+    this._aliases = params.aliases || [];
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -301,6 +305,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   public get helmValues(): string {
     return this._helmValues;
   }
+  public getAliases(): string[] {
+    return this._aliases;
+  }
 
 }
 
@@ -407,76 +414,80 @@ export class TezosChain extends pulumi.ComponentResource {
     })
 
     let _cacheFrom: docker.CacheFrom = {}
-    // RPC Ingress
-    const rpcDomain = `rpc.${teztnetsDomain}`
-    const rpcCert = new aws.acm.Certificate(
-      `${rpcDomain}-cert`,
-      {
-        validationMethod: "DNS",
-        domainName: rpcDomain,
-      },
-      { parent: this }
-    )
-    const { certValidation } = createCertValidation(
-      {
-        cert: rpcCert,
-        targetDomain: rpcDomain,
-        hostedZone: this.zone,
-      },
-      { parent: this }
-    )
+    let allNames: string[] = [...params.getAliases(), ...[name]];
 
-    const rpcIngName = `${rpcDomain}-ingress`
-    const rpc_ingress = new k8s.networking.v1beta1.Ingress(
-      rpcIngName,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: rpcIngName,
-          annotations: {
-            "kubernetes.io/ingress.class": "alb",
-            "alb.ingress.kubernetes.io/scheme": "internet-facing",
-            "alb.ingress.kubernetes.io/healthcheck-path":
-              "/chains/main/chain_id",
-            "alb.ingress.kubernetes.io/healthcheck-port": "8732",
-            "alb.ingress.kubernetes.io/listen-ports":
-              '[{"HTTP": 80}, {"HTTPS":443}]',
-            "ingress.kubernetes.io/force-ssl-redirect": "true",
-            "alb.ingress.kubernetes.io/actions.ssl-redirect":
-              '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-            // Prevent pulumi erroring if ingress doesn't resolve immediately
-            "pulumi.com/skipAwait": "true",
-          },
-          labels: { app: "tezos-node" },
+    allNames.forEach(name => {
+      // RPC Ingress
+      const rpcDomain = `rpc.${name}.teztnets.xyz`
+      const rpcCert = new aws.acm.Certificate(
+        `${rpcDomain}-cert`,
+        {
+          validationMethod: "DNS",
+          domainName: rpcDomain,
         },
-        spec: {
-          rules: [
-            {
-              host: rpcDomain,
-              http: {
-                paths: [
-                  {
-                    path: "/*",
-                    backend: {
-                      serviceName: "ssl-redirect",
-                      servicePort: "use-annotation",
-                    },
-                  },
-                  {
-                    path: "/*",
-                    backend: {
-                      serviceName: "tezos-node-rpc",
-                      servicePort: "rpc",
-                    },
-                  },
-                ],
-              },
+        { parent: this }
+      )
+      const { certValidation } = createCertValidation(
+        {
+          cert: rpcCert,
+          targetDomain: rpcDomain,
+          hostedZone: this.zone,
+        },
+        { parent: this }
+      )
+
+      const rpcIngName = `${rpcDomain}-ingress`
+      const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+        rpcIngName,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: rpcIngName,
+            annotations: {
+              "kubernetes.io/ingress.class": "alb",
+              "alb.ingress.kubernetes.io/scheme": "internet-facing",
+              "alb.ingress.kubernetes.io/healthcheck-path":
+                "/chains/main/chain_id",
+              "alb.ingress.kubernetes.io/healthcheck-port": "8732",
+              "alb.ingress.kubernetes.io/listen-ports":
+                '[{"HTTP": 80}, {"HTTPS":443}]',
+              "ingress.kubernetes.io/force-ssl-redirect": "true",
+              "alb.ingress.kubernetes.io/actions.ssl-redirect":
+                '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+              // Prevent pulumi erroring if ingress doesn't resolve immediately
+              "pulumi.com/skipAwait": "true",
             },
-          ],
+            labels: { app: "tezos-node" },
+          },
+          spec: {
+            rules: [
+              {
+                host: rpcDomain,
+                http: {
+                  paths: [
+                    {
+                      path: "/*",
+                      backend: {
+                        serviceName: "ssl-redirect",
+                        servicePort: "use-annotation",
+                      },
+                    },
+                    {
+                      path: "/*",
+                      backend: {
+                        serviceName: "tezos-node-rpc",
+                        servicePort: "rpc",
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
         },
-      },
-      { provider, parent: this, dependsOn: certValidation }
-    )
+        { provider, parent: this, dependsOn: certValidation }
+      )
+    })
 
     let tezosK8sImages;
     let pulumiTaggedImages;
@@ -548,32 +559,36 @@ export class TezosChain extends pulumi.ComponentResource {
       );
     }
 
-    new k8s.core.v1.Service(
-      `${name}-p2p-lb`,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: name,
-          annotations: {
-            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
+
+    allNames.forEach(name => {
+      new k8s.core.v1.Service(
+        `${name}-p2p-lb`,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: name,
+            annotations: {
+              "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+              "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+              "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+            },
+          },
+          spec: {
+            ports: [
+              {
+                port: 9732,
+                targetPort: 9732,
+                protocol: "TCP",
+              },
+            ],
+            selector: { node_class: "tezos-baking-node" },
+            type: "LoadBalancer",
           },
         },
-        spec: {
-          ports: [
-            {
-              port: 9732,
-              targetPort: 9732,
-              protocol: "TCP",
-            },
-          ],
-          selector: { node_class: "tezos-baking-node" },
-          type: "LoadBalancer",
-        },
-      },
-      { provider: this.provider }
-    )
+        { provider: this.provider }
+      )
+
+    })
 
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
