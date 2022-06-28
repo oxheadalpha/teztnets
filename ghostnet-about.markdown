@@ -1,17 +1,17 @@
 ---
 layout: page
-title: Ithacanet
-permalink: /ithacanet-about
+title: Ghostnet
+permalink: /ghostnet-about
 ---
 
-Ithacanet/Ghostnet is the long-running testnet for Tezos
+Ghostnet is the long-running testnet for Tezos
 
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v13.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0) |
 | Public RPC endpoint | [https://rpc.ithacanet.teztnets.xyz](https://rpc.ithacanet.teztnets.xyz) |
-| Faucet | [Ithacanet faucet](https://teztnets.xyz/ithacanet-faucet) |
+| Faucet | [Ghostnet faucet](https://teztnets.xyz/ithacanet-faucet) |
 | Activated on | 2022-01-25T15:00:00Z |
 | Protocol at level 0 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 | Protocol at level 8191 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
@@ -77,7 +77,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 
 #### Alternative: Use docker
 
-To join Ithacanet with docker, open a shell in the container:
+To join Ghostnet with docker, open a shell in the container:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:v13.0
@@ -98,7 +98,7 @@ make
 export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 ```
 
-### Join the Ithacanet network
+### Join the Ghostnet network
 
 Run the following commands:
 
@@ -115,7 +115,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > ```
 
 
-### Bake on the Ithacanet network
+### Bake on the Ghostnet network
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/ithacanet-faucet).
 
