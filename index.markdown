@@ -6,6 +6,16 @@ Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. 
 
 This list of Teztnets is also available in [json format](https://teztnets.xyz/teztnets.json).
 
+# Long-running Teztnets
+
+A Testnet that follow Tezos mainnet upgrades
+
+| | Activated on | Faucet |
+|-------|---------------------|--|
+| [Ghostnet](/ghostnet-about) | `2022-01-25` | [Ghostnet faucet](https://teztnets.xyz/ithacanet-faucet) |
+
+
+
 # Protocol Teztnets
 
 Testnets deployed specifically to test new Tezos protocol proposals.
@@ -26,16 +36,6 @@ Testnets that restart regularly and track the development of the master branch o
 |-------|---------------------|--|
 | [Dailynet](/dailynet-about) | `2022-06-28` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-06-28-faucet) |
 | [Mondaynet](/mondaynet-about) | `2022-06-27` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-06-27-faucet) |
-
-
-
-# Long-running Teztnets
-
-
-
-| | Activated on | Faucet |
-|-------|---------------------|--|
-| [Ghostnet](/ghostnet-about) | `2022-01-25` | [Ghostnet faucet](https://teztnets.xyz/ithacanet-faucet) |
 
 
 
