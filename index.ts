@@ -301,6 +301,7 @@ function getTeztnets(chains: TezosChain[]): object {
       category: chain.params.getCategory(),
       rpc_url: rpcUrl,
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
+      aliases: chain.params.getAliases(),
     }
   })
 

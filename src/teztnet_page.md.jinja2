@@ -57,7 +57,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-{% if v["release"] and "rc" not in v["release"] -%}
+{% if v["release"] and "rc" not in v["release"] and k != "ghostnet" -%}
 tezos-node config init --network {{ k }}
 {% else -%}
 tezos-node config init --network {{ v["network_url"] }}
