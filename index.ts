@@ -187,9 +187,9 @@ const ithacanet_chain = new TezosChain(
     yamlFile: "ithacanet/values.yaml",
     name: "ithacanet",
     dnsName: "ithacanet",
-    category: protocolCategory,
-    humanName: "Ithacanet",
-    description: "Ithacanet/Ghostnet is the long-running testnet for Tezos",
+    category: longCategory,
+    humanName: "Ghostnet",
+    description: "Ghostnet is the long-running testnet for Tezos",
     bootstrapPeers: [
       "ithacanet.smartpy.io",
       "ghostnet.boot.ecadinfra.com",
