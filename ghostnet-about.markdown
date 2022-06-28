@@ -18,7 +18,6 @@ Ghostnet is the long-running testnet for Tezos
 | Protocol at level 765952 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 
 
-Ghostnet was previously known as Ithacanet, the testchain for the Ithaca protocol.
 
 
 ### Install the software
