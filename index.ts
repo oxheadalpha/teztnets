@@ -182,7 +182,7 @@ const mondaynet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const ithacanet_chain = new TezosChain(
+const ghostnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "ithacanet/values.yaml",
     name: "ithacanet",
@@ -210,7 +210,7 @@ const ithacanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const ithacanet_signer = new TezosSigner(
+const ghostnet_signer = new TezosSigner(
   new TezosSignerParametersBuilder({
     yamlFile: "ithacanet-signer/values.yaml",
     name: "ithacanet-signer",
@@ -309,13 +309,13 @@ function getTeztnets(chains: TezosChain[]): object {
 export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
-  ithacanet_chain,
+  ghostnet_chain,
   jakartanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
-  ithacanet_chain,
+  ghostnet_chain,
   jakartanet_chain,
 ])
 
