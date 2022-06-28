@@ -13,7 +13,6 @@ node_config_network:
       replacement_protocol: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
 
 protocols:
-  - command: 012-Psithaca
   - command: 013-PtJakart
 
 activation:
