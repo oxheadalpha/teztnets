@@ -59,7 +59,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network ghostnet
+tezos-node config init --network https://teztnets.xyz/ghostnet
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
