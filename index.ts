@@ -186,6 +186,7 @@ const ghostnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "ghostnet/values.yaml",
     name: "ghostnet",
+    aliases: ["ithacanet"],
     dnsName: "ghostnet",
     category: longCategory,
     humanName: "Ghostnet",

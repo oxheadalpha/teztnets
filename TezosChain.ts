@@ -38,6 +38,7 @@ export interface TezosInitParameters {
   getFaucetSeed(): string;
   getFaucetRecaptchaSiteKey(): string;
   getFaucetRecaptchaSecretKey(): string;
+  getAliases(): string[];
 }
 
 export interface TezosParamsInitializer {
@@ -63,6 +64,7 @@ export interface TezosParamsInitializer {
   readonly faucetSeed?: string;
   readonly faucetRecaptchaSiteKey?: string;
   readonly faucetRecaptchaSecretKey?: string;
+  readonly aliases?: string[];
 }
 
 
@@ -85,6 +87,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetSeed: string;
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
+  private _aliases: string[];
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -105,6 +108,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetSeed = params.faucetSeed || '';
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
+    this._aliases = params.aliases || [];
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -300,6 +304,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
 
   public get helmValues(): string {
     return this._helmValues;
+  }
+  public getAliases(): string[] {
+    return this._aliases;
   }
 
 }
@@ -548,32 +555,37 @@ export class TezosChain extends pulumi.ComponentResource {
       );
     }
 
-    new k8s.core.v1.Service(
-      `${name}-p2p-lb`,
-      {
-        metadata: {
-          namespace: ns.metadata.name,
-          name: name,
-          annotations: {
-            "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-            "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-            "external-dns.alpha.kubernetes.io/hostname": teztnetsDomain,
+    let allNames: string[] = [...params.getAliases(), ...[name]];
+
+    allNames.forEach(name => {
+      new k8s.core.v1.Service(
+        `${name}-p2p-lb`,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: name,
+            annotations: {
+              "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+              "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+              "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+            },
+          },
+          spec: {
+            ports: [
+              {
+                port: 9732,
+                targetPort: 9732,
+                protocol: "TCP",
+              },
+            ],
+            selector: { node_class: "tezos-baking-node" },
+            type: "LoadBalancer",
           },
         },
-        spec: {
-          ports: [
-            {
-              port: 9732,
-              targetPort: 9732,
-              protocol: "TCP",
-            },
-          ],
-          selector: { node_class: "tezos-baking-node" },
-          type: "LoadBalancer",
-        },
-      },
-      { provider: this.provider }
-    )
+        { provider: this.provider }
+      )
+
+    })
 
     if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
       // deploy a faucet website
