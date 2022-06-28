@@ -184,7 +184,7 @@ const mondaynet_chain = new TezosChain(
 
 const ghostnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "ithacanet/values.yaml",
+    yamlFile: "ghostnet/values.yaml",
     name: "ithacanet",
     dnsName: "ithacanet",
     category: longCategory,
@@ -212,7 +212,7 @@ const ghostnet_chain = new TezosChain(
 
 const ghostnet_signer = new TezosSigner(
   new TezosSignerParametersBuilder({
-    yamlFile: "ithacanet-signer/values.yaml",
+    yamlFile: "ghostnet-signer/values.yaml",
     name: "ithacanet-signer",
     privateBakingKey: private_oxhead_baking_key,
   }),
