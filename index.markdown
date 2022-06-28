@@ -12,7 +12,7 @@ A Testnet that follow Tezos mainnet upgrades
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Ghostnet](/ghostnet-about) | `2022-01-25` | [Ghostnet faucet](https://teztnets.xyz/ithacanet-faucet) |
+| [Ghostnet](/ghostnet-about) | `2022-01-25` | [Ghostnet faucet](https://teztnets.xyz/ghostnet-faucet) |
 
 
 
