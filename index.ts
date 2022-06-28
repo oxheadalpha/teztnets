@@ -213,7 +213,7 @@ const ghostnet_chain = new TezosChain(
 const ghostnet_signer = new TezosSigner(
   new TezosSignerParametersBuilder({
     yamlFile: "ghostnet-signer/values.yaml",
-    name: "ithacanet-signer",
+    name: "ghostnet-signer",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,

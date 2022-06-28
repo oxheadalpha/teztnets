@@ -77,8 +77,8 @@ nodes:
 bootstrap_peers:
   - ithacanet.smartpy.io
   - ithacanet.kaml.fr
-  - ithacanet.boot.ecadinfra.com
-  - ithacanet.stakenow.de:9733
+  - ghostnet.boot.ecadinfra.com
+  - ghostnet.stakenow.de:9733
 
 
 full_snapshot_url: null
