@@ -194,7 +194,7 @@ const ithacanet_chain = new TezosChain(
       "ithacanet.smartpy.io",
       "ghostnet.boot.ecadinfra.com",
       "ithacanet.kaml.fr",
-      "ithacanet.stakenow.de:9733",
+      "ghostnet.stakenow.de:9733",
       "ghostnet.visualtez.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
