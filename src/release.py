@@ -66,6 +66,6 @@ for k,v in teztnets.items():
         with open(f"target/release/{alias}-about.markdown", "w") as out_file:
             print(f"{alias} is now {k}, go to [{k}-about]({k}-about)", file=out_file)
         with open(f"target/release/{alias}-faucet.markdown", "w") as out_file:
-            print(f"{alias} is now {v}, go to [{k}-faucet]({k}-faucet)", file=out_file)
+            print(f"{alias} is now {k}, go to [{k}-faucet]({k}-faucet)", file=out_file)
         with open(f"target/release/{alias}", "w") as out_file:
             print(json.dumps(networks[k], indent = 2), file=out_file)
