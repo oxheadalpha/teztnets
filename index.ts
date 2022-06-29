@@ -248,6 +248,30 @@ const jakartanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const kathmandunet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "kathmandunet/values.yaml",
+    name: "kathmandunet",
+    dnsName: "kathmandunet",
+    category: protocolCategory,
+    humanName: "Kathmandunet",
+    description: "Testnet for the half-baked Kathmandu proposal - not final",
+    bootstrapPeers: [
+      "kathmandunet.boot.ecadinfra.com",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.7.0",
+    privateBakingKey: private_oxhead_baking_key,
+    numberOfFaucetAccounts: 10000,
+    faucetSeed: faucetSeed,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -313,12 +337,14 @@ export const networks = getNetworks([
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
+  kathmandunet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
+  kathmandunet_chain,
 ])
 
 const pyrometerChart = new k8s.helm.v2.Chart(
