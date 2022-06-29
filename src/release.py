@@ -16,7 +16,7 @@ with open("./networks.json", 'r') as networks_file:
 
 for network_name in networks:
     with open(f"target/release/{network_name}", "w") as out_file:
-        print(json.dumps(networks[network_name]), file=out_file)
+        print(json.dumps(networks[network_name], indent = 2), file=out_file)
 
 # group by category for human rendering
 # Order manually. Start with long-running.
@@ -39,7 +39,7 @@ with open("target/release-notes.markdown", "w") as out_file:
 with open("target/release/index.markdown", "a") as out_file:
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
-    print(json.dumps(teztnets), file=out_file)
+    print(json.dumps(teztnets, indent = 2), file=out_file)
 
 for k,v in teztnets.items():
     v["release"] = None
@@ -68,3 +68,5 @@ for k,v in teztnets.items():
             print(f"{alias} is now {k}, go to [{k}-about]({k}-about)", file=out_file)
         with open(f"target/release/{alias}-faucet.markdown", "w") as out_file:
             print(f"{alias} is now {v}, go to [{k}-faucet]({k}-faucet)", file=out_file)
+        with open(f"target/release/{alias}", "w") as out_file:
+            print(json.dumps(networks[k], indent = 2), file=out_file)
