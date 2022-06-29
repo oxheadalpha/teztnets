@@ -73,18 +73,18 @@ accounts:
       #      type: public
       #      is_bootstrap_baker_account: true
       #      bootstrap_balance: "1000000000000"
-      #  michael_kernaghan:
-      #    # tz1XGwK6kkiJaq2ZEJYcWEj5Tc8bcV6pNHqV
-      #    key: edpkufKizMFA2EfbLdrUPLGcwe9EHad4MwtgGeVPCBP2x5VZeKHqsh
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
-      #  fredcy:
-      #    # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
-      #    key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
+  michael_kernaghan:
+    # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
+    key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  fredcy:
+    # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
+    key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #  baking_benjamins:
       #    # tz1WzwobH5AFz3ea8n2UEramfYm1LY96hKJK
       #    key: edpkuT6dsU7krrQFBnk7c72EnrycvFeKQoL63EoiMz1AdQJGR9ux57
