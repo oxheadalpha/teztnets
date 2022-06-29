@@ -192,9 +192,9 @@ const ghostnet_chain = new TezosChain(
     humanName: "Ghostnet",
     description: "Ghostnet is the long-running testnet for Tezos",
     bootstrapPeers: [
-      "ithacanet.smartpy.io",
+      "ghostnet.smartpy.io",
       "ghostnet.boot.ecadinfra.com",
-      "ithacanet.kaml.fr",
+      "ghostnet.kaml.fr",
       "ghostnet.stakenow.de:9733",
       "ghostnet.visualtez.com",
     ],
