@@ -65,6 +65,6 @@ for k,v in teztnets.items():
 
     for alias in v["aliases"]:
         with open(f"target/release/{alias}-about.markdown", "w") as out_file:
-            print(f"{alias} is now {v}, go to [{v}-about]({v}-about)", file=out_file)
+            print(f"{alias} is now {k}, go to [{k}-about]({k}-about)", file=out_file)
         with open(f"target/release/{alias}-faucet.markdown", "w") as out_file:
-            print(f"{alias} is now {v}, go to [{v}-faucet]({v}-faucet)", file=out_file)
+            print(f"{alias} is now {v}, go to [{k}-faucet]({k}-faucet)", file=out_file)
