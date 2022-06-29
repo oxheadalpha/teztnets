@@ -8,7 +8,7 @@ This list of Teztnets is also available in [json format](https://teztnets.xyz/te
 
 # Long-running Teztnets
 
-A Testnet that follow Tezos mainnet upgrades
+
 
 | | Activated on | Faucet |
 |-------|---------------------|--|

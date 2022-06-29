@@ -18,7 +18,14 @@ Ghostnet is the long-running testnet for Tezos
 | Protocol at level 765952 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 
 
+Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet a few hours before Mainnet update itself.
+
 Ghostnet was previously known as Ithacanet, the testchain for the Ithaca protocol.
+
+Ghostnet indexers are available at:
+
+* [TzStats](https://ghost.tzstats.com)
+* [TzKT](https://ghostnet.tzkt.io)
 
 
 ### Install the software
