@@ -149,7 +149,7 @@ activation:
     blocks_per_cycle: 4096
     blocks_per_commitment: 32
     blocks_per_stake_snapshot: 256
-    blocks_per_voting_period: 4096
+    cycles_per_voting_period: 1
     hard_gas_limit_per_operation: '1040000'
     hard_gas_limit_per_block: '5200000'
     proof_of_work_threshold: '-1'
@@ -239,8 +239,7 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-bootstrap_peers:
-  - kathmandunet.boot.ecadinfra.com
+bootstrap_peers: []
 
 full_snapshot_url: null
 rolling_snapshot_url: null
