@@ -239,4 +239,5 @@ images:
   octez: tezos/tezos:master_43d54ff6_20220629174233
 
 protocols:
+  - command: 013-PtJakart
   - command: 014-PtKathma
