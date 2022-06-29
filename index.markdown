@@ -23,6 +23,7 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 | | Activated on | Faucet |
 |-------|---------------------|--|
 | [Jakartanet](/jakartanet-about) | `2022-04-27` | [Jakartanet faucet](https://teztnets.xyz/jakartanet-faucet) |
+| [Kathmandunet](/kathmandunet-about) | `2022-06-30` | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
 
 
 
