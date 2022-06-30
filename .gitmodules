@@ -1,3 +1,6 @@
 [submodule "ithacanet-signer/tezos-k8s"]
 	path = ghostnet-signer/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
+[submodule "kathmandunet/tezos-k8s"]
+	path = kathmandunet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git

@@ -259,8 +259,9 @@ const kathmandunet_chain = new TezosChain(
     bootstrapPeers: [
       "kathmandunet.boot.ecadinfra.com",
     ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.7.0",
+    //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    //chartRepoVersion: "6.7.0",
+    chartPath: 'kathmandunet/tezos-k8s',
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
