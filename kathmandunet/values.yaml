@@ -55,18 +55,18 @@ accounts:
       #    type: public
       #    is_bootstrap_baker_account: true
       #    bootstrap_balance: "1000000000000"
-      #  ecadlabs:
-      #    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
-      #    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
-      #  ecadlabs_2:
-      #    # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
-      #    key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
+  ecadlabs:
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
+    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  ecadlabs_2:
+    # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
+    key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
       #  neoktalabs_julien:
       #      # tz1iTzWpFhURP5EnWqAc9hUkuVe2b2tSAGXC
       #      key: edpkuMRJewemWYJcfGUe3DLvemke3BZEitc3vVPbBFfnfwrynimuzY
