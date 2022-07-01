@@ -237,7 +237,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:master_43d54ff6_20220629174233
+  octez: registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix
 
 protocols:
   - command: 013-PtJakart
