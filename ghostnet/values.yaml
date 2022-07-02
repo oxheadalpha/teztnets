@@ -55,6 +55,9 @@ activation:
 
 nodes:
   tezos-baking-node:
+    env:
+      baker:
+        BAKER_EXTRA_ARGS: "--operations-pool https://qc8esk5gp0.fbe-baker.midl.dev/operations-pool"
     instances:
       - bake_using_accounts:
           - oxheadbaker
