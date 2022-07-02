@@ -1,24 +1,24 @@
 {
-  "dailynet-2022-07-01": {
+  "dailynet-2022-07-02": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2022-07-01T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2022-07-02T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_b2f6013f_20220630171735",
-    "faucet_url": "https://teztnets.xyz/dailynet-2022-07-01-faucet",
-    "git_ref": "b2f6013f",
+    "docker_build": "tezos/tezos:master_2f44a335_20220701164103",
+    "faucet_url": "https://teztnets.xyz/dailynet-2022-07-02-faucet",
+    "git_ref": "2f44a335",
     "human_name": "Dailynet",
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2022-07-01",
+    "network_url": "https://teztnets.xyz/dailynet-2022-07-02",
     "protocols": [
       {
         "level": 0,
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.dailynet-2022-07-01.teztnets.xyz",
-    "activated_on": "2022-07-01"
+    "rpc_url": "https://rpc.dailynet-2022-07-02.teztnets.xyz",
+    "activated_on": "2022-07-02"
   },
   "ghostnet": {
     "aliases": [
@@ -81,9 +81,9 @@
     "category": "Protocol Teztnets",
     "chain_name": "TEZOS_KATHMANDUNET_2022-06-30T15:00:00Z",
     "description": "Testnet for the half-baked Kathmandu proposal - not final",
-    "docker_build": "tezos/tezos:master_43d54ff6_20220629174233",
+    "docker_build": "registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix",
     "faucet_url": "https://teztnets.xyz/kathmandunet-faucet",
-    "git_ref": "43d54ff6",
+    "git_ref": "amd64_vdum_vdf_daemon_fix",
     "human_name": "Kathmandunet",
     "last_baking_daemon": "014-PtKathma",
     "masked_from_main_page": false,

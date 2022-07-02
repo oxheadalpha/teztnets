@@ -9,7 +9,7 @@ Testnet for the half-baked Kathmandu proposal - not final
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_KATHMANDUNET_2022-06-30T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:master_43d54ff6_20220629174233](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_43d54ff6_20220629174233) |
+| Tezos docker build | registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
 | Activated on | 2022-06-30T15:00:00Z |
@@ -39,7 +39,7 @@ You need to opt-in to be a bootstrap baker, by submitting a PR against [this fil
 To join Kathmandunet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_43d54ff6_20220629174233
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix
 ```
 
 #### Alternative: Build the software
@@ -49,7 +49,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_43d54ff6_20220629174233
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 43d54ff6
+git checkout amd64_vdum_vdf_daemon_fix
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
