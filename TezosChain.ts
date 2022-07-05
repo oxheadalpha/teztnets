@@ -39,6 +39,7 @@ export interface TezosInitParameters {
   getFaucetRecaptchaSiteKey(): string;
   getFaucetRecaptchaSecretKey(): string;
   getAliases(): string[];
+  getIndexers(): { name: string, url: string }[];
 }
 
 export interface TezosParamsInitializer {
@@ -65,6 +66,7 @@ export interface TezosParamsInitializer {
   readonly faucetRecaptchaSiteKey?: string;
   readonly faucetRecaptchaSecretKey?: string;
   readonly aliases?: string[];
+  readonly indexers?: { name: string, url: string }[];
 }
 
 
@@ -88,6 +90,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
   private _aliases: string[];
+  private _indexers: { name: string, url: string }[];
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -109,6 +112,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
     this._aliases = params.aliases || [];
+    this._indexers = params.indexers || [];
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -307,6 +311,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   public getAliases(): string[] {
     return this._aliases;
+  }
+  public getIndexers(): { name: string, url: string }[] {
+    return this._indexers;
   }
 
 }

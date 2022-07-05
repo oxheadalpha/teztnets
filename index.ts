@@ -205,6 +205,16 @@ const ghostnet_chain = new TezosChain(
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    indexers: [
+      {
+        name: "TzKT",
+        url: "https://ghostnet.tzkt.io"
+      },
+      {
+        name: "TzStats",
+        url: "https://ghost.tzstats.com"
+      },
+    ]
   }),
   cluster.provider,
   repo,
@@ -242,6 +252,16 @@ const jakartanet_chain = new TezosChain(
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    indexers: [
+      {
+        name: "TzKT",
+        url: "https://jakartanet.tzkt.io"
+      },
+      {
+        name: "TzStats",
+        url: "https://jakarta.tzstats.com"
+      },
+    ]
   }),
   cluster.provider,
   repo,
@@ -327,6 +347,7 @@ function getTeztnets(chains: TezosChain[]): object {
       rpc_url: rpcUrl,
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
       aliases: chain.params.getAliases(),
+      indexers: chain.params.getIndexers(),
     }
   })
 
