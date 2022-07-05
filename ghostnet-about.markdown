@@ -16,16 +16,12 @@ Ghostnet is the long-running testnet for Tezos
 | Protocol at level 0 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 | Protocol at level 8191 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
 | Protocol at level 765952 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
+| Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 
 
-Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet a few hours before Mainnet update itself.
+Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet shortly before Mainnet update itself.
 
 Ghostnet was previously known as Ithacanet, the testchain for the Ithaca protocol.
-
-Ghostnet indexers are available at:
-
-* [TzStats](https://ghost.tzstats.com)
-* [TzKT](https://ghostnet.tzkt.io)
 
 If you were previously running an Ithacanet node and it is now stuck at upgrade level (765952), you must:
 

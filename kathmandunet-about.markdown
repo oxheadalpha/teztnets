@@ -17,6 +17,7 @@ Testnet for the half-baked Kathmandu proposal - not final
 | Protocol at level 8192 |  `PtKathmaHPSjL3WDmUCJP7iHBsUix65HdAgSeVacukogRK6hum6` |
 
 
+
 Half-baked Kathmandu protocol snapshot. The real one will come later. PLEASE DO NOT INJECT.
 
 There is no Octez release for this first instance of Kathmandunet. You need to build or grab a build or container from the master branch of Octez built on or after `Wed Jun 29 17:42:33 2022 +0000` (commit `43d54ff63d`).

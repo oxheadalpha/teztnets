@@ -15,6 +15,7 @@ Testnet for the Jakarta protocol proposal, proposed April 2022
 | Activated on | 2022-04-27T15:00:00Z |
 | Protocol at level 0 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
 | Protocol at level 8192 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
+| Block Explorers | [TzKT](https://jakartanet.tzkt.io) - [TzStats](https://jakarta.tzstats.com) |
 
 
 Jakartanet ran Ithaca for 2 cycles then switched to Jakarta at block 8192.
