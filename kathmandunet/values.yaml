@@ -136,14 +136,13 @@ accounts:
 
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_KATHMANDUNET_2022-06-30T15:00:00Z
+  chain_name: TEZOS_KATHMANDUNET_2022-07-07T15:00:00Z
   genesis:
-    block: BLockGenesisGenesisGenesisGenesisGenesisbd16dciJxo9
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2022-06-30T15:00:00Z"
+    timestamp: "2022-07-07T15:00:00Z"
   user_activated_upgrades:
     - level: 8192
-      replacement_protocol: PtKathmaHPSjL3WDmUCJP7iHBsUix65HdAgSeVacukogRK6hum6
+      replacement_protocol: PtKathmaXYPEsBau83zRwXK19HAQRzZSj6pCXnvtyLZFjRxdQxt
 
 activation:
   protocol_hash: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
@@ -237,7 +236,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix
+  octez: TBD
 
 protocols:
   - command: 013-PtJakart
