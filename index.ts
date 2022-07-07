@@ -4,6 +4,8 @@ import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
 import * as tezos from "@oxheadalpha/tezos-pulumi"
+var blake2b = require('blake2b');
+const bs58check = require('bs58check');
 
 require('dotenv').config();
 
@@ -316,6 +318,14 @@ function getNetworks(chains: TezosChain[]): object {
     }
     if ("activation_account_name" in network) {
       delete network["activation_account_name"]
+    }
+    if ("block" in network["genesis"] === false) {
+      // If block hash not passed, use tezos-k8s convention:
+      // deterministically derive it from chain name.
+      var input = Buffer.from(network["chain_name"])
+      var gbk = blake2b(32).update(input).digest('hex');
+      var bytes = Buffer.from('0134' + gbk, 'hex')
+      network["genesis"]["block"] = bs58check.encode(bytes);
     }
 
     networks[chain.params.getName()] = network
