@@ -84,7 +84,7 @@ accounts:
     key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000000000"
+    bootstrap_balance: "1000000000000"
       #  baking_benjamins:
       #    # tz1WzwobH5AFz3ea8n2UEramfYm1LY96hKJK
       #    key: edpkuT6dsU7krrQFBnk7c72EnrycvFeKQoL63EoiMz1AdQJGR9ux57
