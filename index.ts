@@ -4,6 +4,8 @@ import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
 import * as tezos from "@oxheadalpha/tezos-pulumi"
+var blake2b = require('blake2b');
+const bs58check = require('bs58check');
 
 require('dotenv').config();
 
@@ -268,6 +270,31 @@ const jakartanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const kathmandunet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "kathmandunet/values.yaml",
+    name: "kathmandunet",
+    dnsName: "kathmandunet",
+    category: protocolCategory,
+    humanName: "Kathmandunet",
+    description: "Testnet for the half-baked Kathmandu proposal - not final",
+    bootstrapPeers: [
+      "kathmandunet.boot.ecadinfra.com",
+    ],
+    //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    //chartRepoVersion: "6.7.0",
+    chartPath: 'kathmandunet/tezos-k8s',
+    privateBakingKey: private_oxhead_baking_key,
+    numberOfFaucetAccounts: 10000,
+    faucetSeed: faucetSeed,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -291,6 +318,14 @@ function getNetworks(chains: TezosChain[]): object {
     }
     if ("activation_account_name" in network) {
       delete network["activation_account_name"]
+    }
+    if ("block" in network["genesis"] === false) {
+      // If block hash not passed, use tezos-k8s convention:
+      // deterministically derive it from chain name.
+      var input = Buffer.from(network["chain_name"])
+      var gbk = blake2b(32).update(input).digest('hex');
+      var bytes = Buffer.from('0134' + gbk, 'hex')
+      network["genesis"]["block"] = bs58check.encode(bytes);
     }
 
     networks[chain.params.getName()] = network
@@ -334,12 +369,14 @@ export const networks = getNetworks([
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
+  kathmandunet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
+  kathmandunet_chain,
 ])
 
 const pyrometerChart = new k8s.helm.v2.Chart(

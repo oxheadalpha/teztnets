@@ -8,6 +8,8 @@
     "@pulumi/awsx": "^0.40.0",
     "@pulumi/eks": "^0.40.0",
     "@pulumi/pulumi": "^3.32.1",
+    "blake2b": "^2.1.4",
+    "bs58check": "^2.1.2",
     "cron-parser": "^3.5.0",
     "dotenv": "^16.0.0",
     "yaml": "^1.10.0"

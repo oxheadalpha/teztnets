@@ -84,7 +84,7 @@ accounts:
     key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"
+    bootstrap_balance: "100000000000"
       #  baking_benjamins:
       #    # tz1WzwobH5AFz3ea8n2UEramfYm1LY96hKJK
       #    key: edpkuT6dsU7krrQFBnk7c72EnrycvFeKQoL63EoiMz1AdQJGR9ux57
@@ -136,14 +136,15 @@ accounts:
 
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_KATHMANDUNET_2022-06-30T15:00:00Z
+  chain_name: TEZOS_KATHMANDUNET_2022-07-07T15:00:00Z
   genesis:
-    block: BLockGenesisGenesisGenesisGenesisGenesisbd16dciJxo9
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2022-06-30T15:00:00Z"
+    timestamp: "2022-07-07T15:00:00Z"
+    # NEW: the hash is deterministically generated from chain_name
+    # check https://teztnets.xyz/kathmandunet for its value
   user_activated_upgrades:
     - level: 8192
-      replacement_protocol: PtKathmaHPSjL3WDmUCJP7iHBsUix65HdAgSeVacukogRK6hum6
+      replacement_protocol: PtKathmaXYPEsBau83zRwXK19HAQRzZSj6pCXnvtyLZFjRxdQxt
 
 activation:
   protocol_hash: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
@@ -223,7 +224,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-      - vdf
+        #- vdf
     readiness_probe: false
     storage_size: 160Gi
   # Overwrite default values.yaml rolling-node
@@ -237,7 +238,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: registry.gitlab.com/tezos/tezos:amd64_vdum_vdf_daemon_fix
+  octez: tezos/tezos:master_dc6e6f4c_20220707125540
 
 protocols:
   - command: 013-PtJakart
