@@ -224,7 +224,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-        #- vdf
+      - vdf
     readiness_probe: false
     storage_size: 160Gi
   # Overwrite default values.yaml rolling-node
@@ -238,7 +238,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:master_dc6e6f4c_20220707125540
+  octez: tezos/tezos:master_68127222_20220708153243
 
 protocols:
   - command: 013-PtJakart
