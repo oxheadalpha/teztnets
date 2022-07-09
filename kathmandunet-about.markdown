@@ -9,7 +9,7 @@ Testnet for the half-baked Kathmandu proposal - not final
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_KATHMANDUNET_2022-07-07T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:master_dc6e6f4c_20220707125540](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_dc6e6f4c_20220707125540) |
+| Tezos docker build | [tezos/tezos:master_68127222_20220708153243](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_68127222_20220708153243) |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
 | Activated on | 2022-07-07T15:00:00Z |
@@ -36,7 +36,7 @@ But the protocol is already snapshotted. The baker binary for this protocol is `
 To join Kathmandunet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_dc6e6f4c_20220707125540
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_68127222_20220708153243
 ```
 
 #### Alternative: Build the software
@@ -46,7 +46,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_dc6e6f4c_20220707125540
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout dc6e6f4c
+git checkout 68127222
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
