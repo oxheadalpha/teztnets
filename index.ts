@@ -277,7 +277,7 @@ const kathmandunet_chain = new TezosChain(
     dnsName: "kathmandunet",
     category: protocolCategory,
     humanName: "Kathmandunet",
-    description: "Testnet for the half-baked Kathmandu proposal - not final",
+    description: "NOT FINAL Kathmandunet - the real Kathmandunet will start on Monday, July 18th, 2022",
     bootstrapPeers: [
       "kathmandunet.boot.ecadinfra.com",
     ],
