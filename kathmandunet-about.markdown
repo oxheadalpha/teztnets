@@ -4,7 +4,7 @@ title: Kathmandunet
 permalink: /kathmandunet-about
 ---
 
-Testnet for the half-baked Kathmandu proposal - not final
+NOT FINAL Kathmandunet - the real Kathmandunet will start on Monday, July 18th, 2022
 
 | | |
 |-------|---------------------|
