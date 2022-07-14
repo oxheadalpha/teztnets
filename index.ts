@@ -192,7 +192,7 @@ const ghostnet_chain = new TezosChain(
     dnsName: "ghostnet",
     category: longCategory,
     humanName: "Ghostnet",
-    description: "Ghostnet is the long-running testnet for Tezos",
+    description: "Ghostnet is the long-running testnet for Tezos.",
     bootstrapPeers: [
       "ghostnet.smartpy.io",
       "ghostnet.boot.ecadinfra.com",
@@ -241,7 +241,7 @@ const jakartanet_chain = new TezosChain(
     dnsName: "jakartanet",
     category: protocolCategory,
     humanName: "Jakartanet",
-    description: "Testnet for the Jakarta protocol proposal, proposed April 2022",
+    description: "Testnet for the Jakarta protocol proposal, proposed April 2022.",
     bootstrapPeers: [
       "jakartanet.boot.ecadinfra.com",
       "jakartanet.kaml.fr",
