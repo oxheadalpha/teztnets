@@ -21,7 +21,7 @@ for network_name in networks:
 # group by category for human rendering
 # Order manually. Start with long-running.
 category_desc = {
-        "Long-running Teztnets": "In doubt, pick this one",
+        "Long-running Teztnets": "If you are not sure, pick this one.",
         "Protocol Teztnets":"Testnets deployed specifically to test new Tezos protocol proposals.",
         "Periodic Teztnets": "Testnets that restart regularly and track the development of the master branch of [Octez repo](https://gitlab.com/tezos/tezos/).\n \n☠️ You probably don't want this unless you are a core protocol developer." }
 nested_teztnets = {"Long-running Teztnets":{}, "Protocol Teztnets":{}, "Periodic Teztnets":{}}
