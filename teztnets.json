@@ -100,11 +100,11 @@
   "kathmandunet": {
     "aliases": [],
     "category": "Protocol Teztnets",
-    "chain_name": "TEZOS_KATHMANDUNET_2022-07-07T15:00:00Z",
-    "description": "NOT FINAL Kathmandunet - the real Kathmandunet will start on Monday, July 18th, 2022",
-    "docker_build": "tezos/tezos:master_68127222_20220708153243",
+    "chain_name": "TEZOS_KATHMANDUNET_2022-07-18T15:00:00Z",
+    "description": "Test Chain for the Kathmandu Protocol Proposal",
+    "docker_build": "tezos/tezos:v14.0-rc1",
     "faucet_url": "https://teztnets.xyz/kathmandunet-faucet",
-    "git_ref": "68127222",
+    "git_ref": "v14.0-rc1",
     "human_name": "Kathmandunet",
     "indexers": [],
     "last_baking_daemon": "014-PtKathma",
@@ -112,16 +112,12 @@
     "network_url": "https://teztnets.xyz/kathmandunet",
     "protocols": [
       {
-        "level": 0,
-        "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-      },
-      {
         "level": 8192,
-        "replacement_protocol": "PtKathmaXYPEsBau83zRwXK19HAQRzZSj6pCXnvtyLZFjRxdQxt"
+        "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
       }
     ],
     "rpc_url": "https://rpc.kathmandunet.teztnets.xyz",
-    "activated_on": "2022-07-07"
+    "activated_on": "2022-07-18"
   },
   "mondaynet-2022-07-11": {
     "aliases": [],

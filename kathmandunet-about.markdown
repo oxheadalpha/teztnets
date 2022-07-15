@@ -4,17 +4,16 @@ title: Kathmandunet
 permalink: /kathmandunet-about
 ---
 
-NOT FINAL Kathmandunet - the real Kathmandunet will start on Monday, July 18th, 2022
+Test Chain for the Kathmandu Protocol Proposal
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS_KATHMANDUNET_2022-07-07T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:master_68127222_20220708153243](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_68127222_20220708153243) |
+| Full network name | `TEZOS_KATHMANDUNET_2022-07-18T15:00:00Z` |
+| Tezos docker build | [tezos/tezos:v14.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.0-rc1) |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
-| Activated on | 2022-07-07T15:00:00Z |
-| Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
-| Protocol at level 8192 |  `PtKathmaXYPEsBau83zRwXK19HAQRzZSj6pCXnvtyLZFjRxdQxt` |
+| Activated on | 2022-07-18T15:00:00Z |
+| Protocol at level 8192 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
 
 
 
@@ -30,13 +29,17 @@ But the protocol is already snapshotted. The baker binary for this protocol is `
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
+#### Download and install Tezos version v14.0-rc1
+
+Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
+
 
 #### Alternative: Use docker
 
 To join Kathmandunet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_68127222_20220708153243
+docker run -it --entrypoint=/bin/sh tezos/tezos:v14.0-rc1
 ```
 
 #### Alternative: Build the software
@@ -46,7 +49,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_68127222_20220708153243
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 68127222
+git checkout v14.0-rc1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
