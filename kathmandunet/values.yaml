@@ -242,4 +242,8 @@ images:
 
 protocols:
   - command: 013-PtJakart
+    vote:
+      liquidity_baking_toggle_vote: "pass"
   - command: 014-PtKathma
+    vote:
+      liquidity_baking_toggle_vote: "pass"
