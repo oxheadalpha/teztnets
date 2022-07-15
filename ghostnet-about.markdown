@@ -4,7 +4,7 @@ title: Ghostnet
 permalink: /ghostnet-about
 ---
 
-Ghostnet is the long-running testnet for Tezos
+Ghostnet is the long-running testnet for Tezos.
 
 | | |
 |-------|---------------------|

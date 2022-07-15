@@ -4,7 +4,7 @@ title: Jakartanet
 permalink: /jakartanet-about
 ---
 
-Testnet for the Jakarta protocol proposal, proposed April 2022
+Testnet for the Jakarta protocol proposal, proposed April 2022.
 
 | | |
 |-------|---------------------|
