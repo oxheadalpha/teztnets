@@ -279,7 +279,7 @@ const kathmandunet_chain = new TezosChain(
     humanName: "Kathmandunet",
     description: "Test Chain for the Kathmandu Protocol Proposal",
     bootstrapPeers: [
-      //"kathmandunet.boot.ecadinfra.com",
+      "kathmandunet.boot.ecadinfra.com",
     ],
     //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     //chartRepoVersion: "6.8.1",
