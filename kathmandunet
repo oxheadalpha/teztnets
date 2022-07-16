@@ -1,7 +1,8 @@
 {
   "chain_name": "TEZOS_KATHMANDUNET_2022-07-18T15:00:00Z",
   "default_bootstrap_peers": [
-    "kathmandunet.teztnets.xyz"
+    "kathmandunet.teztnets.xyz",
+    "kathmandunet.boot.ecadinfra.com"
   ],
   "genesis": {
     "block": "BLoSxnQWM6iXAufZWrDASZobhsJPjxC3y1uifyJUm4b82q6UCTH",
