@@ -133,6 +133,13 @@ accounts:
       #    type: public
       #    is_bootstrap_baker_account: true
       #    bootstrap_balance: "1000000000000"
+  rich_ayotte:
+    # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
+    # tz1ZjyxaKWVgmzvcc8X8z8pmndLENDzCvnPR
+    key: edpkuEUkeQXP1PbudqRcSYYPsxFXxk1wUNCDSDptRGq1rRsGrRpSzf
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
 
 node_config_network:
   activation_account_name: oxheadbaker
