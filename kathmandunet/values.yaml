@@ -139,6 +139,41 @@ accounts:
     key: edpkuEUkeQXP1PbudqRcSYYPsxFXxk1wUNCDSDptRGq1rRsGrRpSzf
     type: public
     is_bootstrap_baker_account: true
+  bakebuddy_primate:
+    # tz1YgDUQV2eXm8pUWNz3S5aWP86iFzNp4jnD
+    key: edpkteP1jsCpAzmQpseKjEJpo4WFa9TZcFvuxVftVFfZfqKNU9cWTv
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "1000000000000"  
+  bakebuddy_waveform:
+    # tz1QRZrEUNDiuYadYvJa5dJRCqry7hPvYMUh
+    key: edpkufHs4XkMUAtSkHkHsfJYD65RQMHz6PZYko6Gf1MoWvYKfLpZ9N
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000"
+  bakebuddy_jackvargo:
+    # tz1MszKq6K79thewtU7ZQgCxwuzsHq6PRAG7
+    key: edpkvTtGfrbNGQ7DQ8hqi1fx9b7BYg1Cr5QwzJazpMe9Ln9WXwq8tb
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000"
+  bakebuddy_bakinglibertez:
+    # tz1ddu9JTAhcTgKMYRx9YgMZZnSsZQmuhvgj
+    key: edpkuLqVLoHppEqR2HPF2gAr33CJ1DHS3QirDRUuzuuebyAivYQHtX
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000"
+  bakebuddy_ryxns:
+    # tz1YPeVXYiihY5t94fohtNdFzk9vXM8upy9z
+    key: edpktzRHRzaeJzezQRGcaXS4meHCuQZ5irfMbAxk2Em4iRCpydBWd8
+    type: public
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "500000000000"
+  bakebuddy_billyhoush:
+    # tz1RCuLid33rWEegKjLwptfUgGNoc7N6LLCP
+    key: edpku867NozNR2zsFnqEEo7wEKekkwRp258bYGbo3f52cF16MYk1bS
+    type: public
+    is_bootstrap_baker_account: false
     bootstrap_balance: "1000000000000"
 
 node_config_network:
