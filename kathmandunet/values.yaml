@@ -273,8 +273,6 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-bootstrap_peers: []
-
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
@@ -290,3 +288,6 @@ protocols:
   - command: 014-PtKathma
     vote:
       liquidity_baking_toggle_vote: "pass"
+
+bootstrap_peers:
+  - kathmandunet.boot.ecadinfra.com
