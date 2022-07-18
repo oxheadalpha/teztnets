@@ -112,6 +112,10 @@
     "network_url": "https://teztnets.xyz/kathmandunet",
     "protocols": [
       {
+        "level": 0,
+        "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
+      },
+      {
         "level": 8192,
         "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
       }

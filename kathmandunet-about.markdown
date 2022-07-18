@@ -13,6 +13,7 @@ Test Chain for the Kathmandu Protocol Proposal
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
 | Activated on | 2022-07-18T15:00:00Z |
+| Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 | Protocol at level 8192 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
 
 
