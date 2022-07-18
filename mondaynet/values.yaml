@@ -41,12 +41,6 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "470000000000"
-  jdsika:
-    # tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
-    key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "470000000000"
   ecadlabs:
     # tz1ck3EJwzFpbLVmXVuEn5Ptwzc6Aj14mHSH
     key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
