@@ -175,6 +175,13 @@ accounts:
     type: public
     is_bootstrap_baker_account: false
     bootstrap_balance: "1000000000000"
+  vincent_xtzmaster:
+    # tz1M9b1sKoh5GB7AiBiqdMrjMMyvuhsZua5n
+    key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+
 
 node_config_network:
   activation_account_name: oxheadbaker
