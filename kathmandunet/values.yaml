@@ -109,18 +109,18 @@ accounts:
       #    type: public
       #    is_bootstrap_baker_account: true
       #    bootstrap_balance: "1000000000000"
-      #  ping:
-      #    #tz1hm7NuCGNSKZQLQSawjUnehJcX8yCBcCAq
-      #    key: edpkty9Zdoxxc8BCCseTaeKtBpAVctrzVmzhkj3dkgmbFkWduu4SCB
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
-      #  ping_bob:
-      #    #tz1MvCE9dczhoij2bd4sLL2AfVuMtWfFAoCN
-      #    key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
-      #    type: public
-      #    is_bootstrap_baker_account: true
-      #    bootstrap_balance: "1000000000000"
+  ping:
+    #tz1hm7NuCGNSKZQLQSawjUnehJcX8yCBcCAq
+    key: edpkty9Zdoxxc8BCCseTaeKtBpAVctrzVmzhkj3dkgmbFkWduu4SCB
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  ping_bob:
+    #tz1MvCE9dczhoij2bd4sLL2AfVuMtWfFAoCN
+    key: edpkvZcJNTNG3q4A4N42eNPPCtUDT5jffMCYwiD7QLzRGZ4CQR8pyj
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   pasqualepinto:
     # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
     key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
