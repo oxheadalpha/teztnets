@@ -127,6 +127,7 @@ accounts:
     key: edpkuEUkeQXP1PbudqRcSYYPsxFXxk1wUNCDSDptRGq1rRsGrRpSzf
     type: public
     is_bootstrap_baker_account: true
+    # FIXME missing bootstrap balance
   bakebuddy_primate:
     # tz1YgDUQV2eXm8pUWNz3S5aWP86iFzNp4jnD
     key: edpkteP1jsCpAzmQpseKjEJpo4WFa9TZcFvuxVftVFfZfqKNU9cWTv
@@ -137,6 +138,7 @@ accounts:
     # tz1QRZrEUNDiuYadYvJa5dJRCqry7hPvYMUh
     key: edpkufHs4XkMUAtSkHkHsfJYD65RQMHz6PZYko6Gf1MoWvYKfLpZ9N
     type: public
+    # FIXME should have been true (same for all bake buddies)
     is_bootstrap_baker_account: false
     bootstrap_balance: "500000000000"
   bakebuddy_jackvargo:
