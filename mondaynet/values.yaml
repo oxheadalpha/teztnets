@@ -72,14 +72,14 @@ accounts:
 node_config_network:
   activation_account_name: oxheadbaker
   genesis:
-    block: BLockGenesisGenesisGenesisGenesisGenesis74cdcXiQAPV
+    block: BMJ1jA8TwcF7EtVap8Qrw22uSVBbDe3Jm4E9EbAwtRdrGYf26h9
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
   user_activated_upgrades:
     - level: 1024
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
+  protocol_hash: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -120,11 +120,12 @@ activation:
     cache_script_size: 100000000
     cache_stake_distribution_cycles: 8
     cache_sampler_state_cycles: 8
+    nonce_revelation_threshold: 32
+    vdf_difficulty: '1000000000'
     tx_rollup_enable: true
     tx_rollup_origination_size: 4000
     tx_rollup_hard_size_limit_per_inbox: 500000
     tx_rollup_hard_size_limit_per_message: 5000
-    tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_commitment_bond: "10000000000"
     tx_rollup_finality_period: 10
     tx_rollup_max_inboxes_count: 15
@@ -132,13 +133,25 @@ activation:
     tx_rollup_max_messages_per_inbox: 1010
     tx_rollup_max_commitments_count: 30
     tx_rollup_cost_per_byte_ema_factor: 120
+    tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_max_ticket_payload_size: 2048
     tx_rollup_rejection_max_proof_size: 30000
     tx_rollup_sunset_level: 1000000
+    dal_parametric:
+      feature_enable: true
+      number_of_slots: 256
+      number_of_shards: 2048
+      endorsement_lag: 2
+      availability_threshold: 50
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40
     sc_rollup_max_available_messages: 1000000
+    sc_rollup_stake_amount: "32000000"
+    sc_rollup_commitment_period_in_blocks: 20
+    sc_rollup_max_lookahead_in_blocks: 30000
+    sc_rollup_max_active_outbox_levels: 20160
+    sc_rollup_max_outbox_messages_per_level: 100
 
 nodes:
   tezos-baking-node:
@@ -157,7 +170,7 @@ nodes:
       - baker
       - accuser
     readiness_probe: false
-    storage_size: 15Gi
+    storage_size: 50Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
@@ -177,5 +190,5 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: 013-PtJakart
+  - command: 014-PtKathma
   - command: alpha
