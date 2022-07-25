@@ -13,7 +13,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 | Public RPC endpoint | [https://rpc.mondaynet-2022-07-25.teztnets.xyz](https://rpc.mondaynet-2022-07-25.teztnets.xyz) |
 | Faucet | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-07-25-faucet) |
 | Activated on | 2022-07-25T00:00:00.000Z |
-| Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
+| Protocol at level 0 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
 | Protocol at level 1024 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
