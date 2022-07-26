@@ -44,6 +44,60 @@ accounts:
     key: edpkuet91oSH1Q9i4nGJRDjdsF9W7XcAteqLQe1VqSjtMHRtDpCVFp
     bootstrap_balance: "1000000000000"
     is_bootstrap_baker_account: false
+  stresstest_1:
+    # a stress test account with a lot of money in it
+    # tz1ST1WZv4G3pmYqZ4iYu9PtbN9M7ByxiULn
+    key: edpkuLyT6wFmSdqsxA3YaukS8SX4LxpTxTLUF3oJ6vgkZfLhp5iz1U
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_2:
+    # a stress test account with a lot of money in it
+    # tz1ST2bdAVcBuRszxBrCnmL9TLzKsahgPDaZ
+    key: edpktompQYh2b8ybPGHSHbdXXnPyp3qH6VKCkYvqBn8qDTheN1aH2M
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_3:
+    # a stress test account with a lot of money in it
+    # tz1ST3nnn3NhXs57Np8YFodu1C2gsXQ36Qzc
+    key: edpktwUktVnwNywwK5yvC87sEntiAiNqp7kSPU3EE5Twp4LjUUXHqy
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_4:
+    # a stress test account with a lot of money in it
+    # tz1ST4LbETqS4FhD3viKk23J4MucPg8UsCaE
+    key: edpkv5uv25CFXP9cs9mHeH2FaLZ6e1dmJC2eqZoaNe8GoQjtzA8S8y
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_5:
+    # a stress test account with a lot of money in it
+    # tz1ST5nQZus5LUdgvfJdcBEqDYPLBkWiKAeV
+    key: edpktmmQ27SPGm4AqQZ2SPCnmAi9sQAx4g53qWDzjCtrc1mK1z4U8Y
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_6:
+    # a stress test account with a lot of money in it
+    # tz1ST6oEJv3qxdMBiqz465nWqu8DAFnSddwA
+    key: edpkteQVRQRD8GoCnf4tX4BXFEVMSskBATbWS74rgWHfCKZno5dakC
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_7:
+    # a stress test account with a lot of money in it
+    # tz1ST77umYobjqYGjp6AQAYUYiEgRgB8zoJm
+    key: edpkvUfRKmagvZAtUtQZaZetLyjgdtVkEwv9kUVgrW9LoQNkNGpWmh
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_8:
+    # a stress test account with a lot of money in it
+    # tz1ST8funahiy1ZuWw9Fdac7e7F9SoPDkqt5
+    key: edpkujgNgCwU8xvoyjhfS5jYJuUQZ7FBjUt5dsPWZb8ZVNprKJHVqP
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
+  stresstest_9:
+    # a stress test account with a lot of money in it
+    # tz1ST91snXGofwV4DBtX87ds7TVRTMoCYhsc
+    key: edpkupAr2bNdQXDz7vquh3xKDQBeFZKg8BQiwk3dswTnHz2QDCUBYz
+    bootstrap_balance: "10000000000000"
+    is_bootstrap_baker_account: false
 
 signers:
   tezos-signer-0:
