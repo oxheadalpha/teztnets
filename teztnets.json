@@ -97,32 +97,6 @@
     "rpc_url": "https://rpc.jakartanet.teztnets.xyz",
     "activated_on": "2022-04-27"
   },
-  "kathmandunet": {
-    "aliases": [],
-    "category": "Protocol Teztnets",
-    "chain_name": "TEZOS_KATHMANDUNET_2022-07-18T15:00:00Z",
-    "description": "Test Chain for the Kathmandu Protocol Proposal",
-    "docker_build": "tezos/tezos:v14.0-rc1",
-    "faucet_url": "https://teztnets.xyz/kathmandunet-faucet",
-    "git_ref": "v14.0-rc1",
-    "human_name": "Kathmandunet",
-    "indexers": [],
-    "last_baking_daemon": "014-PtKathma",
-    "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/kathmandunet",
-    "protocols": [
-      {
-        "level": 0,
-        "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-      },
-      {
-        "level": 8192,
-        "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
-      }
-    ],
-    "rpc_url": "https://rpc.kathmandunet.teztnets.xyz",
-    "activated_on": "2022-07-18"
-  },
   "mondaynet-2022-07-25": {
     "aliases": [],
     "category": "Periodic Teztnets",
