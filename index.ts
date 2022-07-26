@@ -173,7 +173,7 @@ const mondaynet_chain = new TezosChain(
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     //chartRepoVersion: "6.7.0",
-    chartPath: 'kathmandunet/tezos-k8s',
+    chartPath: 'mondaynet/tezos-k8s',
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 1000,
     faucetSeed: faucetSeed,
@@ -271,31 +271,31 @@ const jakartanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-const kathmandunet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "kathmandunet/values.yaml",
-    name: "kathmandunet",
-    dnsName: "kathmandunet",
-    category: protocolCategory,
-    humanName: "Kathmandunet",
-    description: "Test Chain for the Kathmandu Protocol Proposal",
-    bootstrapPeers: [
-      "kathmandunet.boot.ecadinfra.com",
-      "kathmandunet.stakenow.de:9733",
-    ],
-    //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    //chartRepoVersion: "6.8.1",
-    chartPath: 'kathmandunet/tezos-k8s',
-    privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
+//const kathmandunet_chain = new TezosChain(
+//  new TezosChainParametersBuilder({
+//    yamlFile: "kathmandunet/values.yaml",
+//    name: "kathmandunet",
+//    dnsName: "kathmandunet",
+//    category: protocolCategory,
+//    humanName: "Kathmandunet",
+//    description: "Test Chain for the Kathmandu Protocol Proposal",
+//    bootstrapPeers: [
+//      "kathmandunet.boot.ecadinfra.com",
+//      "kathmandunet.stakenow.de:9733",
+//    ],
+//    //chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+//    //chartRepoVersion: "6.8.1",
+//    chartPath: 'kathmandunet/tezos-k8s',
+//    privateBakingKey: private_oxhead_baking_key,
+//    numberOfFaucetAccounts: 10000,
+//    faucetSeed: faucetSeed,
+//    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+//    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+//  }),
+//  cluster.provider,
+//  repo,
+//  teztnetsHostedZone,
+//)
 
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
@@ -371,14 +371,14 @@ export const networks = getNetworks([
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
-  kathmandunet_chain,
+  // kathmandunet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
   jakartanet_chain,
-  kathmandunet_chain,
+  // kathmandunet_chain,
 ])
 
 const pyrometerChart = new k8s.helm.v2.Chart(
