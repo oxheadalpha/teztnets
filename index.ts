@@ -246,7 +246,6 @@ const jakartanet_chain = new TezosChain(
     bootstrapPeers: [
       "jakartanet.boot.ecadinfra.com",
       "jakartanet.kaml.fr",
-      "jakartanet.visualtez.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.7.0",

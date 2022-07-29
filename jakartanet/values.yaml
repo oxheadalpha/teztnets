@@ -209,7 +209,6 @@ nodes:
 bootstrap_peers:
   - jakartanet.kaml.fr
   - jakartanet.boot.ecadinfra.com
-  - jakartanet.visualtez.com
 
 full_snapshot_url: null
 rolling_snapshot_url: null
