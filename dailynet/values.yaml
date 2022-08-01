@@ -178,7 +178,7 @@ activation:
       number_of_shards: 2048
       endorsement_lag: 2
       availability_threshold: 50
-      slot_size: 20
+      slot_size: 1048576
       redundancy_factor: 16
       segment_size: 4096
     sc_rollup_enable: true
