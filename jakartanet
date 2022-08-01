@@ -3,8 +3,7 @@
   "default_bootstrap_peers": [
     "jakartanet.teztnets.xyz",
     "jakartanet.boot.ecadinfra.com",
-    "jakartanet.kaml.fr",
-    "jakartanet.visualtez.com"
+    "jakartanet.kaml.fr"
   ],
   "genesis": {
     "block": "BLockGenesisGenesisGenesisGenesisGenesisbd16dciJxo9",
