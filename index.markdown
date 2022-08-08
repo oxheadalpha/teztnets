@@ -35,8 +35,8 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-08-07` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-07-faucet) |
-| [Mondaynet](/mondaynet-about) | `2022-08-01` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-08-01-faucet) |
+| [Dailynet](/dailynet-about) | `2022-08-08` | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-08-faucet) |
+| [Mondaynet](/mondaynet-about) | `2022-08-08` | [Mondaynet faucet](https://teztnets.xyz/mondaynet-2022-08-08-faucet) |
 
 
 

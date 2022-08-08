@@ -8,11 +8,11 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2022-08-07T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_3624fc43_20220805151026](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_3624fc43_20220805151026) |
-| Public RPC endpoint | [https://rpc.dailynet-2022-08-07.teztnets.xyz](https://rpc.dailynet-2022-08-07.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-07-faucet) |
-| Activated on | 2022-08-07T00:00:00.000Z |
+| Full network name | `TEZOS-DAILYNET-2022-08-08T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_a198a9ad_20220807092234](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a198a9ad_20220807092234) |
+| Public RPC endpoint | [https://rpc.dailynet-2022-08-08.teztnets.xyz](https://rpc.dailynet-2022-08-08.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-08-faucet) |
+| Activated on | 2022-08-08T00:00:00.000Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -30,7 +30,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_3624fc43_20220805151026
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_a198a9ad_20220807092234
 ```
 
 #### Alternative: Build the software
@@ -40,7 +40,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_3624fc43_20220805151026
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 3624fc43
+git checkout a198a9ad
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -53,7 +53,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/dailynet-2022-08-07
+tezos-node config init --network https://teztnets.xyz/dailynet-2022-08-08
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -61,7 +61,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2022-08-07.log &
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2022-08-08.log &
 > ```
 
 
