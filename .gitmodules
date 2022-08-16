@@ -7,3 +7,6 @@
 [submodule "mondaynet/tezos-k8s"]
 	path = mondaynet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s
+[submodule "pyrometer/tezos-k8s"]
+	path = pyrometer/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git

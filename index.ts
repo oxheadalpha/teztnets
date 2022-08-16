@@ -380,15 +380,26 @@ export const teztnets = getTeztnets([
   kathmandunet_chain,
 ])
 
-const pyrometerChart = new k8s.helm.v2.Chart(
+const pyrometerDomain = "pyrometer.teztnets.xyz"
+const pyrometerCert = new aws.acm.Certificate(
+  `${pyrometerDomain}-cert`,
+  {
+    validationMethod: "DNS",
+    domainName: pyrometerDomain,
+  },
+)
+createCertValidation(
+  {
+    cert: pyrometerCert,
+    targetDomain: pyrometerDomain,
+    hostedZone: teztnetsHostedZone
+  },
+)
+
+new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    chart: "pyrometer",
-    version: "6.1.0",
-    fetchOpts:
-    {
-      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    },
+    path: "pyrometer/tezos-k8s/charts/pyrometer",
     values: {
       config: {
         "node_monitor": {
@@ -403,64 +414,36 @@ const pyrometerChart = new k8s.helm.v2.Chart(
           "level": "info",
           "timestamp": false
         }
+      },
+      ingress: {
+        enabled: true,
+        annotations: {
+          "kubernetes.io/ingress.class": "alb",
+          "alb.ingress.kubernetes.io/scheme": "internet-facing",
+          "alb.ingress.kubernetes.io/healthcheck-path": "/",
+          "alb.ingress.kubernetes.io/healthcheck-port": "80",
+          "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
+          "ingress.kubernetes.io/force-ssl-redirect": "true",
+          "alb.ingress.kubernetes.io/actions.ssl-redirect":
+            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+        },
+        hosts: [
+          {
+            host: pyrometerDomain,
+            paths: [
+              {
+                path: "/",
+                pathType: 'Prefix',
+                backend: {
+                  serviceName: "pyrometer",
+                  portName: 'http',
+                },
+              },
+            ],
+          },
+        ],
       }
     }
   },
   { providers: { kubernetes: cluster.provider } }
 );
-
-const pyrometerDomain = "pyrometer.teztnets.xyz"
-const pyrometerCert = new aws.acm.Certificate(
-  `${pyrometerDomain}-cert`,
-  {
-    validationMethod: "DNS",
-    domainName: pyrometerDomain,
-  },
-)
-const { certValidation } = createCertValidation(
-  {
-    cert: pyrometerCert,
-    targetDomain: pyrometerDomain,
-    hostedZone: teztnetsHostedZone
-  },
-)
-
-const pyrometerIngressName = `${pyrometerDomain}-ingress`
-new k8s.networking.v1beta1.Ingress(
-  pyrometerIngressName,
-  {
-    metadata: {
-      name: pyrometerIngressName,
-      annotations: {
-        "kubernetes.io/ingress.class": "alb",
-        "alb.ingress.kubernetes.io/scheme": "internet-facing",
-        "alb.ingress.kubernetes.io/healthcheck-path": "/",
-        "alb.ingress.kubernetes.io/healthcheck-port": "80",
-        "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
-        "ingress.kubernetes.io/force-ssl-redirect": "true",
-        "alb.ingress.kubernetes.io/actions.ssl-redirect":
-          '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-      },
-      labels: { app: "pyrometer" },
-    },
-    spec: {
-      rules: [
-        {
-          host: pyrometerDomain,
-          http: {
-            paths: [
-              {
-                path: "/*",
-                backend: {
-                  serviceName: "pyrometer",
-                  servicePort: "http",
-                },
-              },
-            ],
-          },
-        },
-      ],
-    },
-  },
-  { provider: cluster.provider }
-)
