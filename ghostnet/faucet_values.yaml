@@ -1,7 +1,7 @@
 images:
   tezos_faucet: ghcr.io/nicolasochem/tezos-faucet@sha256:6806571db6402ee91a7f047cda763506fbf3a9a883577cd05a675755a98f8a7b
   tezos_faucet_backend: ghcr.io/nicolasochem/tezos-faucet-backend:ghcr
-authorizedHost: \*
+authorizedHost: "https://new-faucet.ghostnet.teztnets.xyz"
 config:
   application:
      name: "Tezos Ghostnet faucet"
