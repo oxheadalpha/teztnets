@@ -38,12 +38,10 @@ ingress:
     - path: "/"
       pathType: 'Prefix'
       backend:
-        serviceName: "tezos-faucet"
-        portName: 'backend'
+        portNumber: 80
   - host: new-faucet-backend.ghostnet.teztnets.xyz
     paths:
     - path: "/"
       pathType: 'Prefix'
       backend:
-        serviceName: "tezos-faucet"
-        portName: 'frontend'
+        portNumber: 3000

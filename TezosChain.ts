@@ -561,7 +561,7 @@ export class TezosChain extends pulumi.ComponentResource {
       const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getNewFaucetRecaptchaSecretKey()
       faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getNewFaucetRecaptchaSiteKey()
-      faucetChartValues.values["config"]["application"]["backendUrl"] = faucetBEDomain
+      faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetBEDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
       new k8s.helm.v2.Chart(
         `${name}-new-faucet`,
