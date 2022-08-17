@@ -142,6 +142,10 @@ const longCategory = "Long-running Teztnets"
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "dailynet/values.yaml",
+    faucetYamlFile: "dailynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     dnsName: "dailynet",
     category: periodicCategory,
     humanName: "Dailynet",
@@ -165,6 +169,10 @@ const dailynet_chain = new TezosChain(
 const mondaynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "mondaynet/values.yaml",
+    faucetYamlFile: "mondaynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     dnsName: "mondaynet",
     category: periodicCategory,
     humanName: "Mondaynet",

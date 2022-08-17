@@ -4,7 +4,7 @@ images:
 authorizedHost: # filled in by pulumi
 config:
   application:
-     name: "Tezos Jakartanet faucet"
+     name: "Tezos Mondaynet faucet"
      googleCaptchaSiteKey: #filled in by pulumi
      backendUrl: # filled in by pulumi
      githubRepo: "https://github.com/avysel/tezos-faucet"
@@ -19,7 +19,7 @@ config:
      name: # filled in by pulumi
      rpcUrl: # filled in by pulumi
      faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
-     viewer: https://jakarta.tzstats.com
+     viewer: https://mondaynet.tzstats.com
      allowSendButton: false
 ingress:
   enabled: true
@@ -33,13 +33,13 @@ ingress:
     "alb.ingress.kubernetes.io/actions.ssl-redirect":
       '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}'
   hosts:
-  - host: # frontend fqdn, filled in by pulumi
+  - host: # filled in by pulumi
     paths:
     - path: "/"
       pathType: 'Prefix'
       backend:
         portNumber: 80
-  - host: # backend fqdn, filled in by pulumi
+  - host: # filled in by pulumi
     paths:
     - path: "/"
       pathType: 'Prefix'
