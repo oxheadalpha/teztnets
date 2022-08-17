@@ -18,6 +18,8 @@ import { createCertValidation } from "./route53";
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
+const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
+const faucetRecaptchaSecretKey = cfg.requireSecret("faucet-recaptcha-secret-key")
 
 // Function to fail on non-truthy variable.
 const getEnvVariable = (name: string): string => {
@@ -35,8 +37,8 @@ const desiredClusterCapacity = 2
 const aws_account_id = getEnvVariable("AWS_ACCOUNT_ID")
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
 const faucetSeed = getEnvVariable("FAUCET_SEED")
-const faucetRecaptchaSiteKey = getEnvVariable("FAUCET_RECAPTCHA_SITE_KEY")
-const faucetRecaptchaSecretKey = getEnvVariable("FAUCET_RECAPTCHA_SECRET_KEY")
+const oldFaucetRecaptchaSiteKey = getEnvVariable("FAUCET_RECAPTCHA_SITE_KEY")
+const oldFaucetRecaptchaSecretKey = getEnvVariable("FAUCET_RECAPTCHA_SECRET_KEY")
 
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
@@ -152,8 +154,8 @@ const dailynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 1000,
     faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,
@@ -179,8 +181,8 @@ const mondaynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 1000,
     faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,
@@ -210,8 +212,10 @@ const ghostnet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     indexers: [
       {
         name: "TzKT",
@@ -256,8 +260,8 @@ const jakartanet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
     indexers: [
       {
         name: "TzKT",
@@ -292,8 +296,8 @@ const kathmandunet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     numberOfFaucetAccounts: 10000,
     faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,

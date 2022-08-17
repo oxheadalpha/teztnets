@@ -1,12 +1,12 @@
 images:
-  tezos_faucet: ghcr.io/nicolasochem/tezos-faucet:ghcr
+  tezos_faucet: ghcr.io/nicolasochem/tezos-faucet@sha256:6806571db6402ee91a7f047cda763506fbf3a9a883577cd05a675755a98f8a7b
   tezos_faucet_backend: ghcr.io/nicolasochem/tezos-faucet-backend:ghcr
 authorizedHost: \*
 config:
   application:
      name: "Tezos Ghostnet faucet"
-     googleCaptchaSiteKey: #6LeiK14fAAAAAPptX4v49I4wSrHjOrU2cb_y5oII
-     backendUrl: "http://localhost:3000"
+     googleCaptchaSiteKey: #filled in by pulumi
+     backendUrl: # filled in by pulumi
      githubRepo: "https://github.com/avysel/tezos-faucet"
      profiles:
        user:
@@ -16,11 +16,11 @@ config:
          profile: BAKER
          amount: 6000
   network:
-     name: #Jakartanet
-     rpcUrl: http://tezos-node-rpc:8732
-     faucetAddress: #tz1cpdS3qoQBYCGohszPWS8Gdya6Wg2e4JnL
+     name: # filled in by pulumi
+     rpcUrl: https://rpc.ghostnet.teztnets.xyz
+     faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
      viewer: https://ghost.tzstats.com
-     allowSendButton: true
+     allowSendButton: false
 ingress:
   enabled: true
   annotations:

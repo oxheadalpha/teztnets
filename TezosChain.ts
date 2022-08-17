@@ -36,6 +36,8 @@ export interface TezosInitParameters {
   getPrivateBakingKey(): string;
   getNumberOfFaucetAccounts(): number;
   getFaucetSeed(): string;
+  getNewFaucetRecaptchaSiteKey(): pulumi.Output<string>;
+  getNewFaucetRecaptchaSecretKey(): pulumi.Output<string>;
   getFaucetRecaptchaSiteKey(): string;
   getFaucetRecaptchaSecretKey(): string;
   getAliases(): string[];
@@ -64,6 +66,8 @@ export interface TezosParamsInitializer {
   readonly numberOfFaucetAccounts?: number;
   readonly maskedFromMainPage?: boolean;
   readonly faucetSeed?: string;
+  readonly newFaucetRecaptchaSiteKey?: pulumi.Output<string>;
+  readonly newFaucetRecaptchaSecretKey?: pulumi.Output<string>;
   readonly faucetRecaptchaSiteKey?: string;
   readonly faucetRecaptchaSecretKey?: string;
   readonly aliases?: string[];
@@ -89,6 +93,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _numberOfFaucetAccounts: number;
   private _maskedFromMainPage: boolean;
   private _faucetSeed: string;
+  private _newFaucetRecaptchaSiteKey: pulumi.Output<string>;
+  private _newFaucetRecaptchaSecretKey: pulumi.Output<string>;
   private _faucetRecaptchaSiteKey: string;
   private _faucetRecaptchaSecretKey: string;
   private _aliases: string[];
@@ -113,6 +119,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetSeed = params.faucetSeed || '';
     this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
+    this._newFaucetRecaptchaSiteKey = params.newFaucetRecaptchaSiteKey!;
+    this._newFaucetRecaptchaSecretKey = params.newFaucetRecaptchaSecretKey!;
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
 
@@ -274,6 +282,14 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
 
   public getFaucetSeed(): string {
     return this._faucetSeed;
+  }
+
+  public getNewFaucetRecaptchaSiteKey(): pulumi.Output<string> {
+    return this._newFaucetRecaptchaSiteKey;
+  }
+
+  public getNewFaucetRecaptchaSecretKey(): pulumi.Output<string> {
+    return this._newFaucetRecaptchaSecretKey;
   }
 
   public getFaucetRecaptchaSiteKey(): string {
@@ -542,7 +558,11 @@ export class TezosChain extends pulumi.ComponentResource {
         values: params.faucetHelmValues,
         path: `new-faucet/tezos-k8s/charts/tezos-faucet`
       }
-      faucetChartValues.values["faucetReacptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
+      const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
+      faucetChartValues.values["googleCaptchaSecretKey"] = params.getNewFaucetRecaptchaSecretKey()
+      faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getNewFaucetRecaptchaSiteKey()
+      faucetChartValues.values["config"]["application"]["backendUrl"] = faucetBEDomain
+      faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
       new k8s.helm.v2.Chart(
         `${name}-new-faucet`,
         faucetChartValues,
@@ -566,7 +586,6 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { parent: this }
       )
-      const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
       const faucetBECert = new aws.acm.Certificate(
         `${faucetBEDomain}-cert`,
         {
