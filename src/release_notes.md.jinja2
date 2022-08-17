@@ -3,10 +3,10 @@
 
 {{ category_desc[cat_name] }}
 
-| | Activated on | Faucet |
-|-------|---------------------|--|
+| | Activated on | Faucet | New Faucet |
+|-------|---------------------|--|--|
 {% for k, v in  cat_teztnets.items() -%}
-| [{{ v["human_name"] }}](/{{ v["human_name"] | lower }}-about) | `{{ v["activated_on"] }}` | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
+| [{{ v["human_name"] }}](/{{ v["human_name"] | lower }}-about) | `{{ v["activated_on"] }}` | [Faucet]({{ v["faucet_url"] }}) | [New Faucet]({{ v["new_faucet_url"]}}) |
 {% endfor %}
 
 {% endfor %}

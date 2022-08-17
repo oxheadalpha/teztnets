@@ -368,6 +368,7 @@ function getTeztnets(chains: TezosChain[]): object {
 
     faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
     let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`
+    let newFaucetUrl = `https://new-faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
       network_url: chain.getNetworkUrl(),
@@ -378,6 +379,7 @@ function getTeztnets(chains: TezosChain[]): object {
       protocols: chain.getProtocols(),
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
+      new_faucet_url: newFaucetUrl,
       category: chain.params.getCategory(),
       rpc_url: rpcUrl,
       masked_from_main_page: chain.params.isMaskedFromMainPage(),

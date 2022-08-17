@@ -12,6 +12,7 @@ permalink: /{{ v["human_name"] | lower }}-about
 | Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New {{ v["human_name"] }} faucet]({{ v["new_faucet_url"] }}) |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
 {% for proto in v["protocols"] -%}
 | Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
