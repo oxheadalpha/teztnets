@@ -36,6 +36,11 @@ accounts:
     bootstrap_balance: "5000000000000000"
     is_bootstrap_baker_account: false
     type: public
+  faucet:
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    key: edpkvGYHoY5kwq13Ak6r4fLa1GGSHKJZVe7xJFV6ZgHwdZeaHy3WZj
+    bootstrap_balance: "2000000000000"
+    is_bootstrap_baker_account: false
   scoru_rollup_operator:
     key: edpktnY9kXbEW1HjqDbQ4AG3hYkNunxHiRsZe72gEaHxddxNBtjG7B
     bootstrap_balance: "1000000000000"
