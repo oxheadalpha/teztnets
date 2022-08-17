@@ -16,6 +16,8 @@ import { TezosSigner, TezosSignerParametersBuilder } from "./TezosSigner"
 import { createCertValidation } from "./route53";
 
 let stack = pulumi.getStack()
+const cfg = new pulumi.Config()
+const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 
 // Function to fail on non-truthy variable.
 const getEnvVariable = (name: string): string => {
@@ -188,6 +190,8 @@ const mondaynet_chain = new TezosChain(
 const ghostnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "ghostnet/values.yaml",
+    faucetYamlFile: "ghostnet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
     name: "ghostnet",
     aliases: ["ithacanet"],
     dnsName: "ghostnet",
@@ -425,7 +429,7 @@ new k8s.helm.v2.Chart(
           "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
           "ingress.kubernetes.io/force-ssl-redirect": "true",
           "alb.ingress.kubernetes.io/actions.ssl-redirect":
-            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+            '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}',
         },
         hosts: [
           {

@@ -1,3 +1,5 @@
 config:
   aws:profile: oxheadalpha
   aws:region: us-east-2
+  teztnets:faucet-private-key:
+    secure: AAABAKPZ71lMMbZ1udwJp45T9PByWZUzB32jqJhUGxCgDjtV40JEq42xlKGpsuA8KEp7SZCeMD2rK+IeDk4p1UiQCbJCMOTM/Do7vALVaY3Y/txDLQs=

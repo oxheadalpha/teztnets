@@ -1,0 +1,49 @@
+images:
+  tezos_faucet: ghcr.io/nicolasochem/tezos-faucet:ghcr
+  tezos_faucet_backend: ghcr.io/nicolasochem/tezos-faucet-backend:ghcr
+authorizedHost: \*
+config:
+  application:
+     name: "Tezos Ghostnet faucet"
+     googleCaptchaSiteKey: #6LeiK14fAAAAAPptX4v49I4wSrHjOrU2cb_y5oII
+     backendUrl: "http://localhost:3000"
+     githubRepo: "https://github.com/avysel/tezos-faucet"
+     profiles:
+       user:
+         profile: USER
+         amount: 1
+       baker:
+         profile: BAKER
+         amount: 6000
+  network:
+     name: #Jakartanet
+     rpcUrl: http://tezos-node-rpc:8732
+     faucetAddress: #tz1cpdS3qoQBYCGohszPWS8Gdya6Wg2e4JnL
+     viewer: https://ghost.tzstats.com
+     allowSendButton: true
+ingress:
+  enabled: true
+  annotations:
+    "kubernetes.io/ingress.class": "alb"
+    "alb.ingress.kubernetes.io/scheme": "internet-facing"
+    "alb.ingress.kubernetes.io/healthcheck-path": "/"
+    "alb.ingress.kubernetes.io/healthcheck-port": "80"
+    "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]'
+    "ingress.kubernetes.io/force-ssl-redirect": "true"
+    "alb.ingress.kubernetes.io/actions.ssl-redirect":
+      '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}'
+  hosts:
+  - host: new-faucet.ghostnet.teztnets.xyz
+    paths:
+    - path: "/"
+      pathType: 'Prefix'
+      backend:
+        serviceName: "tezos-faucet"
+        portName: 'backend'
+  - host: new-faucet-backend.ghostnet.teztnets.xyz
+    paths:
+    - path: "/"
+      pathType: 'Prefix'
+      backend:
+        serviceName: "tezos-faucet"
+        portName: 'frontend'

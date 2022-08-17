@@ -14,6 +14,7 @@ const mime = require("mime");
 
 export interface TezosHelmParameters {
   readonly helmValues: any;
+  readonly faucetHelmValues: any;
 }
 
 export interface TezosInitParameters {
@@ -33,7 +34,6 @@ export interface TezosInitParameters {
   getChartRepoVersion(): string;
   getChartPath(): string;
   getPrivateBakingKey(): string;
-  getPrivateNonbakingKey(): string;
   getNumberOfFaucetAccounts(): number;
   getFaucetSeed(): string;
   getFaucetRecaptchaSiteKey(): string;
@@ -58,8 +58,9 @@ export interface TezosParamsInitializer {
   readonly chartRepoVersion?: string;
   readonly chartPath?: string;
   readonly privateBakingKey?: string;
-  readonly privateNonbakingKey?: string;
+  readonly faucetPrivateKey?: pulumi.Output<string>;
   readonly yamlFile?: string;
+  readonly faucetYamlFile?: string;
   readonly numberOfFaucetAccounts?: number;
   readonly maskedFromMainPage?: boolean;
   readonly faucetSeed?: string;
@@ -72,6 +73,7 @@ export interface TezosParamsInitializer {
 
 export class TezosChainParametersBuilder implements TezosHelmParameters, TezosInitParameters {
   private _helmValues: any;
+  private _faucetHelmValues: any;
   private _name: string;
   private _description: string;
   private _humanName: string;
@@ -118,6 +120,10 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     if (params.yamlFile) {
       this.fromFile(params.yamlFile);
     }
+    this._faucetHelmValues = {};
+    if (params.faucetYamlFile) {
+      this.fromFaucetFile(params.faucetYamlFile);
+    }
     if (params.schedule) {
       this.schedule(params.schedule);
     }
@@ -130,8 +136,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     if (params.privateBakingKey) {
       this.privateBakingKey(params.privateBakingKey);
     }
-    if (params.privateNonbakingKey) {
-      this.privateNonbakingKey(params.privateNonbakingKey);
+    if (params.faucetPrivateKey) {
+      this.faucetPrivateKey(params.faucetPrivateKey);
     }
   }
 
@@ -142,6 +148,16 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
 
   public fromFile(yamlPath: string): TezosChainParametersBuilder {
     this.fromYaml(fs.readFileSync(yamlPath, 'utf8'));
+    return this;
+  }
+
+  public fromFaucetYaml(yaml: string): TezosChainParametersBuilder {
+    this._faucetHelmValues = YAML.parse(yaml);
+    return this;
+  }
+
+  public fromFaucetFile(faucetYamlPath: string): TezosChainParametersBuilder {
+    this.fromFaucetYaml(fs.readFileSync(faucetYamlPath, 'utf8'));
     return this;
   }
 
@@ -298,16 +314,16 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._helmValues["accounts"]["oxheadbaker"]["key"];
   }
 
-  public privateNonbakingKey(privateNonbakingKey: string): TezosChainParametersBuilder {
-    this._helmValues["accounts"]["tqfree"]["key"] = privateNonbakingKey;
+  public faucetPrivateKey(faucetPrivateKey: pulumi.Output<string>): TezosChainParametersBuilder {
+    this._faucetHelmValues["faucetPrivateKey"] = faucetPrivateKey;
     return this;
-  }
-  public getPrivateNonbakingKey(): string {
-    return this._helmValues["accounts"]["tqfree"]["key"];
   }
 
   public get helmValues(): string {
     return this._helmValues;
+  }
+  public get faucetHelmValues(): string {
+    return this._faucetHelmValues;
   }
   public getAliases(): string[] {
     return this._aliases;
@@ -519,6 +535,55 @@ export class TezosChain extends pulumi.ComponentResource {
         number_of_accounts: params.getNumberOfFaucetAccounts(),
       }
       params.helmValues["activation"]["faucet"] = faucetConfig;
+    }
+    if (Object.keys(params.faucetHelmValues).length != 0) {
+      let faucetChartValues: any = {
+        namespace: ns.metadata.name,
+        values: params.faucetHelmValues,
+        path: `new-faucet/tezos-k8s/charts/tezos-faucet`
+      }
+      faucetChartValues.values["faucetReacptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
+      new k8s.helm.v2.Chart(
+        `${name}-new-faucet`,
+        faucetChartValues,
+        { providers: { kubernetes: this.provider } }
+      )
+
+      const faucetDomain = `new-faucet.${teztnetsDomain}`
+      const faucetCert = new aws.acm.Certificate(
+        `${faucetDomain}-cert`,
+        {
+          validationMethod: "DNS",
+          domainName: faucetDomain,
+        },
+        { parent: this }
+      )
+      createCertValidation(
+        {
+          cert: faucetCert,
+          targetDomain: faucetDomain,
+          hostedZone: this.zone,
+        },
+        { parent: this }
+      )
+      const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
+      const faucetBECert = new aws.acm.Certificate(
+        `${faucetBEDomain}-cert`,
+        {
+          validationMethod: "DNS",
+          domainName: faucetBEDomain,
+        },
+        { parent: this }
+      )
+      createCertValidation(
+        {
+          cert: faucetBECert,
+          targetDomain: faucetBEDomain,
+          hostedZone: this.zone,
+        },
+        { parent: this }
+      )
+
     }
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
