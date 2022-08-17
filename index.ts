@@ -194,6 +194,8 @@ const ghostnet_chain = new TezosChain(
     yamlFile: "ghostnet/values.yaml",
     faucetYamlFile: "ghostnet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     name: "ghostnet",
     aliases: ["ithacanet"],
     dnsName: "ghostnet",
@@ -214,8 +216,6 @@ const ghostnet_chain = new TezosChain(
     faucetSeed: faucetSeed,
     faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
-    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     indexers: [
       {
         name: "TzKT",
@@ -246,6 +246,10 @@ const ghostnet_signer = new TezosSigner(
 const jakartanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "jakartanet/values.yaml",
+    faucetYamlFile: "jakartanet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     name: "jakartanet",
     dnsName: "jakartanet",
     category: protocolCategory,
@@ -281,6 +285,10 @@ const jakartanet_chain = new TezosChain(
 const kathmandunet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "kathmandunet/values.yaml",
+    faucetYamlFile: "kathmandunet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    newFaucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    newFaucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     name: "kathmandunet",
     dnsName: "kathmandunet",
     category: protocolCategory,

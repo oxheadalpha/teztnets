@@ -559,7 +559,9 @@ export class TezosChain extends pulumi.ComponentResource {
         path: `new-faucet/tezos-k8s/charts/tezos-faucet`
       }
       const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
+      const faucetDomain = `new-faucet.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getNewFaucetRecaptchaSecretKey()
+      faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
       faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getNewFaucetRecaptchaSiteKey()
       faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetBEDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
@@ -569,7 +571,6 @@ export class TezosChain extends pulumi.ComponentResource {
         { providers: { kubernetes: this.provider } }
       )
 
-      const faucetDomain = `new-faucet.${teztnetsDomain}`
       const faucetCert = new aws.acm.Certificate(
         `${faucetDomain}-cert`,
         {
