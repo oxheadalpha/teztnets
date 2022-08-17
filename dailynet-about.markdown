@@ -12,6 +12,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 | Tezos docker build | [tezos/tezos:master_c0a5aca7_20220816172719](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_c0a5aca7_20220816172719) |
 | Public RPC endpoint | [https://rpc.dailynet-2022-08-17.teztnets.xyz](https://rpc.dailynet-2022-08-17.teztnets.xyz) |
 | Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-17-faucet) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Dailynet faucet](https://new-faucet.dailynet-2022-08-17.teztnets.xyz) |
 | Activated on | 2022-08-17T00:00:00.000Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 

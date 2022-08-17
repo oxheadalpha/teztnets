@@ -12,6 +12,7 @@ Test Chain for the Kathmandu Protocol Proposal
 | Tezos docker build | [tezos/tezos:v14.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.0) |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Kathmandunet faucet](https://new-faucet.kathmandunet.teztnets.xyz) |
 | Activated on | 2022-07-28T15:00:00Z |
 | Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 | Protocol at level 8192 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |

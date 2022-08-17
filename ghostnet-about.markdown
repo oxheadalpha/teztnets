@@ -12,6 +12,7 @@ Ghostnet is the long-running testnet for Tezos.
 | Tezos docker build | [tezos/tezos:v13.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0) |
 | Public RPC endpoint | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz) |
 | Faucet | [Ghostnet faucet](https://teztnets.xyz/ghostnet-faucet) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Ghostnet faucet](https://new-faucet.ghostnet.teztnets.xyz) |
 | Activated on | 2022-01-25T15:00:00Z |
 | Protocol at level 0 |  `PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx` |
 | Protocol at level 8191 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |

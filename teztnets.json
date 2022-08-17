@@ -12,6 +12,7 @@
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/dailynet-2022-08-17",
+    "new_faucet_url": "https://new-faucet.dailynet-2022-08-17.teztnets.xyz",
     "protocols": [
       {
         "level": 0,
@@ -45,6 +46,7 @@
     "last_baking_daemon": "013-PtJakart",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/ghostnet",
+    "new_faucet_url": "https://new-faucet.ghostnet.teztnets.xyz",
     "protocols": [
       {
         "level": 0,
@@ -84,6 +86,7 @@
     "last_baking_daemon": "013-PtJakart",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/jakartanet",
+    "new_faucet_url": "https://new-faucet.jakartanet.teztnets.xyz",
     "protocols": [
       {
         "level": 0,
@@ -110,6 +113,7 @@
     "last_baking_daemon": "014-PtKathma",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/kathmandunet",
+    "new_faucet_url": "https://new-faucet.kathmandunet.teztnets.xyz",
     "protocols": [
       {
         "level": 0,
@@ -136,6 +140,7 @@
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/mondaynet-2022-08-15",
+    "new_faucet_url": "https://new-faucet.mondaynet-2022-08-15.teztnets.xyz",
     "protocols": [
       {
         "level": 0,

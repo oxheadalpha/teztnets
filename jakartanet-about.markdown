@@ -12,6 +12,7 @@ Testnet for the Jakarta protocol proposal, proposed April 2022.
 | Tezos docker build | [tezos/tezos:v13.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0) |
 | Public RPC endpoint | [https://rpc.jakartanet.teztnets.xyz](https://rpc.jakartanet.teztnets.xyz) |
 | Faucet | [Jakartanet faucet](https://teztnets.xyz/jakartanet-faucet) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Jakartanet faucet](https://new-faucet.jakartanet.teztnets.xyz) |
 | Activated on | 2022-04-27T15:00:00Z |
 | Protocol at level 0 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
 | Protocol at level 8192 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
