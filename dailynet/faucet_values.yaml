@@ -1,6 +1,6 @@
 images:
-tezos_faucet: ghcr.io/avysel/tezos-faucet-backend:1.0
-tezos_faucet_backend: ghcr.io/avysel/tezos-faucet-backend:1.0
+  tezos_faucet: ghcr.io/avysel/tezos-faucet-backend:1.0
+  tezos_faucet_backend: ghcr.io/avysel/tezos-faucet-backend:1.0
 authorizedHost: # filled in by pulumi
 config:
   application:
