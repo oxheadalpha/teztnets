@@ -274,7 +274,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:v14.0
+  octez: registry.gitlab.com/tezos/tezos:amd64_raphael-t_vdf-daemon
 
 protocols:
   - command: 013-PtJakart
