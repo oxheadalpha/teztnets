@@ -8,12 +8,12 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Full network name | `TEZOS-DAILYNET-2022-08-20T00:00:00.000Z` |
+| Full network name | `TEZOS-DAILYNET-2022-08-21T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_a44d7164_20220819162933](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a44d7164_20220819162933) |
-| Public RPC endpoint | [https://rpc.dailynet-2022-08-20.teztnets.xyz](https://rpc.dailynet-2022-08-20.teztnets.xyz) |
-| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-20-faucet) |
-| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Dailynet faucet](https://new-faucet.dailynet-2022-08-20.teztnets.xyz) |
-| Activated on | 2022-08-20T00:00:00.000Z |
+| Public RPC endpoint | [https://rpc.dailynet-2022-08-21.teztnets.xyz](https://rpc.dailynet-2022-08-21.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://teztnets.xyz/dailynet-2022-08-21-faucet) |
+| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Dailynet faucet](https://new-faucet.dailynet-2022-08-21.teztnets.xyz) |
+| Activated on | 2022-08-21T00:00:00.000Z |
 | Protocol at level 0 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
 
@@ -54,7 +54,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/dailynet-2022-08-20
+tezos-node config init --network https://teztnets.xyz/dailynet-2022-08-21
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -62,7 +62,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2022-08-20.log &
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-dailynet-2022-08-21.log &
 > ```
 
 
