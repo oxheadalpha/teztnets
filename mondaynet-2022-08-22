@@ -1,13 +1,13 @@
 {
-  "chain_name": "TEZOS-MONDAYNET-2022-08-15T00:00:00.000Z",
+  "chain_name": "TEZOS-MONDAYNET-2022-08-22T00:00:00.000Z",
   "default_bootstrap_peers": [
-    "mondaynet-2022-08-15.teztnets.xyz",
+    "mondaynet-2022-08-22.teztnets.xyz",
     "mondaynet.ecadinfra.com"
   ],
   "genesis": {
-    "block": "BMJgDCdC6aUFiALCvN9trRUTpbCn2q8C71F34Noof6eYaKpuLov",
+    "block": "BMKduxQDv4sMgds9kQfghfSj51TnXsMV5pTgfVJb9omB6SKgSte",
     "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
-    "timestamp": "2022-08-15T00:00:00.000Z"
+    "timestamp": "2022-08-22T00:00:00.000Z"
   },
   "genesis_parameters": {
     "values": {
