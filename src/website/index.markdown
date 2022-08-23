@@ -6,4 +6,4 @@ Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. 
 
 This list of Teztnets is also available in [json format](https://teztnets.xyz/teztnets.json).
 
-🆕 Fund your testnet web wallet with our **new faucet**, currently in Beta.
+🆕 Fund your testnet web wallet with our **new faucet**. No more CLI needed!
