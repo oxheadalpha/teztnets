@@ -6,7 +6,7 @@ Current testnets for the [Tezos](https://tezos.com) blockchain are listed here. 
 
 This list of Teztnets is also available in [json format](https://teztnets.xyz/teztnets.json).
 
-🆕 Fund your testnet web wallet with our **new faucet**, currently in Beta.
+🆕 Fund your testnet web wallet with our **new faucet**. No more CLI needed!
 
 # Long-running Teztnets
 
@@ -14,7 +14,7 @@ If you are not sure, pick this one.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Ghostnet](/ghostnet-about) | `2022-01-25` | 🆕 [Faucet]() |
+| [Ghostnet](/ghostnet-about) | `2022-01-25` | 🆕 [Faucet](https://faucet.ghostnet.teztnets.xyz) |
 
 
 
@@ -24,8 +24,8 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Jakartanet](/jakartanet-about) | `2022-04-27` | 🆕 [Faucet]() |
-| [Kathmandunet](/kathmandunet-about) | `2022-07-28` | 🆕 [Faucet]() |
+| [Jakartanet](/jakartanet-about) | `2022-04-27` | 🆕 [Faucet](https://faucet.jakartanet.teztnets.xyz) |
+| [Kathmandunet](/kathmandunet-about) | `2022-07-28` | 🆕 [Faucet](https://faucet.kathmandunet.teztnets.xyz) |
 
 
 
@@ -37,8 +37,8 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-08-23` | 🆕 [Faucet]() |
-| [Mondaynet](/mondaynet-about) | `2022-08-22` | 🆕 [Faucet]() |
+| [Dailynet](/dailynet-about) | `2022-08-23` | 🆕 [Faucet](https://faucet.dailynet-2022-08-23.teztnets.xyz) |
+| [Mondaynet](/mondaynet-about) | `2022-08-22` | 🆕 [Faucet](https://faucet.mondaynet-2022-08-22.teztnets.xyz) |
 
 
 
