@@ -14,7 +14,7 @@ If you are not sure, pick this one.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Ghostnet](/ghostnet-about) | `2022-01-25` | 🆕 [Faucet](https://new-faucet.ghostnet.teztnets.xyz) |
+| [Ghostnet](/ghostnet-about) | `2022-01-25` | 🆕 [Faucet]() |
 
 
 
@@ -24,8 +24,8 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Jakartanet](/jakartanet-about) | `2022-04-27` | 🆕 [Faucet](https://new-faucet.jakartanet.teztnets.xyz) |
-| [Kathmandunet](/kathmandunet-about) | `2022-07-28` | 🆕 [Faucet](https://new-faucet.kathmandunet.teztnets.xyz) |
+| [Jakartanet](/jakartanet-about) | `2022-04-27` | 🆕 [Faucet]() |
+| [Kathmandunet](/kathmandunet-about) | `2022-07-28` | 🆕 [Faucet]() |
 
 
 
@@ -37,8 +37,8 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-08-23` | 🆕 [Faucet](https://new-faucet.dailynet-2022-08-23.teztnets.xyz) |
-| [Mondaynet](/mondaynet-about) | `2022-08-22` | 🆕 [Faucet](https://new-faucet.mondaynet-2022-08-22.teztnets.xyz) |
+| [Dailynet](/dailynet-about) | `2022-08-23` | 🆕 [Faucet]() |
+| [Mondaynet](/mondaynet-about) | `2022-08-22` | 🆕 [Faucet]() |
 
 
 

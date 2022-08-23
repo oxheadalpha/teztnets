@@ -11,7 +11,7 @@ Testnet for the Jakarta protocol proposal, proposed April 2022.
 | Full network name | `TEZOS_JAKARTANET_2022-04-27T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v13.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v13.0) |
 | Public RPC endpoint | [https://rpc.jakartanet.teztnets.xyz](https://rpc.jakartanet.teztnets.xyz) |
-| Faucet | [Jakartanet faucet](https://new-faucet.jakartanet.teztnets.xyz) |
+| Faucet | [Jakartanet faucet]() |
 | Activated on | 2022-04-27T15:00:00Z |
 | Protocol at level 0 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
 | Protocol at level 8192 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
@@ -73,7 +73,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Jakartanet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://new-faucet.jakartanet.teztnets.xyz).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet]().
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
