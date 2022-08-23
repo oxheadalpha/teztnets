@@ -11,8 +11,7 @@ Test Chain for the Kathmandu Protocol Proposal
 | Full network name | `TEZOS_KATHMANDUNET_2022-07-28T15:00:00Z` |
 | Tezos docker build | registry.gitlab.com/tezos/tezos:amd64_raphael-t_vdf-daemon |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
-| Faucet | [Kathmandunet faucet](https://teztnets.xyz/kathmandunet-faucet) |
-| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New Kathmandunet faucet](https://new-faucet.kathmandunet.teztnets.xyz) |
+| Faucet | [Kathmandunet faucet](https://new-faucet.kathmandunet.teztnets.xyz) |
 | Activated on | 2022-07-28T15:00:00Z |
 | Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 | Protocol at level 8192 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
@@ -70,16 +69,16 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Kathmandunet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://teztnets.xyz/kathmandunet-faucet).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://new-faucet.kathmandunet.teztnets.xyz).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./tezos-client register key faucet as delegate
+./tezos-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-014-PtKathma run with local node ~/.tezos-node faucet --liquidity-baking-toggle-vote pass
+tezos-baker-014-PtKathma run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
@@ -90,7 +89,7 @@ tezos-accuser-014-PtKathma run
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-014-PtKathma run with local node ~/.tezos-node faucet --liquidity-baking-toggle-vote pass > ./baker-kathmandunet.log &
+> nohup tezos-baker-014-PtKathma run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-kathmandunet.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
