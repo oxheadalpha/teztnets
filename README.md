@@ -14,7 +14,7 @@ See the [tezos-k8s documentation](https://github.com/oxheadalpha/tezos-k8s/blob/
 
 ### Faucet support
 
-The [commitments](https://github.com/oxheadalpha/teztnets/tree/main/bootstrap_commitments) are precursor accounts that can be used to fund real account with the faucet.
+We support the beacon-compatible Tezos Faucet.
 
 ### Injection of contracts at genesis
 

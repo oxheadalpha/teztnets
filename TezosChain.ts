@@ -29,13 +29,12 @@ export interface TezosInitParameters {
   getCategory(): string;
   getPeers(): string[];
   getContracts(): string[];
-  getCommitments(): string;
   getChartRepo(): string;
   getChartRepoVersion(): string;
   getChartPath(): string;
   getPrivateBakingKey(): string;
-  getNewFaucetRecaptchaSiteKey(): pulumi.Output<string>;
-  getNewFaucetRecaptchaSecretKey(): pulumi.Output<string>;
+  getFaucetRecaptchaSiteKey(): pulumi.Output<string>;
+  getFaucetRecaptchaSecretKey(): pulumi.Output<string>;
   getAliases(): string[];
   getIndexers(): { name: string, url: string }[];
 }
@@ -51,7 +50,6 @@ export interface TezosParamsInitializer {
   readonly dnsName?: string;
   readonly bootstrapPeers?: string[];
   readonly bootstrapContracts?: string[];
-  readonly bootstrapCommitments?: string;
   readonly chartRepo?: string;
   readonly chartRepoVersion?: string;
   readonly chartPath?: string;
@@ -60,8 +58,8 @@ export interface TezosParamsInitializer {
   readonly yamlFile?: string;
   readonly faucetYamlFile?: string;
   readonly maskedFromMainPage?: boolean;
-  readonly newFaucetRecaptchaSiteKey?: pulumi.Output<string>;
-  readonly newFaucetRecaptchaSecretKey?: pulumi.Output<string>;
+  readonly faucetRecaptchaSiteKey?: pulumi.Output<string>;
+  readonly faucetRecaptchaSecretKey?: pulumi.Output<string>;
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
 }
@@ -78,13 +76,12 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _category: string;
   private _publicBootstrapPeers: string[];
   private _bootstrapContracts: string[];
-  private _bootstrapCommitments: string;
   private _chartRepo: string;
   private _chartRepoVersion: string;
   private _chartPath: string;
   private _maskedFromMainPage: boolean;
-  private _newFaucetRecaptchaSiteKey: pulumi.Output<string>;
-  private _newFaucetRecaptchaSecretKey: pulumi.Output<string>;
+  private _faucetRecaptchaSiteKey: pulumi.Output<string>;
+  private _faucetRecaptchaSecretKey: pulumi.Output<string>;
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
 
@@ -97,14 +94,13 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._category = params.category || '';
     this._publicBootstrapPeers = params.bootstrapPeers || [];
     this._bootstrapContracts = params.bootstrapContracts || [];
-    this._bootstrapCommitments = params.bootstrapCommitments || '';
     this._chartRepo = params.chartRepo || '';
     this._chartRepoVersion = params.chartRepoVersion || '';
     this._chartPath = params.chartPath || '';
     this._periodic = false;
     this._maskedFromMainPage = params.maskedFromMainPage || false;
-    this._newFaucetRecaptchaSiteKey = params.newFaucetRecaptchaSiteKey!;
-    this._newFaucetRecaptchaSecretKey = params.newFaucetRecaptchaSecretKey!;
+    this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey!;
+    this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey!;
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
 
@@ -252,20 +248,12 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._bootstrapContracts;
   }
 
-  public commitments(commitments: string): TezosChainParametersBuilder {
-    this._bootstrapCommitments = commitments;
-    return this;
-  }
-  public getCommitments(): string {
-    return this._bootstrapCommitments;
+  public getFaucetRecaptchaSiteKey(): pulumi.Output<string> {
+    return this._faucetRecaptchaSiteKey;
   }
 
-  public getNewFaucetRecaptchaSiteKey(): pulumi.Output<string> {
-    return this._newFaucetRecaptchaSiteKey;
-  }
-
-  public getNewFaucetRecaptchaSecretKey(): pulumi.Output<string> {
-    return this._newFaucetRecaptchaSecretKey;
+  public getFaucetRecaptchaSecretKey(): pulumi.Output<string> {
+    return this._faucetRecaptchaSecretKey;
   }
 
   public chartRepo(chartRepo: string): TezosChainParametersBuilder {
@@ -362,7 +350,7 @@ export class TezosChain extends pulumi.ComponentResource {
       { provider: this.provider }
     );
 
-    if (("activation" in params.helmValues) && (params.getContracts() || params.getCommitments())) {
+    if (("activation" in params.helmValues) && params.getContracts()) {
       const activationBucket = new aws.s3.Bucket(`${name}-activation-bucket`);
       const bucketPolicy = new aws.s3.BucketPolicy(`${name}-activation-bucket-policy`, {
         bucket: activationBucket.bucket,
@@ -381,18 +369,6 @@ export class TezosChain extends pulumi.ComponentResource {
           });
           params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
-      }
-
-      if (params.getCommitments()) {
-        const commitmentFile = params.getCommitments();
-        const bucketObject = new aws.s3.BucketObject(`${name}-${commitmentFile}`, {
-          bucket: activationBucket.bucket,
-          key: commitmentFile,
-          source: new pulumi.asset.FileAsset(`bootstrap_commitments/${commitmentFile}`),
-          contentType: mime.getType(commitmentFile),
-          acl: 'public-read'
-        });
-        params.helmValues["activation"]["commitments_url"] = pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${commitmentFile}`;
       }
     }
 
@@ -514,18 +490,18 @@ export class TezosChain extends pulumi.ComponentResource {
         values: params.faucetHelmValues,
         path: `new-faucet/tezos-k8s/charts/tezos-faucet`
       }
-      const faucetBEDomain = `new-faucet-backend.${teztnetsDomain}`
-      const faucetDomain = `new-faucet.${teztnetsDomain}`
-      faucetChartValues.values["googleCaptchaSecretKey"] = params.getNewFaucetRecaptchaSecretKey()
+      const faucetBEDomain = `faucet-backend.${teztnetsDomain}`
+      const faucetDomain = `faucet.${teztnetsDomain}`
+      faucetChartValues.values["googleCaptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
       faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
-      faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getNewFaucetRecaptchaSiteKey()
+      faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getFaucetRecaptchaSiteKey()
       faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetBEDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
       faucetChartValues.values["config"]["network"]["rpcUrl"] = `https://rpc.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["hosts"][0]["host"] = `new-faucet.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["hosts"][1]["host"] = `new-faucet-backend.${teztnetsDomain}`
+      faucetChartValues.values["ingress"]["hosts"][0]["host"] = `faucet.${teztnetsDomain}`
+      faucetChartValues.values["ingress"]["hosts"][1]["host"] = `faucet-backend.${teztnetsDomain}`
       new k8s.helm.v2.Chart(
-        `${name}-new-faucet`,
+        `${name}-faucet`,
         faucetChartValues,
         { providers: { kubernetes: this.provider } }
       )
