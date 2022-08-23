@@ -36,10 +36,6 @@ const repo = new awsx.ecr.Repository(stack)
 const desiredClusterCapacity = 2
 const aws_account_id = getEnvVariable("AWS_ACCOUNT_ID")
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
-const faucetSeed = getEnvVariable("FAUCET_SEED")
-const oldFaucetRecaptchaSiteKey = getEnvVariable("FAUCET_RECAPTCHA_SITE_KEY")
-const oldFaucetRecaptchaSecretKey = getEnvVariable("FAUCET_RECAPTCHA_SECRET_KEY")
-
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
 const vpc = new awsx.ec2.Vpc(
@@ -156,10 +152,6 @@ const dailynet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.7.0",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 1000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,
@@ -187,10 +179,6 @@ const mondaynet_chain = new TezosChain(
     //chartRepoVersion: "6.7.0",
     chartPath: 'mondaynet/tezos-k8s',
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 1000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,
@@ -220,10 +208,6 @@ const ghostnet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.7.0",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
     indexers: [
       {
         name: "TzKT",
@@ -270,10 +254,6 @@ const jakartanet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.7.0",
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
     indexers: [
       {
         name: "TzKT",
@@ -310,10 +290,6 @@ const kathmandunet_chain = new TezosChain(
     //chartRepoVersion: "6.8.1",
     chartPath: 'kathmandunet/tezos-k8s',
     privateBakingKey: private_oxhead_baking_key,
-    numberOfFaucetAccounts: 10000,
-    faucetSeed: faucetSeed,
-    faucetRecaptchaSiteKey: oldFaucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: oldFaucetRecaptchaSecretKey,
   }),
   cluster.provider,
   repo,
@@ -364,9 +340,6 @@ function getTeztnets(chains: TezosChain[]): object {
 
   chains.forEach(function(chain) {
     const chainName = chain.params.getName()
-    let faucetUrl
-
-    faucetUrl = `https://teztnets.xyz/${chain.params.getName()}-faucet`
     let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`
     let newFaucetUrl = `https://new-faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
@@ -378,7 +351,6 @@ function getTeztnets(chains: TezosChain[]): object {
       git_ref: chain.getGitRef(),
       protocols: chain.getProtocols(),
       last_baking_daemon: chain.getLastBakingDaemon(),
-      faucet_url: faucetUrl,
       new_faucet_url: newFaucetUrl,
       category: chain.params.getCategory(),
       rpc_url: rpcUrl,

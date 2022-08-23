@@ -11,8 +11,7 @@ permalink: /{{ v["human_name"] | lower }}-about
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
-| Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
-| New [Beacon](https://tezos.b9lab.com/beacon/)-capable Faucet | [New {{ v["human_name"] }} faucet]({{ v["new_faucet_url"] }}) |
+| Faucet | [{{ v["human_name"] }} faucet]({{ v["new_faucet_url"] }}) |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
 {% for proto in v["protocols"] -%}
 | Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
@@ -80,16 +79,16 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 {% if v["category"] in [ "Protocol Teztnets", "Long-running Teztnets" ] %}
 ### Bake on the {{ v["human_name"] }} network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet]({{ v["faucet_url"] }}).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet]({{ v["new_faucet_url"] }}).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./tezos-client register key faucet as delegate
+./tezos-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node faucet --liquidity-baking-toggle-vote pass
+tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
@@ -100,7 +99,7 @@ tezos-accuser-{{ v["last_baking_daemon"] }} run
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node faucet --liquidity-baking-toggle-vote pass > ./baker-{{ k }}.log &
+> nohup tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-{{ k }}.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.

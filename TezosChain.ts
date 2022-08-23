@@ -34,12 +34,8 @@ export interface TezosInitParameters {
   getChartRepoVersion(): string;
   getChartPath(): string;
   getPrivateBakingKey(): string;
-  getNumberOfFaucetAccounts(): number;
-  getFaucetSeed(): string;
   getNewFaucetRecaptchaSiteKey(): pulumi.Output<string>;
   getNewFaucetRecaptchaSecretKey(): pulumi.Output<string>;
-  getFaucetRecaptchaSiteKey(): string;
-  getFaucetRecaptchaSecretKey(): string;
   getAliases(): string[];
   getIndexers(): { name: string, url: string }[];
 }
@@ -63,13 +59,9 @@ export interface TezosParamsInitializer {
   readonly faucetPrivateKey?: pulumi.Output<string>;
   readonly yamlFile?: string;
   readonly faucetYamlFile?: string;
-  readonly numberOfFaucetAccounts?: number;
   readonly maskedFromMainPage?: boolean;
-  readonly faucetSeed?: string;
   readonly newFaucetRecaptchaSiteKey?: pulumi.Output<string>;
   readonly newFaucetRecaptchaSecretKey?: pulumi.Output<string>;
-  readonly faucetRecaptchaSiteKey?: string;
-  readonly faucetRecaptchaSecretKey?: string;
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
 }
@@ -90,13 +82,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _chartRepo: string;
   private _chartRepoVersion: string;
   private _chartPath: string;
-  private _numberOfFaucetAccounts: number;
   private _maskedFromMainPage: boolean;
-  private _faucetSeed: string;
   private _newFaucetRecaptchaSiteKey: pulumi.Output<string>;
   private _newFaucetRecaptchaSecretKey: pulumi.Output<string>;
-  private _faucetRecaptchaSiteKey: string;
-  private _faucetRecaptchaSecretKey: string;
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
 
@@ -115,10 +103,6 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._chartPath = params.chartPath || '';
     this._periodic = false;
     this._maskedFromMainPage = params.maskedFromMainPage || false;
-    this._numberOfFaucetAccounts = params.numberOfFaucetAccounts || 0;
-    this._faucetSeed = params.faucetSeed || '';
-    this._faucetRecaptchaSiteKey = params.faucetRecaptchaSiteKey || '';
-    this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey || '';
     this._newFaucetRecaptchaSiteKey = params.newFaucetRecaptchaSiteKey!;
     this._newFaucetRecaptchaSecretKey = params.newFaucetRecaptchaSecretKey!;
     this._aliases = params.aliases || [];
@@ -276,28 +260,12 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._bootstrapCommitments;
   }
 
-  public getNumberOfFaucetAccounts(): number {
-    return this._numberOfFaucetAccounts;
-  }
-
-  public getFaucetSeed(): string {
-    return this._faucetSeed;
-  }
-
   public getNewFaucetRecaptchaSiteKey(): pulumi.Output<string> {
     return this._newFaucetRecaptchaSiteKey;
   }
 
   public getNewFaucetRecaptchaSecretKey(): pulumi.Output<string> {
     return this._newFaucetRecaptchaSecretKey;
-  }
-
-  public getFaucetRecaptchaSiteKey(): string {
-    return this._faucetRecaptchaSiteKey;
-  }
-
-  public getFaucetRecaptchaSecretKey(): string {
-    return this._faucetRecaptchaSecretKey;
   }
 
   public chartRepo(chartRepo: string): TezosChainParametersBuilder {
@@ -538,20 +506,8 @@ export class TezosChain extends pulumi.ComponentResource {
       tezosK8sImages = defaultHelmValues["tezos_k8s_images"];
       // do not build zerotier for now since it takes times and it is not used in tqinfra
       delete tezosK8sImages["zerotier"];
-      // build faucet container
-      tezosK8sImages["faucet"] = "faucet:dev";
     }
 
-    let faucetConfig;
-    if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
-      // deploy a faucet website
-
-      faucetConfig = {
-        seed: `${params.getFaucetSeed()}-${params.getChainName()}`,
-        number_of_accounts: params.getNumberOfFaucetAccounts(),
-      }
-      params.helmValues["activation"]["faucet"] = faucetConfig;
-    }
     if (Object.keys(params.faucetHelmValues).length != 0) {
       let faucetChartValues: any = {
         namespace: ns.metadata.name,
@@ -682,109 +638,7 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
-
     })
-
-    if (params.getNumberOfFaucetAccounts() > 0 && "activation" in params.helmValues) {
-      // deploy a faucet website
-
-      let faucetChartValues: any = {
-        namespace: ns.metadata.name,
-        values: {
-          recaptcha_keys: {
-            siteKey: params.getFaucetRecaptchaSiteKey(),
-            secretKey: params.getFaucetRecaptchaSecretKey(),
-          },
-          activation: {
-            faucet: faucetConfig,
-          },
-        },
-      };
-      if (params.getChartRepo() == '') {
-        // deploy from submodule
-        faucetChartValues["values"]["tezos_k8s_images"] = pulumiTaggedImages;
-        faucetChartValues["path"] = `${params.getChartPath()}/charts/tezos-faucet`;
-      } else {
-        // deploy from helm repo with public images
-        faucetChartValues["chart"] = 'tezos-faucet';
-        faucetChartValues["version"] = params.getChartRepoVersion();
-        faucetChartValues["fetchOpts"] = {
-          repo: params.getChartRepo(),
-        };
-      }
-      new k8s.helm.v2.Chart(
-        `${name}-faucet`,
-        faucetChartValues,
-        { providers: { kubernetes: this.provider } }
-      )
-
-      const faucetDomain = `faucet.${teztnetsDomain}`
-      const faucetCert = new aws.acm.Certificate(
-        `${faucetDomain}-cert`,
-        {
-          validationMethod: "DNS",
-          domainName: faucetDomain,
-        },
-        { parent: this }
-      )
-      const { certValidation } = createCertValidation(
-        {
-          cert: faucetCert,
-          targetDomain: faucetDomain,
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
-
-      const ingressName = `${faucetDomain}-ingress`
-      new k8s.networking.v1beta1.Ingress(
-        ingressName,
-        {
-          metadata: {
-            namespace: ns.metadata.name,
-            name: ingressName,
-            annotations: {
-              "kubernetes.io/ingress.class": "alb",
-              "alb.ingress.kubernetes.io/scheme": "internet-facing",
-              "alb.ingress.kubernetes.io/healthcheck-path": "/",
-              "alb.ingress.kubernetes.io/healthcheck-port": "8081",
-              "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
-              "ingress.kubernetes.io/force-ssl-redirect": "true",
-              "alb.ingress.kubernetes.io/actions.ssl-redirect":
-                '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-            },
-            labels: { app: "faucet" },
-          },
-          spec: {
-            rules: [
-              {
-                host: faucetDomain,
-                http: {
-                  paths: [
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "ssl-redirect",
-                        servicePort: "use-annotation",
-                      },
-                    },
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "faucet",
-                        servicePort: "http",
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-        { provider, parent: this, dependsOn: certValidation }
-      )
-    }
-
   }
 
 
