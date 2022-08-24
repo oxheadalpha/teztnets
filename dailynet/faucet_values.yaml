@@ -33,16 +33,4 @@ ingress:
     "ingress.kubernetes.io/force-ssl-redirect": "true"
     "alb.ingress.kubernetes.io/actions.ssl-redirect":
       '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}'
-  hosts:
-  - host: # filled in by pulumi
-    paths:
-    - path: "/"
-      pathType: 'Prefix'
-      backend:
-        portNumber: 80
-  - host: # filled in by pulumi
-    paths:
-    - path: "/"
-      pathType: 'Prefix'
-      backend:
-        portNumber: 3000
+  host: # faucet fqdn, filled in by pulumi

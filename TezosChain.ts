@@ -490,16 +490,14 @@ export class TezosChain extends pulumi.ComponentResource {
         values: params.faucetHelmValues,
         path: `new-faucet/tezos-k8s/charts/tezos-faucet`
       }
-      const faucetBEDomain = `faucet-backend.${teztnetsDomain}`
       const faucetDomain = `faucet.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
       faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
       faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getFaucetRecaptchaSiteKey()
-      faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetBEDomain}`
+      faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
       faucetChartValues.values["config"]["network"]["rpcUrl"] = `https://rpc.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["hosts"][0]["host"] = `faucet.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["hosts"][1]["host"] = `faucet-backend.${teztnetsDomain}`
+      faucetChartValues.values["ingress"]["host"] = `faucet.${teztnetsDomain}`
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
         faucetChartValues,
@@ -518,22 +516,6 @@ export class TezosChain extends pulumi.ComponentResource {
         {
           cert: faucetCert,
           targetDomain: faucetDomain,
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
-      const faucetBECert = new aws.acm.Certificate(
-        `${faucetBEDomain}-cert`,
-        {
-          validationMethod: "DNS",
-          domainName: faucetBEDomain,
-        },
-        { parent: this }
-      )
-      createCertValidation(
-        {
-          cert: faucetBECert,
-          targetDomain: faucetBEDomain,
           hostedZone: this.zone,
         },
         { parent: this }
