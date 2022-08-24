@@ -1,5 +1,5 @@
 images:
-  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.0.1
+  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.0.2
   tezos_faucet_backend: ghcr.io/oxheadalpha/tezos-faucet-backend:1.1
 authorizedHost: # filled in by pulumi
 maxBalance: 61000
@@ -8,7 +8,7 @@ config:
      name: "Tezos Dailynet faucet"
      googleCaptchaSiteKey: #filled in by pulumi
      backendUrl: # filled in by pulumi
-     githubRepo: "https://github.com/avysel/tezos-faucet"
+     githubRepo: "https://github.com/oxheadalpha/tezos-faucet"
      profiles:
        user:
          profile: USER
