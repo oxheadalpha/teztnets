@@ -117,6 +117,8 @@ node_config_network:
 
 protocols:
   - command: alpha
+    vote:
+      liquidity_baking_toggle_vote: "pass"
 
 activation:
   protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK

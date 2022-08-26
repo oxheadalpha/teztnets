@@ -14,6 +14,8 @@ node_config_network:
 
 protocols:
   - command: 013-PtJakart
+    vote:
+      liquidity_baking_toggle_vote: "on"
 
 activation:
   protocol_hash: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx

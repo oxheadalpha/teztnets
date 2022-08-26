@@ -1,18 +1,3 @@
-[submodule "ithacanet-signer/tezos-k8s"]
-	path = ghostnet-signer/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "kathmandunet/tezos-k8s"]
-	path = kathmandunet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "mondaynet/tezos-k8s"]
-	path = mondaynet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s
-[submodule "pyrometer/tezos-k8s"]
-	path = pyrometer/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
 [submodule "new-faucet/tezos-k8s"]
 	path = new-faucet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "dailynet/tezos-k8s"]
-	path = dailynet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
