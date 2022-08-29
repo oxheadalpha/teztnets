@@ -395,11 +395,7 @@ createCertValidation(
 new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    chart: "pyrometer",
-    fetchOpts: {
-      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    },
-    version: "6.8.2",
+    path: "pyrometer/tezos-k8s/charts/pyrometer",
     values: {
       config: {
         "node_monitor": {
