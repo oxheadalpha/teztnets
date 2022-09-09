@@ -74,7 +74,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-    storage_size: 160Gi
+    storage_size: 200Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
