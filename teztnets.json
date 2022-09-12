@@ -28,9 +28,9 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
-    "docker_build": "tezos/tezos:v13.0",
+    "docker_build": "tezos/tezos:v14.0",
     "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-    "git_ref": "v13.0",
+    "git_ref": "v14.0",
     "human_name": "Ghostnet",
     "indexers": [
       {
@@ -42,7 +42,7 @@
         "url": "https://ghost.tzstats.com"
       }
     ],
-    "last_baking_daemon": "013-PtJakart",
+    "last_baking_daemon": "014-PtKathma",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/ghostnet",
     "protocols": [
@@ -57,6 +57,10 @@
       {
         "level": 765952,
         "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
+      },
+      {
+        "level": 1191936,
+        "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
       }
     ],
     "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
