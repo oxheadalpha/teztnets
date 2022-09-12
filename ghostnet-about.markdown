@@ -54,11 +54,13 @@ To verify that the update was successful, run tezos-node config and observe that
   ]
 ```
 
-Note: if your config is not under the default dir (`~/.tezos-node`), you must pass the option -d /path/to/my/node/dir to the commands above.
+Note: if your config is not under the default dir (`~/.tezos-node`), you must pass the option `-d /path/to/my/node/dir` to the commands above.
 
 You do not need to be online during activation as long as you performed these steps correctly.
 
-If you don't do step 3, you will be on a fork and will have to rebuild your node storage from scratch. Thanks in advance for your participation. (edited) 
+If you don't do step 3, you will be on a fork and will have to rebuild your node storage from scratch. Thanks in advance for your participation.
+
+Generic instructions to start baking on Ghostnet are below.
 
 
 ### Install the software
