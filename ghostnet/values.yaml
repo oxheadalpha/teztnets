@@ -11,9 +11,15 @@ node_config_network:
       # update to jakarta at the end of cycle 186, estimated to be on June 28th at 08:30 UTC
     - level: 765952
       replacement_protocol: PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY
+        # update to kathmandu at the end of cycle 290, estimated to be on Sept 16 at 20:00 UTC
+    - level: 1191936
+      replacement_protocol: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
 
 protocols:
   - command: 013-PtJakart
+    vote:
+      liquidity_baking_toggle_vote: "on"
+  - command: 014-PtKathma
     vote:
       liquidity_baking_toggle_vote: "on"
 
@@ -91,7 +97,7 @@ rolling_tarball_url: null
 archive_tarball_url: "https://ghostnet.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v13.0
+  octez: tezos/tezos:v14.0
 
 # We give:
 accounts:
