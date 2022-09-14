@@ -187,7 +187,7 @@ activation:
       availability_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
-      segment_size: 4096
+      page_size: 4096
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40
