@@ -274,7 +274,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: registry.gitlab.com/tezos/tezos:amd64_raphael-t_vdf-daemon
+  octez: registry.gitlab.com/tezos/tezos:amd64_vdum_vdf-daemon
 
 protocols:
   - command: 014-PtKathma
