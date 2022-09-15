@@ -9,7 +9,7 @@ Test Chain for the Kathmandu Protocol Proposal
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_KATHMANDUNET_2022-07-28T15:00:00Z` |
-| Tezos docker build | registry.gitlab.com/tezos/tezos:amd64_raphael-t_vdf-daemon |
+| Tezos docker build | registry.gitlab.com/tezos/tezos:amd64_vdum_vdf-daemon |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://faucet.kathmandunet.teztnets.xyz) |
 | Activated on | 2022-07-28T15:00:00Z |
@@ -32,7 +32,7 @@ For the first 8192 blocks, Kathmandunet will run the Jakarta protocol. Please st
 To join Kathmandunet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_raphael-t_vdf-daemon
+docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_vdum_vdf-daemon
 ```
 
 #### Alternative: Build the software
@@ -42,7 +42,7 @@ docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_raphae
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout amd64_raphael-t_vdf-daemon
+git checkout amd64_vdum_vdf-daemon
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
