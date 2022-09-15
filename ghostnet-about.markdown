@@ -27,7 +27,7 @@ Ghostnet will update to Kathmandu next Friday, September 16th, at approx 22:00 U
 That's a dress rehersal one week before mainnet. It will provide insight on mainnet migration, and will give us enough time to fix problems (if any).
 
 Every ghostnet baker must immediately:
-* upgrade to v14 of tezos
+* upgrade to v14 of Octez
 * run jakarta and kathmandu bakers together
 * run the following command to update your node config:
 
