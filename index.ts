@@ -235,41 +235,6 @@ const ghostnet_signer = new TezosSigner(
   teztnetsHostedZone,
 )
 
-const jakartanet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "jakartanet/values.yaml",
-    faucetYamlFile: "jakartanet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "jakartanet",
-    dnsName: "jakartanet",
-    category: protocolCategory,
-    humanName: "Jakartanet",
-    description: "Testnet for the Jakarta protocol proposal, proposed April 2022.",
-    bootstrapPeers: [
-      "jakartanet.boot.ecadinfra.com",
-      "jakartanet.kaml.fr",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.8.2",
-    privateBakingKey: private_oxhead_baking_key,
-    indexers: [
-      {
-        name: "TzKT",
-        url: "https://jakartanet.tzkt.io"
-      },
-      {
-        name: "TzStats",
-        url: "https://jakarta.tzstats.com"
-      },
-    ]
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
 const kathmandunet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "kathmandunet/values.yaml",
@@ -366,14 +331,12 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
-  jakartanet_chain,
   kathmandunet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
-  jakartanet_chain,
   kathmandunet_chain,
 ])
 
