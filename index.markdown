@@ -22,7 +22,6 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Jakartanet](/jakartanet-about) | `2022-04-27` | [Faucet](https://faucet.jakartanet.teztnets.xyz) |
 | [Kathmandunet](/kathmandunet-about) | `2022-07-28` | [Faucet](https://faucet.kathmandunet.teztnets.xyz) |
 
 
@@ -35,7 +34,7 @@ Testnets that restart regularly and track the development of the master branch o
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
-| [Dailynet](/dailynet-about) | `2022-09-28` | [Faucet](https://faucet.dailynet-2022-09-28.teztnets.xyz) |
+| [Dailynet](/dailynet-about) | `2022-09-29` | [Faucet](https://faucet.dailynet-2022-09-29.teztnets.xyz) |
 | [Mondaynet](/mondaynet-about) | `2022-09-26` | [Faucet](https://faucet.mondaynet-2022-09-26.teztnets.xyz) |
 
 

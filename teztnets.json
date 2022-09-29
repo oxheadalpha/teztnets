@@ -1,25 +1,25 @@
 {
-  "dailynet-2022-09-28": {
+  "dailynet-2022-09-29": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2022-09-28T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2022-09-29T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_da44096c_20220927211323",
-    "faucet_url": "https://faucet.dailynet-2022-09-28.teztnets.xyz",
-    "git_ref": "da44096c",
+    "docker_build": "tezos/tezos:master_398de910_20220928204717",
+    "faucet_url": "https://faucet.dailynet-2022-09-29.teztnets.xyz",
+    "git_ref": "398de910",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2022-09-28",
+    "network_url": "https://teztnets.xyz/dailynet-2022-09-29",
     "protocols": [
       {
         "level": 0,
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.dailynet-2022-09-28.teztnets.xyz",
-    "activated_on": "2022-09-28"
+    "rpc_url": "https://rpc.dailynet-2022-09-29.teztnets.xyz",
+    "activated_on": "2022-09-29"
   },
   "ghostnet": {
     "aliases": [
@@ -65,41 +65,6 @@
     ],
     "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
     "activated_on": "2022-01-25"
-  },
-  "jakartanet": {
-    "aliases": [],
-    "category": "Protocol Teztnets",
-    "chain_name": "TEZOS_JAKARTANET_2022-04-27T15:00:00Z",
-    "description": "Testnet for the Jakarta protocol proposal, proposed April 2022.",
-    "docker_build": "tezos/tezos:v13.0",
-    "faucet_url": "https://faucet.jakartanet.teztnets.xyz",
-    "git_ref": "v13.0",
-    "human_name": "Jakartanet",
-    "indexers": [
-      {
-        "name": "TzKT",
-        "url": "https://jakartanet.tzkt.io"
-      },
-      {
-        "name": "TzStats",
-        "url": "https://jakarta.tzstats.com"
-      }
-    ],
-    "last_baking_daemon": "013-PtJakart",
-    "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/jakartanet",
-    "protocols": [
-      {
-        "level": 0,
-        "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
-      },
-      {
-        "level": 8192,
-        "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-      }
-    ],
-    "rpc_url": "https://rpc.jakartanet.teztnets.xyz",
-    "activated_on": "2022-04-27"
   },
   "kathmandunet": {
     "aliases": [],
