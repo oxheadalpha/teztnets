@@ -1,25 +1,25 @@
 {
-  "dailynet-2022-10-02": {
+  "dailynet-2022-10-03": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2022-10-02T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2022-10-03T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_d4d5478f_20220930170018",
-    "faucet_url": "https://faucet.dailynet-2022-10-02.teztnets.xyz",
+    "faucet_url": "https://faucet.dailynet-2022-10-03.teztnets.xyz",
     "git_ref": "d4d5478f",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2022-10-02",
+    "network_url": "https://teztnets.xyz/dailynet-2022-10-03",
     "protocols": [
       {
         "level": 0,
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.dailynet-2022-10-02.teztnets.xyz",
-    "activated_on": "2022-10-02"
+    "rpc_url": "https://rpc.dailynet-2022-10-03.teztnets.xyz",
+    "activated_on": "2022-10-03"
   },
   "ghostnet": {
     "aliases": [
@@ -92,19 +92,19 @@
     "rpc_url": "https://rpc.kathmandunet.teztnets.xyz",
     "activated_on": "2022-07-28"
   },
-  "mondaynet-2022-09-26": {
+  "mondaynet-2022-10-03": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2022-09-26T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAYNET-2022-10-03T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Jakarta with SCORU feature flags on for 8 cycles then upgrades to proto Alpha.",
-    "docker_build": "tezos/tezos:master_4bd55aa3_20220924220104",
-    "faucet_url": "https://faucet.mondaynet-2022-09-26.teztnets.xyz",
-    "git_ref": "4bd55aa3",
+    "docker_build": "tezos/tezos:master_d4d5478f_20220930170018",
+    "faucet_url": "https://faucet.mondaynet-2022-10-03.teztnets.xyz",
+    "git_ref": "d4d5478f",
     "human_name": "Mondaynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/mondaynet-2022-09-26",
+    "network_url": "https://teztnets.xyz/mondaynet-2022-10-03",
     "protocols": [
       {
         "level": 0,
@@ -115,7 +115,7 @@
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.mondaynet-2022-09-26.teztnets.xyz",
-    "activated_on": "2022-09-26"
+    "rpc_url": "https://rpc.mondaynet-2022-10-03.teztnets.xyz",
+    "activated_on": "2022-10-03"
   }
 }
