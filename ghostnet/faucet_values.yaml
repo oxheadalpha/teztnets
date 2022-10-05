@@ -2,7 +2,7 @@ images:
   tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.0.2
   tezos_faucet_backend: ghcr.io/oxheadalpha/tezos-faucet-backend:1.1
 authorizedHost: # filled in by pulumi
-maxBalance: 61000
+maxBalance: 10000
 config:
   application:
      name: "Tezos Ghostnet faucet"
@@ -12,7 +12,7 @@ config:
      profiles:
        user:
          profile: USER
-         amount: 1
+         amount: 100
        baker:
          profile: BAKER
          amount: 6001
