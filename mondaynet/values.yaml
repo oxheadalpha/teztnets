@@ -249,7 +249,7 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: 014-PtKathma
+  - command: PtKathma
     vote:
       liquidity_baking_toggle_vote: "pass"
   - command: alpha
