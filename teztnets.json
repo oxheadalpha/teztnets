@@ -92,6 +92,28 @@
     "rpc_url": "https://rpc.kathmandunet.teztnets.xyz",
     "activated_on": "2022-07-28"
   },
+  "limanet": {
+    "aliases": [],
+    "category": "Protocol Teztnets",
+    "chain_name": "TEZOS_LIMANET_2022-10-13T15:00:00Z",
+    "description": "Test Chain for the Lima Protocol Proposal",
+    "docker_build": "tezos/tezos:v15.0-rc1",
+    "faucet_url": "https://faucet.limanet.teztnets.xyz",
+    "git_ref": "v15.0-rc1",
+    "human_name": "Limanet",
+    "indexers": [],
+    "last_baking_daemon": "PtLimaPt",
+    "masked_from_main_page": false,
+    "network_url": "https://teztnets.xyz/limanet",
+    "protocols": [
+      {
+        "level": 8192,
+        "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
+      }
+    ],
+    "rpc_url": "https://rpc.limanet.teztnets.xyz",
+    "activated_on": "2022-10-13"
+  },
   "mondaynet-2022-10-10": {
     "aliases": [],
     "category": "Periodic Teztnets",
