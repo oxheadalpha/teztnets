@@ -260,6 +260,30 @@ const kathmandunet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const limanet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "limanet/values.yaml",
+    faucetYamlFile: "limanet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "limanet",
+    dnsName: "limanet",
+    category: protocolCategory,
+    humanName: "Limanet",
+    description: "Test Chain for the Lima Protocol Proposal",
+    bootstrapPeers: [
+      "limanet.boot.ecadinfra.com",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.9.1",
+    privateBakingKey: private_oxhead_baking_key,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -332,12 +356,14 @@ export const networks = getNetworks([
   mondaynet_chain,
   ghostnet_chain,
   kathmandunet_chain,
+  limanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
   kathmandunet_chain,
+  limanet_chain,
 ])
 
 const pyrometerDomain = "pyrometer.teztnets.xyz"
