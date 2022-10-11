@@ -211,7 +211,7 @@ activation:
     liquidity_baking_toggle_ema_threshold: 1000000000
     max_operations_time_to_live: 120
     minimal_block_delay: "15"
-    delay_increment_per_round: "15"
+    delay_increment_per_round: "5"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
@@ -233,28 +233,28 @@ activation:
     tx_rollup_hard_size_limit_per_inbox: 500000
     tx_rollup_hard_size_limit_per_message: 5000
     tx_rollup_commitment_bond: "10000000000"
-    tx_rollup_finality_period: 10
-    tx_rollup_max_inboxes_count: 15
-    tx_rollup_withdraw_period: 10
+    tx_rollup_finality_period: 40000
+    tx_rollup_max_inboxes_count: 40100
+    tx_rollup_withdraw_period: 40000
     tx_rollup_max_messages_per_inbox: 1010
-    tx_rollup_max_commitments_count: 30
+    tx_rollup_max_commitments_count: 80100
     tx_rollup_cost_per_byte_ema_factor: 120
     tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_max_ticket_payload_size: 2048
     tx_rollup_rejection_max_proof_size: 30000
     tx_rollup_sunset_level: 10000000
     dal_parametric:
-      feature_enable: true
+      feature_enable: false
       number_of_slots: 256
       number_of_shards: 2048
-      endorsement_lag: 2
+      endorsement_lag: 1
       availability_threshold: 50
-    sc_rollup_enable: true
+    sc_rollup_enable: false
     sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 40
+    sc_rollup_challenge_window_in_blocks: 20160
     sc_rollup_max_available_messages: 1000000
     sc_rollup_stake_amount: "32000000"
-    sc_rollup_commitment_period_in_blocks: 20
+    sc_rollup_commitment_period_in_blocks: 30
     sc_rollup_max_lookahead_in_blocks: 30000
     sc_rollup_max_active_outbox_levels: 20160
     sc_rollup_max_outbox_messages_per_level: 100
