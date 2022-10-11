@@ -2,14 +2,20 @@
 import requests
 import yaml
 
-with open("kathmandunet/values.yaml", "r") as f:
-    params = yaml.safe_load(f)["activation"]["protocol_parameters"]
 
-zob = requests.get("https://mainnet.oxheadhosted.com/chains/main/blocks/head/context/constants")
+def flatten_params(params):
+    dal_params = params.pop("dal_parametric")
+    for p in dal_params.keys():
+        params["dal_" + p]=dal_params[p]
+    return params
 
-mainnet_params = zob.json()
+with open("limanet/values.yaml", "r") as f:
+    params = flatten_params(yaml.safe_load(f)["activation"]["protocol_parameters"])
 
-print("Param,kathmandunet,mainnet")
+mainnet_params = flatten_params(requests.get("https://mainnet.oxheadhosted.com/chains/main/blocks/head/context/constants").json())
+
+
+print("Param,limanet,mainnet")
 for param in params.keys():
-    if mainnet_params[param] != params[param]:
-        print(f"{param},{params[param]},{mainnet_params[param]}")
+    if mainnet_params.get(param) != params[param]:
+        print(f"{param},{params[param]},{mainnet_params.get(param, 'not defined')}")
