@@ -105,12 +105,12 @@ accounts:
   #   type: public
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # pasqualepinto:
-  #   # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
-  #   key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
-  #   type: public
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  pasqualepinto:
+    # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
+    key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # pea:
   #   # tz1KhTJVAkKc5zhN29VBA3uEijtCKy6kfNBP
   #   key: edpku2vFTjfziPbbViVqfHxVsmvTe5NZoaq6939Ex3eZCaSxkRTfpu
