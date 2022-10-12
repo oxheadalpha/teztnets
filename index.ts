@@ -365,7 +365,7 @@ export const teztnets = getTeztnets([
   limanet_chain,
 ])
 
-const pyrometerDomain = "pyrometer.teztnets.xyz"
+const pyrometerDomain = "status.teztnets.xyz"
 const pyrometerCert = new aws.acm.Certificate(
   `${pyrometerDomain}-cert`,
   {
