@@ -9,7 +9,7 @@ Test Chain for the Kathmandu Protocol Proposal
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_KATHMANDUNET_2022-07-28T15:00:00Z` |
-| Tezos docker build | registry.gitlab.com/tezos/tezos:amd64_vdum_vdf-daemon |
+| Tezos docker build | [tezos/tezos:v14.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.1) |
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://faucet.kathmandunet.teztnets.xyz) |
 | Activated on | 2022-07-28T15:00:00Z |
@@ -26,13 +26,17 @@ For the first 8192 blocks, Kathmandunet will run the Jakarta protocol. Please st
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
+#### Download and install Tezos version v14.1
+
+Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
+
 
 #### Alternative: Use docker
 
 To join Kathmandunet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_vdum_vdf-daemon
+docker run -it --entrypoint=/bin/sh tezos/tezos:v14.1
 ```
 
 #### Alternative: Build the software
@@ -42,7 +46,7 @@ docker run -it --entrypoint=/bin/sh registry.gitlab.com/tezos/tezos:amd64_vdum_v
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout amd64_vdum_vdf-daemon
+git checkout v14.1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -55,7 +59,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/kathmandunet
+tezos-node config init --network kathmandunet
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
