@@ -488,7 +488,12 @@ export class TezosChain extends pulumi.ComponentResource {
       let faucetChartValues: any = {
         namespace: ns.metadata.name,
         values: params.faucetHelmValues,
-        path: `new-faucet/tezos-k8s/charts/tezos-faucet`
+        chart: 'tezos-faucet',
+        version: params.getChartRepoVersion(),
+        fetchOpts:
+        {
+          repo: params.getChartRepo(),
+        },
       }
       const faucetDomain = `faucet.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()

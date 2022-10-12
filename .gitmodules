@@ -1,9 +1,0 @@
-[submodule "new-faucet/tezos-k8s"]
-	path = new-faucet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "pyrometer/tezos-k8s"]
-	path = pyrometer/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "ghostnet/tezos-k8s"]
-	path = ghostnet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git

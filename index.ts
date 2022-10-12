@@ -150,7 +150,7 @@ const dailynet_chain = new TezosChain(
     schedule: "0 0 * * *",
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.8.2",
+    chartRepoVersion: "6.10.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -176,7 +176,7 @@ const mondaynet_chain = new TezosChain(
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.8.2",
+    chartRepoVersion: "6.10.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -204,9 +204,8 @@ const ghostnet_chain = new TezosChain(
       "ghostnet.stakenow.de:9733",
       "ghostnet.visualtez.com",
     ],
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    // chartRepoVersion: "6.8.2",
-    chartPath: "ghostnet/tezos-k8s",
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.10.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
@@ -252,7 +251,7 @@ const kathmandunet_chain = new TezosChain(
       "kathmandunet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.8.2",
+    chartRepoVersion: "6.10.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -276,7 +275,7 @@ const limanet_chain = new TezosChain(
       "limanet.boot.ecadinfra.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.9.1",
+    chartRepoVersion: "6.10.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -385,7 +384,12 @@ createCertValidation(
 new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    path: "pyrometer/tezos-k8s/charts/pyrometer",
+    chart: 'pyrometer',
+    version: "6.10.0",
+    fetchOpts:
+    {
+      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    },
     values: {
       config: {
         "node_monitor": {
