@@ -28,6 +28,12 @@ accounts:
     key: edpkvGYHoY5kwq13Ak6r4fLa1GGSHKJZVe7xJFV6ZgHwdZeaHy3WZj
     is_bootstrap_baker_account: false
     bootstrap_balance: "15000000000000"
+  vicall:
+    # tz1VicarbXb4uAY12pQBAREHUimYCxjfKbLa
+    key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # rodrigo_quelhas:
   #   # tz1ViTezAvcip62Hnu2WYBFEruWEurGPbFX4
   #   key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
@@ -112,7 +118,7 @@ accounts:
   #   # tz1YgDUQV2eXm8pUWNz3S5aWP86iFzNp4jnD
   #   key: edpkteP1jsCpAzmQpseKjEJpo4WFa9TZcFvuxVftVFfZfqKNU9cWTv
   #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"  
+  #   bootstrap_balance: "1000000000000"
   # bakebuddy_waveform:
   #   # tz1QRZrEUNDiuYadYvJa5dJRCqry7hPvYMUh
   #   key: edpkufHs4XkMUAtSkHkHsfJYD65RQMHz6PZYko6Gf1MoWvYKfLpZ9N
