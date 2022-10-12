@@ -107,12 +107,12 @@ accounts:
   #   key: edpku2vFTjfziPbbViVqfHxVsmvTe5NZoaq6939Ex3eZCaSxkRTfpu
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # rich_ayotte:
-  #   # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
-  #   # tz1ZjyxaKWVgmzvcc8X8z8pmndLENDzCvnPR
-  #   key: edpkuEUkeQXP1PbudqRcSYYPsxFXxk1wUNCDSDptRGq1rRsGrRpSzf
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  rich_ayotte:
+    # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
+    # tz1gYTmLWxR4dJ8agYeU5ZSugqUvjC2JsdEs
+    key: edpkvXYuB4dkcSGmm8Mxm9bovPdtVz6CgQARRYGdGeLLQKnBC4iVen
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # bakebuddy_primate:
   #   # tz1YgDUQV2eXm8pUWNz3S5aWP86iFzNp4jnD
   #   key: edpkteP1jsCpAzmQpseKjEJpo4WFa9TZcFvuxVftVFfZfqKNU9cWTv
