@@ -2,7 +2,8 @@
   "chain_name": "TEZOS_LIMANET_2022-10-13T15:00:00Z",
   "default_bootstrap_peers": [
     "limanet.teztnets.xyz",
-    "limanet.boot.ecadinfra.com"
+    "limanet.boot.ecadinfra.com",
+    "limaboot.tzbeta.net"
   ],
   "genesis": {
     "block": "BL3LAGwnWoNFM2H5ZA3Mbd622CVWMe8Kzfkksws4roKDD9WwBmf",
