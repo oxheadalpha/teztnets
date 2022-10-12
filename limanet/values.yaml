@@ -77,11 +77,11 @@ accounts:
     key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # fredcy:
-  #   # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
-  #   key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  fredcy:
+    # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
+    key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   tf:
     # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
