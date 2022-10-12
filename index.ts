@@ -274,6 +274,7 @@ const limanet_chain = new TezosChain(
     bootstrapPeers: [
       "limanet.boot.ecadinfra.com",
       "limaboot.tzbeta.net",
+      "limanet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.10.0",
