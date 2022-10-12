@@ -31,7 +31,6 @@ accounts:
   vicall:
     # tz1VicarbXb4uAY12pQBAREHUimYCxjfKbLa
     key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
-    type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
   # rodrigo_quelhas:
