@@ -83,8 +83,8 @@ accounts:
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
   tf:
-    # tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5
-    key: p2pk66EmFoQS6b2mYLvCrwjXs7XT1A2znX26HcT9YMiGsyCHyDvsLaF
+    # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
+    key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
   # ping:
