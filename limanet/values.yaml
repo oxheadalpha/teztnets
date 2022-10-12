@@ -292,3 +292,4 @@ protocols:
 bootstrap_peers:
   #- limanet.boot.ecadinfra.com
   - limaboot.tzbeta.net
+  - limanet.visualtez.com
