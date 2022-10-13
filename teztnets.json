@@ -107,6 +107,10 @@
     "network_url": "https://teztnets.xyz/limanet",
     "protocols": [
       {
+        "level": 0,
+        "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
+      },
+      {
         "level": 8192,
         "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
       }

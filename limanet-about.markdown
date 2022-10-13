@@ -13,6 +13,7 @@ Test Chain for the Lima Protocol Proposal
 | Public RPC endpoint | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz) |
 | Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) |
 | Activated on | 2022-10-13T15:00:00Z |
+| Protocol at level 0 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
 | Protocol at level 8192 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
 
 
