@@ -3,7 +3,8 @@
   "default_bootstrap_peers": [
     "limanet.teztnets.xyz",
     "limanet.boot.ecadinfra.com",
-    "limaboot.tzbeta.net"
+    "limaboot.tzbeta.net",
+    "limanet.stakenow.de:9733"
   ],
   "genesis": {
     "block": "BL3LAGwnWoNFM2H5ZA3Mbd622CVWMe8Kzfkksws4roKDD9WwBmf",
