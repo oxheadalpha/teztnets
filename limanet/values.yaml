@@ -286,9 +286,6 @@ images:
   octez: tezos/tezos:v15.0-rc1
 
 protocols:
-  - command: PtKathma
-    vote:
-      liquidity_baking_toggle_vote: "pass"
   - command: PtLimaPt
     vote:
       liquidity_baking_toggle_vote: "pass"
