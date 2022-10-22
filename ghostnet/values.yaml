@@ -16,6 +16,9 @@ node_config_network:
       replacement_protocol: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
 
 protocols:
+  - command: 013-PtJakart
+    vote:
+      liquidity_baking_toggle_vote: "on"
   - command: 014-PtKathma
     vote:
       liquidity_baking_toggle_vote: "on"
@@ -94,7 +97,7 @@ rolling_tarball_url: null
 archive_tarball_url: "https://ghostnet.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v14.1
+  octez: tezos/tezos:v14.0
 
 # We give:
 accounts:
