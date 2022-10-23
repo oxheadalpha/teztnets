@@ -9,7 +9,7 @@ Ghostnet is the long-running testnet for Tezos.
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v14.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.1) |
+| Tezos docker build | [tezos/tezos:v14.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.0) |
 | Public RPC endpoint | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz) |
 | Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) |
 | Activated on | 2022-01-25T15:00:00Z |
@@ -28,7 +28,7 @@ Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It gene
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v14.1
+#### Download and install Tezos version v14.0
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -38,7 +38,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Ghostnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v14.1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v14.0
 ```
 
 #### Alternative: Build the software
@@ -48,7 +48,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v14.1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v14.1
+git checkout v14.0
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
