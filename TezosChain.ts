@@ -215,9 +215,12 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     const imageResolver = new TezosImageResolver();
     this.containerImage(pulumi.output(imageResolver.getLatestTagAsync(deployDate))
       .apply(tag => `${imageResolver.image}:${tag}`));
-
     this.name(`${this.getDnsName().toLowerCase()}-${deployDate.toISOString().split('T')[0]}`);
-    this.chainName(`TEZOS-${this.getDnsName().toUpperCase()}-${deployDate.toISOString()}`);
+    if (deployDate.toISOString().split('T')[0] == "2022-10-24" && this.getDnsName().toLowerCase() == "mondaynet") {
+      this.chainName(`TEZOS-MONDAY2NET-${deployDate.toISOString()}`);
+    } else {
+      this.chainName(`TEZOS-${this.getDnsName().toUpperCase()}-${deployDate.toISOString()}`);
+    }
     this.timestamp(deployDate.toISOString());
     this._periodic = true;
 

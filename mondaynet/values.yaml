@@ -137,7 +137,7 @@ node_config_network:
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
+  protocol_hash: PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -147,7 +147,7 @@ activation:
     hard_gas_limit_per_operation: '1040000'
     hard_gas_limit_per_block: '5200000'
     proof_of_work_threshold: '-1'
-    tokens_per_roll: '8000000000'
+    minimal_stake: '6000000000'
     seed_nonce_revelation_tip: '125000'
     baking_reward_fixed_portion: '10000000'
     baking_reward_bonus_per_slot: '4286'
@@ -159,7 +159,6 @@ activation:
     quorum_min: 2000
     min_proposal_quorum: 500
     liquidity_baking_subsidy: '2500000'
-    liquidity_baking_sunset_level: 10000000
     liquidity_baking_toggle_ema_threshold: 100000
     max_operations_time_to_live: 120
     minimal_block_delay: "15"
@@ -194,22 +193,31 @@ activation:
     tx_rollup_max_withdrawals_per_batch: 15
     tx_rollup_max_ticket_payload_size: 2048
     tx_rollup_rejection_max_proof_size: 30000
-    tx_rollup_sunset_level: 1000000
+    tx_rollup_sunset_level: 10000000
     dal_parametric:
       feature_enable: true
       number_of_slots: 256
       number_of_shards: 2048
       endorsement_lag: 2
       availability_threshold: 50
+      slot_size: 1048576
+      redundancy_factor: 16
+      page_size: 4096
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40
-    sc_rollup_max_available_messages: 1000000
+    sc_rollup_max_number_of_messages_per_commitment_period: 32765
     sc_rollup_stake_amount: "32000000"
     sc_rollup_commitment_period_in_blocks: 20
     sc_rollup_max_lookahead_in_blocks: 30000
     sc_rollup_max_active_outbox_levels: 20160
     sc_rollup_max_outbox_messages_per_level: 100
+    sc_rollup_number_of_sections_in_dissection: 32
+    sc_rollup_timeout_period_in_blocks: 500
+    sc_rollup_max_number_of_cemented_commitments: 5
+    zk_rollup_enable: true
+    zk_rollup_origination_size: 4000
+    zk_rollup_min_pending_to_process: 10
 
 nodes:
   tezos-baking-node:
@@ -249,7 +257,7 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: PtKathma
+  - command: PtLimaPt
     vote:
       liquidity_baking_toggle_vote: "pass"
   - command: alpha
