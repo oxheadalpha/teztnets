@@ -121,7 +121,7 @@
   "mondaynet-2022-10-24": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2022-10-24T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAY2NET-2022-10-24T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Jakarta with SCORU feature flags on for 8 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_7f29704d_20221021163017",
     "faucet_url": "https://faucet.mondaynet-2022-10-24.teztnets.xyz",
@@ -134,7 +134,7 @@
     "protocols": [
       {
         "level": 0,
-        "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
+        "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
       },
       {
         "level": 1024,
