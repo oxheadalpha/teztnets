@@ -80,7 +80,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-    storage_size: 200Gi
+    storage_size: 400Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
@@ -97,7 +97,7 @@ rolling_tarball_url: null
 archive_tarball_url: "https://ghostnet.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v14.0
+  octez: tezos/tezos:v14.1
 
 # We give:
 accounts:
