@@ -274,7 +274,7 @@ const limanet_chain = new TezosChain(
     description: "Test Chain for the Lima Protocol Proposal",
     bootstrapPeers: [
       "limanet.boot.ecadinfra.com",
-      "limaboot.tzboot.net",
+      "limanet.tzboot.net",
       "limanet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
