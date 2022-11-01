@@ -283,3 +283,4 @@ protocols:
 
 bootstrap_peers:
   - kathmandunet.boot.ecadinfra.com
+  - kathmandunet.tzboot.net

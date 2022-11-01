@@ -291,6 +291,6 @@ protocols:
       liquidity_baking_toggle_vote: "pass"
 
 bootstrap_peers:
-  #- limanet.boot.ecadinfra.com
-  - limaboot.tzbeta.net
+  - limanet.boot.ecadinfra.com
+  - limaboot.tzboot.net
   - limanet.visualtez.com
