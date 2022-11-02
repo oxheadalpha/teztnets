@@ -3,6 +3,7 @@
   "default_bootstrap_peers": [
     "kathmandunet.teztnets.xyz",
     "kathmandunet.boot.ecadinfra.com",
+    "kathmandunet.tzboot.net",
     "kathmandunet.stakenow.de:9733"
   ],
   "genesis": {
