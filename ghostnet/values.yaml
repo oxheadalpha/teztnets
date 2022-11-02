@@ -89,6 +89,7 @@ bootstrap_peers:
   - ghostnet.kaml.fr
   - ghostnet.boot.ecadinfra.com
   - ghostnet.stakenow.de:9733
+  - ghostnet.tzboot.net
 
 
 full_snapshot_url: null
