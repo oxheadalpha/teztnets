@@ -4,7 +4,7 @@ title: Mondaynet
 permalink: /mondaynet-about
 ---
 
-A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Jakarta with SCORU feature flags on for 8 cycles then upgrades to proto Alpha.
+A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Lima with SCORU and ZK feature flags on for 8 cycles then upgrades to proto Alpha.
 
 | | |
 |-------|---------------------|
