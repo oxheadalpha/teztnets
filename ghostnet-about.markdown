@@ -9,7 +9,7 @@ Ghostnet is the long-running testnet for Tezos.
 | | |
 |-------|---------------------|
 | Public RPC endpoint | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz) |
-| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) || Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
+| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) || Block Explorers | [TzKT](https://ghostnet.tzkt.io) -  |[TzStats](https://ghost.tzstats.com) |
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
 | Activated on | 2022-01-25T15:00:00Z |
@@ -30,7 +30,7 @@ Ghostnet will update to Lima next Monday, December 12th, at the end of cycle 403
 That's a dress rehersal one week before mainnet. It will provide insight on mainnet migration, and will give us enough time to fix problems (if any).
 
 Every ghostnet baker must immediately:
-* upgrade to v15 of Octez
+* upgrade to v15.1 of Octez
 * run kathmandu and lima bakers together
 * run the following command to update your node config:
 
