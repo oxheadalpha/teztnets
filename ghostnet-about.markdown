@@ -9,7 +9,7 @@ Ghostnet is the long-running testnet for Tezos.
 | | |
 |-------|---------------------|
 | Public RPC endpoint | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz) |
-| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) || Block Explorers | [TzKT](https://ghostnet.tzkt.io) -  |[TzStats](https://ghost.tzstats.com) |
+| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) || Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
 | Activated on | 2022-01-25T15:00:00Z |

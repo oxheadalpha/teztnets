@@ -10,6 +10,12 @@ Test Chain for the Kathmandu Protocol Proposal
 |-------|---------------------|
 | Public RPC endpoint | [https://rpc.kathmandunet.teztnets.xyz](https://rpc.kathmandunet.teztnets.xyz) |
 | Faucet | [Kathmandunet faucet](https://faucet.kathmandunet.teztnets.xyz) |
+| Full network name | `TEZOS_KATHMANDUNET_2022-07-28T15:00:00Z` |
+| Tezos docker build | [tezos/tezos:v14.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.1) |
+| Activated on | 2022-07-28T15:00:00Z |
+| Protocol at level 0 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
+| Protocol at level 8192 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
+
 
 
 For the first 8192 blocks, Kathmandunet will run the Jakarta protocol. Please start your Jakarta bakers.
