@@ -7,7 +7,7 @@ Ghostnet will update to Lima next Monday, December 12th, at the end of cycle 403
 That's a dress rehersal one week before mainnet. It will provide insight on mainnet migration, and will give us enough time to fix problems (if any).
 
 Every ghostnet baker must immediately:
-* upgrade to v15 of Octez
+* upgrade to v15.1 of Octez
 * run kathmandu and lima bakers together
 * run the following command to update your node config:
 
