@@ -11,8 +11,8 @@ permalink: /{{ v["human_name"] | lower }}-about
 | Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 {%- if "indexers" in v and v["indexers"] | length >0 -%}
-| Block Explorers | {% for i in v["indexers"] -%}[{{ i["name"]}}]({{ i["url"]}}){% if not loop.last %} - {% endif %}
-{%- endfor %} |
+| Block Explorers | {% for i in v["indexers"] -%}[{{ i["name"]}}]({{ i["url"]}}){% if not loop.last %} - {% endif %} |
+{%- endfor %}
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
