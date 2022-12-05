@@ -15,7 +15,7 @@ Every ghostnet baker must immediately:
 tezos-node config update --network https://teztnets.xyz/ghostnet
 ```
 
-To verify that the update was successful, run `tezos-node config show` and observe that your configuration contains the following user-activated upgrade setting:
+Then restart the node. To verify that the update was successful, run `tezos-node config show` and observe that your configuration contains the following user-activated upgrade setting:
 
 ```
     "user_activated_upgrades": [
