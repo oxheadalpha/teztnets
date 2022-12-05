@@ -2,7 +2,7 @@ Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It gene
 
 ### Ghostnet update to Kathmandu
 
-Ghostnet will update to Lima next Monday, December 12th.
+Ghostnet will update to Lima next Monday, December 12th, at the end of cycle 403.
 
 That's a dress rehersal one week before mainnet. It will provide insight on mainnet migration, and will give us enough time to fix problems (if any).
 
