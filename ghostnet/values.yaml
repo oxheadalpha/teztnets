@@ -22,6 +22,9 @@ protocols:
   - command: PtKathma
     vote:
       liquidity_baking_toggle_vote: "on"
+  - command: PtLimaPt
+    vote:
+      liquidity_baking_toggle_vote: "on"
 
 activation:
   protocol_hash: PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx
