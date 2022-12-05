@@ -28,9 +28,9 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
-    "docker_build": "tezos/tezos:v14.1",
+    "docker_build": "tezos/tezos:v15.1",
     "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-    "git_ref": "v14.1",
+    "git_ref": "v15.1",
     "human_name": "Ghostnet",
     "indexers": [
       {
@@ -42,7 +42,7 @@
         "url": "https://ghost.tzstats.com"
       }
     ],
-    "last_baking_daemon": "014-PtKathma",
+    "last_baking_daemon": "PtLimaPt",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/ghostnet",
     "protocols": [
@@ -61,6 +61,10 @@
       {
         "level": 1191936,
         "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
+      },
+      {
+        "level": 1654784,
+        "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
       }
     ],
     "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
@@ -97,9 +101,9 @@
     "category": "Protocol Teztnets",
     "chain_name": "TEZOS_LIMANET_2022-10-13T15:00:00Z",
     "description": "Test Chain for the Lima Protocol Proposal",
-    "docker_build": "tezos/tezos:v15.0-rc1",
+    "docker_build": "tezos/tezos:v15.1",
     "faucet_url": "https://faucet.limanet.teztnets.xyz",
-    "git_ref": "v15.0-rc1",
+    "git_ref": "v15.1",
     "human_name": "Limanet",
     "indexers": [],
     "last_baking_daemon": "PtLimaPt",

@@ -9,7 +9,7 @@ Test Chain for the Lima Protocol Proposal
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_LIMANET_2022-10-13T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v15.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.0-rc1) |
+| Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
 | Public RPC endpoint | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz) |
 | Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) |
 | Activated on | 2022-10-13T15:00:00Z |
@@ -28,7 +28,7 @@ For the first 8192 blocks, Limanet will run the Kathmandu protocol. Please start
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v15.0-rc1
+#### Download and install Tezos version v15.1
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -38,7 +38,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Limanet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v15.0-rc1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v15.1
 ```
 
 #### Alternative: Build the software
@@ -48,7 +48,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v15.0-rc1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v15.0-rc1
+git checkout v15.1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -61,7 +61,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/limanet
+tezos-node config init --network limanet
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```

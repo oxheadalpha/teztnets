@@ -9,7 +9,7 @@ Ghostnet is the long-running testnet for Tezos.
 | | |
 |-------|---------------------|
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v14.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v14.1) |
+| Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
 | Public RPC endpoint | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz) |
 | Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) |
 | Activated on | 2022-01-25T15:00:00Z |
@@ -17,6 +17,7 @@ Ghostnet is the long-running testnet for Tezos.
 | Protocol at level 8191 |  `Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A` |
 | Protocol at level 765952 |  `PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY` |
 | Protocol at level 1191936 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
+| Protocol at level 1654784 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
 | Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 
 
@@ -28,7 +29,7 @@ Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It gene
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v14.1
+#### Download and install Tezos version v15.1
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -38,7 +39,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Ghostnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v14.1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v15.1
 ```
 
 #### Alternative: Build the software
@@ -48,7 +49,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v14.1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v14.1
+git checkout v15.1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -84,18 +85,18 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-014-PtKathma run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
+tezos-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
 ```bash=3
-tezos-accuser-014-PtKathma run
+tezos-accuser-PtLimaPt run
 ```
 
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-014-PtKathma run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-ghostnet.log &
+> nohup tezos-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-ghostnet.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
