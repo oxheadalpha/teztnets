@@ -8,10 +8,10 @@ Test Chain for the Lima Protocol Proposal
 
 | | |
 |-------|---------------------|
+| Public RPC endpoint | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz) |
+| Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) || Block Explorers | [TzKT](https://limanet.tzkt.io) |
 | Full network name | `TEZOS_LIMANET_2022-10-13T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
-| Public RPC endpoint | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz) |
-| Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) |
 | Activated on | 2022-10-13T15:00:00Z |
 | Protocol at level 0 |  `PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg` |
 | Protocol at level 8192 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
