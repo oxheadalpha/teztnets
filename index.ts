@@ -205,7 +205,7 @@ const ghostnet_chain = new TezosChain(
       "ghostnet.visualtez.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.10.0",
+    chartRepoVersion: "6.11.1",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {

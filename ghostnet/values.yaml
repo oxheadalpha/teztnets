@@ -14,12 +14,12 @@ node_config_network:
         # update to kathmandu at the end of cycle 290, estimated to be on Sept 16 at 20:00 UTC
     - level: 1191936
       replacement_protocol: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
+        # update to lima at the end of cycle 403, estimated to be on Dec 12
+    - level: 1654784
+      replacement_protocol: PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW
 
 protocols:
-  - command: 013-PtJakart
-    vote:
-      liquidity_baking_toggle_vote: "on"
-  - command: 014-PtKathma
+  - command: PtKathma
     vote:
       liquidity_baking_toggle_vote: "on"
 
@@ -95,10 +95,10 @@ bootstrap_peers:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: "https://ghostnet.xtz-shots.io/archive-tarball"
+archive_tarball_url: "https://ghostnet-v15.xtz-shots.io/archive-tarball"
 
 images:
-  octez: tezos/tezos:v14.1
+  octez: tezos/tezos:v15.1
 
 # We give:
 accounts:
