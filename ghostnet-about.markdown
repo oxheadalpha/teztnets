@@ -23,7 +23,7 @@ Ghostnet is the long-running testnet for Tezos.
 
 Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet one week before Mainnet update itself.
 
-### Ghostnet update to Kathmandu
+### Ghostnet update to Lima
 
 Ghostnet will update to Lima next Monday, December 12th, at the end of cycle 403.
 
@@ -38,7 +38,7 @@ Every ghostnet baker must immediately:
 tezos-node config update --network https://teztnets.xyz/ghostnet
 ```
 
-To verify that the update was successful, run `tezos-node config show` and observe that your configuration contains the following user-activated upgrade setting:
+Then restart the node. To verify that the update was successful, run `tezos-node config show` and observe that your configuration contains the following user-activated upgrade setting:
 
 ```
     "user_activated_upgrades": [
