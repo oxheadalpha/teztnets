@@ -81,6 +81,7 @@ activation:
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
+      blocks_per_epoch: 32
     sc_rollup_enable: true
     sc_rollup_origination_size: 6314
     sc_rollup_challenge_window_in_blocks: 40

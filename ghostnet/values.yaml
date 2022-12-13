@@ -19,9 +19,6 @@ node_config_network:
       replacement_protocol: PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW
 
 protocols:
-  - command: PtKathma
-    vote:
-      liquidity_baking_toggle_vote: "on"
   - command: PtLimaPt
     vote:
       liquidity_baking_toggle_vote: "on"
