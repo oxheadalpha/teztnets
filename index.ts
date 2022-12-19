@@ -234,32 +234,6 @@ const ghostnet_signer = new TezosSigner(
   teztnetsHostedZone,
 )
 
-const kathmandunet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "kathmandunet/values.yaml",
-    faucetYamlFile: "kathmandunet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "kathmandunet",
-    dnsName: "kathmandunet",
-    category: protocolCategory,
-    humanName: "Kathmandunet",
-    description: "Test Chain for the Kathmandu Protocol Proposal",
-    bootstrapPeers: [
-      "kathmandunet.boot.ecadinfra.com",
-      "kathmandunet.tzboot.net",
-      "kathmandunet.stakenow.de:9733",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.11.1",
-    privateBakingKey: private_oxhead_baking_key,
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
 const limanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "limanet/values.yaml",
@@ -363,14 +337,12 @@ export const networks = getNetworks([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
-  kathmandunet_chain,
   limanet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
-  kathmandunet_chain,
   limanet_chain,
 ])
 
