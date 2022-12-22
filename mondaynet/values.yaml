@@ -136,7 +136,7 @@ protocols:
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
-    bootstrap_balance: "6700000000000"
+    bootstrap_balance: "7000000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
@@ -180,6 +180,12 @@ accounts:
     #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
     type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  marigold:
+    # tz1eKKAsasRiyUGSnPD5YPu7zfEBcx9LDREQ
+    # cyril.bourdet.pro@gmail.com
+    key: edpkuUD5GNH7LYQySpZNQMt7mWWNAp5phxKrdXuehtBJaoFEp8ebhG
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
   oxheadfree:
