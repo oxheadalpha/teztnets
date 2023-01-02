@@ -8,11 +8,11 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [https://rpc.mondaynet-2022-12-26.teztnets.xyz](https://rpc.mondaynet-2022-12-26.teztnets.xyz) |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2022-12-26.teztnets.xyz) |
-| Full network name | `TEZOS-MONDAYNET-2022-12-26T00:00:00.000Z` |
+| Public RPC endpoint | [https://rpc.mondaynet-2023-01-02.teztnets.xyz](https://rpc.mondaynet-2023-01-02.teztnets.xyz) |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-01-02.teztnets.xyz) |
+| Full network name | `TEZOS-MONDAYNET-2023-01-02T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_950341b2_20221223230037](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_950341b2_20221223230037) |
-| Activated on | 2022-12-26T00:00:00.000Z |
+| Activated on | 2023-01-02T00:00:00.000Z |
 | Protocol at level 0 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
 | Protocol at level 1024 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
 
@@ -54,7 +54,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/mondaynet-2022-12-26
+tezos-node config init --network https://teztnets.xyz/mondaynet-2023-01-02
 
 tezos-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -62,7 +62,7 @@ tezos-node run --rpc-addr 127.0.0.1:8732
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2022-12-26.log &
+> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-01-02.log &
 > ```
 
 
