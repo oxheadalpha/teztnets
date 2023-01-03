@@ -3,7 +3,7 @@ node_config_network:
   genesis:
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
   user_activated_upgrades:
-    - level: 1024
+    - level: 512
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
