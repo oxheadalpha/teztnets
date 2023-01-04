@@ -77,7 +77,7 @@ activation:
       number_of_slots: 256
       number_of_shards: 2048
       attestation_lag: 2
-      availability_threshold: 50
+      attestation_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
