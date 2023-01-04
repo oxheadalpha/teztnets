@@ -17,7 +17,7 @@
   "sandboxed_chain_name": "SANDBOXED_TEZOS",
   "user_activated_upgrades": [
     {
-      "level": 1024,
+      "level": 512,
       "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
     }
   ]
