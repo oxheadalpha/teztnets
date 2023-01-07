@@ -3,8 +3,14 @@
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="/">{{ site.title | escape }}</a>
-
+    <a class="site-title" rel="author" href="/">{{ site.title | escape }}</a> by
+    <img class="w-12 sm:w-16" src="images/oxheadalpha.svg" />
+    <div
+      class="inline-block ml-4 mt-4 mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight header-font-blue ">
+      Oxhead&nbsp;</div>
+    <div
+      class="inline-block mt-4 mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight header-font-red ">
+      Alpha</div>
     {%- if page_paths -%}
     <nav class="site-nav">
       <input type="checkbox" id="nav-trigger" class="nav-trigger" />

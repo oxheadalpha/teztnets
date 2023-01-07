@@ -30,7 +30,7 @@ Example:
 
 ### `--network` endpoint for Tezos node
 
-Tezos nodes supports downloading of network specification from a json endpoint: `tezos-node config init --network https://teztnets.xyz/<TEZTNET NAME>`
+Tezos nodes supports downloading of network specification from a json endpoint: `octez-node config init --network https://teztnets.xyz/<TEZTNET NAME>`
 
 The Teztnet platform creates and exposes such endpoints.
 

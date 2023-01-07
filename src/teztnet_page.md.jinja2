@@ -63,17 +63,17 @@ Run the following commands:
 
 ```
 {% if v["release"] and "rc" not in v["release"] and k != "ghostnet" -%}
-tezos-node config init --network {{ k }}
+octez-node config init --network {{ k }}
 {% else -%}
-tezos-node config init --network {{ v["network_url"] }}
+octez-node config init --network {{ v["network_url"] }}
 {% endif%}
-tezos-node run --rpc-addr 127.0.0.1:8732
+octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-{{ k }}.log &
+> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-{{ k }}.log &
 > ```
 
 {% if v["category"] in [ "Protocol Teztnets", "Long-running Teztnets" ] %}
@@ -83,23 +83,23 @@ To improve reliability of the chain, you can take part in the consensus by becom
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./tezos-client register key mykey as delegate
+./octez-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
+octez-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
 ```bash=3
-tezos-accuser-{{ v["last_baking_daemon"] }} run
+octez-accuser-{{ v["last_baking_daemon"] }} run
 ```
 
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-{{ k }}.log &
+> nohup octez-baker-{{ v["last_baking_daemon"] }} run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-{{ k }}.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
