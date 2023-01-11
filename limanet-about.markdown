@@ -61,15 +61,15 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network limanet
+octez-node config init --network limanet
 
-tezos-node run --rpc-addr 127.0.0.1:8732
+octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-limanet.log &
+> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-limanet.log &
 > ```
 
 
@@ -79,23 +79,23 @@ To improve reliability of the chain, you can take part in the consensus by becom
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./tezos-client register key mykey as delegate
+./octez-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
 ```bash=3
-tezos-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
+octez-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
 ```bash=3
-tezos-accuser-PtLimaPt run
+octez-accuser-PtLimaPt run
 ```
 
 > 💡 Again, to keep your processes alive in background:
 >
 > ```bash=4
-> nohup tezos-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-limanet.log &
+> nohup octez-baker-PtLimaPt run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-limanet.log &
 > ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.

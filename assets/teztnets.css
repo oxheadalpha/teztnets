@@ -1,0 +1,27 @@
+.oxheadlogo {
+  height:40px;
+}
+
+.logotext_alpha {
+  display: inline-block;
+  font-family: 'Titillium Web';
+    --tw-text-opacity: 1;
+    color: rgba(229, 38, 47, var(--tw-text-opacity));
+    font-weight: 700;
+}
+
+.logotext_oxhead {
+  display: inline-block;
+  font-family: 'Titillium Web';
+    --tw-text-opacity: 1;
+    color: rgba(30, 38, 166, var(--tw-text-opacity));
+    font-weight: 900;
+}
+
+.oxhead-header {
+  margin-left: 34px;
+  font-size: 22px;
+}
+.oxhead-header a:hover {
+text-decoration: none;
+}

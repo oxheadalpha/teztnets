@@ -54,15 +54,15 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-tezos-node config init --network https://teztnets.xyz/mondaynet-2023-01-09
+octez-node config init --network https://teztnets.xyz/mondaynet-2023-01-09
 
-tezos-node run --rpc-addr 127.0.0.1:8732
+octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup tezos-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-01-09.log &
+> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-01-09.log &
 > ```
 
 

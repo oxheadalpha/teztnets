@@ -4,7 +4,16 @@
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     <a class="site-title" rel="author" href="/">{{ site.title | escape }}</a>
-
+    <div class="site-title oxhead-header">
+      by
+      <a href="https://www.oxheadalpha.com" target="_blank">
+        <img class="oxheadlogo" src="/assets/images/oxheadalpha.svg" />
+        <div class="logotext_oxhead">
+          Oxhead</div>
+        <div class="logotext_alpha">
+          Alpha</div>
+      </a>
+    </div>
     {%- if page_paths -%}
     <nav class="site-nav">
       <input type="checkbox" id="nav-trigger" class="nav-trigger" />
