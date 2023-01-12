@@ -1,0 +1,6 @@
+accounts:
+  tf:
+    # tz3Q1fwk1vh3zm5LqyUV9e2wZBdaEXcovh2r
+    key: p2pk66p7iVbEFyJaYM5bjJmXP74B7qso8rXMCmKwVRdRZunMdhUjYBH
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
