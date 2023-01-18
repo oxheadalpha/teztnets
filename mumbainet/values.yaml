@@ -36,10 +36,10 @@ accounts:
 
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_MUMBAINET_2023-01-18T15:00:00Z
+  chain_name: TEZOS_MUMBAINET_2023-01-19T15:00:00Z
   genesis:
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2023-01-18T15:00:00Z"
+    timestamp: "2023-01-19T15:00:00Z"
 
 # activation:
 #   protocol_hash: PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg
