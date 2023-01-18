@@ -126,5 +126,22 @@
     ],
     "rpc_url": "https://rpc.mondaynet-2023-01-16.teztnets.xyz",
     "activated_on": "2023-01-16"
+  },
+  "mumbainet": {
+    "aliases": [],
+    "category": "Protocol Teztnets",
+    "chain_name": "TEZOS_MUMBAINET_2023-01-18T15:00:00Z",
+    "description": "Test Chain for the Mumbai Protocol Proposal",
+    "docker_build": "tezos/tezos:v16.0-rc1",
+    "faucet_url": "https://faucet.mumbainet.teztnets.xyz",
+    "git_ref": "v16.0-rc1",
+    "human_name": "Mumbainet",
+    "indexers": [],
+    "last_baking_daemon": "PtMumbai",
+    "masked_from_main_page": false,
+    "network_url": "https://teztnets.xyz/mumbainet",
+    "protocols": [],
+    "rpc_url": "https://rpc.mumbainet.teztnets.xyz",
+    "activated_on": "2023-01-18"
   }
 }
