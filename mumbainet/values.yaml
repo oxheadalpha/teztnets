@@ -33,6 +33,11 @@ accounts:
     key: p2pk66p7iVbEFyJaYM5bjJmXP74B7qso8rXMCmKwVRdRZunMdhUjYBH
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  marco:
+    # Marco Schurtenberger
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # vicall:
   #   # tz1VicarbXb4uAY12pQBAREHUimYCxjfKbLa
   #   key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
@@ -41,10 +46,6 @@ accounts:
   # pirbo:
   #   # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
   #   key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
-  # marco:
-  #   key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
   # ecadlabs:
