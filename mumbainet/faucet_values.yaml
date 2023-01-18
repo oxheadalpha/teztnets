@@ -1,0 +1,36 @@
+images:
+  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.0.2
+  tezos_faucet_backend: ghcr.io/oxheadalpha/tezos-faucet-backend:1.1
+authorizedHost: # filled in by pulumi
+maxBalance: 61000
+config:
+  application:
+     name: "Tezos Mumbainet faucet"
+     googleCaptchaSiteKey: #filled in by pulumi
+     backendUrl: # filled in by pulumi
+     githubRepo: "https://github.com/oxheadalpha/tezos-faucet"
+     profiles:
+       user:
+         profile: USER
+         amount: 100
+       baker:
+         profile: BAKER
+         amount: 6001
+  network:
+     name: # filled in by pulumi
+     rpcUrl: # filled in by pulumi
+     faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
+     viewer: https://mumbai.tzstats.com
+     allowSendButton: false
+ingress:
+  enabled: true
+  annotations:
+    "kubernetes.io/ingress.class": "alb"
+    "alb.ingress.kubernetes.io/scheme": "internet-facing"
+    "alb.ingress.kubernetes.io/healthcheck-path": "/"
+    "alb.ingress.kubernetes.io/healthcheck-port": "80"
+    "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]'
+    "ingress.kubernetes.io/force-ssl-redirect": "true"
+    "alb.ingress.kubernetes.io/actions.ssl-redirect":
+      '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}'
+  host: # faucet fqdn, filled in by pulumi
