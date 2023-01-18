@@ -74,11 +74,11 @@ accounts:
   #   key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # pasqualepinto:
-  #   # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
-  #   key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  pasqualepinto:
+    # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
+    key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # rich_ayotte:
   #   # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
   #   # tz1gYTmLWxR4dJ8agYeU5ZSugqUvjC2JsdEs
