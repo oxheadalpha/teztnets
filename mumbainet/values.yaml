@@ -38,6 +38,12 @@ accounts:
     key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  andrewk:
+    # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # vicall:
   #   # tz1VicarbXb4uAY12pQBAREHUimYCxjfKbLa
   #   key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
