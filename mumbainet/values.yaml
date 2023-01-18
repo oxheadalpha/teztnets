@@ -228,5 +228,4 @@ protocols:
 
 bootstrap_peers:
   #- mumbainet.boot.ecadinfra.com
-  - mumbainet.tzboot.net
-  #- mumbainet.visualtez.com
+  - mumbainet.visualtez.com
