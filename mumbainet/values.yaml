@@ -89,11 +89,11 @@ accounts:
   #   key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # killian_d:
-  #   # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
-  #   key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  killian_d:
+    # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
+    key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # daniel_jean:
   #   # tz1ehn3nZ8PhiJ2ygtLM3Z5hVtSzU4ZKgqLZ
   #   key: edpkunCh4TWt8qLmVscktUVcuhc25obsxYNJNrYqsQCXDhP7LwnVC6
