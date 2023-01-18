@@ -156,6 +156,6 @@ protocols:
       liquidity_baking_toggle_vote: "pass"
 
 bootstrap_peers:
-  #- limanet.boot.ecadinfra.com
-  - limanet.tzboot.net
-  #- limanet.visualtez.com
+  #- mumbainet.boot.ecadinfra.com
+  - mumbainet.tzboot.net
+  #- mumbainet.visualtez.com

@@ -279,9 +279,9 @@ const mumbainet_chain = new TezosChain(
     humanName: "Mumbainet",
     description: "Test Chain for the Mumbai Protocol Proposal",
     bootstrapPeers: [
-      // "limanet.boot.ecadinfra.com",
-      "limanet.tzboot.net",
-      // "limanet.stakenow.de:9733",
+      // "mumbainet.boot.ecadinfra.com",
+      //"mumbainet.tzboot.net",
+      // "mumbainet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.13.0",
