@@ -266,6 +266,38 @@ const limanet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const mumbainet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "mumbainet/values.yaml",
+    faucetYamlFile: "mumbainet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "mumbainet",
+    dnsName: "mumbainet",
+    category: protocolCategory,
+    humanName: "Mumbainet",
+    description: "Test Chain for the Mumbai Protocol Proposal",
+    bootstrapPeers: [
+      // "limanet.boot.ecadinfra.com",
+      "limanet.tzboot.net",
+      // "limanet.stakenow.de:9733",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.13.0",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+      // {
+      //   name: "TzKT",
+      //   url: "https://limanet.tzkt.io"
+      // },
+    ]
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -290,7 +322,7 @@ function getNetworks(chains: TezosChain[]): object {
     if ("activation_account_name" in network) {
       delete network["activation_account_name"]
     }
-    if ("block" in network["genesis"] === false) {
+    if ("genesis" in network && "block" in network["genesis"] === false) {
       // If block hash not passed, use tezos-k8s convention:
       // deterministically derive it from chain name.
       var input = Buffer.from(network["chain_name"])
@@ -338,12 +370,14 @@ export const networks = getNetworks([
   mondaynet_chain,
   ghostnet_chain,
   limanet_chain,
+  mumbainet_chain,
 ])
 export const teztnets = getTeztnets([
   dailynet_chain,
   mondaynet_chain,
   ghostnet_chain,
   limanet_chain,
+  mumbainet_chain,
 ])
 
 const pyrometerDomain = "status.teztnets.xyz"
