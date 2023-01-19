@@ -54,16 +54,16 @@ accounts:
   #   key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # ecadlabs:
-  #   # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
-  #   key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
-  # ecadlabs_2:
-  #   # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
-  #   key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  ecadlabs:
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
+    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  ecadlabs_2:
+    # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
+    key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # michael_kernaghan:
   #   # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
   #   key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
