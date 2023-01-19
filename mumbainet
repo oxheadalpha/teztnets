@@ -1,7 +1,8 @@
 {
   "chain_name": "TEZOS_MUMBAINET_2023-01-19T15:00:00Z",
   "default_bootstrap_peers": [
-    "mumbainet.teztnets.xyz"
+    "mumbainet.teztnets.xyz",
+    "mumbainet.visualtez.com"
   ],
   "genesis": {
     "block": "BMVeyjhT4yd421XJAYcB54hm54CwGqkV6tCzkJ8VpHPVch6Mkx6",
