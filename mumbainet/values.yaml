@@ -49,11 +49,11 @@ accounts:
   #   key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # pirbo:
-  #   # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
-  #   key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  pirbo:
+    # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
+    key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   ecadlabs:
     # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
     key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
