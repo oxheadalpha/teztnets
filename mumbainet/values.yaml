@@ -108,11 +108,11 @@ accounts:
   #   key: edpkunCh4TWt8qLmVscktUVcuhc25obsxYNJNrYqsQCXDhP7LwnVC6
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # visualtez:
-  #   # tz1ViTezAvcip62Hnu2WYBFEruWEurGPbFX4
-  #   key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  visualtez:
+    # tz1ViTezAvcip62Hnu2WYBFEruWEurGPbFX4
+    key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
 
 node_config_network:
   activation_account_name: oxheadbaker
