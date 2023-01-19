@@ -81,6 +81,7 @@ accounts:
     bootstrap_balance: "1000000000000"
   rich_ayotte:
     # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
+    # tz1Sp6HTbbsHDhGDjqsucvRzV9rVe8LTb7c4
     key: edpktoAgXAvtBFojuKPoigboyPA6mPJ3pyR1JP8XES6Lg1rkf1a3T5
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
