@@ -180,23 +180,23 @@ activation:
       feature_enable: false
       number_of_slots: 256
       number_of_shards: 2048
-      endorsement_lag: 2
+      endorsement_lag: 1
       availability_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
     sc_rollup_enable: false
     sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 80640
+    sc_rollup_challenge_window_in_blocks: 20160
     sc_rollup_stake_amount: "10000000000"
-    sc_rollup_commitment_period_in_blocks: 20
-    sc_rollup_max_lookahead_in_blocks: 172800
-    sc_rollup_max_active_outbox_levels: 80640
+    sc_rollup_commitment_period_in_blocks: 30
+    sc_rollup_max_lookahead_in_blocks: 30000
+    sc_rollup_max_active_outbox_levels: 20160
     sc_rollup_max_outbox_messages_per_level: 100
     sc_rollup_max_number_of_cemented_commitments: 5
-    sc_rollup_max_number_of_messages_per_commitment_period: 32765
+    sc_rollup_max_number_of_messages_per_commitment_period: 300000000 
     sc_rollup_number_of_sections_in_dissection: 32
-    sc_rollup_timeout_period_in_blocks: 40320
+    sc_rollup_timeout_period_in_blocks: 20160
     zk_rollup_enable: false
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
