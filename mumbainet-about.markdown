@@ -13,6 +13,7 @@ Test Chain for the Mumbai Protocol Proposal
 | Full network name | `TEZOS_MUMBAINET_2023-01-19T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v16.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc1) |
 | Activated on | 2023-01-19T15:00:00Z |
+| Protocol at level 0 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
 
 
 
