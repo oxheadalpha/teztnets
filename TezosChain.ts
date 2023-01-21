@@ -488,16 +488,25 @@ export class TezosChain extends pulumi.ComponentResource {
     }
 
     if (Object.keys(params.faucetHelmValues).length != 0) {
+      let chartParams;
+      if (params.getChartPath()) {
+        chartParams = { "path": `${params.getChartPath()}/charts/tezos-faucet` }
+      } else {
+        chartParams = {
+          fetchOpts:
+          {
+            repo: params.getChartRepo(),
+          },
+          chart: 'tezos-faucet',
+        }
+      }
+
       let faucetChartValues: any = {
         namespace: ns.metadata.name,
         values: params.faucetHelmValues,
-        chart: 'tezos-faucet',
         version: params.getChartRepoVersion(),
-        fetchOpts:
-        {
-          repo: params.getChartRepo(),
-        },
       }
+      faucetChartValues = { ...faucetChartValues, ...chartParams };
       const faucetDomain = `faucet.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
       faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
@@ -533,22 +542,6 @@ export class TezosChain extends pulumi.ComponentResource {
     if (params.getChartRepo() == '') {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
-
-
-      pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-        (obj: { [index: string]: any }, [key, value]) => {
-          let dockerBuild: docker.DockerBuild = {
-            dockerfile: `${params.getChartPath()}/${key}/Dockerfile`,
-            cacheFrom: _cacheFrom,
-            context: `${params.getChartPath()}/${key}`
-          };
-          obj[key] = docker.buildAndPushImage((value as string).replace(/:.*/, ""), dockerBuild, repo.repository.repositoryUrl, this, () => registry);
-          return obj
-        },
-        {}
-      )
-
-      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
       const chain = new k8s.helm.v2.Chart(
         name,
         {
