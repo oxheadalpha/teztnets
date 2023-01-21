@@ -237,9 +237,6 @@ images:
   octez: tezos/tezos:v16.0-rc1
 
 protocols:
-  - command: PtLimaPt
-    vote:
-      liquidity_baking_toggle_vote: "pass"
   - command: PtMumbai
     vote:
       liquidity_baking_toggle_vote: "pass"
