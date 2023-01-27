@@ -539,65 +539,67 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
     }
-    if (params.getChartRepo() == '') {
-      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+    if (Object.keys(params.helmValues).length != 0) {
+      if (params.getChartRepo() == '') {
+        // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          path: `${params.getChartPath()}/charts/tezos`,
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    } else {
-      // deploy from helm repo with public images
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          chart: 'tezos-chain',
-          version: params.getChartRepoVersion(),
-          fetchOpts:
+        const chain = new k8s.helm.v2.Chart(
+          name,
           {
-            repo: params.getChartRepo(),
-          },
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    }
-
-
-    allNames.forEach(name => {
-      new k8s.core.v1.Service(
-        `${name}-p2p-lb`,
-        {
-          metadata: {
             namespace: ns.metadata.name,
-            name: name,
-            annotations: {
-              "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-              "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-              "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+            path: `${params.getChartPath()}/charts/tezos`,
+            values: params.helmValues,
+          },
+          { providers: { kubernetes: this.provider } }
+        );
+      } else {
+        // deploy from helm repo with public images
+        const chain = new k8s.helm.v2.Chart(
+          name,
+          {
+            namespace: ns.metadata.name,
+            chart: 'tezos-chain',
+            version: params.getChartRepoVersion(),
+            fetchOpts:
+            {
+              repo: params.getChartRepo(),
+            },
+            values: params.helmValues,
+          },
+          { providers: { kubernetes: this.provider } }
+        );
+      }
+
+
+      allNames.forEach(name => {
+        new k8s.core.v1.Service(
+          `${name}-p2p-lb`,
+          {
+            metadata: {
+              namespace: ns.metadata.name,
+              name: name,
+              annotations: {
+                "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+                "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+                "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+              },
+            },
+            spec: {
+              ports: [
+                {
+                  port: 9732,
+                  targetPort: 9732,
+                  protocol: "TCP",
+                },
+              ],
+              selector: { node_class: "tezos-baking-node" },
+              type: "LoadBalancer",
             },
           },
-          spec: {
-            ports: [
-              {
-                port: 9732,
-                targetPort: 9732,
-                protocol: "TCP",
-              },
-            ],
-            selector: { node_class: "tezos-baking-node" },
-            type: "LoadBalancer",
-          },
-        },
-        { provider: this.provider }
-      )
-    })
+          { provider: this.provider }
+        )
+      })
+    }
   }
 
 
