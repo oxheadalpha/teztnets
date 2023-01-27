@@ -515,11 +515,7 @@ export class TezosChain extends pulumi.ComponentResource {
       faucetChartValues.values["config"]["application"]["googleCaptchaSiteKey"] = params.getFaucetRecaptchaSiteKey()
       faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
-      if (params.getName() == "ghostnet") {
-        faucetChartValues.values["config"]["network"]["rpcUrl"] = "https://ghostnet.ecadinfra.com"
-      } else {
-        faucetChartValues.values["config"]["network"]["rpcUrl"] = `https://rpc.${teztnetsDomain}`
-      }
+      faucetChartValues.values["config"]["network"]["rpcUrl"] = `https://rpc.${teztnetsDomain}`
       faucetChartValues.values["ingress"]["host"] = `faucet.${teztnetsDomain}`
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
