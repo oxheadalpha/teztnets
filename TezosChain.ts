@@ -403,76 +403,78 @@ export class TezosChain extends pulumi.ComponentResource {
     let allNames: string[] = [...params.getAliases(), ...[name]];
 
     allNames.forEach(name => {
-      // RPC Ingress
-      const rpcDomain = `rpc.${name}.teztnets.xyz`
-      const rpcCert = new aws.acm.Certificate(
-        `${rpcDomain}-cert`,
-        {
-          validationMethod: "DNS",
-          domainName: rpcDomain,
-        },
-        { parent: this }
-      )
-      const { certValidation } = createCertValidation(
-        {
-          cert: rpcCert,
-          targetDomain: rpcDomain,
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
+      if (Object.keys(params.helmValues).length != 0) {
+        // RPC Ingress
+        const rpcDomain = `rpc.${name}.teztnets.xyz`
+        const rpcCert = new aws.acm.Certificate(
+          `${rpcDomain}-cert`,
+          {
+            validationMethod: "DNS",
+            domainName: rpcDomain,
+          },
+          { parent: this }
+        )
+        const { certValidation } = createCertValidation(
+          {
+            cert: rpcCert,
+            targetDomain: rpcDomain,
+            hostedZone: this.zone,
+          },
+          { parent: this }
+        )
 
-      const rpcIngName = `${rpcDomain}-ingress`
-      const rpc_ingress = new k8s.networking.v1beta1.Ingress(
-        rpcIngName,
-        {
-          metadata: {
-            namespace: ns.metadata.name,
-            name: rpcIngName,
-            annotations: {
-              "kubernetes.io/ingress.class": "alb",
-              "alb.ingress.kubernetes.io/scheme": "internet-facing",
-              "alb.ingress.kubernetes.io/healthcheck-path":
-                "/chains/main/chain_id",
-              "alb.ingress.kubernetes.io/healthcheck-port": "8732",
-              "alb.ingress.kubernetes.io/listen-ports":
-                '[{"HTTP": 80}, {"HTTPS":443}]',
-              "ingress.kubernetes.io/force-ssl-redirect": "true",
-              "alb.ingress.kubernetes.io/actions.ssl-redirect":
-                '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-              // Prevent pulumi erroring if ingress doesn't resolve immediately
-              "pulumi.com/skipAwait": "true",
-            },
-            labels: { app: "tezos-node" },
-          },
-          spec: {
-            rules: [
-              {
-                host: rpcDomain,
-                http: {
-                  paths: [
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "ssl-redirect",
-                        servicePort: "use-annotation",
-                      },
-                    },
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "tezos-node-rpc",
-                        servicePort: "rpc",
-                      },
-                    },
-                  ],
-                },
+        const rpcIngName = `${rpcDomain}-ingress`
+        const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+          rpcIngName,
+          {
+            metadata: {
+              namespace: ns.metadata.name,
+              name: rpcIngName,
+              annotations: {
+                "kubernetes.io/ingress.class": "alb",
+                "alb.ingress.kubernetes.io/scheme": "internet-facing",
+                "alb.ingress.kubernetes.io/healthcheck-path":
+                  "/chains/main/chain_id",
+                "alb.ingress.kubernetes.io/healthcheck-port": "8732",
+                "alb.ingress.kubernetes.io/listen-ports":
+                  '[{"HTTP": 80}, {"HTTPS":443}]',
+                "ingress.kubernetes.io/force-ssl-redirect": "true",
+                "alb.ingress.kubernetes.io/actions.ssl-redirect":
+                  '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+                // Prevent pulumi erroring if ingress doesn't resolve immediately
+                "pulumi.com/skipAwait": "true",
               },
-            ],
+              labels: { app: "tezos-node" },
+            },
+            spec: {
+              rules: [
+                {
+                  host: rpcDomain,
+                  http: {
+                    paths: [
+                      {
+                        path: "/*",
+                        backend: {
+                          serviceName: "ssl-redirect",
+                          servicePort: "use-annotation",
+                        },
+                      },
+                      {
+                        path: "/*",
+                        backend: {
+                          serviceName: "tezos-node-rpc",
+                          servicePort: "rpc",
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           },
-        },
-        { provider, parent: this, dependsOn: certValidation }
-      )
+          { provider, parent: this, dependsOn: certValidation }
+        )
+      }
     })
 
     let tezosK8sImages;

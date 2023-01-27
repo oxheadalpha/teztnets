@@ -120,6 +120,19 @@ const teztnetsRootRecords = new aws.route53.Record("teztnetsRootRecords", {
   ],
 })
 
+// Ghostnet records
+// We do not host a ghostnet node and baker here
+// We redirect to oxheadhosted
+new aws.route53.Record("ghostnetBoot", {
+  zoneId: teztnetsHostedZone.zoneId,
+  name: "ghostnet.teztnets.xyz",
+  ttl: 300,
+  type: "CNAME",
+  records: [
+    "boot.ghostnet.oxheadhosted.com",
+  ],
+})
+
 // Export the cluster's kubeconfig.
 export const kubeconfig = cluster.kubeconfig
 export const clusterName = cluster.eksCluster.name
