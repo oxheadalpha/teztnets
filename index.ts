@@ -215,17 +215,6 @@ new TezosChain(
   teztnetsHostedZone,
 )
 
-const ghostnet_signer = new TezosSigner(
-  new TezosSignerParametersBuilder({
-    yamlFile: "ghostnet-signer/values.yaml",
-    name: "ghostnet-signer",
-    privateBakingKey: private_oxhead_baking_key,
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
 const limanet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "limanet/values.yaml",
