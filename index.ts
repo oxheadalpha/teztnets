@@ -149,9 +149,8 @@ const dailynet_chain = new TezosChain(
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    chartPath: "dailynet/tezos-k8s",
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    // chartRepoVersion: "6.11.1",
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.14.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -176,9 +175,8 @@ const mondaynet_chain = new TezosChain(
       "mondaynet.ecadinfra.com",
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    chartPath: "dailynet/tezos-k8s",
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    // chartRepoVersion: "6.11.1",
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.14.0",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -207,7 +205,7 @@ const ghostnet_chain = new TezosChain(
       "ghostnet.visualtez.com",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.11.1",
+    chartRepoVersion: "6.14.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
@@ -254,7 +252,7 @@ const limanet_chain = new TezosChain(
       "limanet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.11.1",
+    chartRepoVersion: "6.14.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
@@ -287,7 +285,7 @@ const mumbainet_chain = new TezosChain(
       // "mumbainet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.13.0",
+    chartRepoVersion: "6.14.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       // {
@@ -403,7 +401,7 @@ new k8s.helm.v2.Chart(
   "pyrometer",
   {
     chart: 'pyrometer',
-    version: "6.10.0",
+    version: "6.14.0",
     fetchOpts:
     {
       repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
