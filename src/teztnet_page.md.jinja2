@@ -13,7 +13,7 @@ permalink: /{{ v["human_name"] | lower }}-about
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
-{%- if "indexers" in v and v["indexers"] | length >0 -%}
+{% if "indexers" in v and v["indexers"] | length >0 -%}
 | Block Explorers | {% for i in v["indexers"] -%}[{{ i["name"]}}]({{ i["url"]}}){% if not loop.last %} - {% endif %}
 {%- endfor %} |
 {%- endif %}
