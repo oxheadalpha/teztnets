@@ -12,7 +12,8 @@ Ghostnet is the long-running testnet for Tezos.
 | Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) |
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
-| Activated on | 2022-01-25T15:00:00Z || Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
+| Activated on | 2022-01-25T15:00:00Z |
+| Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 
 
 Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet one week before Mainnet update itself.

@@ -15,6 +15,7 @@ Test Chain for the Mumbai Protocol Proposal
 | Activated on | 2023-01-19T15:00:00Z |
 
 
+
 For the first 8192 blocks, Mumbainet ran the Lima protocol, then switched to Mumbai.
 
 Mumbainet has 8 second blocks (twice faster than mainnet).

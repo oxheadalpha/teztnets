@@ -12,7 +12,8 @@ Test Chain for the Lima Protocol Proposal
 | Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) |
 | Full network name | `TEZOS_LIMANET_2022-10-13T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
-| Activated on | 2022-10-13T15:00:00Z || Block Explorers | [TzKT](https://limanet.tzkt.io) |
+| Activated on | 2022-10-13T15:00:00Z |
+| Block Explorers | [TzKT](https://limanet.tzkt.io) |
 
 
 For the first 8192 blocks, Limanet ran the Kathmandu protocol then it switched to Lima.
