@@ -13,9 +13,6 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 | Full network name | `TEZOS-MONDAYNET-2023-01-23T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_067c787b_20230120183948](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_067c787b_20230120183948) |
 | Activated on | 2023-01-23T00:00:00.000Z |
-| Protocol at level 0 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
-| Protocol at level 512 |  `ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK` |
-
 
 
 

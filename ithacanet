@@ -2,11 +2,8 @@
   "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   "default_bootstrap_peers": [
     "ghostnet.teztnets.xyz",
-    "ghostnet.smartpy.io",
     "ghostnet.boot.ecadinfra.com",
-    "ghostnet.kaml.fr",
-    "ghostnet.stakenow.de:9733",
-    "ghostnet.visualtez.com"
+    "ghostnet.stakenow.de:9733"
   ],
   "genesis": {
     "block": "BLockGenesisGenesisGenesisGenesisGenesis1db77eJNeJ9",

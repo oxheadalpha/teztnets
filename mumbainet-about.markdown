@@ -13,17 +13,11 @@ Test Chain for the Mumbai Protocol Proposal
 | Full network name | `TEZOS_MUMBAINET_2023-01-19T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v16.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc1) |
 | Activated on | 2023-01-19T15:00:00Z |
-| Protocol at level 0 |  `PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW` |
 
 
+For the first 8192 blocks, Mumbainet ran the Lima protocol, then switched to Mumbai.
 
-We welcome bootstrap bakers for Mumbainet! The process is opt-in: please make yourself known in the baking slack, or make a Pull Request against the teztnets repo [Mumbainet definition](https://github.com/oxheadalpha/teztnets/blob/main/mumbainet/values.yaml) file.
-
-For the first 8192 blocks, Mumbainet will run the Lima protocol. Please start your Lima bakers.
-
-Then Mumbainet will upgrade to `PtMumbaiiFFEGbew1rRjzSPyzRbA51Tm3RVZL5suHPxSZYDhCEc`. Instead of a user-activated upgrade, this will be a dictator upgrade using the testnet dictator key.
-
-Once running Mumbai, Mumbainet will have 8 second blocks (twice faster than mainnet).
+Mumbainet has 8 second blocks (twice faster than mainnet).
 
 
 ### Install the software
