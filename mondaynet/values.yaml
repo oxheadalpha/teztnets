@@ -7,7 +7,7 @@ node_config_network:
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW
+  protocol_hash: PtMumbaiiFFEGbew1rRjzSPyzRbA51Tm3RVZL5suHPxSZYDhCEc
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -31,7 +31,7 @@ activation:
     liquidity_baking_subsidy: '2500000'
     liquidity_baking_toggle_ema_threshold: 100000
     max_operations_time_to_live: 120
-    minimal_block_delay: "30"
+    minimal_block_delay: "15"
     delay_increment_per_round: "15"
     consensus_committee_size: 7000
     consensus_threshold: 4667
@@ -68,23 +68,24 @@ activation:
       feature_enable: true
       number_of_slots: 256
       number_of_shards: 2048
-      endorsement_lag: 2
+      attestation_lag: 2
       availability_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
-    sc_rollup_enable: true
-    sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 40
-    sc_rollup_max_number_of_messages_per_commitment_period: 32765
-    sc_rollup_stake_amount: "32000000"
-    sc_rollup_commitment_period_in_blocks: 20
-    sc_rollup_max_lookahead_in_blocks: 30000
-    sc_rollup_max_active_outbox_levels: 20160
-    sc_rollup_max_outbox_messages_per_level: 100
-    sc_rollup_number_of_sections_in_dissection: 32
-    sc_rollup_timeout_period_in_blocks: 500
-    sc_rollup_max_number_of_cemented_commitments: 5
+    smart_rollup_enable: true
+    smart_rollup_origination_size: 6314
+    smart_rollup_challenge_window_in_blocks: 40
+    smart_rollup_stake_amount: "32000000"
+    smart_rollup_commitment_period_in_blocks: 20
+    smart_rollup_max_lookahead_in_blocks: 30000
+    smart_rollup_max_active_outbox_levels: 20160
+    smart_rollup_max_outbox_messages_per_level: 100
+    smart_rollup_number_of_sections_in_dissection: 32
+    smart_rollup_timeout_period_in_blocks: 500
+    smart_rollup_max_number_of_cemented_commitments: 5
+    smart_rollup_max_number_of_parallel_games: 32
+    smart_rollup_arith_pvm_enable: true
     zk_rollup_enable: true
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
@@ -127,7 +128,7 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: PtLimaPt
+  - command: PtMumbai
     vote:
       liquidity_baking_toggle_vote: "pass"
   - command: alpha
