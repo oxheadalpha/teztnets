@@ -476,7 +476,7 @@ new k8s.helm.v2.Chart(
     values: {
       config: {
         "node_monitor": {
-          "nodes": Object.keys(networks).map(network => "http://tezos-node-rpc." + network + ":8732"),
+          "nodes": Object.keys(networks).filter(n => n != "ghostnet").map(network => "http://tezos-node-rpc." + network + ":8732"),
         },
         "ui": {
           "enabled": true,
