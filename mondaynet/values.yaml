@@ -141,33 +141,63 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-  tf_london:
+  tf_frankfurt1:
+    # tz1WLNVBKmPWEMdXD5c3NrpnUsTtb97Fdevg
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_london2:
+  tf_frankfurt2:
+    # tz1NDNCdR2REutVDQXRD791Yv8BQAt2NCMZD
     key: edpktwQ93eJwcJUTkZYRKzDpMqNmY76av4xDmcYP6jTHKMHAvmwToi
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_london3:
+  tf_frankfurt3:
+    # tz1SSe3hejo6tUX3jLvTEEy4VCdxYukqBdkT
     key: edpkue21EdnYUyHU9WHHMGEHA7E1HdTNy8pTZ4QQYodns7NUMFk1Fe
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_paris:
-    key: edpktsx1JxD7cgTBXrgM7B8xUHVQ6cpFEk4rSUAEcuBPzi5wjjf3hZ
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_stockholm:
+  tf_frankfurt6:
+    # tz1cffp9Tn4BWGFB1WniufdTqNeU5S4DtBA4
     key: edpkuiioYPwFA14hgSxnTFcS2enn2BqcMDkMrPVA3r7oZ86zGyphP3
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_frankfurt:
-    key: edpkumfPbLdeawfWNWootvBMYGi83NDuPYvsaHgUoEL3BFRRLDGJQ3
+  tf_frankfurt7:
+    # tz1NdcV4PLiFbWS3anRAJKCKxFJwqF1Z16GL
+    key: edpktsx1JxD7cgTBXrgM7B8xUHVQ6cpFEk4rSUAEcuBPzi5wjjf3hZ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore1:
+    # tz1i7y4ECTZ1j4w3zFN39Lc7g26FSXX7bo1r
+    key: edpkvNvwRzGXQaiYyDBXiHahMAMgGyY599GoAymcc5p3yWztdZTqWA
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore2:
+    # tz1M6XnMjxGDNArR9fsWmptyxtm65jPwUgfA
+    key: edpku3ZnYDvrijsC8f2VNGS295h3gbHpS2X1SwYRPxudgGszNaWBpk
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore3:
+    # tz1fK5YaAZb127B62Y8xiTDVtjVBVMmRbBZZ
+    key: edpkuzbKWYG9k8MVuJSNm5QQBHgVfFrsFCcNamFDja9bqMoo8ihji3
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore4:
+    # tz1PGgfXneewsjbaumXbCDgQPP311QoT12LJ
+    key: edpktkDVyt7Fud32vcjah3i9Kv2thLCD5GWtJgpCZU9RNuJc4ZHZz5
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore5:
+    # tz1b7jqE2Lp5N9Fjo1k8cxL4JR9uC4DXuoYZ
+    key: edpku4nGaeteS2koJfeGEHf9HDFPhx28MwAkNaetDVegghqBmFPSZr
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
