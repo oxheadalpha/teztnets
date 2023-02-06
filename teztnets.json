@@ -1,25 +1,25 @@
 {
-  "dailynet-2023-02-05": {
+  "dailynet-2023-02-06": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-02-05T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-02-06T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_0b861fd0_20230203200457",
-    "faucet_url": "https://faucet.dailynet-2023-02-05.teztnets.xyz",
+    "faucet_url": "https://faucet.dailynet-2023-02-06.teztnets.xyz",
     "git_ref": "0b861fd0",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-02-05",
+    "network_url": "https://teztnets.xyz/dailynet-2023-02-06",
     "protocols": [
       {
         "level": 0,
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.dailynet-2023-02-05.teztnets.xyz",
-    "activated_on": "2023-02-05"
+    "rpc_url": "https://rpc.dailynet-2023-02-06.teztnets.xyz",
+    "activated_on": "2023-02-06"
   },
   "ghostnet": {
     "aliases": [
@@ -101,19 +101,19 @@
     "rpc_url": "https://rpc.limanet.teztnets.xyz",
     "activated_on": "2022-10-13"
   },
-  "mondaynet-2023-01-30": {
+  "mondaynet-2023-02-06": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2023-01-30T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAYNET-2023-02-06T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Lima with SCORU and ZK feature flags on for 8 cycles then upgrades to proto Alpha.",
-    "docker_build": "tezos/tezos:master_68779c31_20230129203845",
-    "faucet_url": "https://faucet.mondaynet-2023-01-30.teztnets.xyz",
-    "git_ref": "68779c31",
+    "docker_build": "tezos/tezos:master_0b861fd0_20230203200457",
+    "faucet_url": "https://faucet.mondaynet-2023-02-06.teztnets.xyz",
+    "git_ref": "0b861fd0",
     "human_name": "Mondaynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/mondaynet-2023-01-30",
+    "network_url": "https://teztnets.xyz/mondaynet-2023-02-06",
     "protocols": [
       {
         "level": 0,
@@ -124,8 +124,8 @@
         "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
       }
     ],
-    "rpc_url": "https://rpc.mondaynet-2023-01-30.teztnets.xyz",
-    "activated_on": "2023-01-30"
+    "rpc_url": "https://rpc.mondaynet-2023-02-06.teztnets.xyz",
+    "activated_on": "2023-02-06"
   },
   "mumbainet": {
     "aliases": [],
