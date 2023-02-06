@@ -137,7 +137,7 @@ protocols:
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
-    bootstrap_balance: "7000000000000"
+    bootstrap_balance: "1500000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
