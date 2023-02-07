@@ -3,7 +3,6 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
-import * as tezos from "@oxheadalpha/tezos-pulumi"
 var blake2b = require('blake2b');
 const bs58check = require('bs58check');
 
@@ -12,7 +11,6 @@ require('dotenv').config();
 import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./externalDns"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
-import { TezosSigner, TezosSignerParametersBuilder } from "./TezosSigner"
 import { createCertValidation } from "./route53";
 
 let stack = pulumi.getStack()
@@ -34,7 +32,6 @@ const getEnvVariable = (name: string): string => {
 const repo = new awsx.ecr.Repository(stack)
 
 const desiredClusterCapacity = 2
-const aws_account_id = getEnvVariable("AWS_ACCOUNT_ID")
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
 // Create a VPC with subnets that are tagged for load balancer usage.
 // See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
@@ -320,7 +317,6 @@ function getTeztnets(chains: TezosChain[]): object {
       description: chain.getDescription(),
       docker_build: chain.getDockerBuild(),
       git_ref: chain.getGitRef(),
-      protocols: chain.getProtocols(),
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
       category: chain.params.getCategory(),
@@ -413,28 +409,6 @@ let ghostnetTeztnet = {
   "last_baking_daemon": "PtLimaPt",
   "masked_from_main_page": false,
   "network_url": "https://teztnets.xyz/ghostnet",
-  "protocols": [
-    {
-      "level": 0,
-      "replacement_protocol": "PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx"
-    },
-    {
-      "level": 8191,
-      "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
-    },
-    {
-      "level": 765952,
-      "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-    },
-    {
-      "level": 1191936,
-      "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
-    },
-    {
-      "level": 1654784,
-      "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
-    }
-  ],
   "rpc_url": "https://rpc.ghostnet.teztnets.xyz"
 }
 
