@@ -42,6 +42,8 @@ with open("target/release/teztnets.json", "w") as out_file:
     print(json.dumps(teztnets, indent = 2), file=out_file)
 
 for k,v in teztnets.items():
+    if k == "mainnet":
+        continue
     v["release"] = None
     if "tezos/tezos:v" in v["docker_build"]:
        v["release"] = v["docker_build"].split("tezos/tezos:")[1]
