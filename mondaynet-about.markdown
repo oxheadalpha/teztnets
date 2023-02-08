@@ -8,7 +8,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [https://rpc.mondaynet-2023-02-06.teztnets.xyz](https://rpc.mondaynet-2023-02-06.teztnets.xyz) |
+| Public RPC endpoints | [https://rpc.mondaynet-2023-02-06.teztnets.xyz](https://rpc.mondaynet-2023-02-06.teztnets.xyz/chains/main/chain_id)<br/> |
 | Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-02-06.teztnets.xyz) |
 | Full network name | `TEZOS-MONDAYNET-2023-02-06T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_0b861fd0_20230203200457](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_0b861fd0_20230203200457) |

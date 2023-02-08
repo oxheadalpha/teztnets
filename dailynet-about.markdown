@@ -8,7 +8,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [https://rpc.dailynet-2023-02-08.teztnets.xyz](https://rpc.dailynet-2023-02-08.teztnets.xyz) |
+| Public RPC endpoints | [https://rpc.dailynet-2023-02-08.teztnets.xyz](https://rpc.dailynet-2023-02-08.teztnets.xyz/chains/main/chain_id)<br/> |
 | Faucet | [Dailynet faucet](https://faucet.dailynet-2023-02-08.teztnets.xyz) |
 | Full network name | `TEZOS-DAILYNET-2023-02-08T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_e0837676_20230207202613](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_e0837676_20230207202613) |

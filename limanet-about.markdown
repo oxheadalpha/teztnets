@@ -8,12 +8,12 @@ Test Chain for the Lima Protocol Proposal
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz) |
+| Public RPC endpoints | [https://rpc.limanet.teztnets.xyz](https://rpc.limanet.teztnets.xyz/chains/main/chain_id)<br/>[https://limanet.ecadinfra.com](https://limanet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Limanet faucet](https://faucet.limanet.teztnets.xyz) |
 | Full network name | `TEZOS_LIMANET_2022-10-13T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v15.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v15.1) |
 | Activated on | 2022-10-13T15:00:00Z |
-| Block Explorers | [TzKT](https://limanet.tzkt.io) |
+| Block Explorers | [TzKT](https://limanet.tzkt.io) - [TzStats](https://lima.tzstats.com) |
 
 
 For the first 8192 blocks, Limanet ran the Kathmandu protocol then it switched to Lima.

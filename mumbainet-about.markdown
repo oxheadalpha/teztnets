@@ -8,7 +8,7 @@ Test Chain for the Mumbai Protocol Proposal
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [https://rpc.mumbainet.teztnets.xyz](https://rpc.mumbainet.teztnets.xyz) |
+| Public RPC endpoints | [https://rpc.mumbainet.teztnets.xyz](https://rpc.mumbainet.teztnets.xyz/chains/main/chain_id)<br/>[https://mumbainet.ecadinfra.com](https://mumbainet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Mumbainet faucet](https://faucet.mumbainet.teztnets.xyz) |
 | Full network name | `TEZOS_MUMBAINET_2023-01-19T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v16.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc1) |
