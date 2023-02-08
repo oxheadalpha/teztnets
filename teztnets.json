@@ -111,7 +111,7 @@
     "aliases": [],
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-MONDAYNET-2023-02-06T00:00:00.000Z",
-    "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Lima with SCORU and ZK feature flags on for 8 cycles then upgrades to proto Alpha.",
+    "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_0b861fd0_20230203200457",
     "faucet_url": "https://faucet.mondaynet-2023-02-06.teztnets.xyz",
     "git_ref": "0b861fd0",
