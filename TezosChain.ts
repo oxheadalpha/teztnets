@@ -37,6 +37,7 @@ export interface TezosInitParameters {
   getFaucetRecaptchaSecretKey(): pulumi.Output<string>;
   getAliases(): string[];
   getIndexers(): { name: string, url: string }[];
+  getRpcUrls(): string[];
 }
 
 export interface TezosParamsInitializer {
@@ -62,6 +63,7 @@ export interface TezosParamsInitializer {
   readonly faucetRecaptchaSecretKey?: pulumi.Output<string>;
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
+  readonly rpcUrls?: string[];
 }
 
 
@@ -84,6 +86,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetRecaptchaSecretKey: pulumi.Output<string>;
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
+  private _rpcUrls: string[];
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -103,6 +106,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey!;
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
+    this._rpcUrls = params.rpcUrls || [];
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -305,6 +309,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   public getIndexers(): { name: string, url: string }[] {
     return this._indexers;
+  }
+  public getRpcUrls(): string[] {
+    return this._rpcUrls;
   }
 
 }
@@ -643,6 +650,16 @@ export class TezosChain extends pulumi.ComponentResource {
       }
       return o;
     });
+  }
+
+  getRpcUrl(): string {
+    return `https://rpc.${this.params.getName()}.teztnets.xyz`;
+  }
+  getRpcUrls(): Array<string> {
+    return [
+      ...[this.getRpcUrl()],
+      ...this.params.getRpcUrls(),
+    ];
   }
 
   getLastBakingDaemon(): string {

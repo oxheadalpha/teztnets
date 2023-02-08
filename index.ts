@@ -224,6 +224,13 @@ const limanet_chain = new TezosChain(
         name: "TzKT",
         url: "https://limanet.tzkt.io"
       },
+      {
+        name: "TzStats",
+        url: "https://lima.tzstats.com"
+      },
+    ],
+    rpcUrls: [
+      "https://limanet.ecadinfra.com",
     ]
   }),
   cluster.provider,
@@ -257,6 +264,9 @@ const mumbainet_chain = new TezosChain(
       //   name: "TzKT",
       //   url: "https://limanet.tzkt.io"
       // },
+    ],
+    rpcUrls: [
+      "https://mumbainet.ecadinfra.com",
     ]
   }),
   cluster.provider,
@@ -307,8 +317,6 @@ function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
   chains.forEach(function(chain) {
-    const chainName = chain.params.getName()
-    let rpcUrl = `https://rpc.${chain.params.getName()}.teztnets.xyz`
     let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
@@ -320,7 +328,8 @@ function getTeztnets(chains: TezosChain[]): object {
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
       category: chain.params.getCategory(),
-      rpc_url: rpcUrl,
+      rpc_url: chain.getRpcUrl(),
+      rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
       aliases: chain.params.getAliases(),
       indexers: chain.params.getIndexers(),
@@ -385,6 +394,8 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
+let gitRefMainnetGhostnet = "v15-release";
+let lastBakingDaemonMainnetGhostnet = "PtLimaPt";
 let ghostnetTeztnet = {
   "aliases": [
     "ithacanet"
@@ -392,9 +403,9 @@ let ghostnetTeztnet = {
   "category": "Long-running Teztnets",
   "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   "description": "Ghostnet is the long-running testnet for Tezos.",
-  "docker_build": "tezos/tezos:v15.1",
+  "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
   "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-  "git_ref": "v15.1",
+  "git_ref": gitRefMainnetGhostnet,
   "human_name": "Ghostnet",
   "indexers": [
     {
@@ -406,10 +417,47 @@ let ghostnetTeztnet = {
       "url": "https://ghost.tzstats.com"
     }
   ],
-  "last_baking_daemon": "PtLimaPt",
+  "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
   "masked_from_main_page": false,
   "network_url": "https://teztnets.xyz/ghostnet",
-  "rpc_url": "https://rpc.ghostnet.teztnets.xyz"
+  "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
+  "rpc_urls": [
+    "https://rpc.ghostnet.teztnets.xyz",
+    "https://ghostnet.ecadinfra.com",
+    "https://ghostnet.tezos.marigold.dev",
+  ]
+}
+
+// We also add mainnet to the teztnets metadata.
+// Some systems rely on this to provide lists of third-party RPC services
+// to their users. For example, umami wallet.
+let mainnetTeztnet = {
+  "aliases": [],
+  "category": "Long-running Teztnets",
+  "chain_name": "TEZOS_MAINNET",
+  "description": "Tezos Mainnet",
+  "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
+  "git_ref": gitRefMainnetGhostnet,
+  "human_name": "Mainnet",
+  "indexers": [
+    {
+      "name": "TzKT",
+      "url": "https://tzkt.io"
+    },
+    {
+      "name": "TzStats",
+      "url": "https://tzstats.com"
+    }
+  ],
+  "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
+  "masked_from_main_page": true,
+  "rpc_url": "https://mainnet.oxheadhosted.com",
+  "rpc_urls": [
+    "https://mainnet.oxheadhosted.com",
+    "https://mainnet.api.tez.ie",
+    "https://mainnet.smartpy.io",
+    "https://mainnet.tezos.marigold.dev",
+  ]
 }
 
 export const teztnets = {
@@ -419,7 +467,7 @@ export const teztnets = {
     limanet_chain,
     mumbainet_chain,
   ]),
-  ...{ "ghostnet": ghostnetTeztnet }
+  ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
 }
 
 const pyrometerDomain = "status.teztnets.xyz"
