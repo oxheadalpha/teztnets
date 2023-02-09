@@ -211,7 +211,7 @@ accounts:
     #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
     type: public
-    is_bootstrap_baker_account: true
+    is_bootstrap_baker_account: false
     bootstrap_balance: "1000000000000"
   marigold:
     # tz1eKKAsasRiyUGSnPD5YPu7zfEBcx9LDREQ
