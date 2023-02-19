@@ -147,7 +147,7 @@ const dailynet_chain = new TezosChain(
     schedule: "0 0 * * *",
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.14.0",
+    chartRepoVersion: "6.15.1",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -173,7 +173,7 @@ const mondaynet_chain = new TezosChain(
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.14.0",
+    chartRepoVersion: "6.15.1",
     privateBakingKey: private_oxhead_baking_key,
   }),
   cluster.provider,
@@ -192,7 +192,7 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.14.0",
+    chartRepoVersion: "6.15.1",
   }),
   cluster.provider,
   repo,
@@ -217,7 +217,7 @@ const limanet_chain = new TezosChain(
       "limanet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.14.0",
+    chartRepoVersion: "6.15.1",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
@@ -257,7 +257,7 @@ const mumbainet_chain = new TezosChain(
       // "mumbainet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.14.0",
+    chartRepoVersion: "6.15.1",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       // {
@@ -490,7 +490,7 @@ new k8s.helm.v2.Chart(
   "pyrometer",
   {
     chart: 'pyrometer',
-    version: "6.14.0",
+    version: "6.15.1",
     fetchOpts:
     {
       repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
