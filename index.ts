@@ -191,6 +191,7 @@ new TezosChain(
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     name: "ghostnet",
     dnsName: "ghostnet",
+    humanName: "Ghostnet",
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.15.1",
   }),
