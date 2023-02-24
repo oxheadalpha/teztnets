@@ -1,5 +1,5 @@
 images:
-  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.0.3
+  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.1.0
   tezos_faucet_backend: ghcr.io/oxheadalpha/tezos-faucet-backend:1.1
 authorizedHost: # filled in by pulumi
 maxBalance: 61000
