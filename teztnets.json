@@ -1,22 +1,22 @@
 {
-  "dailynet-2023-03-05": {
+  "dailynet-2023-03-06": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-03-05T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-03-06T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_f9675b19_20230303221946",
-    "faucet_url": "https://faucet.dailynet-2023-03-05.teztnets.xyz",
+    "faucet_url": "https://faucet.dailynet-2023-03-06.teztnets.xyz",
     "git_ref": "f9675b19",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-03-05",
-    "rpc_url": "https://rpc.dailynet-2023-03-05.teztnets.xyz",
+    "network_url": "https://teztnets.xyz/dailynet-2023-03-06",
+    "rpc_url": "https://rpc.dailynet-2023-03-06.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-03-05.teztnets.xyz"
+      "https://rpc.dailynet-2023-03-06.teztnets.xyz"
     ],
-    "activated_on": "2023-03-05"
+    "activated_on": "2023-03-06"
   },
   "ghostnet": {
     "aliases": [
@@ -107,24 +107,24 @@
       "https://mainnet.tezos.marigold.dev"
     ]
   },
-  "mondaynet-2023-02-27": {
+  "mondaynet-2023-03-06": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2023-02-27T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAYNET-2023-03-06T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
-    "docker_build": "tezos/tezos:master_64e0f91b_20230224201857",
-    "faucet_url": "https://faucet.mondaynet-2023-02-27.teztnets.xyz",
-    "git_ref": "64e0f91b",
+    "docker_build": "tezos/tezos:master_f9675b19_20230303221946",
+    "faucet_url": "https://faucet.mondaynet-2023-03-06.teztnets.xyz",
+    "git_ref": "f9675b19",
     "human_name": "Mondaynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/mondaynet-2023-02-27",
-    "rpc_url": "https://rpc.mondaynet-2023-02-27.teztnets.xyz",
+    "network_url": "https://teztnets.xyz/mondaynet-2023-03-06",
+    "rpc_url": "https://rpc.mondaynet-2023-03-06.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.mondaynet-2023-02-27.teztnets.xyz"
+      "https://rpc.mondaynet-2023-03-06.teztnets.xyz"
     ],
-    "activated_on": "2023-02-27"
+    "activated_on": "2023-03-06"
   },
   "mumbainet": {
     "aliases": [],
