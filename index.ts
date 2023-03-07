@@ -250,15 +250,15 @@ const mumbainet_chain = new TezosChain(
     dnsName: "mumbainet",
     category: protocolCategory,
     humanName: "Mumbainet",
-    description: "Old Mumbainet - will restart soon, please come back later",
+    description: "Test Chain for the Mumbai2 Protocol Proposal",
     bootstrapPeers: [
-      "mumbainet.visualtez.com",
-      "mumbainet.boot.ecadinfra.com",
+      // "mumbainet.visualtez.com",
+      // "mumbainet.boot.ecadinfra.com",
       //"mumbainet.tzboot.net",
       // "mumbainet.stakenow.de:9733",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.15.1",
+    chartRepoVersion: "6.16.2",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       // {
