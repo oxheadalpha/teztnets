@@ -129,11 +129,11 @@
   "mumbainet": {
     "aliases": [],
     "category": "Protocol Teztnets",
-    "chain_name": "TEZOS_MUMBAINET_2023-01-19T15:00:00Z",
-    "description": "Old Mumbainet - will restart soon, please come back later",
-    "docker_build": "tezos/tezos:v16.0-rc1",
+    "chain_name": "TEZOS_MUMBAINET_2023-03-09T15:00:00Z",
+    "description": "Test Chain for the Mumbai2 Protocol Proposal",
+    "docker_build": "tezos/tezos:v16.0-rc3",
     "faucet_url": "https://faucet.mumbainet.teztnets.xyz",
-    "git_ref": "v16.0-rc1",
+    "git_ref": "v16.0-rc3",
     "human_name": "Mumbainet",
     "indexers": [],
     "last_baking_daemon": "PtMumbai",
@@ -144,6 +144,6 @@
       "https://rpc.mumbainet.teztnets.xyz",
       "https://mumbainet.ecadinfra.com"
     ],
-    "activated_on": "2023-01-19"
+    "activated_on": "2023-03-09"
   }
 }

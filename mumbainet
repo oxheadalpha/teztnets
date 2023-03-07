@@ -1,14 +1,12 @@
 {
-  "chain_name": "TEZOS_MUMBAINET_2023-01-19T15:00:00Z",
+  "chain_name": "TEZOS_MUMBAINET_2023-03-09T15:00:00Z",
   "default_bootstrap_peers": [
-    "mumbainet.teztnets.xyz",
-    "mumbainet.visualtez.com",
-    "mumbainet.boot.ecadinfra.com"
+    "mumbainet.teztnets.xyz"
   ],
   "genesis": {
-    "block": "BMVeyjhT4yd421XJAYcB54hm54CwGqkV6tCzkJ8VpHPVch6Mkx6",
+    "block": "BLytf7aG27Ca4xZ8cG4otofaUQfUA9TdULvHC3L9fToPHBcPKDV",
     "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
-    "timestamp": "2023-01-19T15:00:00Z"
+    "timestamp": "2023-03-09T15:00:00Z"
   },
   "genesis_parameters": {
     "values": {

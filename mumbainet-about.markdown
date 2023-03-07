@@ -4,19 +4,23 @@ title: Mumbainet
 permalink: /mumbainet-about
 ---
 
-Old Mumbainet - will restart soon, please come back later
+Test Chain for the Mumbai2 Protocol Proposal
 
 | | |
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.mumbainet.teztnets.xyz](https://rpc.mumbainet.teztnets.xyz/chains/main/chain_id)<br/>[https://mumbainet.ecadinfra.com](https://mumbainet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Mumbainet faucet](https://faucet.mumbainet.teztnets.xyz) |
-| Full network name | `TEZOS_MUMBAINET_2023-01-19T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v16.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc1) |
-| Activated on | 2023-01-19T15:00:00Z |
+| Full network name | `TEZOS_MUMBAINET_2023-03-09T15:00:00Z` |
+| Tezos docker build | [tezos/tezos:v16.0-rc3](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc3) |
+| Activated on | 2023-03-09T15:00:00Z |
 
 
 
-Mumbainet will restart this week (March 6, 2023). Please come back to this page later for more information.
+For the first 8192 blocks, Mumbainet will run the Lima protocol. Please start your Lima bakers.
+
+Then Mumbainet will upgrade to `PtMumbai2TmsJHNGRkD8v8YDbtao7BLUC3wjASn1inAKLFCjaH1`. Instead of a user-activated upgrade, this will be a dictator upgrade using the testnet dictator key.
+
+Once running Mumbai, Mumbainet will have 8 second blocks (twice faster than mainnet).
 
 
 ### Install the software
@@ -24,7 +28,7 @@ Mumbainet will restart this week (March 6, 2023). Please come back to this page 
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v16.0-rc1
+#### Download and install Tezos version v16.0-rc3
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -34,7 +38,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Mumbainet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0-rc1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0-rc3
 ```
 
 #### Alternative: Build the software
@@ -44,7 +48,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0-rc1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v16.0-rc1
+git checkout v16.0-rc3
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
