@@ -250,7 +250,7 @@ const mumbainet_chain = new TezosChain(
     dnsName: "mumbainet",
     category: protocolCategory,
     humanName: "Mumbainet",
-    description: "Test Chain for the Mumbai Protocol Proposal",
+    description: "Old Mumbainet - will restart soon, please come back later",
     bootstrapPeers: [
       "mumbainet.visualtez.com",
       "mumbainet.boot.ecadinfra.com",

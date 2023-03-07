@@ -1,3 +1,1 @@
-For the first 8192 blocks, Mumbainet ran the Lima protocol, then switched to Mumbai.
-
-Mumbainet has 8 second blocks (twice faster than mainnet).
+Mumbainet will restart this week (March 6, 2023). Please come back to this page later for more information.
