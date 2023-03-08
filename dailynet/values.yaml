@@ -114,7 +114,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-        #- vdf
+      - vdf
     readiness_probe: false
     storage_size: 15Gi
   # Overwrite default values.yaml tezos-node
