@@ -114,7 +114,12 @@ accounts:
     key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-
+  albin:
+    # tz1YtB3Hn6oghVk96vkpZt6PHrfbyRY1ciL3
+    key: edpkuc4NCkkmTyLogcU32b7sU363J2jggs19EyBzhmms6JmjQZxEJo
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+    
 node_config_network:
   activation_account_name: oxheadbaker
   chain_name: TEZOS_MUMBAINET_2023-03-09T15:00:00Z
