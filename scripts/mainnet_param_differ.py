@@ -14,9 +14,9 @@ with open("mumbainet/values.yaml", "r") as f:
 
 mainnet_params = flatten_params(requests.get("https://mainnet.oxheadhosted.com/chains/main/blocks/head/context/constants").json())
 
-ghostnet_params = flatten_params(requests.get("https://ghostnet.oxheadhosted.com/chains/main/blocks/head/context/constants").json())
+ghostnet_params = flatten_params(requests.get("https://rpc.ghostnet.teztnets.xyz/chains/main/blocks/head/context/constants").json())
 
-limanet_params = flatten_params(requests.get("https://limanet.oxheadhosted.com/chains/main/blocks/head/context/constants").json())
+limanet_params = flatten_params(requests.get("https://rpc.limanet.teztnets.xyz/chains/main/blocks/head/context/constants").json())
 
 print("Param,mumbainet,limanet,ghostnet,mainnet")
 for param in params.keys():

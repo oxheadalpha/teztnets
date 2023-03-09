@@ -112,8 +112,8 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-#bootstrap_peers:
-  #- mondaynet.ecadinfra.com
+bootstrap_peers:
+  - mondaynet.ecadinfra.com
   #  # tf
   #- 18.132.213.248
   #- 18.134.9.200
