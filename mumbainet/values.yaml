@@ -247,6 +247,6 @@ protocols:
     vote:
       liquidity_baking_toggle_vote: "pass"
 
-# bootstrap_peers:
-#   - mumbainet.boot.ecadinfra.com
+bootstrap_peers:
+  - mumbainet.boot.ecadinfra.com
 #   - mumbainet.visualtez.com

@@ -253,7 +253,7 @@ const mumbainet_chain = new TezosChain(
     description: "Test Chain for the Mumbai2 Protocol Proposal",
     bootstrapPeers: [
       // "mumbainet.visualtez.com",
-      // "mumbainet.boot.ecadinfra.com",
+      "mumbainet.boot.ecadinfra.com",
       //"mumbainet.tzboot.net",
       // "mumbainet.stakenow.de:9733",
     ],
