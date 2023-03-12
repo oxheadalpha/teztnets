@@ -1,22 +1,22 @@
 {
-  "dailynet-2023-03-11": {
+  "dailynet-2023-03-12": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-03-11T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-03-12T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_2f04e9d4_20230310170730",
-    "faucet_url": "https://faucet.dailynet-2023-03-11.teztnets.xyz",
-    "git_ref": "2f04e9d4",
+    "docker_build": "tezos/tezos:master_1084a043_20230311194714",
+    "faucet_url": "https://faucet.dailynet-2023-03-12.teztnets.xyz",
+    "git_ref": "1084a043",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-03-11",
-    "rpc_url": "https://rpc.dailynet-2023-03-11.teztnets.xyz",
+    "network_url": "https://teztnets.xyz/dailynet-2023-03-12",
+    "rpc_url": "https://rpc.dailynet-2023-03-12.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-03-11.teztnets.xyz"
+      "https://rpc.dailynet-2023-03-12.teztnets.xyz"
     ],
-    "activated_on": "2023-03-11"
+    "activated_on": "2023-03-12"
   },
   "ghostnet": {
     "aliases": [
