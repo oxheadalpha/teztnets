@@ -240,7 +240,7 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:v16.0-rc3
+  octez: tezos/tezos:v16.0
 
 protocols:
   - command: PtMumbai

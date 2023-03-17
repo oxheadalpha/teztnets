@@ -7,7 +7,7 @@ node_config_network:
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtMumbaiiFFEGbew1rRjzSPyzRbA51Tm3RVZL5suHPxSZYDhCEc
+  protocol_hash: PtMumbai2TmsJHNGRkD8v8YDbtao7BLUC3wjASn1inAKLFCjaH1
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -106,7 +106,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-        #- vdf
+      - vdf
     readiness_probe: false
     storage_size: 50Gi
   # Overwrite default values.yaml rolling-node
