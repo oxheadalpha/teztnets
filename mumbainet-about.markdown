@@ -11,7 +11,7 @@ Test Chain for the Mumbai2 Protocol Proposal
 | Public RPC endpoints | [https://rpc.mumbainet.teztnets.xyz](https://rpc.mumbainet.teztnets.xyz/chains/main/chain_id)<br/>[https://mumbainet.ecadinfra.com](https://mumbainet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Mumbainet faucet](https://faucet.mumbainet.teztnets.xyz) |
 | Full network name | `TEZOS_MUMBAINET_2023-03-09T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v16.0-rc3](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0-rc3) |
+| Tezos docker build | [tezos/tezos:v16.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.0) |
 | Activated on | 2023-03-09T15:00:00Z |
 
 
@@ -24,7 +24,7 @@ Mumbainet has 8 second blocks (twice faster than mainnet).
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v16.0-rc3
+#### Download and install Tezos version v16.0
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -34,7 +34,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Mumbainet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0-rc3
+docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0
 ```
 
 #### Alternative: Build the software
@@ -44,7 +44,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v16.0-rc3
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v16.0-rc3
+git checkout v16.0
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -57,7 +57,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/mumbainet
+octez-node config init --network mumbainet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
