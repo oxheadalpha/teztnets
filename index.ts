@@ -491,7 +491,7 @@ new k8s.helm.v2.Chart(
   "pyrometer",
   {
     chart: 'pyrometer',
-    version: "6.15.1",
+    version: "6.17.0",
     fetchOpts:
     {
       repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
