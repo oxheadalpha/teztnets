@@ -359,8 +359,8 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let gitRefMainnetGhostnet = "v15-release";
-let lastBakingDaemonMainnetGhostnet = "PtLimaPt";
+let gitRefMainnetGhostnet = "v16.1";
+let lastBakingDaemonMainnetGhostnet = "PtMumbai";
 let ghostnetTeztnet = {
   "aliases": [
     "ithacanet"
