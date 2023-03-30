@@ -200,45 +200,6 @@ new TezosChain(
   teztnetsHostedZone,
 )
 
-const limanet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "limanet/values.yaml",
-    faucetYamlFile: "limanet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "limanet",
-    dnsName: "limanet",
-    category: protocolCategory,
-    humanName: "Limanet",
-    description: "Test Chain for the Lima Protocol Proposal",
-    bootstrapPeers: [
-      "limanet.boot.ecadinfra.com",
-      "limanet.tzboot.net",
-      "limanet.stakenow.de:9733",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
-    privateBakingKey: private_oxhead_baking_key,
-    indexers: [
-      {
-        name: "TzKT",
-        url: "https://limanet.tzkt.io"
-      },
-      {
-        name: "TzStats",
-        url: "https://lima.tzstats.com"
-      },
-    ],
-    rpcUrls: [
-      "https://limanet.ecadinfra.com",
-    ]
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
 const mumbainet_chain = new TezosChain(
   new TezosChainParametersBuilder({
     yamlFile: "mumbainet/values.yaml",
@@ -261,10 +222,14 @@ const mumbainet_chain = new TezosChain(
     chartRepoVersion: "6.18.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
-      // {
-      //   name: "TzKT",
-      //   url: "https://limanet.tzkt.io"
-      // },
+      {
+        name: "TzKT",
+        url: "https://mumbainet.tzkt.io"
+      },
+      {
+        "name": "TzStats",
+        "url": "https://mumbai.tzstats.com"
+      }
     ],
     rpcUrls: [
       "https://mumbainet.ecadinfra.com",
@@ -385,7 +350,6 @@ export const networks = {
   ...getNetworks([
     dailynet_chain,
     mondaynet_chain,
-    limanet_chain,
     mumbainet_chain,
   ]),
   ...{ "ghostnet": ghostnetNetwork }
@@ -465,7 +429,6 @@ export const teztnets = {
   ...getTeztnets([
     dailynet_chain,
     mondaynet_chain,
-    limanet_chain,
     mumbainet_chain,
   ]),
   ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
