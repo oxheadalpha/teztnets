@@ -1,22 +1,22 @@
 {
-  "dailynet-2023-03-30": {
+  "dailynet-2023-03-31": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-03-30T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-03-31T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_a19bbd17_20230329225603",
-    "faucet_url": "https://faucet.dailynet-2023-03-30.teztnets.xyz",
-    "git_ref": "a19bbd17",
+    "docker_build": "tezos/tezos:master_d845607a_20230330204923",
+    "faucet_url": "https://faucet.dailynet-2023-03-31.teztnets.xyz",
+    "git_ref": "d845607a",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-03-30",
-    "rpc_url": "https://rpc.dailynet-2023-03-30.teztnets.xyz",
+    "network_url": "https://teztnets.xyz/dailynet-2023-03-31",
+    "rpc_url": "https://rpc.dailynet-2023-03-31.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-03-30.teztnets.xyz"
+      "https://rpc.dailynet-2023-03-31.teztnets.xyz"
     ],
-    "activated_on": "2023-03-30"
+    "activated_on": "2023-03-31"
   },
   "ghostnet": {
     "aliases": [
@@ -25,9 +25,9 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
-    "docker_build": "tezos/tezos:v15-release",
+    "docker_build": "tezos/tezos:v16.1",
     "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-    "git_ref": "v15-release",
+    "git_ref": "v16.1",
     "human_name": "Ghostnet",
     "indexers": [
       {
@@ -39,7 +39,7 @@
         "url": "https://ghost.tzstats.com"
       }
     ],
-    "last_baking_daemon": "PtLimaPt",
+    "last_baking_daemon": "PtMumbai",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/ghostnet",
     "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
@@ -50,42 +50,13 @@
     ],
     "activated_on": "2022-01-25"
   },
-  "limanet": {
-    "aliases": [],
-    "category": "Protocol Teztnets",
-    "chain_name": "TEZOS_LIMANET_2022-10-13T15:00:00Z",
-    "description": "Test Chain for the Lima Protocol Proposal",
-    "docker_build": "tezos/tezos:v15.1",
-    "faucet_url": "https://faucet.limanet.teztnets.xyz",
-    "git_ref": "v15.1",
-    "human_name": "Limanet",
-    "indexers": [
-      {
-        "name": "TzKT",
-        "url": "https://limanet.tzkt.io"
-      },
-      {
-        "name": "TzStats",
-        "url": "https://lima.tzstats.com"
-      }
-    ],
-    "last_baking_daemon": "PtLimaPt",
-    "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/limanet",
-    "rpc_url": "https://rpc.limanet.teztnets.xyz",
-    "rpc_urls": [
-      "https://rpc.limanet.teztnets.xyz",
-      "https://limanet.ecadinfra.com"
-    ],
-    "activated_on": "2022-10-13"
-  },
   "mainnet": {
     "aliases": [],
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_MAINNET",
     "description": "Tezos Mainnet",
-    "docker_build": "tezos/tezos:v15-release",
-    "git_ref": "v15-release",
+    "docker_build": "tezos/tezos:v16.1",
+    "git_ref": "v16.1",
     "human_name": "Mainnet",
     "indexers": [
       {
@@ -97,7 +68,7 @@
         "url": "https://tzstats.com"
       }
     ],
-    "last_baking_daemon": "PtLimaPt",
+    "last_baking_daemon": "PtMumbai",
     "masked_from_main_page": true,
     "rpc_url": "https://mainnet.oxheadhosted.com",
     "rpc_urls": [
@@ -135,7 +106,16 @@
     "faucet_url": "https://faucet.mumbainet.teztnets.xyz",
     "git_ref": "v16.1",
     "human_name": "Mumbainet",
-    "indexers": [],
+    "indexers": [
+      {
+        "name": "TzKT",
+        "url": "https://mumbainet.tzkt.io"
+      },
+      {
+        "name": "TzStats",
+        "url": "https://mumbai.tzstats.com"
+      }
+    ],
     "last_baking_daemon": "PtMumbai",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/mumbainet",

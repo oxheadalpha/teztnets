@@ -13,7 +13,7 @@ Test Chain for the Mumbai2 Protocol Proposal
 | Full network name | `TEZOS_MUMBAINET_2023-03-09T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v16.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v16.1) |
 | Activated on | 2023-03-09T15:00:00Z |
-
+| Block Explorers | [TzKT](https://mumbainet.tzkt.io) - [TzStats](https://mumbai.tzstats.com) |
 
 
 Mumbainet has 8 second blocks (twice faster than mainnet).
