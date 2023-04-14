@@ -362,6 +362,13 @@ export class TezosChain extends pulumi.ComponentResource {
 
     if (("activation" in params.helmValues) && params.getContracts()) {
       const activationBucket = new aws.s3.Bucket(`${name}-activation-bucket`);
+      const activationBucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock(`${name}-activation-bucket-public-access-block`, {
+        bucket: activationBucket.id,
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      });
       const bucketPolicy = new aws.s3.BucketPolicy(`${name}-activation-bucket-policy`, {
         bucket: activationBucket.bucket,
         policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
