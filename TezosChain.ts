@@ -382,7 +382,6 @@ export class TezosChain extends pulumi.ComponentResource {
             key: contractFile,
             source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
             contentType: mime.getType(contractFile),
-            acl: 'public-read'
           });
           params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
