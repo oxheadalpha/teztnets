@@ -61,7 +61,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network nairobinet
+octez-node config init --network https://teztnets.xyz/nairobinet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
