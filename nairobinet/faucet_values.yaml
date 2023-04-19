@@ -5,7 +5,7 @@ authorizedHost: # filled in by pulumi
 maxBalance: 61000
 config:
   application:
-     name: "Tezos Mumbainet faucet"
+     name: "Tezos Nairobinet faucet"
      googleCaptchaSiteKey: #filled in by pulumi
      backendUrl: # filled in by pulumi
      githubRepo: "https://github.com/oxheadalpha/tezos-faucet"
