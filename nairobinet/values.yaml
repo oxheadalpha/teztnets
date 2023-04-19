@@ -22,12 +22,13 @@ accounts:
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
     is_bootstrap_baker_account: false
     bootstrap_balance: "50000000000000000"
-  # foundationfaucet:
-  #   # TF funds to deploy more bakers later if needed
-  #   # chris.pinnock@tezos.foundation
-  #   # tz1LwEoAHSxsMm8dECaQTGNsGvXCD9HeBgdj
-  #   is_bootstrap_baker_account: false
-  #   bootstrap_balance: "50000000000000000"
+  foundationfaucet:
+    # TF funds to deploy more bakers later if needed
+    # chris.pinnock@tezos.foundation
+    # tz1LwEoAHSxsMm8dECaQTGNsGvXCD9HeBgdj
+    key: edpku2v3DA5WFGE7LSjNVC8FTVhy2LdSu8U34GYaT1zfzZaugCbpVU
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "50000000000000000"
   oxheadfaucet:
     # the faucet on teztnets platform
     # tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
@@ -39,11 +40,6 @@ accounts:
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # tf_rpi:
-  #   # tz1iJUpWK6SeKcHfvAJVYoyNx1pA3Y71bUVn
-  #   key: TODO
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
   # marco:
   #   # Marco Schurtenberger
   #   key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
