@@ -240,6 +240,37 @@ const mumbainet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
+const nairobinet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "nairobinet/values.yaml",
+    faucetYamlFile: "nairobinet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "nairobinet",
+    dnsName: "nairobinet",
+    category: protocolCategory,
+    humanName: "Nairobinet",
+    description: "Test Chain for the Mumbai2 Protocol Proposal",
+    bootstrapPeers: [
+      // "nairobinet.visualtez.com",
+      "nairobinet.boot.ecadinfra.com",
+      //"nairobinet.tzboot.net",
+      // "nairobinet.stakenow.de:9733",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.19.1",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+    ],
+    rpcUrls: [
+    ]
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -351,6 +382,7 @@ export const networks = {
     dailynet_chain,
     mondaynet_chain,
     mumbainet_chain,
+    nairobinet_chain,
   ]),
   ...{ "ghostnet": ghostnetNetwork }
 }
@@ -430,6 +462,7 @@ export const teztnets = {
     dailynet_chain,
     mondaynet_chain,
     mumbainet_chain,
+    nairobinet_chain,
   ]),
   ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
 }
