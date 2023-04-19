@@ -59,7 +59,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-{% if v["release"] and "rc" not in v["release"] and k != "ghostnet" -%}
+{% if v["release"] and "rc" not in v["release"] and "beta" not in v["release"] and k != "ghostnet" -%}
 octez-node config init --network {{ k }}
 {% else -%}
 octez-node config init --network {{ v["network_url"] }}
