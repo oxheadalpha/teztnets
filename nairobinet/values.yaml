@@ -230,6 +230,9 @@ images:
   octez: tezos/tezos:v17.0-beta1
 
 protocols:
+  - command: PtMumbai
+    vote:
+      liquidity_baking_toggle_vote: "pass"
   - command: PtNairob
     vote:
       liquidity_baking_toggle_vote: "pass"
