@@ -253,10 +253,8 @@ const nairobinet_chain = new TezosChain(
     humanName: "Nairobinet",
     description: "NOT LAUNCHED YET - Test Chain for the Nairobi Protocol Proposal",
     bootstrapPeers: [
-      // "nairobinet.visualtez.com",
       "nairobinet.boot.ecadinfra.com",
-      //"nairobinet.tzboot.net",
-      // "nairobinet.stakenow.de:9733",
+      "nairobinet.tzboot.net",
     ],
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.19.1",
