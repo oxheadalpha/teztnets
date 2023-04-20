@@ -2,7 +2,8 @@
   "chain_name": "TEZOS_NAIROBINET_2023-04-20T15:00:00Z",
   "default_bootstrap_peers": [
     "nairobinet.teztnets.xyz",
-    "nairobinet.boot.ecadinfra.com"
+    "nairobinet.boot.ecadinfra.com",
+    "nairobinet.tzboot.net"
   ],
   "genesis": {
     "block": "BMQZWtQjSpyJZBVHbABEmVP9VG8yEZPZ3wNftwZdXt6A33ZYatj",
