@@ -40,11 +40,11 @@ accounts:
     key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # marco:
-  #   # Marco Schurtenberger
-  #   key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  marco:
+    # Marco Schurtenberger
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   andrewk:
     # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
     key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
@@ -81,11 +81,11 @@ accounts:
   #   key: edpktoAgXAvtBFojuKPoigboyPA6mPJ3pyR1JP8XES6Lg1rkf1a3T5
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # vincent_xtzmaster:
-  #   # tz1M9b1sKoh5GB7AiBiqdMrjMMyvuhsZua5n
-  #   key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  vincent_xtzmaster:
+    # tz1M9b1sKoh5GB7AiBiqdMrjMMyvuhsZua5n
+    key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # killian_d:
   #   # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
   #   key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
