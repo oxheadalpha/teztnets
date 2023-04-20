@@ -8,15 +8,12 @@ permalink: /{{ v["human_name"] | lower }}-about
 
 | | |
 |-------|---------------------|
-| Public RPC endpoint | [{{ v["rpc_url"] }}]({{ v["rpc_url"] }}) |
+| Public RPC endpoints | {% for r in v["rpc_urls"] -%}[{{ r }}]({{ r }}/chains/main/chain_id)<br/> {%- endfor %} |
 | Faucet | [{{ v["human_name"] }} faucet]({{ v["faucet_url"] }}) |
 | Full network name | `{{ v["chain_name"] }}` |
 | Tezos docker build | {{ v["docker_build_hyperlinked"] }} |
 | Activated on | {{ network_params["genesis"]["timestamp"] }} |
-{% for proto in v["protocols"] -%}
-| Protocol at level {{ proto["level"] }} |  `{{ proto["replacement_protocol"] }}` |
-{% endfor %}
-{%- if "indexers" in v and v["indexers"] | length >0 -%}
+{% if "indexers" in v and v["indexers"] | length >0 -%}
 | Block Explorers | {% for i in v["indexers"] -%}[{{ i["name"]}}]({{ i["url"]}}){% if not loop.last %} - {% endif %}
 {%- endfor %} |
 {%- endif %}
@@ -62,7 +59,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-{% if v["release"] and "rc" not in v["release"] and k != "ghostnet" -%}
+{% if v["release"] and "rc" not in v["release"] and "beta" not in v["release"] and k != "ghostnet" -%}
 octez-node config init --network {{ k }}
 {% else -%}
 octez-node config init --network {{ v["network_url"] }}

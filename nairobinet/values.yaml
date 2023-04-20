@@ -22,6 +22,13 @@ accounts:
     key: edpkuh3WSwziyd6nXqDXeh48vZHp5ETxFd43EdkbzhmW98BvuLXK81
     is_bootstrap_baker_account: false
     bootstrap_balance: "50000000000000000"
+  foundationfaucet:
+    # TF funds to deploy more bakers later if needed
+    # chris.pinnock@tezos.foundation
+    # tz1LwEoAHSxsMm8dECaQTGNsGvXCD9HeBgdj
+    key: edpku2v3DA5WFGE7LSjNVC8FTVhy2LdSu8U34GYaT1zfzZaugCbpVU
+    is_bootstrap_baker_account: false
+    bootstrap_balance: "50000000000000000"
   oxheadfaucet:
     # the faucet on teztnets platform
     # tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
@@ -29,8 +36,8 @@ accounts:
     is_bootstrap_baker_account: false
     bootstrap_balance: "15000000000000"
   tf:
-    # tz3Q1fwk1vh3zm5LqyUV9e2wZBdaEXcovh2r
-    key: p2pk66p7iVbEFyJaYM5bjJmXP74B7qso8rXMCmKwVRdRZunMdhUjYBH
+    # tz3Q67aMz7gSMiQRcW729sXSfuMtkyAHYfqc
+    key: p2pk66gP3wq6k9QgNwAgaGLeXc3YFfrxgYdC7cdYuJWAHYBw4hExVHW
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
   marco:
@@ -41,14 +48,8 @@ accounts:
   andrewk:
     # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
     key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
-    type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # vicall:
-  #   # tz1VicarbXb4uAY12pQBAREHUimYCxjfKbLa
-  #   key: edpkujMeTHyUEK4gqCBXHDL9yXYiHnJJ4C58AHnmgAKyfFZXcBRngB
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
   pirbo:
     # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
     key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
@@ -64,11 +65,6 @@ accounts:
     key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # michael_kernaghan:
-  #   # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
-  #   key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
   fredcy:
     # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
     key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
@@ -90,11 +86,6 @@ accounts:
     key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # stakenow:
-  #   # tz1iZ9LkpAhN8X1L6RpBtfy3wxpEWzFrXz8j
-  #   key: edpkutdFBe12UBzvgRKtAPbhQrpRA46oBSJCECeHswSLPzf6eAeqph
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
   killian_d:
     # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
     key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
@@ -104,28 +95,24 @@ accounts:
     key: edpktmqPi9eRefM9ZrwsPNAdg9832UDg3r894J4rkBGfUhpqZpqx6y
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # daniel_jean:
-  #   # tz1ehn3nZ8PhiJ2ygtLM3Z5hVtSzU4ZKgqLZ
-  #   key: edpkunCh4TWt8qLmVscktUVcuhc25obsxYNJNrYqsQCXDhP7LwnVC6
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
-  # visualtez:
-  #   # tz1ViTezAvcip62Hnu2WYBFEruWEurGPbFX4
-  #   key: edpkuDJ1GULsA4qX8LUy3ERSVkjnrJDaGaX9Q2Ea55RX2t2sZxc3iW
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
   albin:
     # tz1YtB3Hn6oghVk96vkpZt6PHrfbyRY1ciL3
     key: edpkuc4NCkkmTyLogcU32b7sU363J2jggs19EyBzhmms6JmjQZxEJo
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  blueledger:
+    # Mike Kerhnaghan
+    # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
+    key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
     
 node_config_network:
   activation_account_name: oxheadbaker
-  chain_name: TEZOS_MUMBAINET_2023-03-09T15:00:00Z
+  chain_name: TEZOS_NAIROBINET_2023-04-20T15:00:00Z
   genesis:
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
-    timestamp: "2023-03-09T15:00:00Z"
+    timestamp: "2023-04-20T15:00:00Z"
 
 activation:
   protocol_hash: PtMumbai2TmsJHNGRkD8v8YDbtao7BLUC3wjASn1inAKLFCjaH1
@@ -240,13 +227,13 @@ rolling_tarball_url: null
 archive_tarball_url: null
 
 images:
-  octez: tezos/tezos:v16.1
+  octez: tezos/tezos:v17.0-beta1
 
 protocols:
-  - command: PtMumbai
+  - command: PtNairob
     vote:
       liquidity_baking_toggle_vote: "pass"
 
 bootstrap_peers:
-  - mumbainet.boot.ecadinfra.com
+  - nairobinet.tzboot.net
 #   - mumbainet.visualtez.com

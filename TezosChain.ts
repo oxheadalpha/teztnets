@@ -37,6 +37,7 @@ export interface TezosInitParameters {
   getFaucetRecaptchaSecretKey(): pulumi.Output<string>;
   getAliases(): string[];
   getIndexers(): { name: string, url: string }[];
+  getRpcUrls(): string[];
 }
 
 export interface TezosParamsInitializer {
@@ -62,6 +63,7 @@ export interface TezosParamsInitializer {
   readonly faucetRecaptchaSecretKey?: pulumi.Output<string>;
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
+  readonly rpcUrls?: string[];
 }
 
 
@@ -84,6 +86,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _faucetRecaptchaSecretKey: pulumi.Output<string>;
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
+  private _rpcUrls: string[];
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -103,6 +106,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._faucetRecaptchaSecretKey = params.faucetRecaptchaSecretKey!;
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
+    this._rpcUrls = params.rpcUrls || [];
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -306,6 +310,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   public getIndexers(): { name: string, url: string }[] {
     return this._indexers;
   }
+  public getRpcUrls(): string[] {
+    return this._rpcUrls;
+  }
 
 }
 
@@ -355,6 +362,13 @@ export class TezosChain extends pulumi.ComponentResource {
 
     if (("activation" in params.helmValues) && params.getContracts()) {
       const activationBucket = new aws.s3.Bucket(`${name}-activation-bucket`);
+      const activationBucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock(`${name}-activation-bucket-public-access-block`, {
+        bucket: activationBucket.id,
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      });
       const bucketPolicy = new aws.s3.BucketPolicy(`${name}-activation-bucket-policy`, {
         bucket: activationBucket.bucket,
         policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
@@ -368,7 +382,6 @@ export class TezosChain extends pulumi.ComponentResource {
             key: contractFile,
             source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
             contentType: mime.getType(contractFile),
-            acl: 'public-read'
           });
           params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
         })
@@ -403,76 +416,78 @@ export class TezosChain extends pulumi.ComponentResource {
     let allNames: string[] = [...params.getAliases(), ...[name]];
 
     allNames.forEach(name => {
-      // RPC Ingress
-      const rpcDomain = `rpc.${name}.teztnets.xyz`
-      const rpcCert = new aws.acm.Certificate(
-        `${rpcDomain}-cert`,
-        {
-          validationMethod: "DNS",
-          domainName: rpcDomain,
-        },
-        { parent: this }
-      )
-      const { certValidation } = createCertValidation(
-        {
-          cert: rpcCert,
-          targetDomain: rpcDomain,
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
+      if (Object.keys(params.helmValues).length != 0) {
+        // RPC Ingress
+        const rpcDomain = `rpc.${name}.teztnets.xyz`
+        const rpcCert = new aws.acm.Certificate(
+          `${rpcDomain}-cert`,
+          {
+            validationMethod: "DNS",
+            domainName: rpcDomain,
+          },
+          { parent: this }
+        )
+        const { certValidation } = createCertValidation(
+          {
+            cert: rpcCert,
+            targetDomain: rpcDomain,
+            hostedZone: this.zone,
+          },
+          { parent: this }
+        )
 
-      const rpcIngName = `${rpcDomain}-ingress`
-      const rpc_ingress = new k8s.networking.v1beta1.Ingress(
-        rpcIngName,
-        {
-          metadata: {
-            namespace: ns.metadata.name,
-            name: rpcIngName,
-            annotations: {
-              "kubernetes.io/ingress.class": "alb",
-              "alb.ingress.kubernetes.io/scheme": "internet-facing",
-              "alb.ingress.kubernetes.io/healthcheck-path":
-                "/chains/main/chain_id",
-              "alb.ingress.kubernetes.io/healthcheck-port": "8732",
-              "alb.ingress.kubernetes.io/listen-ports":
-                '[{"HTTP": 80}, {"HTTPS":443}]',
-              "ingress.kubernetes.io/force-ssl-redirect": "true",
-              "alb.ingress.kubernetes.io/actions.ssl-redirect":
-                '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-              // Prevent pulumi erroring if ingress doesn't resolve immediately
-              "pulumi.com/skipAwait": "true",
-            },
-            labels: { app: "tezos-node" },
-          },
-          spec: {
-            rules: [
-              {
-                host: rpcDomain,
-                http: {
-                  paths: [
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "ssl-redirect",
-                        servicePort: "use-annotation",
-                      },
-                    },
-                    {
-                      path: "/*",
-                      backend: {
-                        serviceName: "tezos-node-rpc",
-                        servicePort: "rpc",
-                      },
-                    },
-                  ],
-                },
+        const rpcIngName = `${rpcDomain}-ingress`
+        const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+          rpcIngName,
+          {
+            metadata: {
+              namespace: ns.metadata.name,
+              name: rpcIngName,
+              annotations: {
+                "kubernetes.io/ingress.class": "alb",
+                "alb.ingress.kubernetes.io/scheme": "internet-facing",
+                "alb.ingress.kubernetes.io/healthcheck-path":
+                  "/chains/main/chain_id",
+                "alb.ingress.kubernetes.io/healthcheck-port": "8732",
+                "alb.ingress.kubernetes.io/listen-ports":
+                  '[{"HTTP": 80}, {"HTTPS":443}]',
+                "ingress.kubernetes.io/force-ssl-redirect": "true",
+                "alb.ingress.kubernetes.io/actions.ssl-redirect":
+                  '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+                // Prevent pulumi erroring if ingress doesn't resolve immediately
+                "pulumi.com/skipAwait": "true",
               },
-            ],
+              labels: { app: "tezos-node" },
+            },
+            spec: {
+              rules: [
+                {
+                  host: rpcDomain,
+                  http: {
+                    paths: [
+                      {
+                        path: "/*",
+                        backend: {
+                          serviceName: "ssl-redirect",
+                          servicePort: "use-annotation",
+                        },
+                      },
+                      {
+                        path: "/*",
+                        backend: {
+                          serviceName: "tezos-node-rpc",
+                          servicePort: "rpc",
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           },
-        },
-        { provider, parent: this, dependsOn: certValidation }
-      )
+          { provider, parent: this, dependsOn: certValidation }
+        )
+      }
     })
 
     let tezosK8sImages;
@@ -488,16 +503,25 @@ export class TezosChain extends pulumi.ComponentResource {
     }
 
     if (Object.keys(params.faucetHelmValues).length != 0) {
+      let chartParams;
+      if (params.getChartPath()) {
+        chartParams = { "path": `${params.getChartPath()}/charts/tezos-faucet` }
+      } else {
+        chartParams = {
+          fetchOpts:
+          {
+            repo: params.getChartRepo(),
+          },
+          chart: 'tezos-faucet',
+        }
+      }
+
       let faucetChartValues: any = {
         namespace: ns.metadata.name,
         values: params.faucetHelmValues,
-        chart: 'tezos-faucet',
         version: params.getChartRepoVersion(),
-        fetchOpts:
-        {
-          repo: params.getChartRepo(),
-        },
       }
+      faucetChartValues = { ...faucetChartValues, ...chartParams };
       const faucetDomain = `faucet.${teztnetsDomain}`
       faucetChartValues.values["googleCaptchaSecretKey"] = params.getFaucetRecaptchaSecretKey()
       faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
@@ -530,81 +554,67 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
     }
-    if (params.getChartRepo() == '') {
-      // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+    if (Object.keys(params.helmValues).length != 0) {
+      if (params.getChartRepo() == '') {
+        // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
-
-
-      pulumiTaggedImages = Object.entries(tezosK8sImages).reduce(
-        (obj: { [index: string]: any }, [key, value]) => {
-          let dockerBuild: docker.DockerBuild = {
-            dockerfile: `${params.getChartPath()}/${key}/Dockerfile`,
-            cacheFrom: _cacheFrom,
-            context: `${params.getChartPath()}/${key}`
-          };
-          obj[key] = docker.buildAndPushImage((value as string).replace(/:.*/, ""), dockerBuild, repo.repository.repositoryUrl, this, () => registry);
-          return obj
-        },
-        {}
-      )
-
-      params.helmValues["tezos_k8s_images"] = pulumiTaggedImages
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          path: `${params.getChartPath()}/charts/tezos`,
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    } else {
-      // deploy from helm repo with public images
-      const chain = new k8s.helm.v2.Chart(
-        name,
-        {
-          namespace: ns.metadata.name,
-          chart: 'tezos-chain',
-          version: params.getChartRepoVersion(),
-          fetchOpts:
+        const chain = new k8s.helm.v2.Chart(
+          name,
           {
-            repo: params.getChartRepo(),
-          },
-          values: params.helmValues,
-        },
-        { providers: { kubernetes: this.provider } }
-      );
-    }
-
-
-    allNames.forEach(name => {
-      new k8s.core.v1.Service(
-        `${name}-p2p-lb`,
-        {
-          metadata: {
             namespace: ns.metadata.name,
-            name: name,
-            annotations: {
-              "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-              "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
-              "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+            path: `${params.getChartPath()}/charts/tezos`,
+            values: params.helmValues,
+          },
+          { providers: { kubernetes: this.provider } }
+        );
+      } else {
+        // deploy from helm repo with public images
+        const chain = new k8s.helm.v2.Chart(
+          name,
+          {
+            namespace: ns.metadata.name,
+            chart: 'tezos-chain',
+            version: params.getChartRepoVersion(),
+            fetchOpts:
+            {
+              repo: params.getChartRepo(),
+            },
+            values: params.helmValues,
+          },
+          { providers: { kubernetes: this.provider } }
+        );
+      }
+
+
+      allNames.forEach(name => {
+        new k8s.core.v1.Service(
+          `${name}-p2p-lb`,
+          {
+            metadata: {
+              namespace: ns.metadata.name,
+              name: name,
+              annotations: {
+                "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
+                "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
+                "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+              },
+            },
+            spec: {
+              ports: [
+                {
+                  port: 9732,
+                  targetPort: 9732,
+                  protocol: "TCP",
+                },
+              ],
+              selector: { node_class: "tezos-baking-node" },
+              type: "LoadBalancer",
             },
           },
-          spec: {
-            ports: [
-              {
-                port: 9732,
-                targetPort: 9732,
-                protocol: "TCP",
-              },
-            ],
-            selector: { node_class: "tezos-baking-node" },
-            type: "LoadBalancer",
-          },
-        },
-        { provider: this.provider }
-      )
-    })
+          { provider: this.provider }
+        )
+      })
+    }
   }
 
 
@@ -648,17 +658,14 @@ export class TezosChain extends pulumi.ComponentResource {
     });
   }
 
-  getProtocols(): Array<{ level: number, replacement_protocol: string }> {
-    let protocols: Array<{ level: number, replacement_protocol: string }> = []
-    if ("activation" in this.params.helmValues) {
-      protocols.push({ level: 0, replacement_protocol: this.params.helmValues["activation"]["protocol_hash"] });
-    }
-    if ("user_activated_upgrades" in this.params.helmValues["node_config_network"]) {
-      //protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
-      protocols = protocols.concat(this.params.helmValues["node_config_network"]["user_activated_upgrades"]);
-    }
-
-    return protocols;
+  getRpcUrl(): string {
+    return `https://rpc.${this.params.getName()}.teztnets.xyz`;
+  }
+  getRpcUrls(): Array<string> {
+    return [
+      ...[this.getRpcUrl()],
+      ...this.params.getRpcUrls(),
+    ];
   }
 
   getLastBakingDaemon(): string {

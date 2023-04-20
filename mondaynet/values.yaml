@@ -7,7 +7,7 @@ node_config_network:
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW
+  protocol_hash: PtMumbai2TmsJHNGRkD8v8YDbtao7BLUC3wjASn1inAKLFCjaH1
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -68,23 +68,24 @@ activation:
       feature_enable: true
       number_of_slots: 256
       number_of_shards: 2048
-      endorsement_lag: 2
+      attestation_lag: 2
       availability_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
-    sc_rollup_enable: true
-    sc_rollup_origination_size: 6314
-    sc_rollup_challenge_window_in_blocks: 40
-    sc_rollup_max_number_of_messages_per_commitment_period: 32765
-    sc_rollup_stake_amount: "32000000"
-    sc_rollup_commitment_period_in_blocks: 20
-    sc_rollup_max_lookahead_in_blocks: 30000
-    sc_rollup_max_active_outbox_levels: 20160
-    sc_rollup_max_outbox_messages_per_level: 100
-    sc_rollup_number_of_sections_in_dissection: 32
-    sc_rollup_timeout_period_in_blocks: 500
-    sc_rollup_max_number_of_cemented_commitments: 5
+    smart_rollup_enable: true
+    smart_rollup_origination_size: 6314
+    smart_rollup_challenge_window_in_blocks: 40
+    smart_rollup_stake_amount: "32000000"
+    smart_rollup_commitment_period_in_blocks: 20
+    smart_rollup_max_lookahead_in_blocks: 30000
+    smart_rollup_max_active_outbox_levels: 20160
+    smart_rollup_max_outbox_messages_per_level: 100
+    smart_rollup_number_of_sections_in_dissection: 32
+    smart_rollup_timeout_period_in_blocks: 500
+    smart_rollup_max_number_of_cemented_commitments: 5
+    smart_rollup_max_number_of_parallel_games: 32
+    smart_rollup_arith_pvm_enable: true
     zk_rollup_enable: true
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
@@ -111,8 +112,8 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-#bootstrap_peers:
-  #- mondaynet.ecadinfra.com
+bootstrap_peers:
+  - mondaynet.ecadinfra.com
   #  # tf
   #- 18.132.213.248
   #- 18.134.9.200
@@ -127,7 +128,7 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: PtLimaPt
+  - command: PtMumbai
     vote:
       liquidity_baking_toggle_vote: "pass"
   - command: alpha
@@ -136,37 +137,67 @@ protocols:
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
-    bootstrap_balance: "7000000000000"
+    bootstrap_balance: "1500000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-  tf_london:
+  tf_frankfurt1:
+    # tz1WLNVBKmPWEMdXD5c3NrpnUsTtb97Fdevg
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_london2:
+  tf_frankfurt2:
+    # tz1NDNCdR2REutVDQXRD791Yv8BQAt2NCMZD
     key: edpktwQ93eJwcJUTkZYRKzDpMqNmY76av4xDmcYP6jTHKMHAvmwToi
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_london3:
+  tf_frankfurt3:
+    # tz1SSe3hejo6tUX3jLvTEEy4VCdxYukqBdkT
     key: edpkue21EdnYUyHU9WHHMGEHA7E1HdTNy8pTZ4QQYodns7NUMFk1Fe
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_paris:
-    key: edpktsx1JxD7cgTBXrgM7B8xUHVQ6cpFEk4rSUAEcuBPzi5wjjf3hZ
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_stockholm:
+  tf_frankfurt6:
+    # tz1cffp9Tn4BWGFB1WniufdTqNeU5S4DtBA4
     key: edpkuiioYPwFA14hgSxnTFcS2enn2BqcMDkMrPVA3r7oZ86zGyphP3
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_frankfurt:
-    key: edpkumfPbLdeawfWNWootvBMYGi83NDuPYvsaHgUoEL3BFRRLDGJQ3
+  tf_frankfurt7:
+    # tz1NdcV4PLiFbWS3anRAJKCKxFJwqF1Z16GL
+    key: edpktsx1JxD7cgTBXrgM7B8xUHVQ6cpFEk4rSUAEcuBPzi5wjjf3hZ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore1:
+    # tz1i7y4ECTZ1j4w3zFN39Lc7g26FSXX7bo1r
+    key: edpkvNvwRzGXQaiYyDBXiHahMAMgGyY599GoAymcc5p3yWztdZTqWA
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore2:
+    # tz1M6XnMjxGDNArR9fsWmptyxtm65jPwUgfA
+    key: edpku3ZnYDvrijsC8f2VNGS295h3gbHpS2X1SwYRPxudgGszNaWBpk
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore3:
+    # tz1fK5YaAZb127B62Y8xiTDVtjVBVMmRbBZZ
+    key: edpkuzbKWYG9k8MVuJSNm5QQBHgVfFrsFCcNamFDja9bqMoo8ihji3
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore4:
+    # tz1PGgfXneewsjbaumXbCDgQPP311QoT12LJ
+    key: edpktkDVyt7Fud32vcjah3i9Kv2thLCD5GWtJgpCZU9RNuJc4ZHZz5
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_singapore5:
+    # tz1b7jqE2Lp5N9Fjo1k8cxL4JR9uC4DXuoYZ
+    key: edpku4nGaeteS2koJfeGEHf9HDFPhx28MwAkNaetDVegghqBmFPSZr
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
@@ -180,7 +211,7 @@ accounts:
     #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
     type: public
-    is_bootstrap_baker_account: true
+    is_bootstrap_baker_account: false
     bootstrap_balance: "1000000000000"
   marigold:
     # tz1eKKAsasRiyUGSnPD5YPu7zfEBcx9LDREQ
