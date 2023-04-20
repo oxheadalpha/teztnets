@@ -100,6 +100,12 @@ accounts:
   #   key: edpkuc4NCkkmTyLogcU32b7sU363J2jggs19EyBzhmms6JmjQZxEJo
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
+  blueledger:
+    # Mike Kerhnaghan
+    # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
+    key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
     
 node_config_network:
   activation_account_name: oxheadbaker
