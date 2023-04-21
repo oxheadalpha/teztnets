@@ -251,7 +251,7 @@ const nairobinet_chain = new TezosChain(
     dnsName: "nairobinet",
     category: protocolCategory,
     humanName: "Nairobinet",
-    description: "NOT LAUNCHED YET - Test Chain for the Nairobi Protocol Proposal",
+    description: "Test Chain for the Nairobi Protocol Proposal",
     bootstrapPeers: [
       "nairobinet.boot.ecadinfra.com",
       "nairobinet.tzboot.net",
