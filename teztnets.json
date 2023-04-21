@@ -130,7 +130,7 @@
     "aliases": [],
     "category": "Protocol Teztnets",
     "chain_name": "TEZOS_NAIROBINET_2023-04-20T15:00:00Z",
-    "description": "NOT LAUNCHED YET - Test Chain for the Nairobi Protocol Proposal",
+    "description": "Test Chain for the Nairobi Protocol Proposal",
     "docker_build": "tezos/tezos:v17.0-beta1",
     "faucet_url": "https://faucet.nairobinet.teztnets.xyz",
     "git_ref": "v17.0-beta1",

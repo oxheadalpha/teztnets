@@ -4,7 +4,7 @@ title: Nairobinet
 permalink: /nairobinet-about
 ---
 
-NOT LAUNCHED YET - Test Chain for the Nairobi Protocol Proposal
+Test Chain for the Nairobi Protocol Proposal
 
 | | |
 |-------|---------------------|
