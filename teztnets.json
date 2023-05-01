@@ -81,7 +81,7 @@
   "mondaynet-2023-05-01": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2023-05-01T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAY2NET-2023-05-01T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_8b74239d_20230428141140",
     "faucet_url": "https://faucet.mondaynet-2023-05-01.teztnets.xyz",

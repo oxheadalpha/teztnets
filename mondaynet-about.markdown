@@ -10,7 +10,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.mondaynet-2023-05-01.teztnets.xyz](https://rpc.mondaynet-2023-05-01.teztnets.xyz/chains/main/chain_id)<br/> |
 | Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-05-01.teztnets.xyz) |
-| Full network name | `TEZOS-MONDAYNET-2023-05-01T00:00:00.000Z` |
+| Full network name | `TEZOS-MONDAY2NET-2023-05-01T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_8b74239d_20230428141140](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_8b74239d_20230428141140) |
 | Activated on | 2023-05-01T00:00:00.000Z |
 
