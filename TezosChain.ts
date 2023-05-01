@@ -220,7 +220,13 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this.containerImage(pulumi.output(imageResolver.getLatestTagAsync(deployDate))
       .apply(tag => `${imageResolver.image}:${tag}`));
     this.name(`${this.getDnsName().toLowerCase()}-${deployDate.toISOString().split('T')[0]}`);
-    if (deployDate.toISOString().split('T')[0] == "2022-10-24" && this.getDnsName().toLowerCase() == "mondaynet") {
+    // this is a trick to change mondaynet's name when it needs to be respun.
+    // if the chain has already launched but gets bricked because it can no longer upgrade from one proto to the next,
+    // change the date below. It will start with a different chainId.
+    // This way, it won't mix with the existing mondaynet and will be able to sync.
+    // Otherwise, the old broken mondaynet will mix with the new one and you'll never be able to produce
+    // another genesis block.
+    if (deployDate.toISOString().split('T')[0] == "2023-05-01" && this.getDnsName().toLowerCase() == "mondaynet") {
       this.chainName(`TEZOS-MONDAY2NET-${deployDate.toISOString()}`);
     } else {
       this.chainName(`TEZOS-${this.getDnsName().toUpperCase()}-${deployDate.toISOString()}`);

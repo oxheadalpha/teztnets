@@ -7,7 +7,7 @@ node_config_network:
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
 
 activation:
-  protocol_hash: PtMumbai2TmsJHNGRkD8v8YDbtao7BLUC3wjASn1inAKLFCjaH1
+  protocol_hash: PtNairobiyssHuh87hEhfVBGCVrK3WnS8Z2FT4ymB5tAa4r1nQf
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -69,10 +69,11 @@ activation:
       number_of_slots: 256
       number_of_shards: 2048
       attestation_lag: 2
-      availability_threshold: 50
+      attestation_threshold: 50
       slot_size: 1048576
       redundancy_factor: 16
       page_size: 4096
+      blocks_per_epoch: 32
     smart_rollup_enable: true
     smart_rollup_origination_size: 6314
     smart_rollup_challenge_window_in_blocks: 40
@@ -128,7 +129,7 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: PtMumbai
+  - command: PtNairob
     vote:
       liquidity_baking_toggle_vote: "pass"
   - command: alpha
@@ -137,7 +138,7 @@ protocols:
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
-    bootstrap_balance: "1500000000000"
+    bootstrap_balance: "15000000000000"
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
@@ -206,7 +207,7 @@ accounts:
     key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"
+    bootstrap_balance: "10000000000000"
   german:
     #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
