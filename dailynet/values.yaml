@@ -26,17 +26,15 @@ activation:
     hard_gas_limit_per_block: '5200000'
     proof_of_work_threshold: '-1'
     minimal_stake: '6000000000'
+    adaptive_inflation_enable: true
     reward_weights:
-        #base_total_rewards_per_minute: "111"
-      base_index_of_total_rewards_per_minute: "111"
-      baking_reward_fixed_weight: 2
-        #baking_reward_fixed_portion_weight: "2"
-      baking_reward_bonus_weight: 3
-      endorsing_reward_weight: 5
-      liquidity_baking_subsidy_weight: 7
-      vdf_revelation_tip_weight: 9
-        #seed_nonce_revelation_tip_weight: 7
-      nonce_revelation_tip_weight: 7
+      base_index_of_total_rewards_per_minute: "85007812"
+      baking_reward_fixed_weight: 5120
+      baking_reward_bonus_weight: 5120
+      endorsing_reward_weight: 10240
+      liquidity_baking_subsidy_weight: 1280
+      vdf_revelation_tip_weight: 1
+      nonce_revelation_tip_weight: 1
     hard_storage_limit_per_operation: '60000'
     origination_size: 257
     cost_per_byte: '250'
@@ -63,7 +61,6 @@ activation:
     cache_sampler_state_cycles: 8
     nonce_revelation_threshold: 32
     vdf_difficulty: '10000000'
-    adaptive_inflation_enable: true
     tx_rollup_enable: true
     tx_rollup_origination_size: 4000
     tx_rollup_hard_size_limit_per_inbox: 500000
