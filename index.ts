@@ -3,6 +3,7 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
+import { publicReadPolicyForBucket } from "./s3";
 var blake2b = require('blake2b');
 const bs58check = require('bs58check');
 
@@ -127,6 +128,20 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
 deployAwsAlbController(cluster)
 deployExternalDns(cluster)
 
+// Deploy a bucket to store activation smart contracts for all testnets
+const activationBucket = new aws.s3.Bucket(`teztnets-global-activation-bucket`);
+new aws.s3.BucketPublicAccessBlock(`teztnets-activation-bucket-public-access-block`, {
+  bucket: activationBucket.id,
+  blockPublicAcls: false,
+  blockPublicPolicy: false,
+  ignorePublicAcls: false,
+  restrictPublicBuckets: false,
+});
+new aws.s3.BucketPolicy(`teztnets-activation-bucket-policy`, {
+  bucket: activationBucket.bucket,
+  policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
+});
+
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
@@ -149,6 +164,7 @@ const dailynet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.18.0",
     privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
@@ -175,6 +191,7 @@ const mondaynet_chain = new TezosChain(
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.18.0",
     privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
@@ -233,7 +250,8 @@ const mumbainet_chain = new TezosChain(
     ],
     rpcUrls: [
       "https://mumbainet.ecadinfra.com",
-    ]
+    ],
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
@@ -262,7 +280,8 @@ const nairobinet_chain = new TezosChain(
     indexers: [
     ],
     rpcUrls: [
-    ]
+    ],
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,

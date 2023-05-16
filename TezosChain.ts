@@ -38,6 +38,7 @@ export interface TezosInitParameters {
   getAliases(): string[];
   getIndexers(): { name: string, url: string }[];
   getRpcUrls(): string[];
+  getActivationBucket(): aws.s3.Bucket;
 }
 
 export interface TezosParamsInitializer {
@@ -64,6 +65,7 @@ export interface TezosParamsInitializer {
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
   readonly rpcUrls?: string[];
+  readonly activationBucket?: aws.s3.Bucket;
 }
 
 
@@ -87,6 +89,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
   private _rpcUrls: string[];
+  private _activationBucket: aws.s3.Bucket;
 
 
   constructor(params: TezosParamsInitializer = {}) {
@@ -107,6 +110,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
     this._rpcUrls = params.rpcUrls || [];
+    this._activationBucket = params.activationBucket!;
 
     this._helmValues = {};
     if (params.yamlFile) {
@@ -290,6 +294,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   public getChartPath(): string {
     return this._chartPath;
   }
+  public getActivationBucket(): aws.s3.Bucket {
+    return this._activationBucket;
+  }
 
   public privateBakingKey(privateBakingKey: string): TezosChainParametersBuilder {
     this._helmValues["accounts"]["oxheadbaker"]["key"] = privateBakingKey;
@@ -333,6 +340,7 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly repo: awsx.ecr.Repository;
   readonly zone: aws.route53.Zone;
 
+
   // readonly ns: k8s.core.v1.Namespace;
   // readonly chain: k8s.helm.v2.Chart;
 
@@ -367,29 +375,18 @@ export class TezosChain extends pulumi.ComponentResource {
     );
 
     if (("activation" in params.helmValues) && params.getContracts()) {
-      const activationBucket = new aws.s3.Bucket(`${name}-activation-bucket`);
-      const activationBucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock(`${name}-activation-bucket-public-access-block`, {
-        bucket: activationBucket.id,
-        blockPublicAcls: false,
-        blockPublicPolicy: false,
-        ignorePublicAcls: false,
-        restrictPublicBuckets: false,
-      });
-      const bucketPolicy = new aws.s3.BucketPolicy(`${name}-activation-bucket-policy`, {
-        bucket: activationBucket.bucket,
-        policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
-      });
       params.helmValues["activation"]["bootstrap_contract_urls"] = [];
 
       if (params.getContracts()) {
         params.getContracts().forEach(function(contractFile: any) {
-          const bucketObject = new aws.s3.BucketObject(`${name}-${contractFile}`, {
-            bucket: activationBucket.bucket,
-            key: contractFile,
+          let contractFullName = `${name}-${contractFile}`;
+          const bucketObject = new aws.s3.BucketObject(contractFullName, {
+            bucket: params.getActivationBucket(),
+            key: contractFullName,
             source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
             contentType: mime.getType(contractFile),
           });
-          params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${activationBucket.bucketRegionalDomainName}/${contractFile}`);
+          params.helmValues["activation"]["bootstrap_contract_urls"].push(pulumi.interpolate`https://${params.getActivationBucket().bucketRegionalDomainName}/${contractFullName}`);
         })
       }
     }
