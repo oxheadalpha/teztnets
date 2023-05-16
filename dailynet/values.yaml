@@ -1,3 +1,5 @@
+tezos_k8s_images:
+  utils: ghcr.io/oxheadalpha/tezos-k8s-utils:evm_rollup
 signers:
   tezos-signer-0:
     sign_for_accounts:
