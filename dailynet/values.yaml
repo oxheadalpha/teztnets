@@ -29,6 +29,7 @@ activation:
     proof_of_work_threshold: '-1'
     minimal_stake: '6000000000'
     adaptive_inflation_enable: true
+    staking_over_baking_limit: 5
     reward_weights:
       base_total_rewards_per_minute: "85007812"
       baking_reward_fixed_portion_weight: 5120
