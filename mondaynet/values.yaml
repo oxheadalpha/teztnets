@@ -202,6 +202,42 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
+  tf_gcp_oregon_1:
+    # tz1Q5yMydHkc2DHaP8GdWcz6YcuNu5wKWSa9
+    key: edpkuqgGiesSEaxJ2pUjNpHa46Lq7TiRJBqDCxBgdVisEQjPG1TdxQ
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_gcp_oregon_2:
+    # tz1Y5nRiviBMSxdr7ZY15c2Pz8SjaG5LXQqz
+    key: edpkuhYJo1ULyLnetjq5ct1GiEpjNVRTQzU324tHU1MNcdPKtRxSM3
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_gcp_oregon_3:
+    # tz1VXDXJKNZ6Vd8WGoSyrfEXNpManegYm7gd
+    key: edpkvFBNrMAmBiFhw7G3bypjnNQpMJ7trDyGnpMmyWWJLABpDHgxGV
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_gcp_zurich_1:
+    # tz1e4nXmvHK8TC8VbBg9KmD8So3BxzS4qUnN
+    key: edpktx15jbSycZMkDEmB9Yrnzf6YnUgSj6qzQv2MVPy2E27UFJUZDR
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_gcp_zurich_2:
+    # tz1htmXW41DdSVK8XoqYfCEcNqz3xb2Y4uWQ
+    key: edpku8RZHsqeuuuZS5P4ExwBbRP5P44bm7gZxBWBcERrTdSQvWzc1o
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
+  tf_gcp_zurich_3:
+    # tz1RWEVV83L9YYittWtz33iGQMkFEekcv3Ui
+    key: edpkvM1aKoDD5wJ3cYcaN4YbV2ihyP7yHtZJW7mqY8oxXNMNMww94y
+    type: public
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "370000000000"
   ecadlabs:
     # tz1ck3EJwzFpbLVmXVuEn5Ptwzc6Aj14mHSH
     key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
