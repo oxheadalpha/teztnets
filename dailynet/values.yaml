@@ -110,7 +110,7 @@ activation:
       pvm_kind: "arith"
       kernel: ""
       parameters_ty:
-        prim: Unit
+        prim: unit
 nodes:
   tezos-baking-node:
     instances:
