@@ -134,9 +134,11 @@ nodes:
   rolling-node: null
 
 smartRollupNodes:
-  rollup-node-0:
+  evm:
     operator_account: oxheadbaker
     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
+    ingress:
+      # ingress details filled by pulumi
 
 bootstrap_peers: []
 full_snapshot_url: null

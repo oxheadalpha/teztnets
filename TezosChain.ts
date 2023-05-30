@@ -557,6 +557,46 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
     }
+
+    // Rollup
+    if (params.helmValues.smartRollupNodes && params.helmValues.smartRollupNodes.length != 0) {
+      let rollupFqdn = `evm-rollup-node.${name}.teztnets.xyz`;
+      const rollupCert = new aws.acm.Certificate(
+        "evm-rollup-cert",
+        {
+          validationMethod: "DNS",
+          domainName: rollupFqdn,
+        },
+        { parent: this }
+      )
+      createCertValidation(
+        {
+          cert: rollupCert,
+          targetDomain: "evm-rollup-cert",
+          hostedZone: this.zone,
+        },
+        { parent: this }
+      )
+      let rollupIngressParams = {
+        enabled: true,
+        host: rollupFqdn,
+        annotations: {
+          "kubernetes.io/ingress.class": "alb",
+          "alb.ingress.kubernetes.io/scheme": "internet-facing",
+          "alb.ingress.kubernetes.io/healthcheck-path":
+            "/global/block/head",
+          "alb.ingress.kubernetes.io/healthcheck-port": "8932",
+          "alb.ingress.kubernetes.io/listen-ports":
+            '[{"HTTP": 80}, {"HTTPS":443}]',
+          "ingress.kubernetes.io/force-ssl-redirect": "true",
+          "alb.ingress.kubernetes.io/actions.ssl-redirect":
+            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+          // Prevent pulumi erroring if ingress doesn't resolve immediately
+          "pulumi.com/skipAwait": "true",
+        },
+      }
+      params.helmValues.smartRollupNodes.evm.ingress = rollupIngressParams;
+    }
     if (Object.keys(params.helmValues).length != 0) {
       if (params.getChartRepo() == '') {
         // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
