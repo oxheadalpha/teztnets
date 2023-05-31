@@ -580,6 +580,9 @@ export class TezosChain extends pulumi.ComponentResource {
       let rollupIngressParams = {
         enabled: true,
         host: rollupFqdn,
+        labels: {
+          app: "rollup-evm"
+        },
         annotations: {
           "kubernetes.io/ingress.class": "alb",
           "alb.ingress.kubernetes.io/scheme": "internet-facing",
