@@ -68,8 +68,8 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | `[https://evm-rollup-node.dailynet-2023-06-01.teztnets.xyz](https://evm-rollup-node.dailynet-2023-06-01.teztnets.xyz)` |
-| EVM Proxy URL | `[https://evm.dailynet-2023-06-01.teztnets.xyz](https://evm.dailynet-2023-06-01.teztnets.xyz)` |
+| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-06-01.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-06-01.teztnets.xyz) |
+| EVM Proxy URL | [`https://evm.dailynet-2023-06-01.teztnets.xyz`](https://evm.dailynet-2023-06-01.teztnets.xyz) |
 
 
 
