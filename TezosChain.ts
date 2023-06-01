@@ -64,6 +64,8 @@ export interface TezosParamsInitializer {
   readonly aliases?: string[];
   readonly indexers?: { name: string, url: string }[];
   readonly rpcUrls?: string[];
+  readonly rollupUrls?: string[];
+  readonly evmProxyUrls?: string[];
   readonly activationBucket?: aws.s3.Bucket;
 }
 
@@ -88,6 +90,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _aliases: string[];
   private _indexers: { name: string, url: string }[];
   private _rpcUrls: string[];
+  private _rollupUrls: string[];
+  private _evmProxyUrls: string[];
   private _activationBucket: aws.s3.Bucket;
 
 
@@ -109,6 +113,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._aliases = params.aliases || [];
     this._indexers = params.indexers || [];
     this._rpcUrls = params.rpcUrls || [];
+    this._rollupUrls = params.rollupUrls || [];
+    this._evmProxyUrls = params.evmProxyUrls || [];
     this._activationBucket = params.activationBucket!;
 
     this._helmValues = {};
@@ -330,6 +336,12 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   public getRpcUrls(): string[] {
     return this._rpcUrls;
+  }
+  public getRollupUrls(): string[] {
+    return this._rollupUrls;
+  }
+  public getEvmProxyUrls(): string[] {
+    return this._evmProxyUrls;
   }
 
 }
@@ -711,6 +723,18 @@ export class TezosChain extends pulumi.ComponentResource {
 
   getRpcUrl(): string {
     return `https://rpc.${this.params.getName()}.teztnets.xyz`;
+  }
+  getRollupUrls(): string[] {
+    if (this.params.helmValues.smartRollupNodes && this.params.helmValues.smartRollupNodes.length != 0) {
+      return [`https://evm-rollup-node.${this.params.getName()}.teztnets.xyz`];
+    }
+    return [];
+  }
+  getEvmProxyUrls(): string[] {
+    if (this.params.helmValues.smartRollupNodes && this.params.helmValues.smartRollupNodes.length != 0) {
+      return [`https://evm.${this.params.getName()}.teztnets.xyz`];
+    }
+    return [];
   }
   getRpcUrls(): Array<string> {
     return [

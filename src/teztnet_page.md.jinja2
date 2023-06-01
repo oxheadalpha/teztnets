@@ -73,6 +73,16 @@ octez-node run --rpc-addr 127.0.0.1:8732
 > nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-{{ k }}.log &
 > ```
 
+{% if v["rollup_urls"] | length > 0 %}
+### EVM Rollup
+
+| | |
+|-------|---------------------|
+| Octez Rollup RPC URL | `[{{ v["rollup_urls"][0] }}]({{ v["rollup_urls"][0] }})` |
+| EVM Proxy URL | `[{{ v["evm_proxy_urls"][0] }}]({{ v["evm_proxy_urls"][0] }})` |
+
+{% endif %}
+
 {% if v["category"] in [ "Protocol Teztnets", "Long-running Teztnets" ] %}
 ### Bake on the {{ v["human_name"] }} network
 

@@ -344,6 +344,8 @@ function getTeztnets(chains: TezosChain[]): object {
       faucet_url: faucetUrl,
       category: chain.params.getCategory(),
       rpc_url: chain.getRpcUrl(),
+      rollup_urls: chain.getRollupUrls(),
+      evm_proxy_urls: chain.getEvmProxyUrls(),
       rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
       aliases: chain.params.getAliases(),
