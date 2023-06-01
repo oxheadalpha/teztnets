@@ -616,6 +616,45 @@ export class TezosChain extends pulumi.ComponentResource {
         },
       }
       params.helmValues.smartRollupNodes.evm.ingress = rollupIngressParams;
+      let evmProxyFqdn = `evm.${name}.teztnets.xyz`;
+      const evmProxyCert = new aws.acm.Certificate(
+        "evm-proxy-cert",
+        {
+          validationMethod: "DNS",
+          domainName: evmProxyFqdn,
+        },
+        { parent: this }
+      )
+      createCertValidation(
+        {
+          cert: evmProxyCert,
+          targetDomain: "evm-proxy-cert",
+          hostedZone: this.zone,
+        },
+        { parent: this }
+      )
+      let evmProxyIngressParams = {
+        enabled: true,
+        host: evmProxyFqdn,
+        labels: {
+          app: "evm-proxy"
+        },
+        annotations: {
+          "kubernetes.io/ingress.class": "alb",
+          "alb.ingress.kubernetes.io/scheme": "internet-facing",
+          "alb.ingress.kubernetes.io/healthcheck-path":
+            "/",
+          "alb.ingress.kubernetes.io/healthcheck-port": "8545",
+          "alb.ingress.kubernetes.io/listen-ports":
+            '[{"HTTP": 80}, {"HTTPS":443}]',
+          "ingress.kubernetes.io/force-ssl-redirect": "true",
+          "alb.ingress.kubernetes.io/actions.ssl-redirect":
+            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
+          // Prevent pulumi erroring if ingress doesn't resolve immediately
+          "pulumi.com/skipAwait": "true",
+        },
+      }
+      params.helmValues.smartRollupNodes.evm.evm_proxy_ingress = evmProxyIngressParams;
     }
     if (Object.keys(params.helmValues).length != 0) {
       if (params.getChartRepo() == '') {
