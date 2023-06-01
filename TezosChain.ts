@@ -48,7 +48,6 @@ export interface TezosParamsInitializer {
   readonly humanName?: string;
   readonly schedule?: string;
   readonly category?: string;
-  readonly containerImage?: string | pulumi.Output<string>;
   readonly dnsName?: string;
   readonly bootstrapPeers?: string[];
   readonly bootstrapContracts?: string[];
@@ -126,9 +125,6 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     if (params.chainName) {
       this.chainName(params.chainName);
     }
-    if (params.containerImage) {
-      this.containerImage(params.containerImage);
-    }
     if (params.privateBakingKey) {
       this.privateBakingKey(params.privateBakingKey);
     }
@@ -178,12 +174,19 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._helmValues["node_config_network"]["chain_name"];
   }
 
-  public containerImage(containerImage: string | pulumi.Output<String>): TezosChainParametersBuilder {
+  public containerImage(containerImage: pulumi.Output<String>): TezosChainParametersBuilder {
     this._helmValues["images"]["octez"] = containerImage
     return this;
   }
   public getContainerImage(): string {
     return this._helmValues["images"]["octez"];
+  }
+  public containerDebugImage(containerDebugImage: pulumi.Output<String>): TezosChainParametersBuilder {
+    this._helmValues["images"]["octez_debug"] = containerDebugImage
+    return this;
+  }
+  public getContainerDebugImage(): string {
+    return this._helmValues["images"]["octez_debug"];
   }
 
   public dnsName(dnsName: string): TezosChainParametersBuilder {
@@ -223,6 +226,8 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     const imageResolver = new TezosImageResolver();
     this.containerImage(pulumi.output(imageResolver.getLatestTagAsync(deployDate))
       .apply(tag => `${imageResolver.image}:${tag}`));
+    this.containerDebugImage(pulumi.output(imageResolver.getLatestTagAsync(deployDate))
+      .apply(tag => `${imageResolver.image}-debug:${tag}`));
     this.name(`${this.getDnsName().toLowerCase()}-${deployDate.toISOString().split('T')[0]}`);
     // this is a trick to change mondaynet's name when it needs to be respun.
     // if the chain has already launched but gets bricked because it can no longer upgrade from one proto to the next,
