@@ -8,11 +8,11 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.mondaynet-2023-05-29.teztnets.xyz](https://rpc.mondaynet-2023-05-29.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-05-29.teztnets.xyz) |
-| Full network name | `TEZOS-MONDAYNET-2023-05-29T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_a317741f_20230526171451](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_a317741f_20230526171451) |
-| Activated on | 2023-05-29T00:00:00.000Z |
+| Public RPC endpoints | [https://rpc.mondaynet-2023-06-05.teztnets.xyz](https://rpc.mondaynet-2023-06-05.teztnets.xyz/chains/main/chain_id)<br/> |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-06-05.teztnets.xyz) |
+| Full network name | `TEZOS-MONDAYNET-2023-06-05T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_bdd90c13_20230604130754](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_bdd90c13_20230604130754) |
+| Activated on | 2023-06-05T00:00:00.000Z |
 
 
 
@@ -29,7 +29,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 To join Mondaynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_a317741f_20230526171451
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_bdd90c13_20230604130754
 ```
 
 #### Alternative: Build the software
@@ -39,7 +39,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_a317741f_20230526171451
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout a317741f
+git checkout bdd90c13
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -52,7 +52,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/mondaynet-2023-05-29
+octez-node config init --network https://teztnets.xyz/mondaynet-2023-06-05
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -60,7 +60,7 @@ octez-node run --rpc-addr 127.0.0.1:8732
 > 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
 >
 > ```bash=13
-> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-05-29.log &
+> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-06-05.log &
 > ```
 
 
