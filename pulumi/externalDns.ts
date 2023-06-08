@@ -11,7 +11,7 @@ const deployExternalDns = ({ cluster }: any) => {
   const externalDnsRole = clusterOidcUrl?.apply(
     (url) =>
       new aws.iam.Role("external-dns-assume-role", {
-        name: `external-dns-assume-role-${cluster.name}`,
+        name: "external-dns-assume-role-teztnets",
         assumeRolePolicy: {
           Version: "2012-10-17",
           Statement: [
@@ -23,7 +23,7 @@ const deployExternalDns = ({ cluster }: any) => {
               Action: "sts:AssumeRoleWithWebIdentity",
               Condition: {
                 StringEquals: {
-                  [`${url}: sub`]: `system: serviceaccount: ${kubeSystem}: external - dns`,
+                  [`${url}: sub`]: `system: serviceaccount:${kubeSystem}:external-dns`,
                 },
               },
             },
@@ -37,7 +37,7 @@ const deployExternalDns = ({ cluster }: any) => {
 
   const saName = `external-dns-${cluster.name}`;
 
-  const externalDnsServiceAccount = new k8s.core.v1.ServiceAccount(
+  new k8s.core.v1.ServiceAccount(
     `${saName}-sa`,
     {
       metadata: {
@@ -51,7 +51,7 @@ const deployExternalDns = ({ cluster }: any) => {
     { provider: cluster.provider, parent: cluster }
   )
 
-  const externalDns = new tezos.aws.ExteranlDns(
+  new tezos.aws.ExteranlDns(
     {
       iamRole: externalDnsRole,
       namespace: kubeSystem,

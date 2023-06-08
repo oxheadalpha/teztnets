@@ -464,18 +464,10 @@ export class TezosChain extends pulumi.ComponentResource {
               namespace: ns.metadata.name,
               name: rpcIngName,
               annotations: {
-                "kubernetes.io/ingress.class": "alb",
-                "alb.ingress.kubernetes.io/scheme": "internet-facing",
-                "alb.ingress.kubernetes.io/healthcheck-path":
-                  "/chains/main/chain_id",
-                "alb.ingress.kubernetes.io/healthcheck-port": "8732",
-                "alb.ingress.kubernetes.io/listen-ports":
-                  '[{"HTTP": 80}, {"HTTPS":443}]',
-                "ingress.kubernetes.io/force-ssl-redirect": "true",
-                "alb.ingress.kubernetes.io/actions.ssl-redirect":
-                  '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-                // Prevent pulumi erroring if ingress doesn't resolve immediately
-                "pulumi.com/skipAwait": "true",
+                "kubernetes.io/ingress.class": "nginx",
+                'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+                'nginx.ingress.kubernetes.io/enable-cors': 'true',
+                'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
               },
               labels: { app: "tezos-node" },
             },
@@ -485,13 +477,6 @@ export class TezosChain extends pulumi.ComponentResource {
                   host: rpcDomain,
                   http: {
                     paths: [
-                      {
-                        path: "/*",
-                        backend: {
-                          serviceName: "ssl-redirect",
-                          servicePort: "use-annotation",
-                        },
-                      },
                       {
                         path: "/*",
                         backend: {
@@ -556,44 +541,12 @@ export class TezosChain extends pulumi.ComponentResource {
         { providers: { kubernetes: this.provider } }
       )
 
-      const faucetCert = new aws.acm.Certificate(
-        `${faucetDomain}-cert`,
-        {
-          validationMethod: "DNS",
-          domainName: faucetDomain,
-        },
-        { parent: this }
-      )
-      createCertValidation(
-        {
-          cert: faucetCert,
-          targetDomain: faucetDomain,
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
 
     }
 
     // Rollup
     if (params.helmValues.smartRollupNodes && params.helmValues.smartRollupNodes.length != 0) {
       let rollupFqdn = `evm-rollup-node.${name}.teztnets.xyz`;
-      const rollupCert = new aws.acm.Certificate(
-        "evm-rollup-cert",
-        {
-          validationMethod: "DNS",
-          domainName: rollupFqdn,
-        },
-        { parent: this }
-      )
-      createCertValidation(
-        {
-          cert: rollupCert,
-          targetDomain: "evm-rollup-cert",
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
       let rollupIngressParams = {
         enabled: true,
         host: rollupFqdn,
@@ -601,38 +554,14 @@ export class TezosChain extends pulumi.ComponentResource {
           app: "rollup-evm"
         },
         annotations: {
-          "kubernetes.io/ingress.class": "alb",
-          "alb.ingress.kubernetes.io/scheme": "internet-facing",
-          "alb.ingress.kubernetes.io/healthcheck-path":
-            "/global/block/head",
-          "alb.ingress.kubernetes.io/healthcheck-port": "8932",
-          "alb.ingress.kubernetes.io/listen-ports":
-            '[{"HTTP": 80}, {"HTTPS":443}]',
-          "ingress.kubernetes.io/force-ssl-redirect": "true",
-          "alb.ingress.kubernetes.io/actions.ssl-redirect":
-            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-          // Prevent pulumi erroring if ingress doesn't resolve immediately
-          "pulumi.com/skipAwait": "true",
+          "kubernetes.io/ingress.class": "nginx",
+          'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+          'nginx.ingress.kubernetes.io/enable-cors': 'true',
+          'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
         },
       }
       params.helmValues.smartRollupNodes.evm.ingress = rollupIngressParams;
       let evmProxyFqdn = `evm.${name}.teztnets.xyz`;
-      const evmProxyCert = new aws.acm.Certificate(
-        "evm-proxy-cert",
-        {
-          validationMethod: "DNS",
-          domainName: evmProxyFqdn,
-        },
-        { parent: this }
-      )
-      createCertValidation(
-        {
-          cert: evmProxyCert,
-          targetDomain: "evm-proxy-cert",
-          hostedZone: this.zone,
-        },
-        { parent: this }
-      )
       let evmProxyIngressParams = {
         enabled: true,
         host: evmProxyFqdn,
@@ -640,18 +569,10 @@ export class TezosChain extends pulumi.ComponentResource {
           app: "evm-proxy"
         },
         annotations: {
-          "kubernetes.io/ingress.class": "alb",
-          "alb.ingress.kubernetes.io/scheme": "internet-facing",
-          "alb.ingress.kubernetes.io/healthcheck-path":
-            "/",
-          "alb.ingress.kubernetes.io/healthcheck-port": "8545",
-          "alb.ingress.kubernetes.io/listen-ports":
-            '[{"HTTP": 80}, {"HTTPS":443}]',
-          "ingress.kubernetes.io/force-ssl-redirect": "true",
-          "alb.ingress.kubernetes.io/actions.ssl-redirect":
-            '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}',
-          // Prevent pulumi erroring if ingress doesn't resolve immediately
-          "pulumi.com/skipAwait": "true",
+          "kubernetes.io/ingress.class": "nginx",
+          'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+          'nginx.ingress.kubernetes.io/enable-cors': 'true',
+          'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
         },
       }
       params.helmValues.smartRollupNodes.evm.evm_proxy_ingress = evmProxyIngressParams;
