@@ -10,7 +10,8 @@ const bs58check = require('bs58check');
 require('dotenv').config();
 
 import deployAwsAlbController from "./awsAlbController"
-import deployExternalDns from "./externalDns"
+import deployExternalDns from "./pulumi/externalDns"
+import deployCertManager from "./pulumi/certManager"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53";
 
@@ -75,6 +76,7 @@ const vpc = new awsx.ec2.Vpc(
 
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
+  createOidcProvider: true,
   instanceType: "t3.2xlarge",
   desiredCapacity: desiredClusterCapacity,
   minSize: 1,
@@ -93,6 +95,9 @@ const cluster = new eks.Cluster(stack, {
   publicSubnetIds: vpc.publicSubnetIds,
   privateSubnetIds: vpc.privateSubnetIds,
 })
+
+export const clusterOidcArn = cluster.core.oidcProvider!.arn
+export const clusterOidcUrl = cluster.core.oidcProvider!.url
 
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
@@ -125,8 +130,10 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
   (roles) => roles[0].name
 )
 
+const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
 deployAwsAlbController(cluster)
-deployExternalDns(cluster)
+deployExternalDns({ clusterOidcUrl, clusterOidcArn, cluster })
+deployCertManager(cluster, awsAccountId)
 
 // Deploy a bucket to store activation smart contracts for all testnets
 const activationBucket = new aws.s3.Bucket(`teztnets-global-activation-bucket`);
