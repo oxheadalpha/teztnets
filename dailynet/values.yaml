@@ -81,14 +81,14 @@ activation:
     tx_rollup_sunset_level: 10000000
     dal_parametric:
       feature_enable: true
-      number_of_slots: 256
+      number_of_slots: 1
       number_of_shards: 2048
-      attestation_lag: 2
-      attestation_threshold: 50
-      slot_size: 1048576
+      attestation_lag: 1
+      attestation_threshold: 20
+      slot_size: 262144
       redundancy_factor: 16
       page_size: 4096
-      blocks_per_epoch: 32
+      blocks_per_epoch: 1
     smart_rollup_enable: true
     smart_rollup_origination_size: 6314
     smart_rollup_challenge_window_in_blocks: 40
