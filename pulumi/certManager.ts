@@ -7,8 +7,8 @@ import { clusterOidcUrl, clusterOidcArn } from "../index"
 const certManagerNS = "cert-manager"
 
 const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
-  const saName = "cert-manager"
-  const roleName = "cert-manager-assume-role";
+  const saName = "cert-manager-teztnets";
+  const roleName = "crt-mngr-assm-rl-teztnets";
   const certManagerRole = clusterOidcUrl?.apply(
     (url) =>
       new aws.iam.Role("cert-manager-assume-role", {

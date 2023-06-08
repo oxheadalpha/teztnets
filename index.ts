@@ -9,7 +9,7 @@ const bs58check = require('bs58check');
 
 require('dotenv').config();
 
-import deployAwsAlbController from "./awsAlbController"
+//import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./pulumi/externalDns"
 import deployCertManager from "./pulumi/certManager"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
@@ -35,45 +35,6 @@ const repo = new awsx.ecr.Repository(stack)
 
 const desiredClusterCapacity = 2
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
-// Create a VPC with subnets that are tagged for load balancer usage.
-// See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
-const vpc = new awsx.ec2.Vpc(
-  "vpc",
-  {
-    subnets: [
-      // Tag subnets for specific load-balancer usage.
-      // Any non-null tag value is valid.
-      // See:
-      //  - https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-      //  - https://github.com/pulumi/pulumi-eks/issues/196
-      //  - https://github.com/pulumi/pulumi-eks/issues/415
-      { type: "public", tags: { "kubernetes.io/role/elb": "1" } },
-      { type: "private", tags: { "kubernetes.io/role/internal-elb": "1" } },
-    ],
-  },
-  {
-    // Inform pulumi to ignore tag changes to the VPCs or subnets, so that
-    // tags auto-added by AWS EKS do not get removed during future
-    // refreshes and updates, as they are added outside of pulumi's management
-    // and would be removed otherwise.
-    // See: https://github.com/pulumi/pulumi-eks/issues/271#issuecomment-548452554
-    transformations: [
-      (args: any) => {
-        if (
-          args.type === "aws:ec2/vpc:Vpc" ||
-          args.type === "aws:ec2/subnet:Subnet"
-        ) {
-          return {
-            props: args.props,
-            opts: pulumi.mergeOptions(args.opts, { ignoreChanges: ["tags"] }),
-          }
-        }
-        return undefined
-      },
-    ],
-  }
-)
-
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
   createOidcProvider: true,
@@ -91,9 +52,6 @@ const cluster = new eks.Cluster(stack, {
       username: "admin",
     },
   ],
-  vpcId: vpc.id,
-  publicSubnetIds: vpc.publicSubnetIds,
-  privateSubnetIds: vpc.privateSubnetIds,
 })
 
 export const clusterOidcArn = cluster.core.oidcProvider!.arn
@@ -131,7 +89,7 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
 )
 
 const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
-deployAwsAlbController(cluster)
+//deployAwsAlbController(cluster)
 deployExternalDns({ clusterOidcUrl, clusterOidcArn, cluster })
 deployCertManager(cluster, awsAccountId)
 
@@ -418,7 +376,7 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let gitRefMainnetGhostnet = "v16.1";
+let gitRefMainnetGhostnet = "v17.0";
 let lastBakingDaemonMainnetGhostnet = "PtMumbai";
 let ghostnetTeztnet = {
   "aliases": [

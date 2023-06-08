@@ -5,9 +5,9 @@
   },
   "dependencies": {
     "@oxheadalpha/tezos-pulumi": "1.0.1",
-    "@pulumi/awsx": "^0.40.0",
-    "@pulumi/eks": "^0.40.0",
-    "@pulumi/pulumi": "^3.32.1",
+    "@pulumi/awsx": "^1.0.2",
+    "@pulumi/eks": "^1.0.2",
+    "@pulumi/pulumi": "^3.69.0",
     "blake2b": "^2.1.4",
     "bs58check": "^2.1.2",
     "cron-parser": "^3.5.0",
