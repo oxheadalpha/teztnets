@@ -10,13 +10,11 @@ const bs58check = require('bs58check');
 require('dotenv').config();
 
 //import deployAwsAlbController from "./awsAlbController"
-import deployExternalDns from "./pulumi/externalDns"
+import deployExternalDns from "./externalDns"
 import deployCertManager from "./pulumi/certManager"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53";
 
-import { createClusterAuthIamResources } from "./aws/iam"
-import { createClusterAdminAuth, createK8sRbacRoleObject } from "./k8s/rbac"
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
@@ -59,21 +57,6 @@ const cluster = new eks.Cluster(stack, {
 export const clusterOidcArn = cluster.core.oidcProvider!.arn
 export const clusterOidcUrl = cluster.core.oidcProvider!.url
 
-const authGroupName = "teztnetscluster"
-const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
-// AWS IAM Role that users in the authGroupName can assume to authenticate to the EKS Cluster.
-// const clusterNonManagedIamRole = createClusterAuthIamResources(
-//   authGroupName,
-//   awsAccountId,
-//   true
-// )
-// ClusterRoleBinding that will be used to map to users assuming the AWS IAM Role clusterIamAuthRole
-// Provides cluster permissions to authenticated users
-const k8sClusterRoleName = "non-system-managed-admin-teztnets"
-const clusterK8sAdminUser = createClusterAdminAuth(
-  k8sClusterRoleName,
-  cluster.provider
-)
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
   forceDestroy: false,
@@ -105,7 +88,7 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
   (roles) => roles[0].name
 )
 
-deployExternalDns({ clusterOidcUrl, clusterOidcArn, cluster })
+deployExternalDns(cluster)
 //deployCertManager(cluster, awsAccountId)
 
 // Deploy a bucket to store activation smart contracts for all testnets
