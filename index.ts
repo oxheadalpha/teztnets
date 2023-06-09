@@ -127,117 +127,117 @@ const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
 
 // chains
-// const dailynet_chain = new TezosChain(
-//   new TezosChainParametersBuilder({
-//     yamlFile: "dailynet/values.yaml",
-//     faucetYamlFile: "dailynet/faucet_values.yaml",
-//     faucetPrivateKey: faucetPrivateKey,
-//     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-//     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-//     dnsName: "dailynet",
-//     category: periodicCategory,
-//     humanName: "Dailynet",
-//     description:
-//       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-//     schedule: "0 0 * * *",
-//     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-//     // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     // chartRepoVersion: "6.18.0",
-//     chartPath: "dailynet/tezos-k8s",
-//     privateBakingKey: private_oxhead_baking_key,
-//     activationBucket: activationBucket,
-//   }),
-//   cluster.provider,
-//   repo,
-//   teztnetsHostedZone,
-// )
+const dailynet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "dailynet/values.yaml",
+    faucetYamlFile: "dailynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    dnsName: "dailynet",
+    category: periodicCategory,
+    humanName: "Dailynet",
+    description:
+      "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
+    schedule: "0 0 * * *",
+    bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    // chartRepoVersion: "6.18.0",
+    chartPath: "dailynet/tezos-k8s",
+    privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
 
-// const mondaynet_chain = new TezosChain(
-//   new TezosChainParametersBuilder({
-//     yamlFile: "mondaynet/values.yaml",
-//     faucetYamlFile: "mondaynet/faucet_values.yaml",
-//     faucetPrivateKey: faucetPrivateKey,
-//     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-//     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-//     dnsName: "mondaynet",
-//     category: periodicCategory,
-//     humanName: "Mondaynet",
-//     description:
-//       "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
-//     schedule: "0 0 * * MON",
-//     bootstrapPeers: [
-//       "mondaynet.ecadinfra.com",
-//     ],
-//     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-//     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     chartRepoVersion: "6.18.0",
-//     privateBakingKey: private_oxhead_baking_key,
-//     activationBucket: activationBucket,
-//   }),
-//   cluster.provider,
-//   repo,
-//   teztnetsHostedZone,
-// )
+const mondaynet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "mondaynet/values.yaml",
+    faucetYamlFile: "mondaynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    dnsName: "mondaynet",
+    category: periodicCategory,
+    humanName: "Mondaynet",
+    description:
+      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
+    schedule: "0 0 * * MON",
+    bootstrapPeers: [
+      "mondaynet.ecadinfra.com",
+    ],
+    bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.18.0",
+    privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
 
-// // For ghostnet, we only deploy a faucet.
-// // The RPC service and baker are in the sensitive infra.
-// new TezosChain(
-//   new TezosChainParametersBuilder({
-//     faucetYamlFile: "ghostnet/faucet_values.yaml",
-//     faucetPrivateKey: faucetPrivateKey,
-//     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-//     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-//     name: "ghostnet",
-//     dnsName: "ghostnet",
-//     humanName: "Ghostnet",
-//     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     chartRepoVersion: "6.18.0",
-//   }),
-//   cluster.provider,
-//   repo,
-//   teztnetsHostedZone,
-// )
+// For ghostnet, we only deploy a faucet.
+// The RPC service and baker are in the sensitive infra.
+new TezosChain(
+  new TezosChainParametersBuilder({
+    faucetYamlFile: "ghostnet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "ghostnet",
+    dnsName: "ghostnet",
+    humanName: "Ghostnet",
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.18.0",
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
 
-// const mumbainet_chain = new TezosChain(
-//   new TezosChainParametersBuilder({
-//     yamlFile: "mumbainet/values.yaml",
-//     faucetYamlFile: "mumbainet/faucet_values.yaml",
-//     faucetPrivateKey: faucetPrivateKey,
-//     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-//     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-//     name: "mumbainet",
-//     dnsName: "mumbainet",
-//     category: protocolCategory,
-//     humanName: "Mumbainet",
-//     description: "Test Chain for the Mumbai2 Protocol Proposal",
-//     bootstrapPeers: [
-//       // "mumbainet.visualtez.com",
-//       "mumbainet.boot.ecadinfra.com",
-//       //"mumbainet.tzboot.net",
-//       // "mumbainet.stakenow.de:9733",
-//     ],
-//     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     chartRepoVersion: "6.18.0",
-//     privateBakingKey: private_oxhead_baking_key,
-//     indexers: [
-//       {
-//         name: "TzKT",
-//         url: "https://mumbainet.tzkt.io"
-//       },
-//       {
-//         "name": "TzStats",
-//         "url": "https://mumbai.tzstats.com"
-//       }
-//     ],
-//     rpcUrls: [
-//       "https://mumbainet.ecadinfra.com",
-//     ],
-//     activationBucket: activationBucket,
-//   }),
-//   cluster.provider,
-//   repo,
-//   teztnetsHostedZone,
-// )
+const mumbainet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "mumbainet/values.yaml",
+    faucetYamlFile: "mumbainet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "mumbainet",
+    dnsName: "mumbainet",
+    category: protocolCategory,
+    humanName: "Mumbainet",
+    description: "Test Chain for the Mumbai2 Protocol Proposal",
+    bootstrapPeers: [
+      // "mumbainet.visualtez.com",
+      "mumbainet.boot.ecadinfra.com",
+      //"mumbainet.tzboot.net",
+      // "mumbainet.stakenow.de:9733",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.18.0",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+      {
+        name: "TzKT",
+        url: "https://mumbainet.tzkt.io"
+      },
+      {
+        "name": "TzStats",
+        "url": "https://mumbai.tzstats.com"
+      }
+    ],
+    rpcUrls: [
+      "https://mumbainet.ecadinfra.com",
+    ],
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
 
 const nairobinet_chain = new TezosChain(
   new TezosChainParametersBuilder({

@@ -25,12 +25,6 @@ config:
 ingress:
   enabled: true
   annotations:
-    "kubernetes.io/ingress.class": "alb"
-    "alb.ingress.kubernetes.io/scheme": "internet-facing"
-    "alb.ingress.kubernetes.io/healthcheck-path": "/"
-    "alb.ingress.kubernetes.io/healthcheck-port": "80"
-    "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]'
-    "ingress.kubernetes.io/force-ssl-redirect": "true"
-    "alb.ingress.kubernetes.io/actions.ssl-redirect":
-      '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}'
+    "kubernetes.io/ingress.class": "nginx"
+    'cert-manager.io/cluster-issuer': "letsencrypt-prod"
   host: # faucet fqdn, filled in by pulumi
