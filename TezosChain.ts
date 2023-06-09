@@ -529,7 +529,14 @@ export class TezosChain extends pulumi.ComponentResource {
       faucetChartValues.values["config"]["application"]["backendUrl"] = `https://${faucetDomain}`
       faucetChartValues.values["config"]["network"]["name"] = params.getHumanName()
       faucetChartValues.values["config"]["network"]["rpcUrl"] = `https://rpc.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["host"] = `faucet.${teztnetsDomain}`
+      faucetChartValues.values["ingress"]["host"] = faucetDomain
+      faucetChartValues.values["ingress"]["tls"] =
+        [
+          {
+            hosts: [faucetDomain],
+            secretName: `${faucetDomain}-secret`
+          }
+        ]
       new k8s.helm.v2.Chart(
         `${name}-faucet`,
         faucetChartValues,
@@ -554,6 +561,12 @@ export class TezosChain extends pulumi.ComponentResource {
           'nginx.ingress.kubernetes.io/enable-cors': 'true',
           'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
         },
+        tls: [
+          {
+            hosts: [rollupFqdn],
+            secretName: `${rollupFqdn}-secret`
+          }
+        ]
       }
       params.helmValues.smartRollupNodes.evm.ingress = rollupIngressParams;
       let evmProxyFqdn = `evm.${name}.teztnets.xyz`;
@@ -569,6 +582,12 @@ export class TezosChain extends pulumi.ComponentResource {
           'nginx.ingress.kubernetes.io/enable-cors': 'true',
           'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
         },
+        tls: [
+          {
+            hosts: [evmProxyFqdn],
+            secretName: `${evmProxyFqdn}-secret`
+          }
+        ]
       }
       params.helmValues.smartRollupNodes.evm.evm_proxy_ingress = evmProxyIngressParams;
     }

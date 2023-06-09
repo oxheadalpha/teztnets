@@ -28,3 +28,4 @@ ingress:
     "kubernetes.io/ingress.class": "nginx"
     'cert-manager.io/cluster-issuer': "letsencrypt-prod"
   host: # faucet fqdn, filled in by pulumi
+  tls: # filled in by pulumi
