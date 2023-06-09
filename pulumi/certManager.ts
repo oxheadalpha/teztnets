@@ -7,42 +7,42 @@ import { clusterOidcUrl, clusterOidcArn } from "../index"
 const certManagerNS = "cert-manager"
 
 const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
-  const saName = "cert-manager-teztnets";
-  const roleName = "crt-mngr-assm-rl-teztnets";
-  // const certManagerRole = clusterOidcUrl?.apply(
-  //   (url) =>
-  //     new aws.iam.Role("cert-manager-assume-role", {
-  //       name: roleName,
-  //       assumeRolePolicy: {
-  //         Version: "2012-10-17",
-  //         Statement: [
-  //           {
-  //             Effect: "Allow",
-  //             Principal: {
-  //               Federated: clusterOidcArn,
-  //             },
-  //             Action: "sts:AssumeRoleWithWebIdentity",
-  //             Condition: {
-  //               StringEquals: {
-  //                 [`${url}:sub`]: `system:serviceaccount:${certManagerNS}:${saName}`,
-  //               },
-  //             },
-  //           },
-  //           {
-  //             // https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-  //             Effect: "Allow",
-  //             Principal: {
-  //               AWS: `arn:aws:iam::${awsAccountId}:role/${roleName}`
-  //             },
-  //             Action: "sts:AssumeRole",
-  //           },
-  //         ],
-  //       },
-  //       tags: {
-  //         clusterName: cluster.eksCluster.name,
-  //       },
-  //     })
-  // )
+  const saName = "cert-manager"
+  const roleName = "teztnets-cert-manager";
+  const certManagerRole = clusterOidcUrl?.apply(
+    (url) =>
+      new aws.iam.Role("teztnets-cert-manager", {
+        name: roleName,
+        assumeRolePolicy: {
+          Version: "2012-10-17",
+          Statement: [
+            {
+              Effect: "Allow",
+              Principal: {
+                Federated: clusterOidcArn,
+              },
+              Action: "sts:AssumeRoleWithWebIdentity",
+              Condition: {
+                StringEquals: {
+                  [`${url}:sub`]: `system:serviceaccount:${certManagerNS}:${saName}`,
+                },
+              },
+            },
+            {
+              // https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+              Effect: "Allow",
+              Principal: {
+                AWS: `arn:aws:iam::${awsAccountId}:role/${roleName}`
+              },
+              Action: "sts:AssumeRole",
+            },
+          ],
+        },
+        tags: {
+          clusterName: cluster.eksCluster.name,
+        },
+      })
+  )
 
   const certManagerNamespace = new k8s.core.v1.Namespace("cert-manager", {
     metadata: {
@@ -51,19 +51,19 @@ const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
   }, {
     provider: cluster.provider,
   });
-  // new k8s.core.v1.ServiceAccount(
-  //   `${saName}-sa`,
-  //   {
-  //     metadata: {
-  //       name: saName,
-  //       namespace: certManagerNamespace.metadata.name,
-  //       annotations: {
-  //         "eks.amazonaws.com/role-arn": certManagerRole.arn,
-  //       },
-  //     },
-  //   },
-  //   { provider: cluster.provider, parent: cluster }
-  // )
+  new k8s.core.v1.ServiceAccount(
+    `${saName}-sa`,
+    {
+      metadata: {
+        name: saName,
+        namespace: certManagerNamespace.metadata.name,
+        annotations: {
+          "eks.amazonaws.com/role-arn": certManagerRole.arn,
+        },
+      },
+    },
+    { provider: cluster.provider, parent: cluster }
+  )
   const certManagerPolicy = new aws.iam.Policy(
     "cert-manager",
     {
@@ -95,13 +95,13 @@ const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
     },
   )
 
-  // new aws.iam.RolePolicyAttachment(
-  //   "cert-manager",
-  //   {
-  //     policyArn: certManagerPolicy.arn,
-  //     role: certManagerRole,
-  //   },
-  // )
+  new aws.iam.RolePolicyAttachment(
+    "cert-manager",
+    {
+      policyArn: certManagerPolicy.arn,
+      role: certManagerRole,
+    },
+  )
   new k8s.helm.v3.Release(
     "cert-manager",
     {
@@ -114,7 +114,7 @@ const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
       values: {
         installCRDs: true,
         serviceAccount: {
-          //create: false,
+          create: false,
           name: saName,
         },
         securityContext: {
