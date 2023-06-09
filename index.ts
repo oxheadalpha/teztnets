@@ -255,8 +255,9 @@ const nairobinet_chain = new TezosChain(
       "nairobinet.boot.ecadinfra.com",
       "nairobinet.tzboot.net",
     ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.19.1",
+    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    // chartRepoVersion: "6.19.1",
+    chartPath: "nairobinet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
     ],
