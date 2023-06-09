@@ -606,8 +606,6 @@ export class TezosChain extends pulumi.ComponentResource {
               namespace: ns.metadata.name,
               name: name,
               annotations: {
-                "service.beta.kubernetes.io/aws-load-balancer-type": "nlb-ip",
-                "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing",
                 "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
               },
             },
