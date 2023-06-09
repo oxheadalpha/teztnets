@@ -439,25 +439,9 @@ export class TezosChain extends pulumi.ComponentResource {
       if (Object.keys(params.helmValues).length != 0) {
         // RPC Ingress
         const rpcDomain = `rpc.${name}.teztnets.xyz`
-        const rpcCert = new aws.acm.Certificate(
-          `${rpcDomain}-cert`,
-          {
-            validationMethod: "DNS",
-            domainName: rpcDomain,
-          },
-          { parent: this }
-        )
-        const { certValidation } = createCertValidation(
-          {
-            cert: rpcCert,
-            targetDomain: rpcDomain,
-            hostedZone: this.zone,
-          },
-          { parent: this }
-        )
 
         const rpcIngName = `${rpcDomain}-ingress`
-        const rpc_ingress = new k8s.networking.v1beta1.Ingress(
+        new k8s.networking.v1.Ingress(
           rpcIngName,
           {
             metadata: {
@@ -478,10 +462,15 @@ export class TezosChain extends pulumi.ComponentResource {
                   http: {
                     paths: [
                       {
-                        path: "/*",
+                        path: "/",
+                        pathType: "Prefix",
                         backend: {
-                          serviceName: "tezos-node-rpc",
-                          servicePort: "rpc",
+                          service: {
+                            name: "tezos-node-rpc",
+                            port: {
+                              name: "rpc"
+                            },
+                          }
                         },
                       },
                     ],
@@ -490,7 +479,7 @@ export class TezosChain extends pulumi.ComponentResource {
               ],
             },
           },
-          { provider, parent: this, dependsOn: certValidation }
+          { provider, parent: this }
         )
       }
     })

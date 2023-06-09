@@ -15,6 +15,9 @@ import deployCertManager from "./pulumi/certManager"
 import deployNginx from "./pulumi/nginx"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53";
+import {
+  createEbsCsiRole,
+} from "./pulumi/ebsCsiDriver"
 
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
@@ -57,6 +60,17 @@ const cluster = new eks.Cluster(stack, {
 
 export const clusterOidcArn = cluster.core.oidcProvider!.arn
 export const clusterOidcUrl = cluster.core.oidcProvider!.url
+
+const csiRole = createEbsCsiRole({ clusterOidcArn, clusterOidcUrl })
+const ebsCsiDriverAddon = new aws.eks.Addon(
+  "ebs-csi-driver",
+  {
+    clusterName: cluster.eksCluster.name,
+    addonName: "aws-ebs-csi-driver",
+    serviceAccountRoleArn: csiRole.arn,
+  },
+  { parent: cluster }
+)
 
 const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
@@ -225,35 +239,35 @@ const longCategory = "Long-running Teztnets"
 //   teztnetsHostedZone,
 // )
 
-// const nairobinet_chain = new TezosChain(
-//   new TezosChainParametersBuilder({
-//     yamlFile: "nairobinet/values.yaml",
-//     faucetYamlFile: "nairobinet/faucet_values.yaml",
-//     faucetPrivateKey: faucetPrivateKey,
-//     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-//     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-//     name: "nairobinet",
-//     dnsName: "nairobinet",
-//     category: protocolCategory,
-//     humanName: "Nairobinet",
-//     description: "Test Chain for the Nairobi Protocol Proposal",
-//     bootstrapPeers: [
-//       "nairobinet.boot.ecadinfra.com",
-//       "nairobinet.tzboot.net",
-//     ],
-//     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     chartRepoVersion: "6.19.1",
-//     privateBakingKey: private_oxhead_baking_key,
-//     indexers: [
-//     ],
-//     rpcUrls: [
-//     ],
-//     activationBucket: activationBucket,
-//   }),
-//   cluster.provider,
-//   repo,
-//   teztnetsHostedZone,
-// )
+const nairobinet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "nairobinet/values.yaml",
+    faucetYamlFile: "nairobinet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "nairobinet",
+    dnsName: "nairobinet",
+    category: protocolCategory,
+    humanName: "Nairobinet",
+    description: "Test Chain for the Nairobi Protocol Proposal",
+    bootstrapPeers: [
+      "nairobinet.boot.ecadinfra.com",
+      "nairobinet.tzboot.net",
+    ],
+    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    chartRepoVersion: "6.19.1",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+    ],
+    rpcUrls: [
+    ],
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone,
+)
 
 // function getNetworks(chains: TezosChain[]): object {
 //   const networks: { [name: string]: object } = {}
