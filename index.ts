@@ -269,259 +269,261 @@ const nairobinet_chain = new TezosChain(
   teztnetsHostedZone,
 )
 
-// function getNetworks(chains: TezosChain[]): object {
-//   const networks: { [name: string]: object } = {}
+function getNetworks(chains: TezosChain[]): object {
+  const networks: { [name: string]: object } = {}
 
-//   chains.forEach(function(chain) {
-//     const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
-//     bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
+  chains.forEach(function(chain) {
+    const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
+    bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
 
-//     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
-//     // TODO: generate it dynamically based on privkey
-//     let genesisPubkey: string = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-//     const network = Object.assign(
-//       {},
-//       chain.params.helmValues["node_config_network"]
-//     ) // clone
-//     network["sandboxed_chain_name"] = "SANDBOXED_TEZOS"
-//     network["default_bootstrap_peers"] = bootstrapPeers
-//     network["genesis_parameters"] = {
-//       values: {
-//         genesis_pubkey: genesisPubkey,
-//       },
-//     }
-//     if ("activation_account_name" in network) {
-//       delete network["activation_account_name"]
-//     }
-//     if ("genesis" in network && "block" in network["genesis"] === false) {
-//       // If block hash not passed, use tezos-k8s convention:
-//       // deterministically derive it from chain name.
-//       var input = Buffer.from(network["chain_name"])
-//       var gbk = blake2b(32).update(input).digest('hex');
-//       var bytes = Buffer.from('0134' + gbk, 'hex')
-//       network["genesis"]["block"] = bs58check.encode(bytes);
-//     }
+    // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
+    // TODO: generate it dynamically based on privkey
+    let genesisPubkey: string = "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+    const network = Object.assign(
+      {},
+      chain.params.helmValues["node_config_network"]
+    ) // clone
+    network["sandboxed_chain_name"] = "SANDBOXED_TEZOS"
+    network["default_bootstrap_peers"] = bootstrapPeers
+    network["genesis_parameters"] = {
+      values: {
+        genesis_pubkey: genesisPubkey,
+      },
+    }
+    if ("activation_account_name" in network) {
+      delete network["activation_account_name"]
+    }
+    if ("genesis" in network && "block" in network["genesis"] === false) {
+      // If block hash not passed, use tezos-k8s convention:
+      // deterministically derive it from chain name.
+      var input = Buffer.from(network["chain_name"])
+      var gbk = blake2b(32).update(input).digest('hex');
+      var bytes = Buffer.from('0134' + gbk, 'hex')
+      network["genesis"]["block"] = bs58check.encode(bytes);
+    }
 
-//     networks[chain.params.getName()] = network
-//   })
+    networks[chain.params.getName()] = network
+  })
 
-//   return networks
-// }
+  return networks
+}
 
-// function getTeztnets(chains: TezosChain[]): object {
-//   const teztnets: { [name: string]: { [name: string]: Object } } = {}
+function getTeztnets(chains: TezosChain[]): object {
+  const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
-//   chains.forEach(function(chain) {
-//     let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
-//     teztnets[chain.params.getName()] = {
-//       chain_name: chain.getChainName(),
-//       network_url: chain.getNetworkUrl(),
-//       human_name: chain.params.getHumanName(),
-//       description: chain.getDescription(),
-//       docker_build: chain.getDockerBuild(),
-//       git_ref: chain.getGitRef(),
-//       last_baking_daemon: chain.getLastBakingDaemon(),
-//       faucet_url: faucetUrl,
-//       category: chain.params.getCategory(),
-//       rpc_url: chain.getRpcUrl(),
-//       rollup_urls: chain.getRollupUrls(),
-//       evm_proxy_urls: chain.getEvmProxyUrls(),
-//       rpc_urls: chain.getRpcUrls(),
-//       masked_from_main_page: chain.params.isMaskedFromMainPage(),
-//       aliases: chain.params.getAliases(),
-//       indexers: chain.params.getIndexers(),
-//     }
-//   })
+  chains.forEach(function(chain) {
+    let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
+    teztnets[chain.params.getName()] = {
+      chain_name: chain.getChainName(),
+      network_url: chain.getNetworkUrl(),
+      human_name: chain.params.getHumanName(),
+      description: chain.getDescription(),
+      docker_build: chain.getDockerBuild(),
+      git_ref: chain.getGitRef(),
+      last_baking_daemon: chain.getLastBakingDaemon(),
+      faucet_url: faucetUrl,
+      category: chain.params.getCategory(),
+      rpc_url: chain.getRpcUrl(),
+      rollup_urls: chain.getRollupUrls(),
+      evm_proxy_urls: chain.getEvmProxyUrls(),
+      rpc_urls: chain.getRpcUrls(),
+      masked_from_main_page: chain.params.isMaskedFromMainPage(),
+      aliases: chain.params.getAliases(),
+      indexers: chain.params.getIndexers(),
+    }
+  })
 
-//   return teztnets
-// }
+  return teztnets
+}
 
-// // We do not host a ghostnet node here.
-// // Oxhead Alpha hosts a ghostnet RPC service and baker in the
-// // sensitive infra cluster.
-// // Instead, we hardcode the values to be displayed on the webpage.
-// let ghostnetNetwork = {
-//   "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
-//   "default_bootstrap_peers": [
-//     "ghostnet.teztnets.xyz",
-//     "ghostnet.boot.ecadinfra.com",
-//     "ghostnet.stakenow.de:9733",
-//   ],
-//   "genesis": {
-//     "block": "BLockGenesisGenesisGenesisGenesisGenesis1db77eJNeJ9",
-//     "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
-//     "timestamp": "2022-01-25T15:00:00Z"
-//   },
-//   "genesis_parameters": {
-//     "values": {
-//       "genesis_pubkey": "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-//     }
-//   },
-//   "sandboxed_chain_name": "SANDBOXED_TEZOS",
-//   "user_activated_upgrades": [
-//     {
-//       "level": 8191,
-//       "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
-//     },
-//     {
-//       "level": 765952,
-//       "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
-//     },
-//     {
-//       "level": 1191936,
-//       "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
-//     },
-//     {
-//       "level": 1654784,
-//       "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
-//     }
-//   ]
-// }
-// export const networks = {
-//   ...getNetworks([
-//     dailynet_chain,
-//     mondaynet_chain,
-//     mumbainet_chain,
-//     nairobinet_chain,
-//   ]),
-//   ...{ "ghostnet": ghostnetNetwork }
-// }
+// We do not host a ghostnet node here.
+// Oxhead Alpha hosts a ghostnet RPC service and baker in the
+// sensitive infra cluster.
+// Instead, we hardcode the values to be displayed on the webpage.
+let ghostnetNetwork = {
+  "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
+  "default_bootstrap_peers": [
+    "ghostnet.teztnets.xyz",
+    "ghostnet.boot.ecadinfra.com",
+    "ghostnet.stakenow.de:9733",
+  ],
+  "genesis": {
+    "block": "BLockGenesisGenesisGenesisGenesisGenesis1db77eJNeJ9",
+    "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
+    "timestamp": "2022-01-25T15:00:00Z"
+  },
+  "genesis_parameters": {
+    "values": {
+      "genesis_pubkey": "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+    }
+  },
+  "sandboxed_chain_name": "SANDBOXED_TEZOS",
+  "user_activated_upgrades": [
+    {
+      "level": 8191,
+      "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A"
+    },
+    {
+      "level": 765952,
+      "replacement_protocol": "PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY"
+    },
+    {
+      "level": 1191936,
+      "replacement_protocol": "PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg"
+    },
+    {
+      "level": 1654784,
+      "replacement_protocol": "PtLimaPtLMwfNinJi9rCfDPWea8dFgTZ1MeJ9f1m2SRic6ayiwW"
+    }
+  ]
+}
+export const networks = {
+  ...getNetworks([
+    dailynet_chain,
+    mondaynet_chain,
+    mumbainet_chain,
+    nairobinet_chain,
+  ]),
+  ...{ "ghostnet": ghostnetNetwork }
+}
 
-// // We do not host a ghostnet node here.
-// // Oxhead Alpha hosts a ghostnet RPC service and baker in the
-// // sensitive infra cluster.
-// // Instead, we hardcode the values to be displayed on the webpage.
-// let gitRefMainnetGhostnet = "v17.0";
-// let lastBakingDaemonMainnetGhostnet = "PtMumbai";
-// let ghostnetTeztnet = {
-//   "aliases": [
-//     "ithacanet"
-//   ],
-//   "category": "Long-running Teztnets",
-//   "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
-//   "description": "Ghostnet is the long-running testnet for Tezos.",
-//   "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
-//   "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-//   "git_ref": gitRefMainnetGhostnet,
-//   "human_name": "Ghostnet",
-//   "indexers": [
-//     {
-//       "name": "TzKT",
-//       "url": "https://ghostnet.tzkt.io"
-//     },
-//     {
-//       "name": "TzStats",
-//       "url": "https://ghost.tzstats.com"
-//     }
-//   ],
-//   "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
-//   "masked_from_main_page": false,
-//   "network_url": "https://teztnets.xyz/ghostnet",
-//   "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
-//   "rpc_urls": [
-//     "https://rpc.ghostnet.teztnets.xyz",
-//     "https://ghostnet.ecadinfra.com",
-//     "https://ghostnet.tezos.marigold.dev",
-//   ]
-// }
+// We do not host a ghostnet node here.
+// Oxhead Alpha hosts a ghostnet RPC service and baker in the
+// sensitive infra cluster.
+// Instead, we hardcode the values to be displayed on the webpage.
+let gitRefMainnetGhostnet = "v17.0";
+let lastBakingDaemonMainnetGhostnet = "PtMumbai";
+let ghostnetTeztnet = {
+  "aliases": [
+    "ithacanet"
+  ],
+  "category": "Long-running Teztnets",
+  "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
+  "description": "Ghostnet is the long-running testnet for Tezos.",
+  "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
+  "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
+  "git_ref": gitRefMainnetGhostnet,
+  "human_name": "Ghostnet",
+  "indexers": [
+    {
+      "name": "TzKT",
+      "url": "https://ghostnet.tzkt.io"
+    },
+    {
+      "name": "TzStats",
+      "url": "https://ghost.tzstats.com"
+    }
+  ],
+  "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
+  "masked_from_main_page": false,
+  "network_url": "https://teztnets.xyz/ghostnet",
+  "rpc_url": "https://rpc.ghostnet.teztnets.xyz",
+  "rpc_urls": [
+    "https://rpc.ghostnet.teztnets.xyz",
+    "https://ghostnet.ecadinfra.com",
+    "https://ghostnet.tezos.marigold.dev",
+  ]
+}
 
-// // We also add mainnet to the teztnets metadata.
-// // Some systems rely on this to provide lists of third-party RPC services
-// // to their users. For example, umami wallet.
-// let mainnetTeztnet = {
-//   "aliases": [],
-//   "category": "Long-running Teztnets",
-//   "chain_name": "TEZOS_MAINNET",
-//   "description": "Tezos Mainnet",
-//   "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
-//   "git_ref": gitRefMainnetGhostnet,
-//   "human_name": "Mainnet",
-//   "indexers": [
-//     {
-//       "name": "TzKT",
-//       "url": "https://tzkt.io"
-//     },
-//     {
-//       "name": "TzStats",
-//       "url": "https://tzstats.com"
-//     }
-//   ],
-//   "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
-//   "masked_from_main_page": true,
-//   "rpc_url": "https://mainnet.oxheadhosted.com",
-//   "rpc_urls": [
-//     "https://mainnet.oxheadhosted.com",
-//     "https://mainnet.api.tez.ie",
-//     "https://mainnet.smartpy.io",
-//     "https://mainnet.tezos.marigold.dev",
-//   ]
-// }
+// We also add mainnet to the teztnets metadata.
+// Some systems rely on this to provide lists of third-party RPC services
+// to their users. For example, umami wallet.
+let mainnetTeztnet = {
+  "aliases": [],
+  "category": "Long-running Teztnets",
+  "chain_name": "TEZOS_MAINNET",
+  "description": "Tezos Mainnet",
+  "docker_build": `tezos/tezos:${gitRefMainnetGhostnet}`,
+  "git_ref": gitRefMainnetGhostnet,
+  "human_name": "Mainnet",
+  "indexers": [
+    {
+      "name": "TzKT",
+      "url": "https://tzkt.io"
+    },
+    {
+      "name": "TzStats",
+      "url": "https://tzstats.com"
+    }
+  ],
+  "last_baking_daemon": lastBakingDaemonMainnetGhostnet,
+  "masked_from_main_page": true,
+  "rpc_url": "https://mainnet.oxheadhosted.com",
+  "rpc_urls": [
+    "https://mainnet.oxheadhosted.com",
+    "https://mainnet.api.tez.ie",
+    "https://mainnet.smartpy.io",
+    "https://mainnet.tezos.marigold.dev",
+  ]
+}
 
-// export const teztnets = {
-//   ...getTeztnets([
-//     dailynet_chain,
-//     mondaynet_chain,
-//     mumbainet_chain,
-//     nairobinet_chain,
-//   ]),
-//   ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
-// }
+export const teztnets = {
+  ...getTeztnets([
+    dailynet_chain,
+    mondaynet_chain,
+    mumbainet_chain,
+    nairobinet_chain,
+  ]),
+  ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
+}
 
-// const pyrometerDomain = "status.teztnets.xyz"
-// const pyrometerCert = new aws.acm.Certificate(
-//   `${pyrometerDomain}-cert`,
-//   {
-//     validationMethod: "DNS",
-//     domainName: pyrometerDomain,
-//   },
-// )
-// createCertValidation(
-//   {
-//     cert: pyrometerCert,
-//     targetDomain: pyrometerDomain,
-//     hostedZone: teztnetsHostedZone
-//   },
-// )
+const pyrometerDomain = "status.teztnets.xyz"
+const pyrometerCert = new aws.acm.Certificate(
+  `${pyrometerDomain}-cert`,
+  {
+    validationMethod: "DNS",
+    domainName: pyrometerDomain,
+  },
+)
+createCertValidation(
+  {
+    cert: pyrometerCert,
+    targetDomain: pyrometerDomain,
+    hostedZone: teztnetsHostedZone
+  },
+)
 
-// new k8s.helm.v2.Chart(
-//   "pyrometer",
-//   {
-//     chart: 'pyrometer',
-//     version: "6.17.0",
-//     fetchOpts:
-//     {
-//       repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-//     },
-//     values: {
-//       config: {
-//         "node_monitor": {
-//           "nodes": Object.keys(networks).filter(n => n != "ghostnet").map(network => "http://tezos-node-rpc." + network + ":8732"),
-//         },
-//         "ui": {
-//           "enabled": true,
-//           "host": "0.0.0.0",
-//           "port": 80,
-//         },
-//         "log": {
-//           "level": "info",
-//           "timestamp": false
-//         }
-//       },
-//       ingress: {
-//         enabled: true,
-//         annotations: {
-//           "kubernetes.io/ingress.class": "alb",
-//           "alb.ingress.kubernetes.io/scheme": "internet-facing",
-//           "alb.ingress.kubernetes.io/healthcheck-path": "/",
-//           "alb.ingress.kubernetes.io/healthcheck-port": "80",
-//           "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
-//           "ingress.kubernetes.io/force-ssl-redirect": "true",
-//           "alb.ingress.kubernetes.io/actions.ssl-redirect":
-//             '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}',
-//         },
-//         host: pyrometerDomain,
-//       }
-//     }
-//   },
-//   { providers: { kubernetes: cluster.provider } }
-// );
+new k8s.helm.v2.Chart(
+  "pyrometer",
+  {
+    chart: 'pyrometer',
+    version: "6.17.0",
+    fetchOpts:
+    {
+      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    },
+    values: {
+      config: {
+        "node_monitor": {
+          "nodes": Object.keys(networks).filter(n => n != "ghostnet").map(network => "http://tezos-node-rpc." + network + ":8732"),
+        },
+        "ui": {
+          "enabled": true,
+          "host": "0.0.0.0",
+          "port": 80,
+        },
+        "log": {
+          "level": "info",
+          "timestamp": false
+        }
+      },
+      ingress: {
+        enabled: true,
+        annotations: {
+          "kubernetes.io/ingress.class": "nginx",
+          'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+          'nginx.ingress.kubernetes.io/enable-cors': 'true',
+          'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
+        },
+        host: pyrometerDomain,
+        tls: [
+          {
+            hosts: [pyrometerDomain],
+            secretName: `${pyrometerDomain}-secret`
+          }
+        ]
+      }
+    }
+  },
+  { providers: { kubernetes: cluster.provider } }
+);
