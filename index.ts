@@ -487,12 +487,13 @@ createCertValidation(
 new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    chart: 'pyrometer',
-    version: "6.17.0",
-    fetchOpts:
-    {
-      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    },
+    // chart: 'pyrometer',
+    // version: "6.17.0",
+    path: "./pyrometer/tezos-k8s/charts/pyrometer",
+    // fetchOpts:
+    // {
+    //   repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    // },
     values: {
       config: {
         "node_monitor": {
@@ -501,7 +502,7 @@ new k8s.helm.v2.Chart(
         "ui": {
           "enabled": true,
           "host": "0.0.0.0",
-          "port": 80,
+          "port": 8080,
         },
         "log": {
           "level": "info",
