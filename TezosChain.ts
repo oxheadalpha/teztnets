@@ -477,6 +477,12 @@ export class TezosChain extends pulumi.ComponentResource {
                   },
                 },
               ],
+              tls: [
+                {
+                  hosts: [rpcDomain],
+                  secretName: `${rpcDomain}-secret`
+                }
+              ]
             },
           },
           { provider, parent: this }
