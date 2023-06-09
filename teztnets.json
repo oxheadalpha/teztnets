@@ -1,28 +1,28 @@
 {
-  "dailynet-2023-06-08": {
+  "dailynet-2023-06-09": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-06-08T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-06-09T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_026d0b63_20230607220513",
+    "docker_build": "tezos/tezos:master_ea38f263_20230608223450",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2023-06-08.teztnets.xyz"
+      "https://evm.dailynet-2023-06-09.teztnets.xyz"
     ],
-    "faucet_url": "https://faucet.dailynet-2023-06-08.teztnets.xyz",
-    "git_ref": "026d0b63",
+    "faucet_url": "https://faucet.dailynet-2023-06-09.teztnets.xyz",
+    "git_ref": "ea38f263",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-06-08",
+    "network_url": "https://teztnets.xyz/dailynet-2023-06-09",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2023-06-08.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2023-06-09.teztnets.xyz"
     ],
-    "rpc_url": "https://rpc.dailynet-2023-06-08.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2023-06-09.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-06-08.teztnets.xyz"
+      "https://rpc.dailynet-2023-06-09.teztnets.xyz"
     ],
-    "activated_on": "2023-06-08"
+    "activated_on": "2023-06-09"
   },
   "ghostnet": {
     "aliases": [
@@ -31,9 +31,9 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
-    "docker_build": "tezos/tezos:v16.1",
+    "docker_build": "tezos/tezos:v17.0",
     "faucet_url": "https://faucet.ghostnet.teztnets.xyz",
-    "git_ref": "v16.1",
+    "git_ref": "v17.0",
     "human_name": "Ghostnet",
     "indexers": [
       {
@@ -61,8 +61,8 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_MAINNET",
     "description": "Tezos Mainnet",
-    "docker_build": "tezos/tezos:v16.1",
-    "git_ref": "v16.1",
+    "docker_build": "tezos/tezos:v17.0",
+    "git_ref": "v17.0",
     "human_name": "Mainnet",
     "indexers": [
       {
@@ -141,10 +141,10 @@
     "category": "Protocol Teztnets",
     "chain_name": "TEZOS_NAIROBINET_2023-04-20T15:00:00Z",
     "description": "Test Chain for the Nairobi Protocol Proposal",
-    "docker_build": "tezos/tezos:v17.0-beta1",
+    "docker_build": "tezos/tezos:v17.0",
     "evm_proxy_urls": [],
     "faucet_url": "https://faucet.nairobinet.teztnets.xyz",
-    "git_ref": "v17.0-beta1",
+    "git_ref": "v17.0",
     "human_name": "Nairobinet",
     "indexers": [],
     "last_baking_daemon": "PtNairob",
