@@ -12,6 +12,7 @@ require('dotenv').config();
 //import deployAwsAlbController from "./awsAlbController"
 import deployExternalDns from "./externalDns"
 import deployCertManager from "./pulumi/certManager"
+import deployNginx from "./pulumi/nginx"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53";
 
@@ -57,6 +58,7 @@ const cluster = new eks.Cluster(stack, {
 export const clusterOidcArn = cluster.core.oidcProvider!.arn
 export const clusterOidcUrl = cluster.core.oidcProvider!.url
 
+const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
   forceDestroy: false,
@@ -89,7 +91,8 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
 )
 
 deployExternalDns(cluster)
-//deployCertManager(cluster, awsAccountId)
+deployCertManager(cluster, awsAccountId)
+deployNginx({ cluster })
 
 // Deploy a bucket to store activation smart contracts for all testnets
 const activationBucket = new aws.s3.Bucket(`teztnets-global-activation-bucket`);
