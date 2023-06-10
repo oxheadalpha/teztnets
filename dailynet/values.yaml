@@ -29,6 +29,7 @@ activation:
     proof_of_work_threshold: '-1'
     minimal_stake: '6000000000'
     adaptive_inflation_enable: true
+    adaptive_inflation_launch_ema_threshold: '1600000000'
     staking_over_baking_limit: 5
     staking_over_delegation_edge: 2
     max_costaking_baker_count: 5
