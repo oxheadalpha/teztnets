@@ -57,7 +57,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network mumbainet
+octez-node config init --network https://teztnets.xyz/mumbainet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
