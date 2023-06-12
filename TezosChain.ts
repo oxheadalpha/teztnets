@@ -620,6 +620,30 @@ export class TezosChain extends pulumi.ComponentResource {
         ]
       }
       params.helmValues.dalNodes.dal1.ingress = dalIngressParams;
+      new k8s.core.v1.Service(
+        `${name}-dal-p2p-lb`,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: `${name}-dal`,
+            annotations: {
+              "external-dns.alpha.kubernetes.io/hostname": `dal.${name}.teztnets.xyz`,
+            },
+          },
+          spec: {
+            ports: [
+              {
+                port: 11732,
+                targetPort: 11732,
+                protocol: "TCP",
+              },
+            ],
+            selector: { app: "dal-dal1" },
+            type: "LoadBalancer",
+          },
+        },
+        { provider: this.provider }
+      )
     }
     if (Object.keys(params.helmValues).length != 0) {
       if (params.getChartRepo() == '') {
