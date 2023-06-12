@@ -66,6 +66,7 @@ export interface TezosParamsInitializer {
   readonly rpcUrls?: string[];
   readonly rollupUrls?: string[];
   readonly evmProxyUrls?: string[];
+  readonly dalRpcUrls?: string[];
   readonly activationBucket?: aws.s3.Bucket;
 }
 
@@ -92,6 +93,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   private _rpcUrls: string[];
   private _rollupUrls: string[];
   private _evmProxyUrls: string[];
+  private _dalRpcUrls: string[];
   private _activationBucket: aws.s3.Bucket;
 
 
@@ -115,6 +117,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     this._rpcUrls = params.rpcUrls || [];
     this._rollupUrls = params.rollupUrls || [];
     this._evmProxyUrls = params.evmProxyUrls || [];
+    this._dalRpcUrls = params.dalRpcUrls || [];
     this._activationBucket = params.activationBucket!;
 
     this._helmValues = {};
@@ -342,6 +345,9 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
   }
   public getEvmProxyUrls(): string[] {
     return this._evmProxyUrls;
+  }
+  public getDalRpcUrls(): string[] {
+    return this._dalRpcUrls;
   }
 
 }
@@ -590,6 +596,30 @@ export class TezosChain extends pulumi.ComponentResource {
         ]
       }
       params.helmValues.smartRollupNodes.evm.evm_proxy_ingress = evmProxyIngressParams;
+    }
+    // Data Availability Layer
+    if (params.helmValues.dalNodes && params.helmValues.dalNodes.length != 0) {
+      let dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`;
+      let dalIngressParams = {
+        enabled: true,
+        host: dalRpcFqdn,
+        labels: {
+          app: "dal"
+        },
+        annotations: {
+          "kubernetes.io/ingress.class": "nginx",
+          'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+          'nginx.ingress.kubernetes.io/enable-cors': 'true',
+          'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
+        },
+        tls: [
+          {
+            hosts: [dalRpcFqdn],
+            secretName: `${dalRpcFqdn}-secret`
+          }
+        ]
+      }
+      params.helmValues.dalNodes.dal1.ingress = dalIngressParams;
     }
     if (Object.keys(params.helmValues).length != 0) {
       if (params.getChartRepo() == '') {

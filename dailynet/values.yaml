@@ -143,6 +143,10 @@ smartRollupNodes:
       # ingress details filled by pulumi
     evm_proxy_ingress:
       # ingress details filled by pulumi
+dalNodes:
+  dal1:
+    ingress:
+    # ingress details filled up by pulumi
 
 bootstrap_peers: []
 full_snapshot_url: null
