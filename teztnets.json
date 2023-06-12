@@ -1,28 +1,28 @@
 {
-  "dailynet-2023-06-10": {
+  "dailynet-2023-06-12": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-06-10T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-06-12T00:00:00.000Z",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_1184ad35_20230609234058",
+    "docker_build": "tezos/tezos:master_ceb6860f_20230611095233",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2023-06-10.teztnets.xyz"
+      "https://evm.dailynet-2023-06-12.teztnets.xyz"
     ],
-    "faucet_url": "https://faucet.dailynet-2023-06-10.teztnets.xyz",
-    "git_ref": "1184ad35",
+    "faucet_url": "https://faucet.dailynet-2023-06-12.teztnets.xyz",
+    "git_ref": "ceb6860f",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-06-10",
+    "network_url": "https://teztnets.xyz/dailynet-2023-06-12",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2023-06-10.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2023-06-12.teztnets.xyz"
     ],
-    "rpc_url": "https://rpc.dailynet-2023-06-10.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2023-06-12.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-06-10.teztnets.xyz"
+      "https://rpc.dailynet-2023-06-12.teztnets.xyz"
     ],
-    "activated_on": "2023-06-10"
+    "activated_on": "2023-06-12"
   },
   "ghostnet": {
     "aliases": [
@@ -84,26 +84,26 @@
       "https://mainnet.tezos.marigold.dev"
     ]
   },
-  "mondaynet-2023-06-05": {
+  "mondaynet-2023-06-12": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-MONDAYNET-2023-06-05T00:00:00.000Z",
+    "chain_name": "TEZOS-MONDAYNET-2023-06-12T00:00:00.000Z",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
-    "docker_build": "tezos/tezos:master_bdd90c13_20230604130754",
+    "docker_build": "tezos/tezos:master_ceb6860f_20230611095233",
     "evm_proxy_urls": [],
-    "faucet_url": "https://faucet.mondaynet-2023-06-05.teztnets.xyz",
-    "git_ref": "bdd90c13",
+    "faucet_url": "https://faucet.mondaynet-2023-06-12.teztnets.xyz",
+    "git_ref": "ceb6860f",
     "human_name": "Mondaynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/mondaynet-2023-06-05",
+    "network_url": "https://teztnets.xyz/mondaynet-2023-06-12",
     "rollup_urls": [],
-    "rpc_url": "https://rpc.mondaynet-2023-06-05.teztnets.xyz",
+    "rpc_url": "https://rpc.mondaynet-2023-06-12.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.mondaynet-2023-06-05.teztnets.xyz"
+      "https://rpc.mondaynet-2023-06-12.teztnets.xyz"
     ],
-    "activated_on": "2023-06-05"
+    "activated_on": "2023-06-12"
   },
   "mumbainet": {
     "aliases": [],
