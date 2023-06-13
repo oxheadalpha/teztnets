@@ -42,10 +42,10 @@ const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
   createOidcProvider: true,
-  instanceType: "t3.2xlarge",
-  desiredCapacity: desiredClusterCapacity,
+  instanceType: "t3.small",
+  desiredCapacity: 1,
   minSize: 1,
-  maxSize: 5,
+  maxSize: 2,
   providerCredentialOpts: {
     profileName: aws.config.profile,
   },
@@ -57,6 +57,14 @@ const cluster = new eks.Cluster(stack, {
     },
   ],
 })
+const fixedNodeGroup = new eks.NodeGroupV2("teztnets-node-group", {
+  cluster: cluster,
+  instanceType: "t3.2xlarge",
+  desiredCapacity: desiredClusterCapacity,
+  minSize: 1,
+  maxSize: 5,
+  nodeRootVolumeSize: 50
+});
 
 export const clusterOidcArn = cluster.core.oidcProvider!.arn
 export const clusterOidcUrl = cluster.core.oidcProvider!.url
