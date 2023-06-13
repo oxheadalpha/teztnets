@@ -48,7 +48,7 @@ activation:
     min_proposal_quorum: 500
     liquidity_baking_toggle_ema_threshold: 100000
     max_operations_time_to_live: 120
-    minimal_block_delay: "30"
+    minimal_block_delay: "15"
     delay_increment_per_round: "15"
     consensus_committee_size: 7000
     consensus_threshold: 4667
