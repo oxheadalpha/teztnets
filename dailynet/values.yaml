@@ -31,7 +31,6 @@ activation:
     adaptive_inflation_launch_ema_threshold: 200000000
     staking_over_baking_limit: 5
     staking_over_delegation_edge: 2
-    max_costaking_baker_count: 5
     reward_weights:
       base_total_rewards_per_minute: "85007812"
       baking_reward_fixed_portion_weight: 5120

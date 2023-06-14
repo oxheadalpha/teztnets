@@ -199,7 +199,7 @@ new TezosChain(
     dnsName: "ghostnet",
     humanName: "Ghostnet",
     chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
+    chartRepoVersion: "6.20.2",
   }),
   cluster.provider,
   repo,
