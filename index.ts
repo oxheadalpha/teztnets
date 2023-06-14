@@ -268,8 +268,17 @@ const nairobinet_chain = new TezosChain(
     chartPath: "nairobinet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
+      {
+        name: "TzKT",
+        url: "https://nairobinet.tzkt.io"
+      },
+      {
+        "name": "TzStats",
+        "url": "https://nairobi.tzstats.com"
+      }
     ],
     rpcUrls: [
+      "https://nairobinet.ecadinfra.com",
     ],
     activationBucket: activationBucket,
   }),
@@ -400,8 +409,8 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let gitRefMainnetGhostnet = "v17.0";
-let lastBakingDaemonMainnetGhostnet = "PtMumbai";
+let gitRefMainnetGhostnet = "v17.1";
+let lastBakingDaemonMainnetGhostnet = "PtNairob";
 let ghostnetTeztnet = {
   "aliases": [
     "ithacanet"
