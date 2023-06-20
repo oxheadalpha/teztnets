@@ -122,6 +122,13 @@ nodes:
           rpc:
             cors-headers: [ "content-type" ]
             cors-origin: [ "*" ]
+          dal:
+            activated: true
+            use_mock_srs_for_testing:
+              slot_size: 1048576
+              page_size: 4096
+              redundancy_factor: 16
+              number_of_shards: 2048
         is_bootstrap_node: true
     runs:
       - octez_node
