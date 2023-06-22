@@ -108,7 +108,7 @@ activation:
     bootstrap_smart_rollups:
     - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
       pvm_kind: "wasm_2_0_0"
-      kernel: "fromfile#/usr/local/share/tezos/evm_kernel.wasm"
+      kernel: "fromfile#/usr/local/share/tezos/evm_installer.wasm"
       parameters_ty:
         prim: unit
 nodes:
