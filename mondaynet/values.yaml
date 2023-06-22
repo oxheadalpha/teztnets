@@ -5,6 +5,13 @@ node_config_network:
   user_activated_upgrades:
     - level: 512
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
+  dal_config:
+    - activated: true
+      use_mock_srs_for_testing:
+        redundancy_factor: 16
+        page_size: 4096
+        slot_size: 1048576
+        number_of_shards: 2048
 
 activation:
   protocol_hash: PtNairobiyssHuh87hEhfVBGCVrK3WnS8Z2FT4ymB5tAa4r1nQf
