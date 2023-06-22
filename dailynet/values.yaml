@@ -10,6 +10,13 @@ node_config_network:
   genesis:
     block: BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
+  dal_config:
+    - activated: true
+      use_mock_srs_for_testing:
+        redundancy_factor: 16
+        page_size: 4096
+        slot_size: 1048576
+        number_of_shards: 2048
 
 protocols:
   - command: alpha
@@ -108,7 +115,7 @@ activation:
     bootstrap_smart_rollups:
     - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
       pvm_kind: "wasm_2_0_0"
-      kernel: "fromfile#/usr/local/share/tezos/evm_installer.wasm"
+      kernel: "fromfile#/usr/local/share/tezos/evm_kernel/evm_installer.wasm"
       parameters_ty:
         prim: unit
 nodes:
