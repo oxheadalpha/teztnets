@@ -236,4 +236,5 @@ protocols:
 
 bootstrap_peers:
   - nairobinet.tzboot.net
+  - nairobinet.tzinit.org
 #   - mumbainet.visualtez.com
