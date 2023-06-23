@@ -15,8 +15,8 @@ node_config_network:
     use_mock_srs_for_testing:
       redundancy_factor: 16
       page_size: 4096
-      slot_size: 1048576
-      number_of_shards: 2048
+      slot_size: 262144
+      number_of_shards: 512
 
 protocols:
   - command: alpha
@@ -87,11 +87,11 @@ activation:
     tx_rollup_sunset_level: 10000000
     dal_parametric:
       feature_enable: true
-      number_of_slots: 256
-      number_of_shards: 2048
-      attestation_lag: 2
+      number_of_slots: 16
+      number_of_shards: 512
+      attestation_lag: 3
       attestation_threshold: 50
-      slot_size: 1048576
+      slot_size: 262144
       redundancy_factor: 16
       page_size: 4096
       blocks_per_epoch: 32
