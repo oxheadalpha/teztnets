@@ -1,21 +1,21 @@
 {
-  "chain_name": "TEZOS-DAILYNET-2023-06-23T00:00:00.000Z",
+  "chain_name": "TEZOS-DAILYNET-2023-06-24T00:00:00.000Z",
   "dal_config": {
     "activated": true,
     "use_mock_srs_for_testing": {
-      "number_of_shards": 2048,
+      "number_of_shards": 512,
       "page_size": 4096,
       "redundancy_factor": 16,
-      "slot_size": 1048576
+      "slot_size": 262144
     }
   },
   "default_bootstrap_peers": [
-    "dailynet-2023-06-23.teztnets.xyz"
+    "dailynet-2023-06-24.teztnets.xyz"
   ],
   "genesis": {
     "block": "BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM",
     "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
-    "timestamp": "2023-06-23T00:00:00.000Z"
+    "timestamp": "2023-06-24T00:00:00.000Z"
   },
   "genesis_parameters": {
     "values": {
