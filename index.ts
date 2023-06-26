@@ -319,6 +319,9 @@ function getNetworks(chains: TezosChain[]): object {
       var bytes = Buffer.from('0134' + gbk, 'hex')
       network["genesis"]["block"] = bs58check.encode(bytes);
     }
+    if ("dal_config" in network) {
+      network["dal_config"]["bootstrap_peers"] = [`dal.${chain.params.getName()}.teztnets.xyz:11732`]
+    }
 
     networks[chain.params.getName()] = network
   })
