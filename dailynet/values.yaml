@@ -36,7 +36,7 @@ activation:
     proof_of_work_threshold: '-1'
     minimal_stake: '6000000000'
     adaptive_inflation_launch_ema_threshold: 200000000
-    staking_over_baking_limit: 5
+    staking_over_global_baking_limit: 5
     staking_over_delegation_edge: 2
     reward_weights:
       base_total_rewards_per_minute: "85007812"
