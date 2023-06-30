@@ -620,13 +620,7 @@ export class TezosChain extends pulumi.ComponentResource {
         ]
       }
       params.helmValues.dalNodes.dal1.ingress = dalIngressParams;
-      if (params.helmValues.node_config_network.dal_config) {
-        // FIXME: after July 3rd 2023, the above if statement wont' be needed
-        // since all dal network will have a dal config.
-        // Currently we have a race condition that mondaynet doesn't support it
-        // because the code is 6 days old.
-        params.helmValues.node_config_network.dal_config.bootstrap_peers = [`${dalRpcFqdn}:11732`];
-      }
+      params.helmValues.node_config_network.dal_config.bootstrap_peers = [`${dalRpcFqdn}:11732`];
       new k8s.core.v1.Service(
         `${name}-dal-p2p-lb`,
         {
