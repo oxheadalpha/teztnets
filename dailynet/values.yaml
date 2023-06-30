@@ -148,6 +148,7 @@ images: {}
 
 accounts:
   oxheadbaker:
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
     bootstrap_balance: "7500000000000"
     is_bootstrap_baker_account: true
     type: secret

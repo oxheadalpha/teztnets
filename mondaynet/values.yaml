@@ -154,6 +154,7 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
+    #dal_node: http://dal-dal1:10732
   tf_frankfurt1:
     # tz1WLNVBKmPWEMdXD5c3NrpnUsTtb97Fdevg
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW
@@ -290,11 +291,11 @@ accounts:
     key: edpkuet91oSH1Q9i4nGJRDjdsF9W7XcAteqLQe1VqSjtMHRtDpCVFp
     bootstrap_balance: "1000000000000"
     is_bootstrap_baker_account: false
-  # DAL Rich account
+  # DAL Rich account and baker
   # Contact: Francois Thire at Nomadic
   dal_rich_account:
     key: edpkuwL7MVYArfQN9jyR8pZTqmFGYFWTYhhF4F8KWjr2vB18ozTqbd
-    bootstrap_balance: "1000000000000"
+    bootstrap_balance: "370000000000"
     is_bootstrap_baker_account: false
   # SCORU demo
   # As Requested by emma.turner@trili.tech
