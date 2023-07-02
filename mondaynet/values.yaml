@@ -5,13 +5,13 @@ node_config_network:
   user_activated_upgrades:
     - level: 512
       replacement_protocol: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
-  # dal_config:
-  #   activated: true
-  #   use_mock_srs_for_testing:
-  #     redundancy_factor: 16
-  #     page_size: 4096
-  #     slot_size: 1048576
-  #     number_of_shards: 2048
+  dal_config:
+    activated: true
+    use_mock_srs_for_testing:
+      redundancy_factor: 16
+      page_size: 4096
+      slot_size: 1048576
+      number_of_shards: 2048
 
 activation:
   protocol_hash: PtNairobiyssHuh87hEhfVBGCVrK3WnS8Z2FT4ymB5tAa4r1nQf
@@ -120,10 +120,10 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-# dalNodes:
-#   dal1:
-#     ingress:
-#     # ingress details filled up by pulumi
+dalNodes:
+  dal1:
+    ingress:
+    # ingress details filled up by pulumi
 
 bootstrap_peers:
   - mondaynet.ecadinfra.com
@@ -154,7 +154,7 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-    #dal_node: http://dal-dal1:10732
+    dal_node: http://dal-dal1:10732
   tf_frankfurt1:
     # tz1WLNVBKmPWEMdXD5c3NrpnUsTtb97Fdevg
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW
