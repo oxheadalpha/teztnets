@@ -38,6 +38,21 @@ activation:
     adaptive_inflation_launch_ema_threshold: 200000000
     staking_over_baking_global_limit: 5
     staking_over_delegation_edge: 2
+    adaptive_rewards_params:
+      reward_ratio_min:
+        numerator: "1"
+        denominator: "200"
+      reward_ratio_max:
+        numerator: "1"
+        denominator: "10"
+      max_bonus: "50000000000000"
+      growth_rate: "115740740"
+      center_dz:
+        numerator: "1"
+        denominator: "2"
+      radius_dz:
+        numerator: "1"
+        denominator: "50"
     reward_weights:
       base_total_rewards_per_minute: "85007812"
       baking_reward_fixed_portion_weight: 5120
