@@ -10,7 +10,7 @@ node_config_network:
     use_mock_srs_for_testing:
       redundancy_factor: 16
       page_size: 4096
-      slot_size: 1048576
+      slot_size: 65536
       number_of_shards: 2048
 
 activation:
@@ -77,7 +77,7 @@ activation:
       number_of_shards: 2048
       attestation_lag: 4
       attestation_threshold: 50
-      slot_size: 1048576
+      slot_size: 65536
       redundancy_factor: 16
       page_size: 4096
       blocks_per_epoch: 32
