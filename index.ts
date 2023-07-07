@@ -307,6 +307,8 @@ function getTeztnets(chains: TezosChain[]): object {
       rpc_url: chain.getRpcUrl(),
       rollup_urls: chain.getRollupUrls(),
       evm_proxy_urls: chain.getEvmProxyUrls(),
+      dal_p2p_url: chain.getDalP2pUrl()!,
+      dal_rpc_url: chain.getDalRpcUrl()!,
       rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
       aliases: chain.params.getAliases(),

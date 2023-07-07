@@ -763,6 +763,18 @@ export class TezosChain extends pulumi.ComponentResource {
     }
     return [];
   }
+  getDalRpcUrl(): string | undefined {
+    if (this.params.helmValues.dalNodes && this.params.helmValues.dalNodes.length != 0) {
+      return `https://dal-rpc.${this.params.getName()}.teztnets.xyz`;
+    }
+    return;
+  }
+  getDalP2pUrl(): string | undefined {
+    if (this.params.helmValues.dalNodes && this.params.helmValues.dalNodes.length != 0) {
+      return `dal.${this.params.getName()}.teztnets.xyz`;
+    }
+    return;
+  }
   getRpcUrls(): Array<string> {
     return [
       ...[this.getRpcUrl()],
