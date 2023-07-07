@@ -71,6 +71,8 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 
 
+
+
 ### Bake on the Ghostnet network
 
 To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.ghostnet.teztnets.xyz).

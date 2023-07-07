@@ -3,6 +3,8 @@
     "aliases": [],
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-DAILYNET-2023-07-07T00:00:00.000Z",
+    "dal_p2p_url": "dal.dailynet-2023-07-07.teztnets.xyz",
+    "dal_rpc_url": "https://dal-rpc.dailynet-2023-07-07.teztnets.xyz",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_713ef249_20230706204117",
     "evm_proxy_urls": [
@@ -88,6 +90,8 @@
     "aliases": [],
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-MONDAYNET-2023-07-03T00:00:00.000Z",
+    "dal_p2p_url": "dal.mondaynet-2023-07-03.teztnets.xyz",
+    "dal_rpc_url": "https://dal-rpc.mondaynet-2023-07-03.teztnets.xyz",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_060dfe8d_20230630145842",
     "evm_proxy_urls": [],

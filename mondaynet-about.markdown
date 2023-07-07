@@ -66,3 +66,19 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 
 
+### Data Availability Layer
+
+The Teztnets baker for this network is running a Data Availability Layer node.
+
+For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).
+
+The DAL node is accessible with the following endpoints:
+
+| | |
+|-------|---------------------|
+| Octez DAL Node RPC URL | [`https://dal-rpc.mondaynet-2023-07-03.teztnets.xyz`](https://dal-rpc.mondaynet-2023-07-03.teztnets.xyz) |
+| DAL P2P Endpoint | [`dal.mondaynet-2023-07-03.teztnets.xyz`](dal.mondaynet-2023-07-03.teztnets.xyz) |
+
+
+
+

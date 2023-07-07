@@ -66,10 +66,28 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 ### EVM Rollup
 
+More information about the Tezos EVM Rollup will be available soon.
+
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-07-07.teztnets.xyz/global/block/head`](https://evm-rollup-node.dailynet-2023-07-07.teztnets.xyz) |
+| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-07-07.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-07-07.teztnets.xyz/global/block/head) |
 | EVM Proxy URL | [`https://evm.dailynet-2023-07-07.teztnets.xyz`](https://evm.dailynet-2023-07-07.teztnets.xyz) |
+
+
+
+
+### Data Availability Layer
+
+The Teztnets baker for this network is running a Data Availability Layer node.
+
+For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).
+
+The DAL node is accessible with the following endpoints:
+
+| | |
+|-------|---------------------|
+| Octez DAL Node RPC URL | [`https://dal-rpc.dailynet-2023-07-07.teztnets.xyz`](https://dal-rpc.dailynet-2023-07-07.teztnets.xyz) |
+| DAL P2P Endpoint | [`dal.dailynet-2023-07-07.teztnets.xyz`](dal.dailynet-2023-07-07.teztnets.xyz) |
 
 
 
