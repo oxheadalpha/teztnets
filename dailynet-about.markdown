@@ -87,7 +87,7 @@ The DAL node is accessible with the following endpoints:
 | | |
 |-------|---------------------|
 | Octez DAL Node RPC URL | [`https://dal-rpc.dailynet-2023-07-07.teztnets.xyz`](https://dal-rpc.dailynet-2023-07-07.teztnets.xyz) |
-| DAL P2P Endpoint | [`dal.dailynet-2023-07-07.teztnets.xyz`](dal.dailynet-2023-07-07.teztnets.xyz) |
+| DAL P2P Endpoint | `dal.dailynet-2023-07-07.teztnets.xyz:11732` }}) |
 
 
 
