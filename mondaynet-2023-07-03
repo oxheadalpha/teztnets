@@ -9,7 +9,7 @@
       "number_of_shards": 2048,
       "page_size": 4096,
       "redundancy_factor": 16,
-      "slot_size": 1048576
+      "slot_size": 65536
     }
   },
   "default_bootstrap_peers": [
