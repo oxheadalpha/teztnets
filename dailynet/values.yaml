@@ -22,6 +22,7 @@ protocols:
   - command: alpha
     vote:
       liquidity_baking_toggle_vote: "pass"
+      adaptive_inflation_vote: "on"
 
 activation:
   protocol_hash: ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK
