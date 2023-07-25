@@ -36,7 +36,7 @@ activation:
     proof_of_work_threshold: '-1'
     minimal_stake: '6000000000'
     minimal_frozen_stake: '600000000'
-    adaptive_inflation_launch_ema_threshold: 200000000
+    adaptive_inflation_launch_ema_threshold: 10000000
     global_limit_of_staking_over_baking: 5
     edge_of_staking_over_delegation: 2
     adaptive_rewards_params:
@@ -70,8 +70,8 @@ activation:
     min_proposal_quorum: 500
     liquidity_baking_toggle_ema_threshold: 100000
     max_operations_time_to_live: 120
-    minimal_block_delay: "15"
-    delay_increment_per_round: "15"
+    minimal_block_delay: "7"
+    delay_increment_per_round: "7"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
