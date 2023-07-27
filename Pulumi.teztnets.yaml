@@ -7,3 +7,5 @@ config:
     secure: AAABADB2HtNcurlY51X+/Bbny52MMVCR5N/UjslfAMBSm/vyJkZTKm57F1BFNZKE4BrVuS7O2VM33QTxB5DkTr9ryBcREOiy
   teztnets:faucet-recaptcha-site-key:
     secure: AAABAEIxDLNcBeMEKcI8jTHgQDpQaIc1HkT61f5hfKDyJ5d34Z5xJdOHH/9P89sbDCQhWNphYCH15Zp3t83Iv4uSnmsFKLtW
+  teztnets:slack-webhook:
+    secure: AAABAGV/ksRtTAuUbya0yEOe6LmxGria9rugKPfqMIdDS4e6XLdyuIR5edXC6GBaYoD3kRjVbrZdtZtorgXAMRDQErr3zn/kv9sExEJ25rbdn4KAdc5pzhU5b4PjxLt1wSpY+opKOkUh9WZvTzC3
