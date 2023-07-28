@@ -619,7 +619,7 @@ export class TezosChain extends pulumi.ComponentResource {
           }
         ]
       }
-      params.helmValues.dalNodes.dal1.ingress = dalIngressParams;
+      params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams;
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [`${dalRpcFqdn}:11732`];
       new k8s.core.v1.Service(
         `${name}-dal-p2p-lb`,
@@ -639,7 +639,7 @@ export class TezosChain extends pulumi.ComponentResource {
                 protocol: "TCP",
               },
             ],
-            selector: { app: "dal-dal1" },
+            selector: { app: "dal-bootstrap" },
             type: "LoadBalancer",
           },
         },

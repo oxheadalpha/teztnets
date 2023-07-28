@@ -121,9 +121,11 @@ nodes:
   rolling-node: null
 
 dalNodes:
-  dal1:
+  bootstrap:
+    bootstrapProfile: true
     ingress:
     # ingress details filled up by pulumi
+  dal1:
 
 bootstrap_peers:
   - mondaynet.ecadinfra.com
