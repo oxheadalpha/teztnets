@@ -149,7 +149,7 @@ protocols:
   - command: alpha
     vote:
       liquidity_baking_toggle_vote: "pass"
-      adaptive_inflation_vote: "on"
+      adaptive_issuance_vote: "on"
 accounts:
   oxheadbaker:
     # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
