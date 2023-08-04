@@ -300,7 +300,7 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this;
   }
   public getChartRepo(): string {
-    return this._chartRepo;
+    return this._chartRepo || "https://oxheadalpha.github.io/tezos-helm-charts/"
   }
   public getChartRepoVersion(): string {
     return this._chartRepoVersion;
@@ -647,7 +647,7 @@ export class TezosChain extends pulumi.ComponentResource {
       )
     }
     if (Object.keys(params.helmValues).length != 0) {
-      if (params.getChartRepo() == '') {
+      if (params.getChartPath()) {
         // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
         const chain = new k8s.helm.v2.Chart(
