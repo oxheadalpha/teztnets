@@ -81,7 +81,7 @@ const deployMonitoring = (
       fetchOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
       },
-      version: "19.0.1",
+      version: "48.3.1",
       namespace: monitorNamespace.metadata.name,
       values: {
         kubeApiServer: {
