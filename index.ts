@@ -10,6 +10,7 @@ const bs58check = require('bs58check');
 require('dotenv').config();
 
 //import deployAwsAlbController from "./awsAlbController"
+import deployMonitoring from "./pulumi/monitoring"
 import deployExternalDns from "./externalDns"
 import deployCertManager from "./pulumi/certManager"
 import deployNginx from "./pulumi/nginx"
@@ -21,6 +22,7 @@ import {
 
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
+const slackWebhook = cfg.requireSecret("slack-webhook")
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret("faucet-recaptcha-secret-key")
@@ -57,6 +59,15 @@ const cluster = new eks.Cluster(stack, {
     },
   ],
 })
+
+// Metrics server allows view of metrics in k9s, consumable by grafana, and other useful things.
+const metrics = new k8s.yaml.ConfigFile("metrics", {
+  file: "https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml",
+}, {
+  provider: cluster.provider,
+  parent: cluster,
+});
+
 const fixedNodeGroup = new eks.NodeGroupV2("teztnets-node-group", {
   cluster: cluster,
   instanceType: "t3.2xlarge",
@@ -112,6 +123,7 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
   (roles) => roles[0].name
 )
 
+deployMonitoring(cluster, slackWebhook)
 deployExternalDns(cluster)
 deployCertManager(cluster, awsAccountId)
 deployNginx({ cluster })
