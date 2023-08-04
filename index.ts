@@ -39,15 +39,15 @@ const getEnvVariable = (name: string): string => {
 
 const repo = new awsx.ecr.Repository(stack)
 
-const desiredClusterCapacity = 2
 const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
   createOidcProvider: true,
-  instanceType: "t3.small",
-  desiredCapacity: 1,
+  instanceType: "t3.2xlarge",
+  desiredCapacity: 3,
   minSize: 1,
-  maxSize: 2,
+  maxSize: 3,
+  nodeRootVolumeSize: 50,
   providerCredentialOpts: {
     profileName: aws.config.profile,
   },
@@ -60,6 +60,9 @@ const cluster = new eks.Cluster(stack, {
   ],
 })
 
+export const clusterOidcArn = cluster.core.oidcProvider!.arn
+export const clusterOidcUrl = cluster.core.oidcProvider!.url
+
 // Metrics server allows view of metrics in k9s, consumable by grafana, and other useful things.
 const metrics = new k8s.yaml.ConfigFile("metrics", {
   file: "https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml",
@@ -67,18 +70,6 @@ const metrics = new k8s.yaml.ConfigFile("metrics", {
   provider: cluster.provider,
   parent: cluster,
 });
-
-const fixedNodeGroup = new eks.NodeGroupV2("teztnets-node-group", {
-  cluster: cluster,
-  instanceType: "t3.2xlarge",
-  desiredCapacity: desiredClusterCapacity,
-  minSize: 1,
-  maxSize: 5,
-  nodeRootVolumeSize: 50
-});
-
-export const clusterOidcArn = cluster.core.oidcProvider!.arn
-export const clusterOidcUrl = cluster.core.oidcProvider!.url
 
 const csiRole = createEbsCsiRole({ clusterOidcArn, clusterOidcUrl })
 const ebsCsiDriverAddon = new aws.eks.Addon(
