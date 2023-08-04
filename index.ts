@@ -161,7 +161,6 @@ const dailynet_chain = new TezosChain(
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     // chartRepoVersion: "6.18.0",
     chartPath: "dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
@@ -189,7 +188,6 @@ const mondaynet_chain = new TezosChain(
       "mondaynet.ecadinfra.com",
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     // chartRepoVersion: "6.18.0",
     chartPath: "dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
@@ -211,7 +209,6 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     humanName: "Ghostnet",
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
     chartRepoVersion: "6.20.2",
   }),
   cluster.provider,
@@ -231,32 +228,25 @@ const nairobinet_chain = new TezosChain(
     category: protocolCategory,
     humanName: "Nairobinet",
     description: "Test Chain for the Nairobi Protocol Proposal",
-    bootstrapPeers: [
-      "nairobinet.boot.ecadinfra.com",
-      "nairobinet.tzboot.net",
-    ],
-    // chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    // chartRepoVersion: "6.19.1",
-    chartPath: "nairobinet/tezos-k8s",
+    bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
+    chartRepoVersion: "6.21.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
         name: "TzKT",
-        url: "https://nairobinet.tzkt.io"
+        url: "https://nairobinet.tzkt.io",
       },
       {
-        "name": "TzStats",
-        "url": "https://nairobi.tzstats.com"
-      }
+        name: "TzStats",
+        url: "https://nairobi.tzstats.com",
+      },
     ],
-    rpcUrls: [
-      "https://nairobinet.ecadinfra.com",
-    ],
+    rpcUrls: ["https://nairobinet.ecadinfra.com"],
     activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
-  teztnetsHostedZone,
+  teztnetsHostedZone
 )
 
 function getNetworks(chains: TezosChain[]): object {
