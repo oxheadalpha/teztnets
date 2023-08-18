@@ -3,7 +3,7 @@
   "default_bootstrap_peers": [
     "oxfordnet.teztnets.xyz",
     "oxfordnet.boot.ecadinfra.com",
-    "oxford.tzinit.org"
+    "oxfordnet.tzinit.org"
   ],
   "genesis": {
     "block": "BMYgWmzutL2hm3yxTTa1JqFcDHc19SX32vzCDBzXLRjTn9PH5Vw",
