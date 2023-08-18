@@ -391,6 +391,7 @@ export const networks = {
     dailynet_chain,
     mondaynet_chain,
     nairobinet_chain,
+    oxfordnet_chain
   ]),
   ...{ "ghostnet": ghostnetNetwork }
 }
@@ -470,6 +471,7 @@ export const teztnets = {
     dailynet_chain,
     mondaynet_chain,
     nairobinet_chain,
+    oxfordnet_chain
   ]),
   ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
 }
