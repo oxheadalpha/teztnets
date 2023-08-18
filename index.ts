@@ -240,6 +240,39 @@ const nairobinet_chain = new TezosChain(
   teztnetsHostedZone
 )
 
+const oxfordnet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "oxfordnet/values.yaml",
+    faucetYamlFile: "oxfordnet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "oxfordnet",
+    dnsName: "oxfordnet",
+    category: protocolCategory,
+    humanName: "Oxfordnet",
+    description: "Test Chain for the Oxford Protocol Proposal",
+    bootstrapPeers: ["oxfordnet.boot.ecadinfra.com", "oxford.tzinit.org"],
+    chartRepoVersion: "6.21.0",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+      // {
+      //   name: "TzKT",
+      //   url: "https://oxfordnet.tzkt.io",
+      // },
+      // {
+      //   name: "TzStats",
+      //   url: "https://oxford.tzstats.com",
+      // },
+    ],
+    rpcUrls: [],
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
