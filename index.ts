@@ -252,7 +252,7 @@ const oxfordnet_chain = new TezosChain(
     category: protocolCategory,
     humanName: "Oxfordnet",
     description: "Test Chain for the Oxford Protocol Proposal",
-    bootstrapPeers: ["oxfordnet.boot.ecadinfra.com", "oxford.tzinit.org"],
+    bootstrapPeers: ["oxfordnet.boot.ecadinfra.com", "oxfordnet.tzinit.org"],
     chartRepoVersion: "6.21.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
