@@ -225,7 +225,7 @@ nodes:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: https://nairobinet.xtz-shots.io/archive-tarball
+archive_tarball_url: null
 
 images:
   octez: tezos/tezos:v18.0-rc1
