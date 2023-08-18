@@ -14,7 +14,7 @@ node_config_network:
       number_of_shards: 2048
 
 activation:
-  protocol_hash: PtNairobiyssHuh87hEhfVBGCVrK3WnS8Z2FT4ymB5tAa4r1nQf
+  protocol_hash: ProxfordSW2S7fvchT1Zgj2avb5UES194neRyYVXoaDGvF9egt8
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -38,8 +38,8 @@ activation:
     liquidity_baking_subsidy: '2500000'
     liquidity_baking_toggle_ema_threshold: 100000
     max_operations_time_to_live: 120
-    minimal_block_delay: "15"
-    delay_increment_per_round: "15"
+    minimal_block_delay: "7"
+    delay_increment_per_round: "7"
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
@@ -129,11 +129,6 @@ dalNodes:
 
 bootstrap_peers:
   - mondaynet.ecadinfra.com
-  #  # tf
-  #- 18.132.213.248
-  #- 18.134.9.200
-  #- 18.134.13.112
-  #  # end tf
 
 full_snapshot_url: null
 rolling_snapshot_url: null
@@ -143,9 +138,10 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: PtNairob
+  - command: Proxford
     vote:
       liquidity_baking_toggle_vote: "pass"
+      adaptive_issuance_vote: "on"
   - command: alpha
     vote:
       liquidity_baking_toggle_vote: "pass"

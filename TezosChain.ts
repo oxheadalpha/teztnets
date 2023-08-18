@@ -32,7 +32,7 @@ export interface TezosInitParameters {
   getChartRepo(): string;
   getChartRepoVersion(): string;
   getChartPath(): string;
-  getPrivateBakingKey(): string;
+  getPrivateBakingKey(): pulumi.Output<string>;
   getFaucetRecaptchaSiteKey(): pulumi.Output<string>;
   getFaucetRecaptchaSecretKey(): pulumi.Output<string>;
   getAliases(): string[];
@@ -54,7 +54,7 @@ export interface TezosParamsInitializer {
   readonly chartRepo?: string;
   readonly chartRepoVersion?: string;
   readonly chartPath?: string;
-  readonly privateBakingKey?: string;
+  readonly privateBakingKey?: pulumi.Output<string>;
   readonly faucetPrivateKey?: pulumi.Output<string>;
   readonly yamlFile?: string;
   readonly faucetYamlFile?: string;
@@ -312,11 +312,11 @@ export class TezosChainParametersBuilder implements TezosHelmParameters, TezosIn
     return this._activationBucket;
   }
 
-  public privateBakingKey(privateBakingKey: string): TezosChainParametersBuilder {
+  public privateBakingKey(privateBakingKey: pulumi.Output<string>): TezosChainParametersBuilder {
     this._helmValues["accounts"]["oxheadbaker"]["key"] = privateBakingKey;
     return this;
   }
-  public getPrivateBakingKey(): string {
+  public getPrivateBakingKey(): pulumi.Output<string> {
     return this._helmValues["accounts"]["oxheadbaker"]["key"];
   }
 

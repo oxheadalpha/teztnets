@@ -26,20 +26,11 @@ const slackWebhook = cfg.requireSecret("slack-webhook")
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret("faucet-recaptcha-secret-key")
-
-// Function to fail on non-truthy variable.
-const getEnvVariable = (name: string): string => {
-  const env = process.env[name]
-  if (!env) {
-    pulumi.log.error(`${name} environment variable is not set`)
-    throw Error
-  }
-  return env
-}
+const private_oxhead_baking_key = cfg.requireSecret("private-oxhead-baking-key")
+const awsAccountId = cfg.requireSecret("aws-account-id")
 
 const repo = new awsx.ecr.Repository(stack)
 
-const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
   createOidcProvider: true,
@@ -82,7 +73,6 @@ const ebsCsiDriverAddon = new aws.eks.Addon(
   { parent: cluster }
 )
 
-const awsAccountId = getEnvVariable("AWS_ACCOUNT_ID")
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
   forceDestroy: false,

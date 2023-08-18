@@ -1,3 +1,4 @@
+import * as pulumi from "@pulumi/pulumi"
 import * as aws from "@pulumi/aws"
 import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
@@ -6,7 +7,7 @@ import { clusterOidcUrl, clusterOidcArn } from "../index"
 
 const certManagerNS = "cert-manager"
 
-const deployCertManager = (cluster: eks.Cluster, awsAccountId: string) => {
+const deployCertManager = (cluster: eks.Cluster, awsAccountId: pulumi.Output<string>) => {
   const saName = "cert-manager"
   const roleName = "teztnets-cert-manager";
   const certManagerRole = clusterOidcUrl?.apply(
