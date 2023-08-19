@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-prometheus-stack-k8s-tezos-metrics
+  namespace: {{ .Release.Namespace }}
+  labels:
+    grafana_dashboard: "1"
+    app: kube-prometheus-stack-grafana
+data:
+  k8s-tezos-metrics.json: |-
+{{ .Files.Get "scraps/grafana-dashboard.json" | indent 4 }}

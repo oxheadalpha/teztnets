@@ -1,0 +1,15 @@
+apiVersion: v2
+name: tezos-prometheus-stack
+description: A Helm chart for Tezos nodes with Prometheus and Grafana
+type: application
+version: 0.0.0
+keywords:
+  - tezos
+  - blockchain
+  - prometheus
+  - grafana
+home: https://github.com/oxheadalpha/tezos-k8s
+dependencies:
+  - name: kube-prometheus-stac
+    repository: https://prometheus-community.github.io/helm-charts
+    version: 42.2.1

@@ -215,7 +215,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-        #- vdf
+      - vdf
     readiness_probe: false
     storage_size: 160Gi
   # Overwrite default values.yaml rolling-node
@@ -224,10 +224,10 @@ nodes:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: null
+archive_tarball_url: https://nairobinet.xtz-shots.io/archive-tarball
 
 images:
-  octez: tezos/tezos:v17.0-beta1
+  octez: tezos/tezos:v17.1
 
 protocols:
   - command: PtNairob
@@ -236,4 +236,5 @@ protocols:
 
 bootstrap_peers:
   - nairobinet.tzboot.net
+  - nairobinet.tzinit.org
 #   - mumbainet.visualtez.com

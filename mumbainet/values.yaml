@@ -228,7 +228,7 @@ nodes:
       - octez_node
       - baker
       - accuser
-        #- vdf
+      - vdf
     readiness_probe: false
     storage_size: 160Gi
   # Overwrite default values.yaml rolling-node
@@ -237,7 +237,7 @@ nodes:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: null
+archive_tarball_url: https://mumbainet.xtz-shots.io/archive-tarball
 
 images:
   octez: tezos/tezos:v16.1

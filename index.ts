@@ -3,81 +3,42 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
+import { publicReadPolicyForBucket } from "./s3";
 var blake2b = require('blake2b');
 const bs58check = require('bs58check');
 
 require('dotenv').config();
 
-import deployAwsAlbController from "./awsAlbController"
+//import deployAwsAlbController from "./awsAlbController"
+import deployMonitoring from "./pulumi/monitoring"
 import deployExternalDns from "./externalDns"
+import deployCertManager from "./pulumi/certManager"
+import deployNginx from "./pulumi/nginx"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53";
+import {
+  createEbsCsiRole,
+} from "./pulumi/ebsCsiDriver"
 
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
+const slackWebhook = cfg.requireSecret("slack-webhook")
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret("faucet-recaptcha-secret-key")
-
-// Function to fail on non-truthy variable.
-const getEnvVariable = (name: string): string => {
-  const env = process.env[name]
-  if (!env) {
-    pulumi.log.error(`${name} environment variable is not set`)
-    throw Error
-  }
-  return env
-}
+const private_oxhead_baking_key = cfg.requireSecret("private-oxhead-baking-key")
+const awsAccountId = cfg.requireSecret("aws-account-id")
 
 const repo = new awsx.ecr.Repository(stack)
 
-const desiredClusterCapacity = 2
-const private_oxhead_baking_key = getEnvVariable("PRIVATE_OXHEAD_BAKING_KEY")
-// Create a VPC with subnets that are tagged for load balancer usage.
-// See: https://github.com/pulumi/pulumi-eks/tree/master/examples/subnet-tags
-const vpc = new awsx.ec2.Vpc(
-  "vpc",
-  {
-    subnets: [
-      // Tag subnets for specific load-balancer usage.
-      // Any non-null tag value is valid.
-      // See:
-      //  - https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-      //  - https://github.com/pulumi/pulumi-eks/issues/196
-      //  - https://github.com/pulumi/pulumi-eks/issues/415
-      { type: "public", tags: { "kubernetes.io/role/elb": "1" } },
-      { type: "private", tags: { "kubernetes.io/role/internal-elb": "1" } },
-    ],
-  },
-  {
-    // Inform pulumi to ignore tag changes to the VPCs or subnets, so that
-    // tags auto-added by AWS EKS do not get removed during future
-    // refreshes and updates, as they are added outside of pulumi's management
-    // and would be removed otherwise.
-    // See: https://github.com/pulumi/pulumi-eks/issues/271#issuecomment-548452554
-    transformations: [
-      (args: any) => {
-        if (
-          args.type === "aws:ec2/vpc:Vpc" ||
-          args.type === "aws:ec2/subnet:Subnet"
-        ) {
-          return {
-            props: args.props,
-            opts: pulumi.mergeOptions(args.opts, { ignoreChanges: ["tags"] }),
-          }
-        }
-        return undefined
-      },
-    ],
-  }
-)
-
 const kubeAdminRoleARN = "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
 const cluster = new eks.Cluster(stack, {
+  createOidcProvider: true,
   instanceType: "t3.2xlarge",
-  desiredCapacity: desiredClusterCapacity,
+  desiredCapacity: 3,
   minSize: 1,
-  maxSize: 5,
+  maxSize: 3,
+  nodeRootVolumeSize: 50,
   providerCredentialOpts: {
     profileName: aws.config.profile,
   },
@@ -88,10 +49,29 @@ const cluster = new eks.Cluster(stack, {
       username: "admin",
     },
   ],
-  vpcId: vpc.id,
-  publicSubnetIds: vpc.publicSubnetIds,
-  privateSubnetIds: vpc.privateSubnetIds,
 })
+
+export const clusterOidcArn = cluster.core.oidcProvider!.arn
+export const clusterOidcUrl = cluster.core.oidcProvider!.url
+
+// Metrics server allows view of metrics in k9s, consumable by grafana, and other useful things.
+const metrics = new k8s.yaml.ConfigFile("metrics", {
+  file: "https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml",
+}, {
+  provider: cluster.provider,
+  parent: cluster,
+});
+
+const csiRole = createEbsCsiRole({ clusterOidcArn, clusterOidcUrl })
+const ebsCsiDriverAddon = new aws.eks.Addon(
+  "ebs-csi-driver",
+  {
+    clusterName: cluster.eksCluster.name,
+    addonName: "aws-ebs-csi-driver",
+    serviceAccountRoleArn: csiRole.arn,
+  },
+  { parent: cluster }
+)
 
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
   comment: "Teztnets Hosted Zone",
@@ -124,8 +104,24 @@ export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
   (roles) => roles[0].name
 )
 
-deployAwsAlbController(cluster)
+deployMonitoring(cluster, slackWebhook)
 deployExternalDns(cluster)
+deployCertManager(cluster, awsAccountId)
+deployNginx({ cluster })
+
+// Deploy a bucket to store activation smart contracts for all testnets
+const activationBucket = new aws.s3.Bucket(`teztnets-global-activation-bucket`);
+new aws.s3.BucketPublicAccessBlock(`teztnets-activation-bucket-public-access-block`, {
+  bucket: activationBucket.id,
+  blockPublicAcls: false,
+  blockPublicPolicy: false,
+  ignorePublicAcls: false,
+  restrictPublicBuckets: false,
+});
+new aws.s3.BucketPolicy(`teztnets-activation-bucket-policy`, {
+  bucket: activationBucket.bucket,
+  policy: activationBucket.bucket.apply(publicReadPolicyForBucket)
+});
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
@@ -145,10 +141,11 @@ const dailynet_chain = new TezosChain(
     description:
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
-    bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
+    bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json", "evm_bridge.json", "evm_fa12_contract.json"],
+    // chartRepoVersion: "6.18.0",
+    chartPath: "dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
@@ -166,15 +163,16 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Mumbai for 8 cycles then upgrades to proto Alpha.",
+      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
     schedule: "0 0 * * MON",
     bootstrapPeers: [
       "mondaynet.ecadinfra.com",
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
+    // chartRepoVersion: "6.18.0",
+    chartPath: "dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
@@ -192,48 +190,7 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     humanName: "Ghostnet",
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
-  }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone,
-)
-
-const mumbainet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "mumbainet/values.yaml",
-    faucetYamlFile: "mumbainet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "mumbainet",
-    dnsName: "mumbainet",
-    category: protocolCategory,
-    humanName: "Mumbainet",
-    description: "Test Chain for the Mumbai2 Protocol Proposal",
-    bootstrapPeers: [
-      // "mumbainet.visualtez.com",
-      "mumbainet.boot.ecadinfra.com",
-      //"mumbainet.tzboot.net",
-      // "mumbainet.stakenow.de:9733",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.18.0",
-    privateBakingKey: private_oxhead_baking_key,
-    indexers: [
-      {
-        name: "TzKT",
-        url: "https://mumbainet.tzkt.io"
-      },
-      {
-        "name": "TzStats",
-        "url": "https://mumbai.tzstats.com"
-      }
-    ],
-    rpcUrls: [
-      "https://mumbainet.ecadinfra.com",
-    ]
+    chartRepoVersion: "6.20.2",
   }),
   cluster.provider,
   repo,
@@ -251,24 +208,59 @@ const nairobinet_chain = new TezosChain(
     dnsName: "nairobinet",
     category: protocolCategory,
     humanName: "Nairobinet",
-    description: "NOT LAUNCHED YET - Test Chain for the Nairobi Protocol Proposal",
-    bootstrapPeers: [
-      // "nairobinet.visualtez.com",
-      "nairobinet.boot.ecadinfra.com",
-      //"nairobinet.tzboot.net",
-      // "nairobinet.stakenow.de:9733",
-    ],
-    chartRepo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    chartRepoVersion: "6.19.1",
+    description: "Test Chain for the Nairobi Protocol Proposal",
+    bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
+    chartRepoVersion: "6.21.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
+      {
+        name: "TzKT",
+        url: "https://nairobinet.tzkt.io",
+      },
+      {
+        name: "TzStats",
+        url: "https://nairobi.tzstats.com",
+      },
     ],
-    rpcUrls: [
-    ]
+    rpcUrls: ["https://nairobinet.ecadinfra.com"],
+    activationBucket: activationBucket,
   }),
   cluster.provider,
   repo,
-  teztnetsHostedZone,
+  teztnetsHostedZone
+)
+
+const oxfordnet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "oxfordnet/values.yaml",
+    faucetYamlFile: "oxfordnet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    name: "oxfordnet",
+    dnsName: "oxfordnet",
+    category: protocolCategory,
+    humanName: "Oxfordnet",
+    description: "Test Chain for the Oxford Protocol Proposal",
+    bootstrapPeers: ["oxfordnet.boot.ecadinfra.com", "oxfordnet.tzinit.org"],
+    chartRepoVersion: "6.21.0",
+    privateBakingKey: private_oxhead_baking_key,
+    indexers: [
+      // {
+      //   name: "TzKT",
+      //   url: "https://oxfordnet.tzkt.io",
+      // },
+      // {
+      //   name: "TzStats",
+      //   url: "https://oxford.tzstats.com",
+      // },
+    ],
+    rpcUrls: [],
+    activationBucket: activationBucket,
+  }),
+  cluster.provider,
+  repo,
+  teztnetsHostedZone
 )
 
 function getNetworks(chains: TezosChain[]): object {
@@ -303,6 +295,9 @@ function getNetworks(chains: TezosChain[]): object {
       var bytes = Buffer.from('0134' + gbk, 'hex')
       network["genesis"]["block"] = bs58check.encode(bytes);
     }
+    if ("dal_config" in network) {
+      network["dal_config"]["bootstrap_peers"] = [`dal.${chain.params.getName()}.teztnets.xyz:11732`]
+    }
 
     networks[chain.params.getName()] = network
   })
@@ -326,6 +321,10 @@ function getTeztnets(chains: TezosChain[]): object {
       faucet_url: faucetUrl,
       category: chain.params.getCategory(),
       rpc_url: chain.getRpcUrl(),
+      rollup_urls: chain.getRollupUrls(),
+      evm_proxy_urls: chain.getEvmProxyUrls(),
+      dal_p2p_url: chain.getDalP2pUrl()!,
+      dal_rpc_url: chain.getDalRpcUrl()!,
       rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: chain.params.isMaskedFromMainPage(),
       aliases: chain.params.getAliases(),
@@ -381,8 +380,8 @@ export const networks = {
   ...getNetworks([
     dailynet_chain,
     mondaynet_chain,
-    mumbainet_chain,
     nairobinet_chain,
+    oxfordnet_chain
   ]),
   ...{ "ghostnet": ghostnetNetwork }
 }
@@ -391,8 +390,8 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let gitRefMainnetGhostnet = "v16.1";
-let lastBakingDaemonMainnetGhostnet = "PtMumbai";
+let gitRefMainnetGhostnet = "v17.1";
+let lastBakingDaemonMainnetGhostnet = "PtNairob";
 let ghostnetTeztnet = {
   "aliases": [
     "ithacanet"
@@ -461,8 +460,8 @@ export const teztnets = {
   ...getTeztnets([
     dailynet_chain,
     mondaynet_chain,
-    mumbainet_chain,
     nairobinet_chain,
+    oxfordnet_chain
   ]),
   ...{ "ghostnet": ghostnetTeztnet, "mainnet": mainnetTeztnet }
 }
@@ -486,12 +485,13 @@ createCertValidation(
 new k8s.helm.v2.Chart(
   "pyrometer",
   {
-    chart: 'pyrometer',
-    version: "6.17.0",
-    fetchOpts:
-    {
-      repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    },
+    // chart: 'pyrometer',
+    // version: "6.17.0",
+    path: "./pyrometer/tezos-k8s/charts/pyrometer",
+    // fetchOpts:
+    // {
+    //   repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
+    // },
     values: {
       config: {
         "node_monitor": {
@@ -500,7 +500,7 @@ new k8s.helm.v2.Chart(
         "ui": {
           "enabled": true,
           "host": "0.0.0.0",
-          "port": 80,
+          "port": 8080,
         },
         "log": {
           "level": "info",
@@ -510,16 +510,18 @@ new k8s.helm.v2.Chart(
       ingress: {
         enabled: true,
         annotations: {
-          "kubernetes.io/ingress.class": "alb",
-          "alb.ingress.kubernetes.io/scheme": "internet-facing",
-          "alb.ingress.kubernetes.io/healthcheck-path": "/",
-          "alb.ingress.kubernetes.io/healthcheck-port": "80",
-          "alb.ingress.kubernetes.io/listen-ports": '[{"HTTP": 80}, {"HTTPS":443}]',
-          "ingress.kubernetes.io/force-ssl-redirect": "true",
-          "alb.ingress.kubernetes.io/actions.ssl-redirect":
-            '{"type": "redirect", "redirectconfig": { "protocol": "https", "port": "443", "statuscode": "http_301"}}',
+          "kubernetes.io/ingress.class": "nginx",
+          'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+          'nginx.ingress.kubernetes.io/enable-cors': 'true',
+          'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
         },
         host: pyrometerDomain,
+        tls: [
+          {
+            hosts: [pyrometerDomain],
+            secretName: `${pyrometerDomain}-secret`
+          }
+        ]
       }
     }
   },
