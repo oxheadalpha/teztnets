@@ -86,11 +86,11 @@ accounts:
   #   key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # killian_d:
-  #   # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
-  #   key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  killian_d:
+    # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
+    key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # feeny:
   #   key: edpktmqPi9eRefM9ZrwsPNAdg9832UDg3r894J4rkBGfUhpqZpqx6y
   #   is_bootstrap_baker_account: true
@@ -106,7 +106,7 @@ accounts:
   #   key: edpkvMWcnT7ha4m9kDv82X11Yx39xyowquUdBKpne5tpUyajcbjH6L
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-    
+
 node_config_network:
   activation_account_name: oxheadbaker
   chain_name: TEZOS_OXFORDNET_2023-08-21T15:00:00Z
