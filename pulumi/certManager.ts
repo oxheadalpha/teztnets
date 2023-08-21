@@ -10,8 +10,8 @@ const certManagerNS = "cert-manager"
 const deployCertManager = (cluster: eks.Cluster, awsAccountId: pulumi.Output<string>) => {
   const saName = "cert-manager"
   const roleName = "teztnets-cert-manager";
-  const certManagerRole = clusterOidcUrl?.apply(
-    (url) =>
+  const certManagerRole = pulumi.all([clusterOidcUrl, awsAccountId]).apply(
+    ([url, awsAccountId]) =>
       new aws.iam.Role("teztnets-cert-manager", {
         name: roleName,
         assumeRolePolicy: {

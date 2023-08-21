@@ -74,18 +74,18 @@ accounts:
   #   # tz1hoyMUiJYYr4FRPMU8Z7WJzYkqgjygjaTy
   #   key: edpkugfNCoDerYV9pq1EfGgjX9mPk3uxX2wXhRz85dUNMtTUPnhjJE
   #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  #   bootstrap_balance: "1000000000000"b
   rich:
     # Richard Ayotte (https://twitter.com/RichAyotte or anarcode)
     # tz1MDBXbMoLwTjeGYUckSWSTKp5kznTstafr
     key: edpkuK9vRbs1ZKLkaPHdKQ3L4h1YbDUFAt4PHT7MXRDqGpRLLBy6v8
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # vincent_xtzmaster:
-  #   # tz1M9b1sKoh5GB7AiBiqdMrjMMyvuhsZua5n
-  #   key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  vincent_xtzmaster:
+    # tz1M9b1sKoh5GB7AiBiqdMrjMMyvuhsZua5n
+    key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   killian_d:
     # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
     key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
