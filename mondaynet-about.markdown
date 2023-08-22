@@ -4,7 +4,7 @@ title: Mondaynet
 permalink: /mondaynet-about
 ---
 
-A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.
+A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Oxford for 8 cycles then upgrades to proto Alpha.
 
 | | |
 |-------|---------------------|
