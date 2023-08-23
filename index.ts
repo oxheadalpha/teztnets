@@ -7,8 +7,6 @@ import { publicReadPolicyForBucket } from "./s3";
 var blake2b = require('blake2b');
 const bs58check = require('bs58check');
 
-require('dotenv').config();
-
 //import deployAwsAlbController from "./awsAlbController"
 import deployMonitoring from "./pulumi/monitoring"
 import deployExternalDns from "./externalDns"
