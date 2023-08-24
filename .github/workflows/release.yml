@@ -1,4 +1,4 @@
-name: Publish teztnets
+name: Publish Teztnets
 
 on:
   push:
@@ -40,8 +40,6 @@ jobs:
       - name: generate release artifacts
         run: |
           python src/release.py
-        env:
-          FAUCET_RECAPTCHA_SITE_KEY: ${{secrets.FAUCET_RECAPTCHA_SITE_KEY }}
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')

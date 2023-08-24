@@ -85,7 +85,7 @@ for k, v in teztnets.items():
     )
 
     faucet_md = jinja2.Template(open("src/teztnet_faucet.md.jinja2").read()).render(
-        k=k, v=v, faucet_recaptcha_site_key=os.environ["FAUCET_RECAPTCHA_SITE_KEY"]
+        k=k, v=v
     )
 
     with open(
