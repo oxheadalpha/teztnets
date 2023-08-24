@@ -1,5 +1,5 @@
 config:
-  aws:profile: oxheadalpha
+  aws:profile: oxheadalpha_tempKubernetesAdmin
   aws:region: us-east-2
   teztnets:aws-account-id:
     secure: AAABAKrODV/Bg/UQH/m6XVe4fijcmBQ6K0ip2ywd1EKRxaVh4vfNgWytrRg=
