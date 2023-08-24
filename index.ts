@@ -168,7 +168,7 @@ const mondaynet_chain = new TezosChain(
     ],
     bootstrapContracts: ["taquito_big_map_contract.json", "taquito_contract.json", "taquito_sapling_contract.json", "taquito_tzip_12_16_contract.json"],
     // chartRepoVersion: "6.18.0",
-    chartPath: "dailynet/tezos-k8s",
+    chartPath: "dailynet/tezos-k8s", // Using dal node code in dailynet submod
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
