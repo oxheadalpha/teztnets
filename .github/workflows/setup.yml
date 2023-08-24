@@ -5,6 +5,13 @@ on:
       pulumi-command:
         required: true
         type: string
+    outputs:
+      networks:
+        description: "Pulumi networks output"
+        value: ${{ jobs.pulumi.outputs.networks }}
+      teztnets:
+        description: "Pulumi teztnets output"
+        value: ${{ jobs.pulumi.outputs.teztnets }}
 
 jobs:
   pulumi:
