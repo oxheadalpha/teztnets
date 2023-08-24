@@ -62,12 +62,6 @@ octez-node config init --network ghostnet
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
-> 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
->
-> ```bash=13
-> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-ghostnet.log &
-> ```
-
 
 
 
@@ -82,6 +76,11 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 ./octez-client register key mykey as delegate
 ```
 
+Then, you need to **stake** some amount of tez greater than 6,000. For example, to stake 10,000 tez, issue the following command:
+```bash=2
+./octez-client stake 10000 for mykey
+```
+
 You may now launch the baker process.
 ```bash=3
 octez-baker-PtNairob run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
@@ -92,12 +91,8 @@ You may run the accuser as well:
 octez-accuser-PtNairob run
 ```
 
-> 💡 Again, to keep your processes alive in background:
->
-> ```bash=4
-> nohup octez-baker-PtNairob run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass > ./baker-ghostnet.log &
-> ```
-
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.
+
+> 💡 Now that you are baking, you are responsible for the network health. Please ensure that the baking processes will keep running in the background. You may want to use screen, tmux, nohup or systemd. Also make sure that the baking processes will restart when your machine restarts.
 
 

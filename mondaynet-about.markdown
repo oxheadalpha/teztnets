@@ -57,12 +57,6 @@ octez-node config init --network https://teztnets.xyz/mondaynet-2023-08-21
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
-> 💡 A simple way to keep your process alive is to use `screen` or `nohup` to keep it running in the background while redirecting logs into files at the same time. For example:
->
-> ```bash=13
-> nohup octez-node run --rpc-addr 127.0.0.1:8732 > ./node-mondaynet-2023-08-21.log &
-> ```
-
 
 
 
