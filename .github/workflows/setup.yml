@@ -1,0 +1,50 @@
+name: Pulumi Setup
+on:
+  workflow_call:
+    inputs:
+      pulumi-command:
+        required: true
+        type: string
+
+jobs:
+  pulumi:
+    runs-on: ubuntu-latest
+    outputs:
+      networks: ${{ steps.pup.outputs.networks }}
+      teztnets: ${{ steps.pup.outputs.teztnets }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: tempKubernetesAdmin
+
+      - name: Add profile credentials to ~/.aws/credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile oxheadalpha
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile oxheadalpha
+
+      - run: npm install
+
+      - uses: pulumi/actions@v4
+        id: pup
+        with:
+          command: ${{ inputs.pulumi-command }}
+          stack-name: tqtezos/teztnets/teztnets
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
