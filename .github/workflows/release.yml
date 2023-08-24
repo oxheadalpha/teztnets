@@ -1,9 +1,6 @@
 name: Publish Teztnets
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     tags:
       - "v*"
@@ -13,11 +10,11 @@ on:
 
 jobs:
   up:
-    name: Preview
+    name: Up
     uses: ./.github/workflows/setup.yml
     secrets: inherit
     with:
-      pulumi-command: preview
+      pulumi-command: up
 
   build:
     needs: up
