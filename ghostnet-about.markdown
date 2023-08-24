@@ -11,7 +11,7 @@ Ghostnet is the long-running testnet for Tezos.
 | Public RPC endpoints | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz/chains/main/chain_id)<br/>[https://ghostnet.ecadinfra.com](https://ghostnet.ecadinfra.com/chains/main/chain_id)<br/>[https://ghostnet.tezos.marigold.dev](https://ghostnet.tezos.marigold.dev/chains/main/chain_id)<br/> |
 | Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) |
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v17.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v17.1) |
+| Tezos docker build | [tezos/tezos:v17.3](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v17.3) |
 | Activated on | 2022-01-25T15:00:00Z |
 | Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 
@@ -24,7 +24,7 @@ Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It gene
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v17.1
+#### Download and install Tezos version v17.3
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -34,7 +34,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Ghostnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v17.1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v17.3
 ```
 
 #### Alternative: Build the software
@@ -44,7 +44,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v17.1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v17.1
+git checkout v17.3
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -76,7 +76,7 @@ If you are not a bootstrap baker, you need to register your key as a delegate us
 ./octez-client register key mykey as delegate
 ```
 
-Then, you need to **stake** some amount of tez greater than 6,000. For example, to stake 10,000 tez, issue the following command:
+Then, you need to **stake** some amount of tez greater than 6,000 (this only applies to Oxford protocol and beyond). For example, to stake 10,000 tez, issue the following command:
 ```bash=2
 ./octez-client stake 10000 for mykey
 ```
