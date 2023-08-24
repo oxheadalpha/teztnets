@@ -1,10 +1,10 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
 import * as aws from "@pulumi/aws";
+import * as k8s from "@pulumi/kubernetes";
+import * as pulumi from "@pulumi/pulumi";
+import { RandomPassword }from "@pulumi/random"
 import * as cronParser from "cron-parser";
-import { createCertValidation } from "./route53";
-import { publicReadPolicyForBucket } from "./s3";
+
 import { TezosImageResolver } from "./TezosImageResolver";
 import * as docker from "@pulumi/docker";
 
@@ -392,7 +392,7 @@ export class TezosChain extends pulumi.ComponentResource {
     this.repo = repo;
     this.zone = zone;
 
-    var ns = new k8s.core.v1.Namespace(name,
+    const ns = new k8s.core.v1.Namespace(name,
       { metadata: { name: name, } },
       { provider: this.provider }
     );
@@ -509,20 +509,62 @@ export class TezosChain extends pulumi.ComponentResource {
     }
 
     if (Object.keys(params.faucetHelmValues).length != 0) {
-      let chartParams;
+      let chartParams
       if (params.getChartPath()) {
-        chartParams = { "path": `${params.getChartPath()}/charts/tezos-faucet` }
+        chartParams = { path: `${params.getChartPath()}/charts/tezos-faucet` }
       } else {
         chartParams = {
-          fetchOpts:
-          {
+          fetchOpts: {
             repo: params.getChartRepo(),
           },
-          chart: 'tezos-faucet',
+          chart: "tezos-faucet",
         }
       }
 
+      // Using `disableChallenges` atm to determine if redis should be deployed
+      // for the faucet.
+      if (params.faucetHelmValues.disableChallenges === false) {
+        const redisPassword = new RandomPassword(
+          `${name}-redis-pswd`,
+          { length: 16 },
+          { parent: this }
+        ).result
+
+        params.faucetHelmValues.redis.password = redisPassword
+
+        const redisChart = new k8s.helm.v3.Release(
+          `${name}-redis`,
+          {
+            chart: "redis",
+            version: "17.15.6",
+            namespace: name,
+            repositoryOpts: {
+              repo: "https://charts.bitnami.com/bitnami",
+            },
+            values: {
+              // Keep the resource names short and simple
+              fullnameOverride: "redis",
+              // Deploy a single instance
+              architecture: "standalone",
+              // Don't create a pv and persist data
+              master: {
+                persistence: {
+                  enabled: false,
+                },
+              },
+              global: {
+                redis: {
+                  password: redisPassword,
+                },
+              },
+            },
+          },
+          { provider: this.provider, parent: this }
+        )
+      }
+
       let faucetChartValues: any = {
+        ...chartParams,
         namespace: ns.metadata.name,
         values: params.faucetHelmValues,
         version: params.getChartRepoVersion(),
