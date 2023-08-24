@@ -227,7 +227,7 @@ rolling_tarball_url: null
 archive_tarball_url: https://nairobinet.xtz-shots.io/archive-tarball
 
 images:
-  octez: tezos/tezos:v17.1
+  octez: tezos/tezos:v17.3
 
 protocols:
   - command: PtNairob
