@@ -1,0 +1,15 @@
+name: Pulumi Preview
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  preview:
+    name: Preview
+    uses: ./.github/workflows/setup.yml
+    secrets: inherit
+    with:
+      pulumi-command: preview
