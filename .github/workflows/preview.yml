@@ -1,6 +1,9 @@
-name: Pulumi
+name: Pulumi Preview
 on:
   pull_request:
+    branches:
+      - main
+  push:
     branches:
       - main
 jobs:
@@ -12,7 +15,6 @@ jobs:
         with:
           fetch-depth: 1
           submodules: true
-          token: ${{ secrets.ACCESS_TOKEN }}
 
       - uses: actions/setup-node@v1
         with:
