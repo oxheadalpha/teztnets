@@ -188,11 +188,11 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     humanName: "Ghostnet",
-    chartRepoVersion: "6.20.2",
+    chartRepoVersion: "6.22.0",
   }),
   cluster.provider,
   repo,
-  teztnetsHostedZone,
+  teztnetsHostedZone
 )
 
 const nairobinet_chain = new TezosChain(
@@ -208,7 +208,7 @@ const nairobinet_chain = new TezosChain(
     humanName: "Nairobinet",
     description: "Test Chain for the Nairobi Protocol Proposal",
     bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
-    chartRepoVersion: "6.21.0",
+    chartRepoVersion: "6.22.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
@@ -241,7 +241,7 @@ const oxfordnet_chain = new TezosChain(
     humanName: "Oxfordnet",
     description: "Test Chain for the Oxford Protocol Proposal",
     bootstrapPeers: ["oxfordnet.boot.ecadinfra.com", "oxfordnet.tzinit.org"],
-    chartRepoVersion: "6.21.0",
+    chartRepoVersion: "6.22.0",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       // {
