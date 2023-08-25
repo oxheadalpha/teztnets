@@ -25,6 +25,9 @@ profiles:
 
 disableChallenges: false
 
+redis:
+  url: "redis://redis-master:6379"
+
 ingress:
   enabled: true
   annotations:
