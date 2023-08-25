@@ -23,6 +23,8 @@ profiles:
   baker:
     amount: 6001
 
+disableChallenges: false
+
 ingress:
   enabled: true
   annotations:
