@@ -23,7 +23,7 @@ profiles:
   baker:
     amount: 2001
 
-disableChallenges: false
+disableChallenges: true
 
 redis:
   url: "redis://redis-master:6379"
