@@ -188,7 +188,7 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     humanName: "Ghostnet",
-    chartRepoVersion: "6.22.0",
+    chartRepoVersion: "6.20.2",
   }),
   cluster.provider,
   repo,

@@ -1,37 +1,34 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.0.0
-  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.0.0
-
+  tezos_faucet: ghcr.io/oxheadalpha/tezos-faucet:1.1.0
+  tezos_faucet_backend: ghcr.io/oxheadalpha/tezos-faucet-backend:1.1
 authorizedHost: # filled in by pulumi
 maxBalance: 10000
-
 config:
   application:
-    name: "Tezos Ghostnet faucet"
-    googleCaptchaSiteKey: #filled in by pulumi
-    backendUrl: # filled in by pulumi
-    githubRepo: "https://github.com/avysel/tezos-faucet"
+     name: "Tezos Ghostnet faucet"
+     googleCaptchaSiteKey: #filled in by pulumi
+     backendUrl: # filled in by pulumi
+     githubRepo: "https://github.com/avysel/tezos-faucet"
+     profiles:
+       user:
+         profile: USER
+         amount: 100
+       baker:
+         profile: BAKER
+         amount: 2001
   network:
-    name: # filled in by pulumi
-    rpcUrl: # filled in by pulumi
-    faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
-    viewer: https://ghost.tzstats.com
-
-profiles:
-  user:
-    amount: 100
-  baker:
-    amount: 2001
-
-disableChallenges: true
-
-redis:
-  url: "redis://redis-master:6379"
-
+     name: # filled in by pulumi
+     rpcUrl: # filled in by pulumi
+     faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
+     viewer: https://ghost.tzstats.com
+     allowSendButton: false
 ingress:
   enabled: true
   annotations:
     "kubernetes.io/ingress.class": "nginx"
-    "cert-manager.io/cluster-issuer": "letsencrypt-prod"
+    'cert-manager.io/cluster-issuer': "letsencrypt-prod"
   host: # faucet fqdn, filled in by pulumi
+
+redis:
+  url: "redis://redis-master:6379"
 
