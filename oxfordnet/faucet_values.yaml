@@ -2,11 +2,19 @@ images:
   tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.0.0
   tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.0.0
 
-authorizedHost: # filled in by pulumi
+# Value the server sets for the "Access-Control-Allow-Origin" header for CORS.
+authorizedHost: "" # filled in by pulumi
+# RPC url for the faucet backend. Default value assumes tezos-k8s created an RPC
+# service in the same namespace. If not set, defaults to `config.network.rpcUrl`.
+backendRpcUrl: http://tezos-node-rpc:8732
+# If the backend requires CAPTCHA tokens to be submitted.
+enableCaptcha: true
+# Faucet won't dispense to an address if its balance exceeds this.
 maxBalance: 61000
+
 config:
   application:
-    name: "Tezos Oxfordnet faucet"
+    name: "Tezos Oxfordnet Faucet"
     googleCaptchaSiteKey: #filled in by pulumi
     backendUrl: # filled in by pulumi
     githubRepo: "https://github.com/oxheadalpha/tezos-faucet"
@@ -23,7 +31,6 @@ profiles:
     amount: 6001
 
 disableChallenges: false
-
 redis:
   url: "redis://redis-master:6379"
 
@@ -32,4 +39,5 @@ ingress:
   annotations:
     "kubernetes.io/ingress.class": "nginx"
     "cert-manager.io/cluster-issuer": "letsencrypt-prod"
-  host: # faucet fqdn, filled in by pulumi
+  host: "" # faucet fqdn, filled in by pulumi
+  tls: [] # filled in by pulumi

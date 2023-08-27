@@ -42,7 +42,3 @@ ingress:
     "cert-manager.io/cluster-issuer": "letsencrypt-prod"
   host: "" # faucet fqdn, filled in by pulumi
   tls: [] # filled in by pulumi
-
-# Secrets
-googleCaptchaSecretKey: "" # filled in by pulumi
-faucetPrivateKey: "" # filled in by pulumi

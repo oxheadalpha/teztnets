@@ -508,7 +508,9 @@ export class TezosChain extends pulumi.ComponentResource {
       delete tezosK8sImages["zerotier"];
     }
 
-    if (Object.keys(params.faucetHelmValues).length != 0) {
+    const { faucetHelmValues } = params
+
+    if (Object.keys(faucetHelmValues).length) {
       let chartParams
       if (params.getChartPath()) {
         chartParams = { path: `${params.getChartPath()}/charts/tezos-faucet` }
@@ -523,14 +525,18 @@ export class TezosChain extends pulumi.ComponentResource {
 
       // Using `disableChallenges` atm to determine if redis should be deployed
       // for the faucet.
-      if (params.faucetHelmValues.disableChallenges === false) {
+      if (faucetHelmValues.disableChallenges === false) {
+        if (!faucetHelmValues.redis) {
+          faucetHelmValues.redis = {}
+        }
+
         const redisPassword = new RandomPassword(
           `${name}-redis-pswd`,
           { length: 16 },
           { parent: this }
         ).result
 
-        params.faucetHelmValues.redis.password = redisPassword
+        faucetHelmValues.redis.password = redisPassword
 
         const redisChart = new k8s.helm.v3.Release(
           `${name}-redis`,
@@ -566,7 +572,7 @@ export class TezosChain extends pulumi.ComponentResource {
       let faucetChartValues: any = {
         ...chartParams,
         namespace: ns.metadata.name,
-        values: params.faucetHelmValues,
+        values: faucetHelmValues,
         version: params.getChartRepoVersion(),
       }
       faucetChartValues = { ...faucetChartValues, ...chartParams };
@@ -585,7 +591,7 @@ export class TezosChain extends pulumi.ComponentResource {
             secretName: `${faucetDomain}-secret`
           }
         ]
-      new k8s.helm.v2.Chart(
+      new k8s.helm.v3.Chart(
         `${name}-faucet`,
         faucetChartValues,
         { providers: { kubernetes: this.provider } }
