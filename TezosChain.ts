@@ -591,7 +591,7 @@ export class TezosChain extends pulumi.ComponentResource {
             secretName: `${faucetDomain}-secret`
           }
         ]
-      new k8s.helm.v2.Chart(
+      new k8s.helm.v3.Chart(
         `${name}-faucet`,
         faucetChartValues,
         { providers: { kubernetes: this.provider } }
