@@ -72,8 +72,8 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 4.2.2)
-  jekyll-datapage-generator
-  minima
+  jekyll-datapage-generator (~> 1.4)
+  minima (~> 2.5)
   webrick (~> 1.7)
 
 BUNDLED WITH

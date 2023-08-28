@@ -42,12 +42,10 @@ for k, v in teztnets.items():
         "timestamp"
     ].split("T")[0]
 
-index = jinja2.Template(open("src/release_notes.md.jinja2").read()).render(
+index = jinja2.Template(open("src/index.md.jinja2").read()).render(
     teztnets=nested_teztnets, category_desc=category_desc
 )
 
-with open("target/release-notes.markdown", "w") as out_file:
-    print(index, file=out_file)
 with open("target/release/index.markdown", "a") as out_file:
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
@@ -84,22 +82,13 @@ for k, v in teztnets.items():
         k=k, v=v, network_params=networks[k], readme=readme
     )
 
-    faucet_md = jinja2.Template(open("src/teztnet_faucet.md.jinja2").read()).render(
-        k=k, v=v
-    )
-
     with open(
         f"target/release/{v['human_name'].lower()}-about.markdown", "w"
     ) as out_file:
         print(teztnet_md, file=out_file)
 
-    with open(f"target/release/{k}-faucet.markdown", "w") as out_file:
-        print(faucet_md, file=out_file)
-
     for alias in v["aliases"]:
         with open(f"target/release/{alias}-about.markdown", "w") as out_file:
             print(f"{alias} is now {k}, go to [{k}-about]({k}-about)", file=out_file)
-        with open(f"target/release/{alias}-faucet.markdown", "w") as out_file:
-            print(f"{alias} is now {k}, go to [{k}-faucet]({k}-faucet)", file=out_file)
         with open(f"target/release/{alias}", "w") as out_file:
             print(json.dumps(networks[k], indent=2), file=out_file)
