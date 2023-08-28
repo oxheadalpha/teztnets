@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - "v*"
   schedule:
     # update the deployment every Monday at 0:00 UTC
     - cron: "0 0 * * *"
@@ -42,13 +40,6 @@ jobs:
       - name: generate release artifacts
         run: |
           python src/release.py
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/release/teztnets.json
-          body_path: target/release-notes.markdown
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

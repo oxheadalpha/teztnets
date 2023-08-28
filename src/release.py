@@ -46,8 +46,6 @@ index = jinja2.Template(open("src/release_notes.md.jinja2").read()).render(
     teztnets=nested_teztnets, category_desc=category_desc
 )
 
-with open("target/release-notes.markdown", "w") as out_file:
-    print(index, file=out_file)
 with open("target/release/index.markdown", "a") as out_file:
     print(index, file=out_file)
 with open("target/release/teztnets.json", "w") as out_file:
