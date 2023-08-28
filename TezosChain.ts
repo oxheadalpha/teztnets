@@ -621,7 +621,8 @@ export class TezosChain extends pulumi.ComponentResource {
       faucetHelmValues.config.application.googleCaptchaSiteKey =
         params.getFaucetRecaptchaSiteKey()
       faucetHelmValues.config.application.backendUrl = `https://${faucetDomain}`
-      faucetHelmValues.config.network.name = params.getHumanName()
+      faucetHelmValues.config.network.name =
+        faucetHelmValues.config.network.name || params.getHumanName()
       faucetHelmValues.config.network.rpcUrl = `https://rpc.${teztnetsDomain}`
       faucetHelmValues.ingress.host = faucetDomain
       faucetHelmValues.ingress.tls = [
