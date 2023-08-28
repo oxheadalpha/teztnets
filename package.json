@@ -1,5 +1,14 @@
 {
-  "name": "tqinfra",
+  "name": "teztnets",
+  "description": "Infrastructure-as-code repo to activate and bootstrap Tezos testnets in a repeatable, automated way.",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@types/node": "^10.17.60"
   },
