@@ -42,7 +42,7 @@ for k, v in teztnets.items():
         "timestamp"
     ].split("T")[0]
 
-index = jinja2.Template(open("src/release_notes.md.jinja2").read()).render(
+index = jinja2.Template(open("src/index.md.jinja2").read()).render(
     teztnets=nested_teztnets, category_desc=category_desc
 )
 
