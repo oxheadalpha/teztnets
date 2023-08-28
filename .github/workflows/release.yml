@@ -2,6 +2,8 @@ name: Publish Teztnets
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*"
   schedule:
@@ -16,7 +18,7 @@ jobs:
     with:
       pulumi-command: up
 
-  build:
+  publish:
     needs: up
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +44,6 @@ jobs:
           python src/release.py
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: target/release/teztnets.json
           body_path: target/release-notes.markdown
