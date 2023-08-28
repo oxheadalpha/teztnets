@@ -3,15 +3,14 @@ import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 import * as awsx from "@pulumi/awsx"
 import * as aws from "@pulumi/aws"
-import { publicReadPolicyForBucket } from "./s3"
-var blake2b = require("blake2b")
-const bs58check = require("bs58check")
+import * as blake2b from "blake2b"
+import * as bs58check from "bs58check"
 
-//import deployAwsAlbController from "./awsAlbController"
 import deployMonitoring from "./pulumi/monitoring"
 import deployExternalDns from "./externalDns"
 import deployCertManager from "./pulumi/certManager"
 import deployNginx from "./pulumi/nginx"
+import { publicReadPolicyForBucket } from "./s3"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 import { createCertValidation } from "./route53"
 import { createEbsCsiRole } from "./pulumi/ebsCsiDriver"
@@ -358,7 +357,7 @@ function getTeztnets(chains: TezosChain[]): object {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let ghostnetNetwork = {
+const ghostnetNetwork = {
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   default_bootstrap_peers: [
     "ghostnet.teztnets.xyz",
@@ -399,6 +398,7 @@ let ghostnetNetwork = {
     },
   ],
 }
+
 export const networks = {
   ...getNetworks([
     dailynet_chain,
@@ -413,9 +413,9 @@ export const networks = {
 // Oxhead Alpha hosts a ghostnet RPC service and baker in the
 // sensitive infra cluster.
 // Instead, we hardcode the values to be displayed on the webpage.
-let gitRefMainnetGhostnet = "v17.3"
-let lastBakingDaemonMainnetGhostnet = "PtNairob"
-let ghostnetTeztnet = {
+const gitRefMainnetGhostnet = "v17.3"
+const lastBakingDaemonMainnetGhostnet = "PtNairob"
+const ghostnetTeztnet = {
   aliases: ["ithacanet"],
   category: "Long-running Teztnets",
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
@@ -448,7 +448,7 @@ let ghostnetTeztnet = {
 // We also add mainnet to the teztnets metadata.
 // Some systems rely on this to provide lists of third-party RPC services
 // to their users. For example, umami wallet.
-let mainnetTeztnet = {
+const mainnetMetadata = {
   aliases: [],
   category: "Long-running Teztnets",
   chain_name: "TEZOS_MAINNET",
@@ -484,7 +484,7 @@ export const teztnets = {
     nairobinet_chain,
     oxfordnet_chain,
   ]),
-  ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetTeztnet },
+  ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
 const pyrometerDomain = "status.teztnets.xyz"

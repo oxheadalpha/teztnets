@@ -614,35 +614,30 @@ export class TezosChain extends pulumi.ComponentResource {
         )
       }
 
-      let faucetChartValues: any = {
-        ...chartParams,
-        namespace: ns.metadata.name,
-        values: faucetHelmValues,
-        version: params.getChartRepoVersion(),
-      }
-      faucetChartValues = { ...faucetChartValues, ...chartParams }
       const faucetDomain = `faucet.${teztnetsDomain}`
-      faucetChartValues.values["googleCaptchaSecretKey"] =
+      faucetHelmValues.googleCaptchaSecretKey =
         params.getFaucetRecaptchaSecretKey()
-      faucetChartValues.values["authorizedHost"] = `https://${faucetDomain}`
-      faucetChartValues.values["config"]["application"][
-        "googleCaptchaSiteKey"
-      ] = params.getFaucetRecaptchaSiteKey()
-      faucetChartValues.values["config"]["application"][
-        "backendUrl"
-      ] = `https://${faucetDomain}`
-      faucetChartValues.values["config"]["network"]["name"] =
-        params.getHumanName()
-      faucetChartValues.values["config"]["network"][
-        "rpcUrl"
-      ] = `https://rpc.${teztnetsDomain}`
-      faucetChartValues.values["ingress"]["host"] = faucetDomain
-      faucetChartValues.values["ingress"]["tls"] = [
+      faucetHelmValues.authorizedHost = `https://${faucetDomain}`
+      faucetHelmValues.config.application.googleCaptchaSiteKey =
+        params.getFaucetRecaptchaSiteKey()
+      faucetHelmValues.config.application.backendUrl = `https://${faucetDomain}`
+      faucetHelmValues.config.network.name = params.getHumanName()
+      faucetHelmValues.config.network.rpcUrl = `https://rpc.${teztnetsDomain}`
+      faucetHelmValues.ingress.host = faucetDomain
+      faucetHelmValues.ingress.tls = [
         {
           hosts: [faucetDomain],
           secretName: `${faucetDomain}-secret`,
         },
       ]
+
+      const faucetChartValues: any = {
+        ...chartParams,
+        namespace: ns.metadata.name,
+        values: faucetHelmValues,
+        version: params.getChartRepoVersion(),
+      }
+
       new k8s.helm.v3.Chart(`${name}-faucet`, faucetChartValues, {
         providers: { kubernetes: this.provider },
       })
