@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/blake2b": "^2.1.0",
+    "@types/bs58check": "^2.1.0",
     "@types/node": "^10.17.60"
   },
   "dependencies": {
