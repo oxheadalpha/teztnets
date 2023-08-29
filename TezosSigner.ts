@@ -82,7 +82,7 @@ export class TezosSigner extends pulumi.ComponentResource {
   readonly zone: aws.route53.Zone;
 
   // readonly ns: k8s.core.v1.Namespace;
-  // readonly chain: k8s.helm.v2.Chart;
+  // readonly chain: k8s.helm.v3.Chart;
 
   /**
    * Deploys a private chain on a Kubernetes cluster.
@@ -119,7 +119,7 @@ export class TezosSigner extends pulumi.ComponentResource {
     });
 
     const signer = new tezos.TezosK8sHelmChart(
-      name, 
+      name,
       {
         namespace: ns.metadata.name,
         values: params.helmValues,

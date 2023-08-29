@@ -29,7 +29,7 @@ const deployExternalDns = (cluster: eks.Cluster) => {
     role: cluster.instanceRoles.apply((roles) => roles[0].name),
   })
 
-  new k8s.helm.v2.Chart(
+  new k8s.helm.v3.Chart(
     "external-dns",
     {
       chart: "external-dns",
