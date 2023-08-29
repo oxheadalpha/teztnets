@@ -16,9 +16,6 @@ Test Chain for the Nairobi Protocol Proposal
 | Block Explorers | [TzKT](https://nairobinet.tzkt.io) - [TzStats](https://nairobi.tzstats.com) |
 
 
-Nairobinet started on Mumbai protocol then upgraded to Nairobi at the end of cycle 2.
-
-Nairobinet has 8 second blocks (twice faster than mainnet).
 
 
 ### Install the software
