@@ -1,9 +1,3 @@
 [submodule "dailynet/tezos-k8s"]
-	path = dailynet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "nairobinet/tezos-k8s"]
-	path = nairobinet/tezos-k8s
-	url = git@github.com:oxheadalpha/tezos-k8s.git
-[submodule "pyrometer/tezos-k8s"]
-	path = pyrometer/tezos-k8s
+	path = networks/dailynet/tezos-k8s
 	url = git@github.com:oxheadalpha/tezos-k8s.git
