@@ -34,25 +34,20 @@ Tezos nodes supports downloading of network specification from a json endpoint: 
 
 The Teztnet platform creates and exposes such endpoints.
 
-## Currently deployed Teztnets
-
-Deployment of new testnets is performed with Github Releases.
-
-The most recent release on the [Release page](https://github.com/oxheadalpha/teztnets/releases) has a list of currently deployed testnets, with URLs to connect to them.
-
 ## Automate on Teztnets
 
 You are encouraged to build automation to ensure your Tezos project keeps running with the future versions of Tezos shell and/or protocol.
 
-1. monitor this repo's releases using your monitoring tool of choice
+1. monitor this repo's `main` branch using your monitoring tool of choice
 1. this endpoint lists the current active testnets: [https://teztnets.xyz/teztnets.json](https://teztnets.xyz/teztnets.json)
 
 ## Add new Teztnets or modify existing Teztnets
 
-Every Teztnet is defined in a directory in this repository. The Teztnet directory must contain the following files:
+Each Teztnet is defined within a subdirectory of the `/networks` directory in this repository. The Teztnet directory must contain the following files:
 
 - A Helm chart `values.yaml` file
-- optionally, a submodule of tezos-k8s (in case you need an unreleased or custom version of the tezos-k8s software)
+- Optionally, a Helm chart `faucet_values.yaml` file if deploying a faucet
+- Optionally, a submodule of tezos-k8s (in case you need an unreleased or custom version of the tezos-k8s software)
 
 ### Helm chart values.yaml
 
