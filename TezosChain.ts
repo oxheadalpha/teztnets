@@ -393,7 +393,7 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly zone: aws.route53.Zone
 
   // readonly ns: k8s.core.v1.Namespace;
-  // readonly chain: k8s.helm.v2.Chart;
+  // readonly chain: k8s.helm.v3.Chart;
 
   /**
    * Deploys a private chain on a Kubernetes cluster.
@@ -748,7 +748,7 @@ export class TezosChain extends pulumi.ComponentResource {
       if (params.getChartPath()) {
         // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
 
-        const chain = new k8s.helm.v2.Chart(
+        const chain = new k8s.helm.v3.Chart(
           name,
           {
             namespace: ns.metadata.name,
@@ -759,7 +759,7 @@ export class TezosChain extends pulumi.ComponentResource {
         )
       } else {
         // deploy from helm repo with public images
-        const chain = new k8s.helm.v2.Chart(
+        const chain = new k8s.helm.v3.Chart(
           name,
           {
             namespace: ns.metadata.name,
