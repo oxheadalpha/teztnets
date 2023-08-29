@@ -135,8 +135,8 @@ const longCategory = "Long-running Teztnets"
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "dailynet/values.yaml",
-    faucetYamlFile: "dailynet/faucet_values.yaml",
+    yamlFile: "networks/dailynet/values.yaml",
+    faucetYamlFile: "networks/dailynet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -155,7 +155,7 @@ const dailynet_chain = new TezosChain(
       "evm_fa12_contract.json",
     ],
     // chartRepoVersion: "6.18.0",
-    chartPath: "dailynet/tezos-k8s",
+    chartPath: "networks/dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
@@ -166,8 +166,8 @@ const dailynet_chain = new TezosChain(
 
 const mondaynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "mondaynet/values.yaml",
-    faucetYamlFile: "mondaynet/faucet_values.yaml",
+    yamlFile: "networks/mondaynet/values.yaml",
+    faucetYamlFile: "networks/mondaynet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -185,7 +185,7 @@ const mondaynet_chain = new TezosChain(
       "taquito_tzip_12_16_contract.json",
     ],
     // chartRepoVersion: "6.18.0",
-    chartPath: "dailynet/tezos-k8s", // Using dal node code in dailynet submod
+    chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
@@ -198,7 +198,7 @@ const mondaynet_chain = new TezosChain(
 // The RPC service and baker are in the sensitive infra.
 new TezosChain(
   new TezosChainParametersBuilder({
-    faucetYamlFile: "ghostnet/faucet_values.yaml",
+    faucetYamlFile: "networks/ghostnet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -214,8 +214,8 @@ new TezosChain(
 
 const nairobinet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "nairobinet/values.yaml",
-    faucetYamlFile: "nairobinet/faucet_values.yaml",
+    yamlFile: "networks/nairobinet/values.yaml",
+    faucetYamlFile: "networks/nairobinet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -247,8 +247,8 @@ const nairobinet_chain = new TezosChain(
 
 const oxfordnet_chain = new TezosChain(
   new TezosChainParametersBuilder({
-    yamlFile: "oxfordnet/values.yaml",
-    faucetYamlFile: "oxfordnet/faucet_values.yaml",
+    yamlFile: "networks/oxfordnet/values.yaml",
+    faucetYamlFile: "networks/oxfordnet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
