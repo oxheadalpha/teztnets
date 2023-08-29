@@ -9,10 +9,10 @@ import * as bs58check from "bs58check"
 import deployMonitoring from "./pulumi/monitoring"
 import deployExternalDns from "./externalDns"
 import deployCertManager from "./pulumi/certManager"
+import deployPyrometer from "./pyrometer"
 import deployNginx from "./pulumi/nginx"
 import { publicReadPolicyForBucket } from "./s3"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
-import { createCertValidation } from "./route53"
 import { createEbsCsiRole } from "./pulumi/ebsCsiDriver"
 
 let stack = pulumi.getStack()
@@ -487,61 +487,4 @@ export const teztnets = {
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
-const pyrometerDomain = "status.teztnets.xyz"
-const pyrometerCert = new aws.acm.Certificate(`${pyrometerDomain}-cert`, {
-  validationMethod: "DNS",
-  domainName: pyrometerDomain,
-})
-createCertValidation({
-  cert: pyrometerCert,
-  targetDomain: pyrometerDomain,
-  hostedZone: teztnetsHostedZone,
-})
-
-new k8s.helm.v2.Chart(
-  "pyrometer",
-  {
-    // chart: 'pyrometer',
-    // version: "6.17.0",
-    path: "./pyrometer/tezos-k8s/charts/pyrometer",
-    // fetchOpts:
-    // {
-    //   repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
-    // },
-    values: {
-      config: {
-        node_monitor: {
-          nodes: Object.keys(networks)
-            .filter((n) => n != "ghostnet")
-            .map((network) => "http://tezos-node-rpc." + network + ":8732"),
-        },
-        ui: {
-          enabled: true,
-          host: "0.0.0.0",
-          port: 8080,
-        },
-        log: {
-          level: "info",
-          timestamp: false,
-        },
-      },
-      ingress: {
-        enabled: true,
-        annotations: {
-          "kubernetes.io/ingress.class": "nginx",
-          "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-          "nginx.ingress.kubernetes.io/enable-cors": "true",
-          "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
-        },
-        host: pyrometerDomain,
-        tls: [
-          {
-            hosts: [pyrometerDomain],
-            secretName: `${pyrometerDomain}-secret`,
-          },
-        ],
-      },
-    },
-  },
-  { providers: { kubernetes: cluster.provider } }
-)
+deployPyrometer({ cluster, teztnetsHostedZone, networks })
