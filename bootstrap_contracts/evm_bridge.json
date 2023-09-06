@@ -9,59 +9,34 @@
             "prim": "or",
             "args": [
               {
-                "prim": "or",
+                "prim": "ticket",
                 "args": [
                   {
-                    "prim": "pair",
-                    "args": [
-                      {
-                        "prim": "pair",
-                        "args": [
-                          {
-                            "prim": "nat",
-                            "annots": [
-                              "%amount"
-                            ]
-                          },
-                          {
-                            "prim": "bytes",
-                            "annots": [
-                              "%evm_address"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "prim": "nat",
-                        "annots": [
-                          "%max_gas_price"
-                        ]
-                      }
-                    ],
-                    "annots": [
-                      "%deposit"
-                    ]
-                  },
-                  {
-                    "prim": "address",
-                    "annots": [
-                      "%set"
-                    ]
+                    "prim": "unit"
                   }
+                ],
+                "annots": [
+                  "%callback"
                 ]
               },
               {
                 "prim": "pair",
                 "args": [
                   {
-                    "prim": "address"
+                    "prim": "address",
+                    "annots": [
+                      "%evm_address"
+                    ]
                   },
                   {
-                    "prim": "nat"
+                    "prim": "bytes",
+                    "annots": [
+                      "%l2_address"
+                    ]
                   }
                 ],
                 "annots": [
-                  "%withdraw"
+                  "%deposit"
                 ]
               }
             ]
@@ -75,31 +50,34 @@
             "prim": "pair",
             "args": [
               {
-                "prim": "pair",
-                "args": [
-                  {
-                    "prim": "address",
-                    "annots": [
-                      "%admin"
-                    ]
-                  },
-                  {
-                    "prim": "address",
-                    "annots": [
-                      "%ctez_contract"
-                    ]
-                  }
+                "prim": "address",
+                "annots": [
+                  "%exchanger"
                 ]
               },
               {
                 "prim": "option",
                 "args": [
                   {
-                    "prim": "address"
+                    "prim": "pair",
+                    "args": [
+                      {
+                        "prim": "address",
+                        "annots": [
+                          "%evm_address"
+                        ]
+                      },
+                      {
+                        "prim": "bytes",
+                        "annots": [
+                          "%l2_address"
+                        ]
+                      }
+                    ]
                   }
                 ],
                 "annots": [
-                  "%rollup"
+                  "%request_deposit"
                 ]
               }
             ]
@@ -118,437 +96,180 @@
               "args": [
                 [
                   {
-                    "prim": "IF_LEFT",
+                    "prim": "SWAP"
+                  },
+                  {
+                    "prim": "UNPAIR"
+                  },
+                  {
+                    "prim": "SWAP"
+                  },
+                  {
+                    "prim": "IF_NONE",
                     "args": [
                       [
                         {
-                          "prim": "UNPAIR"
-                        },
-                        {
-                          "prim": "UNPAIR"
-                        },
-                        {
-                          "prim": "DUP",
-                          "args": [
-                            {
-                              "int": "4"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "SENDER"
-                        },
-                        {
-                          "prim": "SELF_ADDRESS"
-                        },
-                        {
-                          "prim": "DUP",
-                          "args": [
-                            {
-                              "int": "7"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "CAR"
-                        },
-                        {
-                          "prim": "CDR"
-                        },
-                        {
-                          "prim": "CONTRACT",
-                          "args": [
-                            {
-                              "prim": "pair",
-                              "args": [
-                                {
-                                  "prim": "address",
-                                  "annots": [
-                                    "%from"
-                                  ]
-                                },
-                                {
-                                  "prim": "address",
-                                  "annots": [
-                                    "%to"
-                                  ]
-                                },
-                                {
-                                  "prim": "nat",
-                                  "annots": [
-                                    "%value"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "annots": [
-                            "%transfer"
-                          ]
-                        },
-                        {
-                          "prim": "IF_NONE",
-                          "args": [
-                            [
-                              {
-                                "prim": "PUSH",
-                                "args": [
-                                  {
-                                    "prim": "string"
-                                  },
-                                  {
-                                    "string": "Failed to find the entrypoint %transfer"
-                                  }
-                                ]
-                              },
-                              {
-                                "prim": "FAILWITH"
-                              }
-                            ],
-                            []
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "7"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "CDR"
-                        },
-                        {
-                          "prim": "IF_NONE",
-                          "args": [
-                            [
-                              {
-                                "prim": "PUSH",
-                                "args": [
-                                  {
-                                    "prim": "string"
-                                  },
-                                  {
-                                    "string": "The EVM rollup was not set"
-                                  }
-                                ]
-                              },
-                              {
-                                "prim": "FAILWITH"
-                              }
-                            ],
-                            [
-                              {
-                                "prim": "CONTRACT",
-                                "args": [
-                                  {
-                                    "prim": "pair",
-                                    "args": [
-                                      {
-                                        "prim": "pair",
-                                        "args": [
-                                          {
-                                            "prim": "bytes"
-                                          },
-                                          {
-                                            "prim": "ticket",
-                                            "args": [
-                                              {
-                                                "prim": "unit"
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "prim": "nat"
-                                      },
-                                      {
-                                        "prim": "bytes"
-                                      }
-                                    ]
-                                  }
-                                ]
-                              },
-                              {
-                                "prim": "IF_NONE",
-                                "args": [
-                                  [
-                                    {
-                                      "prim": "PUSH",
-                                      "args": [
-                                        {
-                                          "prim": "string"
-                                        },
-                                        {
-                                          "string": "option is None"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "prim": "FAILWITH"
-                                    }
-                                  ],
-                                  []
-                                ]
-                              }
-                            ]
-                          ]
-                        },
-                        {
-                          "prim": "SWAP"
-                        },
-                        {
                           "prim": "PUSH",
                           "args": [
                             {
-                              "prim": "mutez"
+                              "prim": "string"
                             },
                             {
-                              "int": "0"
+                              "string": "Callback on non-locked deposit"
                             }
                           ]
                         },
                         {
-                          "prim": "DUP",
-                          "args": [
-                            {
-                              "int": "7"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "4"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "5"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "PAIR",
-                          "args": [
-                            {
-                              "int": "3"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "TRANSFER_TOKENS"
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "3"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "UNIT"
-                        },
-                        {
-                          "prim": "TICKET"
-                        },
-                        {
-                          "prim": "IF_NONE",
-                          "args": [
-                            [
-                              {
-                                "prim": "PUSH",
-                                "args": [
-                                  {
-                                    "prim": "string"
-                                  },
-                                  {
-                                    "string": "Failed to create the ticket"
-                                  }
-                                ]
-                              },
-                              {
-                                "prim": "FAILWITH"
-                              }
-                            ],
-                            []
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "2"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "PUSH",
-                          "args": [
-                            {
-                              "prim": "mutez"
-                            },
-                            {
-                              "int": "0"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "PUSH",
-                          "args": [
-                            {
-                              "prim": "bytes"
-                            },
-                            {
-                              "bytes": ""
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "7"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "PAIR"
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "3"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "DIG",
-                          "args": [
-                            {
-                              "int": "6"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "PAIR"
-                        },
-                        {
-                          "prim": "PAIR"
-                        },
-                        {
-                          "prim": "TRANSFER_TOKENS"
-                        },
-                        {
-                          "prim": "NIL",
-                          "args": [
-                            {
-                              "prim": "operation"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "SWAP"
-                        },
-                        {
-                          "prim": "CONS"
-                        },
-                        {
-                          "prim": "SWAP"
-                        },
-                        {
-                          "prim": "CONS"
+                          "prim": "FAILWITH"
                         }
                       ],
-                      [
-                        {
-                          "prim": "DUP",
-                          "args": [
-                            {
-                              "int": "2"
-                            }
-                          ]
-                        },
-                        {
-                          "prim": "CAR"
-                        },
-                        {
-                          "prim": "CAR"
-                        },
-                        {
-                          "prim": "SENDER"
-                        },
-                        {
-                          "prim": "COMPARE"
-                        },
-                        {
-                          "prim": "NEQ"
-                        },
-                        {
-                          "prim": "IF",
-                          "args": [
-                            [
+                      []
+                    ]
+                  },
+                  {
+                    "prim": "UNPAIR"
+                  },
+                  {
+                    "prim": "CONTRACT",
+                    "args": [
+                      {
+                        "prim": "pair",
+                        "args": [
+                          {
+                            "prim": "pair",
+                            "args": [
                               {
-                                "prim": "DROP",
-                                "args": [
-                                  {
-                                    "int": "2"
-                                  }
-                                ]
+                                "prim": "bytes"
                               },
                               {
-                                "prim": "PUSH",
+                                "prim": "ticket",
                                 "args": [
                                   {
-                                    "prim": "string"
-                                  },
-                                  {
-                                    "string": "Unauthorized set entrypoint"
-                                  }
-                                ]
-                              },
-                              {
-                                "prim": "FAILWITH"
-                              }
-                            ],
-                            [
-                              {
-                                "prim": "SOME"
-                              },
-                              {
-                                "prim": "UPDATE",
-                                "args": [
-                                  {
-                                    "int": "2"
+                                    "prim": "unit"
                                   }
                                 ]
                               }
                             ]
+                          },
+                          {
+                            "prim": "nat"
+                          },
+                          {
+                            "prim": "bytes"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "IF_NONE",
+                    "args": [
+                      [
+                        {
+                          "prim": "PUSH",
+                          "args": [
+                            {
+                              "prim": "string"
+                            },
+                            {
+                              "string": "Invalid rollup address"
+                            }
                           ]
                         },
                         {
-                          "prim": "NIL",
-                          "args": [
-                            {
-                              "prim": "operation"
-                            }
-                          ]
+                          "prim": "FAILWITH"
                         }
-                      ]
+                      ],
+                      []
                     ]
-                  }
-                ],
-                [
+                  },
                   {
-                    "prim": "DROP"
+                    "prim": "PUSH",
+                    "args": [
+                      {
+                        "prim": "mutez"
+                      },
+                      {
+                        "int": "0"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "PUSH",
+                    "args": [
+                      {
+                        "prim": "bytes"
+                      },
+                      {
+                        "bytes": ""
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "PUSH",
+                    "args": [
+                      {
+                        "prim": "nat"
+                      },
+                      {
+                        "int": "0"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "PAIR"
+                  },
+                  {
+                    "prim": "DIG",
+                    "args": [
+                      {
+                        "int": "5"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "DIG",
+                    "args": [
+                      {
+                        "int": "4"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "PAIR"
+                  },
+                  {
+                    "prim": "PAIR"
+                  },
+                  {
+                    "prim": "TRANSFER_TOKENS"
+                  },
+                  {
+                    "prim": "NONE",
+                    "args": [
+                      {
+                        "prim": "pair",
+                        "args": [
+                          {
+                            "prim": "address"
+                          },
+                          {
+                            "prim": "bytes"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "DIG",
+                    "args": [
+                      {
+                        "int": "2"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "PAIR"
                   },
                   {
                     "prim": "NIL",
@@ -557,12 +278,183 @@
                         "prim": "operation"
                       }
                     ]
+                  },
+                  {
+                    "prim": "DIG",
+                    "args": [
+                      {
+                        "int": "2"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "CONS"
+                  },
+                  {
+                    "prim": "PAIR"
+                  }
+                ],
+                [
+                  {
+                    "prim": "SWAP"
+                  },
+                  {
+                    "prim": "UNPAIR"
+                  },
+                  {
+                    "prim": "SWAP"
+                  },
+                  {
+                    "prim": "IF_NONE",
+                    "args": [
+                      [],
+                      [
+                        {
+                          "prim": "DROP"
+                        },
+                        {
+                          "prim": "PUSH",
+                          "args": [
+                            {
+                              "prim": "string"
+                            },
+                            {
+                              "string": "deposit locked"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "FAILWITH"
+                        }
+                      ]
+                    ]
+                  },
+                  {
+                    "prim": "AMOUNT"
+                  },
+                  {
+                    "prim": "SELF",
+                    "annots": [
+                      "%callback"
+                    ]
+                  },
+                  {
+                    "prim": "DUP",
+                    "args": [
+                      {
+                        "int": "3"
+                      }
+                    ]
+                  },
+                  {
+                    "prim": "CONTRACT",
+                    "args": [
+                      {
+                        "prim": "contract",
+                        "args": [
+                          {
+                            "prim": "ticket",
+                            "args": [
+                              {
+                                "prim": "unit"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "annots": [
+                      "%mint"
+                    ]
+                  },
+                  {
+                    "prim": "IF_NONE",
+                    "args": [
+                      [
+                        {
+                          "prim": "DROP",
+                          "args": [
+                            {
+                              "int": "4"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "PUSH",
+                          "args": [
+                            {
+                              "prim": "string"
+                            },
+                            {
+                              "string": "Invalid tez ticket contract"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "FAILWITH"
+                        }
+                      ],
+                      [
+                        {
+                          "prim": "DUG",
+                          "args": [
+                            {
+                              "int": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "TRANSFER_TOKENS"
+                        },
+                        {
+                          "prim": "DIG",
+                          "args": [
+                            {
+                              "int": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "SOME"
+                        },
+                        {
+                          "prim": "DIG",
+                          "args": [
+                            {
+                              "int": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "PAIR"
+                        },
+                        {
+                          "prim": "NIL",
+                          "args": [
+                            {
+                              "prim": "operation"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "DIG",
+                          "args": [
+                            {
+                              "int": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "prim": "CONS"
+                        },
+                        {
+                          "prim": "PAIR"
+                        }
+                      ]
+                    ]
                   }
                 ]
               ]
-            },
-            {
-              "prim": "PAIR"
             }
           ]
         ]
@@ -572,23 +464,10 @@
       "prim": "Pair",
       "args": [
         {
-          "prim": "Pair",
-          "args": [
-            {
-              "string": "tz1R4EjaQqeBhBP2dztahpkzHTZ61PSssqkh"
-            },
-            {
-              "string": "KT1FHqsvc7vRS3u54L66DdMX4gb6QKqxJ1JW"
-            }
-          ]
+          "string": "KT1FHqsvc7vRS3u54L66DdMX4gb6QKqxJ1JW"
         },
         {
-          "prim": "Some",
-          "args": [
-            {
-              "string": "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
-            }
-          ]
+          "prim": "None"
         }
       ]
     }

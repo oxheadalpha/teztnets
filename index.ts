@@ -152,7 +152,7 @@ const dailynet_chain = new TezosChain(
       "taquito_sapling_contract.json",
       "taquito_tzip_12_16_contract.json",
       "evm_bridge.json",
-      "evm_fa12_contract.json",
+      "exchanger.json",
     ],
     // chartRepoVersion: "6.18.0",
     chartPath: "networks/dailynet/tezos-k8s",
