@@ -65,7 +65,7 @@ const metrics = new k8s.yaml.ConfigFile(
 )
 
 const csiRole = createEbsCsiRole({ clusterOidcArn, clusterOidcUrl })
-const ebsCsiDriverAddon = new aws.eks.Addon(
+new aws.eks.Addon(
   "ebs-csi-driver",
   {
     clusterName: cluster.eksCluster.name,
@@ -73,6 +73,13 @@ const ebsCsiDriverAddon = new aws.eks.Addon(
     serviceAccountRoleArn: csiRole.arn,
   },
   { parent: cluster }
+)
+// we define a storage class to allow volume expansion.
+// we also make it gp3 since it's cheaper
+new k8s.yaml.ConfigFile(
+  "gp3-StorageClass",
+  // Path is relative to root of Pulumi project
+  { file: "k8s-yaml/gp3StorageClass.yaml" },
 )
 
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
