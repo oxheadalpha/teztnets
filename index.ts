@@ -80,6 +80,10 @@ new k8s.yaml.ConfigFile(
   "gp3-StorageClass",
   // Path is relative to root of Pulumi project
   { file: "k8s-yaml/gp3StorageClass.yaml" },
+  {
+    provider: cluster.provider,
+    parent: cluster,
+  }
 )
 
 const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
@@ -288,7 +292,7 @@ const oxfordnet_chain = new TezosChain(
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
     bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
 
@@ -333,7 +337,7 @@ function getNetworks(chains: TezosChain[]): object {
 function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
