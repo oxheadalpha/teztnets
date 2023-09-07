@@ -202,6 +202,7 @@ activation:
 
 nodes:
   tezos-baking-node:
+    #storageClassName: gp3
     instances:
       - bake_using_accounts:
           - oxheadbaker
@@ -225,8 +226,7 @@ nodes:
 full_snapshot_url: null
 rolling_snapshot_url: null
 rolling_tarball_url: null
-archive_tarball_url: null
-
+archive_tarball_url: https://oxfordnet.xtz-shots.io/archive-tarball
 images:
   octez: tezos/tezos:v18.0-rc1
 
