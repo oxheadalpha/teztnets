@@ -108,6 +108,24 @@ activation:
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
     zk_rollup_max_ticket_payload_size: 2048
+  bootstrap_parameters:
+    bootstrap_smart_rollups:
+    - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
+      pvm_kind: "wasm_2_0_0"
+      kernel: "fromfile#/usr/local/share/tezos/evm_kernel/evm_installer.wasm"
+      parameters_ty:
+        prim: pair
+        args:
+        - prim: pair
+          args:
+          - prim: bytes
+          - prim: ticket
+            args:
+            - prim: unit
+        - prim: pair
+          args:
+          - prim: nat
+          - prim: bytes
 
 nodes:
   tezos-baking-node:
