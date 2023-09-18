@@ -1,3 +1,5 @@
+tezos_k8s_images:
+  utils: ghcr.io/oxheadalpha/tezos-k8s-utils:evm_rollup
 node_config_network:
   activation_account_name: oxheadbaker
   genesis:
@@ -149,6 +151,14 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
+# smartRollupNodes:
+#   evm:
+#     operator_account: oxheadbaker
+#     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
+#     ingress:
+#       # ingress details filled by pulumi
+#     evm_proxy_ingress:
+#       # ingress details filled by pulumi
 dalNodes:
   bootstrap:
     bootstrapProfile: true
