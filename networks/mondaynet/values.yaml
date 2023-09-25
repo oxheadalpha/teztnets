@@ -151,14 +151,14 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-# smartRollupNodes:
-#   evm:
-#     operator_account: oxheadbaker
-#     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
-#     ingress:
-#       # ingress details filled by pulumi
-#     evm_proxy_ingress:
-#       # ingress details filled by pulumi
+smartRollupNodes:
+  evm:
+    operator_account: oxheadbaker
+    rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
+    ingress:
+      # ingress details filled by pulumi
+    evm_proxy_ingress:
+      # ingress details filled by pulumi
 dalNodes:
   bootstrap:
     bootstrapProfile: true
