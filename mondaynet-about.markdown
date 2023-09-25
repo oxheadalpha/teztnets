@@ -58,6 +58,16 @@ octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 
+### EVM Rollup
+
+More information about the Tezos EVM Rollup will be available soon.
+
+| | |
+|-------|---------------------|
+| Octez Rollup RPC URL | [`https://evm-rollup-node.mondaynet-2023-09-25.teztnets.xyz`](https://evm-rollup-node.mondaynet-2023-09-25.teztnets.xyz/global/block/head) |
+| EVM Proxy URL | [`https://evm.mondaynet-2023-09-25.teztnets.xyz`](https://evm.mondaynet-2023-09-25.teztnets.xyz) |
+
+
 
 
 ### Data Availability Layer
