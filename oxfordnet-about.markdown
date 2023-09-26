@@ -11,7 +11,7 @@ Test Chain for the Oxford Protocol Proposal
 | Public RPC endpoints | [https://rpc.oxfordnet.teztnets.xyz](https://rpc.oxfordnet.teztnets.xyz/chains/main/chain_id)<br/> |
 | Faucet | [Oxfordnet faucet](https://faucet.oxfordnet.teztnets.xyz) |
 | Full network name | `TEZOS_OXFORDNET_2023-08-21T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v18.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.0-rc1) |
+| Tezos docker build | [tezos/tezos:v18.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.0) |
 | Activated on | 2023-08-21T15:00:00Z |
 
 
@@ -23,7 +23,7 @@ Test Chain for the Oxford Protocol Proposal
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v18.0-rc1
+#### Download and install Tezos version v18.0
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -33,7 +33,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Oxfordnet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v18.0-rc1
+docker run -it --entrypoint=/bin/sh tezos/tezos:v18.0
 ```
 
 #### Alternative: Build the software
@@ -43,7 +43,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v18.0-rc1
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v18.0-rc1
+git checkout v18.0
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
