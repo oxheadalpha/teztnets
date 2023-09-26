@@ -228,7 +228,7 @@ rolling_snapshot_url: null
 rolling_tarball_url: null
 archive_tarball_url: https://oxfordnet.xtz-shots.io/archive-tarball
 images:
-  octez: tezos/tezos:v18.0-rc1
+  octez: tezos/tezos:v18.0
 
 protocols:
   - command: Proxford
