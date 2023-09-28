@@ -71,8 +71,7 @@ export interface TezosParamsInitializer {
 }
 
 export class TezosChainParametersBuilder
-  implements TezosHelmParameters, TezosInitParameters
-{
+  implements TezosHelmParameters, TezosInitParameters {
   private _helmValues: any
   private _faucetHelmValues: any
   private _name: string
@@ -254,7 +253,7 @@ export class TezosChainParametersBuilder
     )
     this.name(
       `${this.getDnsName().toLowerCase()}-${
-        deployDate.toISOString().split("T")[0]
+      deployDate.toISOString().split("T")[0]
       }`
     )
     // this is a trick to change mondaynet's name when it needs to be respun.
@@ -431,7 +430,7 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues["activation"]["bootstrap_contract_urls"] = []
 
       if (params.getContracts()) {
-        params.getContracts().forEach(function (contractFile: any) {
+        params.getContracts().forEach(function(contractFile: any) {
           let contractFullName = `${name}-${contractFile}`
           const bucketObject = new aws.s3.BucketObject(contractFullName, {
             bucket: params.getActivationBucket(),
@@ -444,7 +443,7 @@ export class TezosChain extends pulumi.ComponentResource {
           params.helmValues["activation"]["bootstrap_contract_urls"].push(
             pulumi.interpolate`https://${
               params.getActivationBucket().bucketRegionalDomainName
-            }/${contractFullName}`
+              }/${contractFullName}`
           )
         })
       }
@@ -690,7 +689,7 @@ export class TezosChain extends pulumi.ComponentResource {
           },
         ],
       }
-      params.helmValues.smartRollupNodes.evm.evm_proxy_ingress =
+      params.helmValues.smartRollupNodes.evm.evm_proxy.ingress =
         evmProxyIngressParams
     }
     // Data Availability Layer

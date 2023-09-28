@@ -168,7 +168,13 @@ smartRollupNodes:
     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
     ingress:
       # ingress details filled by pulumi
-    evm_proxy_ingress:
+    evm_proxy:
+      annotations:
+        # sometimes evm proxy takes too long to initialize
+        # because it depends on the rollup node which in turn
+        # depends on the octez node to be available
+        'pulumi.com/skipAwait': true
+      ingress:
       # ingress details filled by pulumi
 dalNodes:
   bootstrap:
