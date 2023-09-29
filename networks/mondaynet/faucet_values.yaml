@@ -1,5 +1,5 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.1.0
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.0
   tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.0
 
 
@@ -25,14 +25,30 @@ backendRpcUrl: http://tezos-node-rpc:8732
 # If the backend requires CAPTCHA tokens to be submitted.
 enableCaptcha: true
 # Faucet won't dispense to an address if its balance exceeds this.
-maxBalance: 61000
+maxBalance: 1000000
 # The minimum Tez allowed per request.
 minTez: 1
 # The maximum Tez allowed per request.
-maxTez: 10001
+maxTez: 1000000
 
 # Use this prop now to indicate to pulumi to deploy redis backend.
-disableChallenges: true
+disableChallenges: false
+# Minimum number of challenges required for the minimum Tez request.
+minChallenges: 1
+# Maximum number of challenges required for the maximum Tez request.
+# 1100 challenges should take ~20m.
+maxChallenges: 1100
+# Maximum number of challenges required for the maximum Tez request when a
+# captcha is used.
+# 53 challenges should take ~4m.
+maxChallengesWithCaptcha: 53
+# How many bytes the challenge string should be.
+challengeSize: 2048
+# Difficulty level for challenges.
+difficulty: 4
+
+redis:
+  url: "redis://redis-master:6379"
 
 ingress:
   enabled: true
