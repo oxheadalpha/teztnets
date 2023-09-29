@@ -1,30 +1,30 @@
 {
-  "dailynet-2023-09-28": {
+  "dailynet-2023-09-29": {
     "aliases": [],
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-09-28T00:00:00.000Z",
-    "dal_p2p_url": "dal.dailynet-2023-09-28.teztnets.xyz",
-    "dal_rpc_url": "https://dal-rpc.dailynet-2023-09-28.teztnets.xyz",
+    "chain_name": "TEZOS-DAILYNET-2023-09-29T00:00:00.000Z",
+    "dal_p2p_url": "dal.dailynet-2023-09-29.teztnets.xyz",
+    "dal_rpc_url": "https://dal-rpc.dailynet-2023-09-29.teztnets.xyz",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_7e7eb019_20230927232817",
+    "docker_build": "tezos/tezos:master_1c019149_20230928154601",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2023-09-28.teztnets.xyz"
+      "https://evm.dailynet-2023-09-29.teztnets.xyz"
     ],
-    "faucet_url": "https://faucet.dailynet-2023-09-28.teztnets.xyz",
-    "git_ref": "7e7eb019",
+    "faucet_url": "https://faucet.dailynet-2023-09-29.teztnets.xyz",
+    "git_ref": "1c019149",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-09-28",
+    "network_url": "https://teztnets.xyz/dailynet-2023-09-29",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2023-09-28.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2023-09-29.teztnets.xyz"
     ],
-    "rpc_url": "https://rpc.dailynet-2023-09-28.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2023-09-29.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-09-28.teztnets.xyz"
+      "https://rpc.dailynet-2023-09-29.teztnets.xyz"
     ],
-    "activated_on": "2023-09-28"
+    "activated_on": "2023-09-29"
   },
   "ghostnet": {
     "aliases": [
