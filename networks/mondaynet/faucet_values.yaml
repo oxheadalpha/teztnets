@@ -1,6 +1,7 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.0.0
-  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.0.0
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.1.0
+  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.0
+
 
 # Frontend app configuration. You can optionally deploy only the faucet backend.
 enableUI: true
@@ -25,15 +26,13 @@ backendRpcUrl: http://tezos-node-rpc:8732
 enableCaptcha: true
 # Faucet won't dispense to an address if its balance exceeds this.
 maxBalance: 61000
+# The minimum Tez allowed per request.
+minTez: 1
+# The maximum Tez allowed per request.
+maxTez: 10001
 
 # Use this prop now to indicate to pulumi to deploy redis backend.
 disableChallenges: true
-
-profiles:
-  user:
-    amount: 1
-  baker:
-    amount: 10001
 
 ingress:
   enabled: true
