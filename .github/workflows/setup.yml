@@ -29,22 +29,6 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          role-to-assume: tempKubernetesAdmin
-
-      - name: Add profile credentials to ~/.aws/credentials
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile oxheadalpha_tempKubernetesAdmin
-          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile oxheadalpha_tempKubernetesAdmin
-
       - run: npm install
 
       - uses: pulumi/actions@v4
