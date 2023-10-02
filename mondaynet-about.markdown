@@ -8,11 +8,11 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.mondaynet-2023-09-25.teztnets.xyz](https://rpc.mondaynet-2023-09-25.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-09-25.teztnets.xyz) |
-| Full network name | `TEZOS-MONDAYNET-2023-09-25T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_73d5f25d_20230924111132](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_73d5f25d_20230924111132) |
-| Activated on | 2023-09-25T00:00:00.000Z |
+| Public RPC endpoints | [https://rpc.mondaynet-2023-10-02.teztnets.xyz](https://rpc.mondaynet-2023-10-02.teztnets.xyz/chains/main/chain_id)<br/> |
+| Faucet | [Mondaynet faucet](https://faucet.mondaynet-2023-10-02.teztnets.xyz) |
+| Full network name | `TEZOS-MONDAYNET-2023-10-02T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_10175a5f_20230929174815](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_10175a5f_20230929174815) |
+| Activated on | 2023-10-02T00:00:00.000Z |
 
 
 
@@ -29,7 +29,7 @@ A testnet that restarts every Monday launched from tezos/tezos master branch. It
 To join Mondaynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_73d5f25d_20230924111132
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_10175a5f_20230929174815
 ```
 
 #### Alternative: Build the software
@@ -39,7 +39,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_73d5f25d_20230924111132
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 73d5f25d
+git checkout 10175a5f
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -52,7 +52,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/mondaynet-2023-09-25
+octez-node config init --network https://teztnets.xyz/mondaynet-2023-10-02
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -64,8 +64,8 @@ More information about the Tezos EVM Rollup will be available soon.
 
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | [`https://evm-rollup-node.mondaynet-2023-09-25.teztnets.xyz`](https://evm-rollup-node.mondaynet-2023-09-25.teztnets.xyz/global/block/head) |
-| EVM Proxy URL | [`https://evm.mondaynet-2023-09-25.teztnets.xyz`](https://evm.mondaynet-2023-09-25.teztnets.xyz) |
+| Octez Rollup RPC URL | [`https://evm-rollup-node.mondaynet-2023-10-02.teztnets.xyz`](https://evm-rollup-node.mondaynet-2023-10-02.teztnets.xyz/global/block/head) |
+| EVM Proxy URL | [`https://evm.mondaynet-2023-10-02.teztnets.xyz`](https://evm.mondaynet-2023-10-02.teztnets.xyz) |
 
 
 
@@ -80,8 +80,8 @@ The DAL node is accessible with the following endpoints:
 
 | | |
 |-------|---------------------|
-| Octez DAL Node RPC URL | [`https://dal-rpc.mondaynet-2023-09-25.teztnets.xyz`](https://dal-rpc.mondaynet-2023-09-25.teztnets.xyz) |
-| DAL P2P Endpoint | `dal.mondaynet-2023-09-25.teztnets.xyz:11732` |
+| Octez DAL Node RPC URL | [`https://dal-rpc.mondaynet-2023-10-02.teztnets.xyz`](https://dal-rpc.mondaynet-2023-10-02.teztnets.xyz) |
+| DAL P2P Endpoint | `dal.mondaynet-2023-10-02.teztnets.xyz:11732` |
 
 
 
