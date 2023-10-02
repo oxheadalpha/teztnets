@@ -587,7 +587,7 @@ export class TezosChain extends pulumi.ComponentResource {
           {
             chart: "redis",
             version: "17.15.6",
-            namespace: name,
+            namespace: ns.metadata.name,
             repositoryOpts: {
               repo: "https://charts.bitnami.com/bitnami",
             },
