@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi"
 import * as k8s from "@pulumi/kubernetes"
 
 const deployMonitoring = (
-  provider: any,
+  provider: k8s.Provider,
   slackWebhook: pulumi.Output<string>
 ) => {
   const alertTitle =

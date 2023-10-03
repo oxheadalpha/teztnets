@@ -1,71 +1,32 @@
-import * as aws from "@pulumi/aws"
-import * as eks from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
-import * as tezos from "@oxheadalpha/tezos-pulumi"
 
-import { clusterOidcUrl, clusterOidcArn } from "../index"
-
-const kubeSystem = "kube-system"
-
-const deployExternalDns = ({ cluster }: any) => {
-  const externalDnsRole = clusterOidcUrl?.apply(
-    (url) =>
-      new aws.iam.Role("external-dns-assume-role", {
-        name: "external-dns-assume-role-teztnets",
-        assumeRolePolicy: {
-          Version: "2012-10-17",
-          Statement: [
-            {
-              Effect: "Allow",
-              Principal: {
-                Federated: clusterOidcArn,
-              },
-              Action: "sts:AssumeRoleWithWebIdentity",
-              Condition: {
-                StringEquals: {
-                  [`${url}: sub`]: `system: serviceaccount:${kubeSystem}:external-dns`,
-                },
-              },
-            },
-          ],
-        },
-        tags: {
-          clusterName: cluster.eksCluster.name,
-        },
-      })
-  )
-
-  const saName = `external-dns-${cluster.name}`;
-
-  new k8s.core.v1.ServiceAccount(
-    `${saName}-sa`,
+const deployExternalDns = (provider: k8s.Provider) => {
+  // Create a new IAM Policy for external-dns to manage R53 record sets.
+  new k8s.helm.v3.Release(
+    "external-dns",
     {
-      metadata: {
-        name: saName,
-        namespace: kubeSystem,
-        annotations: {
-          "eks.amazonaws.com/role-arn": externalDnsRole.arn,
-        },
+      chart: "external-dns",
+      version: "6.26.2",
+      namespace: "default",
+      repositoryOpts: {
+        repo: "https://charts.bitnami.com/bitnami",
       },
-    },
-    { provider: cluster.provider, parent: cluster }
-  )
-
-  new tezos.aws.ExteranlDns(
-    {
-      iamRole: externalDnsRole,
-      namespace: kubeSystem,
-      txtOwnerId: cluster.eksCluster.name,
-      zoneIdFilters: null,
-      version: "6.13.0",
+      // https://artifacthub.io/packages/helm/bitnami/external-dns#etcd-parameters
       values: {
-        serviceAccount: {
-          create: false,
-          name: saName,
-        }
+        replicas: 2,
+        // This tells extnernal-dns to only track records in the hosted zone
+        // that were created for this cluster. Otherwise it will sync all records
+        // in the hosted zone.
+        //txtOwnerId: cluster.eksCluster.name,
+        // This will delete route53 records after an ingress or its hosts are
+        // deleted.
+        policy: "sync",
+        aws: {
+          zoneType: "public",
+        },
       },
     },
-    { provider: cluster.provider, parent: cluster }
+    { provider: provider }
   )
 }
 

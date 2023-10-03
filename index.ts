@@ -5,13 +5,11 @@ import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
 import deployMonitoring from "./pulumi/monitoring"
-import deployExternalDns from "./externalDns"
+import deployExternalDns from "./pulumi/externalDns"
 import deployCertManager from "./pulumi/certManager"
 import deployPyrometer from "./pyrometer"
 import deployNginx from "./pulumi/nginx"
-import { publicReadPolicyForBucket } from "./s3"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
-import { createEbsCsiRole } from "./pulumi/ebsCsiDriver"
 
 let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
@@ -88,7 +86,7 @@ const provider = new k8s.Provider("do-k8s-provider", {
 })
 
 deployMonitoring(provider, slackWebhook)
-//deployExternalDns(cluster)
+//deployExternalDns(provider)
 deployNginx({ provider })
 
 // Deploy a bucket to store activation smart contracts for all testnets
