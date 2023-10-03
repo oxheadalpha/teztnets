@@ -77,7 +77,8 @@ users:
 
 const doCfg = new pulumi.Config("digitalocean")
 
-export const kubeconfig = createTokenKubeconfig(cluster, "admin", doCfg.requireSecret("token"))
+const doToken = doCfg.requireSecret("token");
+export const kubeconfig = createTokenKubeconfig(cluster, "admin", doToken)
 
 const provider = new k8s.Provider("do-k8s-provider", {
   kubeconfig
@@ -86,7 +87,7 @@ const provider = new k8s.Provider("do-k8s-provider", {
 })
 
 deployMonitoring(provider, slackWebhook)
-//deployExternalDns(provider)
+deployExternalDns(provider, doToken)
 deployNginx({ provider })
 
 // Deploy a bucket to store activation smart contracts for all testnets
