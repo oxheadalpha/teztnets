@@ -36,11 +36,6 @@ const cluster = new digitalocean.KubernetesCluster("do-cluster", {
 });
 
 
-/**
- * Top level A records points to github pages
- * see: "configure an apex domain"
- * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
- */
 // Export the cluster's kubeconfig.
 // Manufacture a DO kubeconfig that uses a given API token.
 //
@@ -97,9 +92,29 @@ const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
 
-new digitalocean.Domain("teztnets.xyz", {
+const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
   name: "teztnets.xyz",
 });
+/**
+ * Top level A records points to github pages
+ * see: "configure an apex domain"
+ * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+ */
+[
+  "185.199.108.153",
+  "185.199.109.153",
+  "185.199.110.153",
+  "185.199.111.153",
+].forEach((v) => {
+  new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
+    domain: teztnetsDomain.name,
+    name: "teztnets.xyz",
+    type: "A",
+    ttl: 300,
+    value: v
+  })
+
+})
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
