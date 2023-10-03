@@ -97,6 +97,9 @@ const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
 
+new digitalocean.Domain("teztnets.xyz", {
+  name: "teztnets.xyz",
+});
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
