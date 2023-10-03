@@ -426,11 +426,11 @@ export class TezosChain extends pulumi.ComponentResource {
         params.getContracts().forEach(function(contractFile: any) {
           let contractFullName = `${name}-${contractFile}`
           const bucketObject = new digitalocean.SpacesBucketObject(contractFullName, {
+            region: digitalocean.Region.NYC3,
             bucket: params.getActivationBucket().name,
             key: contractFullName,
-            source: new pulumi.asset.FileAsset(
-              `bootstrap_contracts/${contractFile}`
-            ),
+            source:
+              `bootstrap_contracts/${contractFile}`,
             contentType: mime.getType(contractFile),
           })
           params.helmValues["activation"]["bootstrap_contract_urls"].push(

@@ -1,15 +1,13 @@
 config:
-  aws:profile: oxheadalpha_tempKubernetesAdmin
-  aws:region: us-east-2
-  teztnets:aws-account-id:
-    secure: AAABAKrODV/Bg/UQH/m6XVe4fijcmBQ6K0ip2ywd1EKRxaVh4vfNgWytrRg=
+  digitalocean:token:
+    secure: AAABAMpNTfnnPqjAqWtUOYhDd0w+XmdWKU0NZ0sYDjVTaMsyQKu8yI1dZ9DW7jAHNSYDciB0ruykARe+lf/G8Hmlvzik7n0TVYgWO3kEssager4GVQrA+ikC5RsVO1oobFh3pIPSeQ==
   teztnets:faucet-private-key:
-    secure: AAABAKPZ71lMMbZ1udwJp45T9PByWZUzB32jqJhUGxCgDjtV40JEq42xlKGpsuA8KEp7SZCeMD2rK+IeDk4p1UiQCbJCMOTM/Do7vALVaY3Y/txDLQs=
+    secure: AAABAFEB5jCOJWeMci6Dzu1AzK+iwkgyW5K5ww0eJXorAVMwt2IqE90NCqc+MUwmj+6eVBuJaUFslmqN8J4lSk+dLWKlAiMbpurkFmib9/kADLPqp1I=
   teztnets:faucet-recaptcha-secret-key:
-    secure: AAABADB2HtNcurlY51X+/Bbny52MMVCR5N/UjslfAMBSm/vyJkZTKm57F1BFNZKE4BrVuS7O2VM33QTxB5DkTr9ryBcREOiy
+    secure: AAABACaZeKlZOEiW1pyF8D/kCFxC6ftmGV1mLl3OX83upTmAkXAFn3OlSU6o4opyttUWtOzbbjs59xtdwIYvMFEqKRJzfvf2
   teztnets:faucet-recaptcha-site-key:
-    secure: AAABAEIxDLNcBeMEKcI8jTHgQDpQaIc1HkT61f5hfKDyJ5d34Z5xJdOHH/9P89sbDCQhWNphYCH15Zp3t83Iv4uSnmsFKLtW
-  teztnets:private-oxhead-baking-key:
-    secure: AAABAFVfh+SWNpSS5mRokBkkbfks3K28L/uCVaLh29ixVP2xJr3sKlo68npMYWlVlasKMj9FugefefmZmYrCNW9mB35Z9tEMvEPvqLdvLJM24Q/clU4=
+    secure: AAABAOsBQ+7YnCNYruw3IHLRRIcFfd8rvvftJbTAA1o6A4HeMRj00ST9Rf4dExmyzED/hsA+CZA6onoYbL4fmvtIxsegsfUz
+  teztnets:private-teztnets-baking-key:
+    secure: AAABAMVj5GU3XyvDXwEksQKkhmP1BA7Y1qBrZGdv9u8fXyvhLv9kcdd/eKuKYszudUV0N136uQt4owsfF73ObqyvPtYT5exKXNZAIIcaBDbriOaplas=
   teztnets:slack-webhook:
-    secure: AAABAGV/ksRtTAuUbya0yEOe6LmxGria9rugKPfqMIdDS4e6XLdyuIR5edXC6GBaYoD3kRjVbrZdtZtorgXAMRDQErr3zn/kv9sExEJ25rbdn4KAdc5pzhU5b4PjxLt1wSpY+opKOkUh9WZvTzC3
+    secure: AAABAPsigJDNSRHZQpI9b6eePoQaHE4/AAUVcWGpkWxUHZ1FIDvCO9x6vBjsZw0q17BJPKxmJhV3GF2aPvXJbFgDyNwipxMZgkoAha0cbXtfqt4WxU8/
