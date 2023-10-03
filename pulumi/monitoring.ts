@@ -1,9 +1,9 @@
 import * as pulumi from "@pulumi/pulumi"
+import * as digitalocean from "@pulumi/digitalocean"
 import * as k8s from "@pulumi/kubernetes"
-import * as eks from "@pulumi/eks"
 
 const deployMonitoring = (
-  cluster: eks.Cluster,
+  cluster: digitalocean.KubernetesCluster,
   slackWebhook: pulumi.Output<string>
 ) => {
   const alertTitle =

@@ -1,14 +1,12 @@
-import * as aws from "@pulumi/aws"
 import * as k8s from "@pulumi/kubernetes"
-import * as tezos from "@oxheadalpha/tezos-pulumi"
 
-const deployNginx = ({ cluster }: any) => {
+const deployNginx = ({ provider }: any) => {
   const nginxNamespace = new k8s.core.v1.Namespace("nginx", {
     metadata: {
       name: "nginx",
     }
   }, {
-    provider: cluster.provider,
+    provider: provider,
   });
   new k8s.helm.v3.Release(
     "nginx",
@@ -29,7 +27,7 @@ const deployNginx = ({ cluster }: any) => {
       timeout: 450,
     },
     {
-      provider: cluster.provider,
+      provider: provider,
     }
   )
 }
