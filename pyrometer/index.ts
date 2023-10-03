@@ -1,36 +1,19 @@
-import * as aws from "@pulumi/aws"
-import { Cluster } from "@pulumi/eks"
 import * as k8s from "@pulumi/kubernetes"
 
-import { createCertValidation } from "../route53"
-
 const deployPyrometer = async ({
-  cluster,
+  provider,
   networks,
-  teztnetsHostedZone,
 }: {
-  cluster: Cluster
+  provider: k8s.Provider,
   networks: any
-  teztnetsHostedZone: aws.route53.Zone
 }) => {
   const pyrometerDomain = "status.teztnets.xyz"
-
-  const pyrometerCert = new aws.acm.Certificate(`${pyrometerDomain}-cert`, {
-    validationMethod: "DNS",
-    domainName: pyrometerDomain,
-  })
-
-  createCertValidation({
-    cert: pyrometerCert,
-    targetDomain: pyrometerDomain,
-    hostedZone: teztnetsHostedZone,
-  })
 
   const pyrometerStr = "pyrometer"
   const namespace = new k8s.core.v1.Namespace(
     pyrometerStr,
     { metadata: { name: pyrometerStr } },
-    { provider: cluster.provider, parent: cluster }
+    { provider: provider }
   )
 
   new k8s.helm.v3.Chart(
@@ -77,7 +60,7 @@ const deployPyrometer = async ({
         },
       },
     },
-    { providers: { kubernetes: cluster.provider }, parent: namespace }
+    { providers: { kubernetes: provider }, parent: namespace }
   )
 }
 

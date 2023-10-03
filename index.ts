@@ -430,4 +430,4 @@ export const teztnets = {
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
-//deployPyrometer({ cluster, teztnetsHostedZone, networks })
+deployPyrometer({ provider, networks })
