@@ -1,6 +1,6 @@
 accounts:
   oxheadbaker:
-    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     bootstrap_balance: "6700000000000"
     is_bootstrap_baker_account: true
     type: secret

@@ -103,7 +103,7 @@ images:
 # We give:
 accounts:
   oxheadbaker:
-    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     # edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC
     bootstrap_balance: '1000000000000'
     is_bootstrap_baker_account: true
