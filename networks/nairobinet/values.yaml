@@ -206,7 +206,7 @@ nodes:
           - oxheadbaker
         config:
           shell:
-            history_mode: archive
+            history_mode: rolling
           rpc:
             cors-headers: [ "content-type" ]
             cors-origin: [ "*" ]
@@ -217,7 +217,7 @@ nodes:
       - accuser
       - vdf
     readiness_probe: false
-    storage_size: 500Gi
+    storage_size: 20Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
