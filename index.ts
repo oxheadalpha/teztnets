@@ -93,7 +93,7 @@ const provider = new k8s.Provider("do-k8s-provider", {
 //deployNginx({ cluster })
 
 // Deploy a bucket to store activation smart contracts for all testnets
-const activationBucket = new digitalocean.SpacesBucket(`teztnets-global-activation-bucket`)
+const activationBucket = new digitalocean.SpacesBucket("teztnets-global-activation-bucket", { acl: "public-read" })
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
