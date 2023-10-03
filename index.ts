@@ -84,6 +84,7 @@ const provider = new k8s.Provider("do-k8s-provider", {
 deployMonitoring(provider, slackWebhook)
 deployExternalDns(provider, doToken)
 deployNginx({ provider })
+deployCertManager(provider)
 
 // Deploy a bucket to store activation smart contracts for all testnets
 const activationBucket = new digitalocean.SpacesBucket("teztnets-global-activation-bucket", { acl: "public-read" })
