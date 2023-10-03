@@ -32,8 +32,8 @@ const cluster = new digitalocean.KubernetesCluster("do-cluster", {
     name: "default",
     size: "s-4vcpu-8gb",
     autoScale: true,
-    minNodes: 1,
-    maxNodes: 1
+    minNodes: 2,
+    maxNodes: 2
   },
 });
 

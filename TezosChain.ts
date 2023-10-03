@@ -425,13 +425,14 @@ export class TezosChain extends pulumi.ComponentResource {
       if (params.getContracts()) {
         params.getContracts().forEach(function(contractFile: any) {
           let contractFullName = `${name}-${contractFile}`
-          const bucketObject = new digitalocean.SpacesBucketObject(contractFullName, {
+          new digitalocean.SpacesBucketObject(contractFullName, {
             region: digitalocean.Region.NYC3,
             bucket: params.getActivationBucket().name,
             key: contractFullName,
             source:
               `bootstrap_contracts/${contractFile}`,
             contentType: mime.getType(contractFile),
+            acl: "public-read"
           })
           params.helmValues["activation"]["bootstrap_contract_urls"].push(
             pulumi.interpolate`https://${
