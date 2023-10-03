@@ -1,4 +1,8 @@
 config:
+  digitalocean:spaces_access_id:
+    secure: AAABAJc7V0rEIgqs1AZKELWa+K7j/fpusQD6W4iyO3yjBNmo9OLoZrG21f0TZI8GvaxqLA==
+  digitalocean:spaces_secret_key:
+    secure: AAABAB8eVXHaf0xgSMSGIoa6aIIYdY9E3Ap5PRpuSpPPr2wEGEB1cdT9HAjtMQnDlvnZCFXWjnl+Cpdf4iM46HUHpC7o2ToSrG8M
   digitalocean:token:
     secure: AAABAMpNTfnnPqjAqWtUOYhDd0w+XmdWKU0NZ0sYDjVTaMsyQKu8yI1dZ9DW7jAHNSYDciB0ruykARe+lf/G8Hmlvzik7n0TVYgWO3kEssager4GVQrA+ikC5RsVO1oobFh3pIPSeQ==
   teztnets:faucet-private-key:

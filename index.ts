@@ -26,7 +26,7 @@ const private_oxhead_baking_key = cfg.requireSecret("private-teztnets-baking-key
 
 const cluster = new digitalocean.KubernetesCluster("do-cluster", {
   region: digitalocean.Region.NYC1,
-  version: "1.27.4-do.0",
+  version: "1.27.6-do.0",
   autoUpgrade: true,
   nodePool: {
     name: "default",
