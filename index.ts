@@ -87,7 +87,7 @@ const provider = new k8s.Provider("do-k8s-provider", {
   parent: cluster,
 })
 
-//deployMonitoring(cluster, slackWebhook)
+deployMonitoring(provider, slackWebhook)
 //deployExternalDns(cluster)
 deployNginx({ provider })
 

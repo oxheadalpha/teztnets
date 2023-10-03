@@ -1,9 +1,8 @@
 import * as pulumi from "@pulumi/pulumi"
-import * as digitalocean from "@pulumi/digitalocean"
 import * as k8s from "@pulumi/kubernetes"
 
 const deployMonitoring = (
-  cluster: digitalocean.KubernetesCluster,
+  provider: any,
   slackWebhook: pulumi.Output<string>
 ) => {
   const alertTitle =
@@ -69,16 +68,15 @@ const deployMonitoring = (
       metadata: { name: "monitoring" },
     },
     {
-      provider: cluster.provider,
-      parent: cluster,
+      provider: provider,
     }
   )
 
-  const monitorStack = new k8s.helm.v3.Chart(
+  new k8s.helm.v3.Release(
     "monitoring",
     {
       chart: "kube-prometheus-stack",
-      fetchOpts: {
+      repositoryOpts: {
         repo: "https://prometheus-community.github.io/helm-charts",
       },
       version: "48.3.1",
@@ -130,12 +128,12 @@ const deployMonitoring = (
       },
     },
     {
-      provider: cluster.provider,
+      provider: provider,
       dependsOn: [monitorNamespace],
       parent: monitorNamespace,
     }
   )
-  const tezosPromStack = new k8s.helm.v3.Chart(
+  new k8s.helm.v3.Chart(
     "tezos-prom",
     {
       chart: "tezos-prometheus-stack",
@@ -143,7 +141,7 @@ const deployMonitoring = (
       namespace: monitorNamespace.metadata.name,
     },
     {
-      provider: cluster.provider,
+      provider: provider,
       dependsOn: [monitorNamespace],
       parent: monitorNamespace,
     }
