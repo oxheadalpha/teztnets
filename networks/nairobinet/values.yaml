@@ -223,7 +223,7 @@ nodes:
 
 full_snapshot_url: null
 rolling_snapshot_url: null
-rolling_tarball_url: null
+rolling_tarball_url: https://nairobinet.xtz-shots.io/rolling-tarball
 archive_tarball_url: https://nairobinet.xtz-shots.io/archive-tarball
 
 images:

@@ -4,16 +4,10 @@ import * as k8s from "@pulumi/kubernetes"
 import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
-import deployMonitoring from "./pulumi/monitoring"
-import deployExternalDns from "./pulumi/externalDns"
-import deployCertManager from "./pulumi/certManager"
 import deployPyrometer from "./pyrometer"
-import deployNginx from "./pulumi/nginx"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
 
-let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
-const slackWebhook = cfg.requireSecret("slack-webhook")
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret(
@@ -21,70 +15,17 @@ const faucetRecaptchaSecretKey = cfg.requireSecret(
 )
 const private_oxhead_baking_key = cfg.requireSecret("private-teztnets-baking-key")
 
+const stackRef = new pulumi.StackReference(`tqtezos/oxheadinfra_do/dev`)
 
-const cluster = new digitalocean.KubernetesCluster("do-cluster", {
-  region: digitalocean.Region.NYC1,
-  version: "1.27.6-do.0",
-  autoUpgrade: true,
-  nodePool: {
-    name: "default",
-    size: "s-4vcpu-8gb",
-    autoScale: true,
-    minNodes: 2,
-    maxNodes: 2
-  },
-});
-
-
-// Export the cluster's kubeconfig.
-// Manufacture a DO kubeconfig that uses a given API token.
-//
-// Note: this is slightly "different" than the default DOKS kubeconfig created
-// for the cluster admin, which uses a new token automatically created by DO.
-// https://github.com/pulumi/pulumi-digitalocean/issues/312#issuecomment-1143432863
-export function createTokenKubeconfig(
-  cluster: digitalocean.KubernetesCluster,
-  user: pulumi.Input<string>,
-  apiToken: pulumi.Input<string>,
-): pulumi.Output<any> {
-  const clusterName = cluster.name
-  return pulumi.interpolate`apiVersion: v1
-clusters:
-- cluster:
-    certificate-authority-data: ${cluster.kubeConfigs[0].clusterCaCertificate}
-    server: ${cluster.endpoint}
-  name: ${cluster.name}
-contexts:
-- context:
-    cluster: ${cluster.name}
-    user: ${cluster.name}-${user}
-  name: ${cluster.name}
-current-context: ${cluster.name}
-kind: Config
-users:
-- name: ${cluster.name}-${user}
-  user:
-    token: ${apiToken}
-`;
-}
-
-//export const kubeconfig = pulumi.secret(cluster.kubeConfigs[0].rawConfig)
+const kubeconfig = stackRef.requireOutput("kubeconfig")
 
 const doCfg = new pulumi.Config("digitalocean")
 
 const doToken = doCfg.requireSecret("token");
-export const kubeconfig = createTokenKubeconfig(cluster, "admin", doToken)
 
 const provider = new k8s.Provider("do-k8s-provider", {
   kubeconfig
-}, {
-  parent: cluster,
 })
-
-deployMonitoring(provider, slackWebhook)
-deployExternalDns(provider, doToken)
-deployNginx({ provider })
-deployCertManager(provider)
 
 // Deploy a bucket to store activation smart contracts for all testnets
 const activationBucket = new digitalocean.SpacesBucket("teztnets-global-activation-bucket", { acl: "public-read" })

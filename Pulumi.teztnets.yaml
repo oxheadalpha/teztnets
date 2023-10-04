@@ -13,5 +13,3 @@ config:
     secure: AAABAOsBQ+7YnCNYruw3IHLRRIcFfd8rvvftJbTAA1o6A4HeMRj00ST9Rf4dExmyzED/hsA+CZA6onoYbL4fmvtIxsegsfUz
   teztnets:private-teztnets-baking-key:
     secure: AAABAMVj5GU3XyvDXwEksQKkhmP1BA7Y1qBrZGdv9u8fXyvhLv9kcdd/eKuKYszudUV0N136uQt4owsfF73ObqyvPtYT5exKXNZAIIcaBDbriOaplas=
-  teztnets:slack-webhook:
-    secure: AAABAPsigJDNSRHZQpI9b6eePoQaHE4/AAUVcWGpkWxUHZ1FIDvCO9x6vBjsZw0q17BJPKxmJhV3GF2aPvXJbFgDyNwipxMZgkoAha0cbXtfqt4WxU8/
