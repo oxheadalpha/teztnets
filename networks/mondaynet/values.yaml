@@ -173,9 +173,10 @@ dalNodes:
   dal1:
 
 bootstrap_peers:
-  - mondaynet.ecadinfra.com
+  - gnomoid-reloaded.freeboxos.fr:9733
 
 full_snapshot_url: null
+  #rolling_snapshot_url: https://snapshots.us.tzinit.org/mondaynet/rolling
 rolling_snapshot_url: null
 rolling_tarball_url: null
 archive_tarball_url: null
