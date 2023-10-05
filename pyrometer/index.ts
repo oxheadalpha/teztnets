@@ -30,7 +30,10 @@ const deployPyrometer = async ({
           node_monitor: {
             nodes: Object.keys(networks)
               .filter((n) => n !== "ghostnet")
-              .map((network) => `http://tezos-node-rpc.${network}:8732`),
+              .map((network) => ({
+                url: `http://tezos-node-rpc.${network}:8732`,
+                name: network
+              }))
           },
           ui: {
             enabled: true,
