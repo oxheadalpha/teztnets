@@ -353,9 +353,8 @@ const mainnetMetadata = {
   ],
   last_baking_daemon: lastBakingDaemonMainnetGhostnet,
   masked_from_main_page: true,
-  rpc_url: "https://mainnet.oxheadhosted.com",
+  rpc_url: "https://mainnet.api.tez.ie",
   rpc_urls: [
-    "https://mainnet.oxheadhosted.com",
     "https://mainnet.api.tez.ie",
     "https://mainnet.smartpy.io",
     "https://mainnet.tezos.marigold.dev",
