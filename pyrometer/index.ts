@@ -3,9 +3,11 @@ import * as k8s from "@pulumi/kubernetes"
 const deployPyrometer = async ({
   provider,
   networks,
+  teztnets,
 }: {
   provider: k8s.Provider,
-  networks: any
+  networks: any,
+  teztnets: any
 }) => {
   const pyrometerDomain = "status.teztnets.xyz"
 
@@ -32,7 +34,7 @@ const deployPyrometer = async ({
               .filter((n) => n !== "ghostnet")
               .map((network) => ({
                 url: `http://tezos-node-rpc.${network}:8732`,
-                name: network
+                name: teztnets[network]['human_name']
               }))
           },
           ui: {
