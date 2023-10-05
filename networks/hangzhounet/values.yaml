@@ -136,7 +136,7 @@ accounts:
     bootstrap_balance: "500000000000000"
   oxheadbaker:
     # Oxhead Alpha's baker hosted in teztnets.xyz infra
-    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
+    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
     bootstrap_balance: "1000000000000"
     is_bootstrap_baker_account: true
     type: secret
