@@ -12,4 +12,4 @@ config:
   teztnets:faucet-recaptcha-site-key:
     secure: AAABAOsBQ+7YnCNYruw3IHLRRIcFfd8rvvftJbTAA1o6A4HeMRj00ST9Rf4dExmyzED/hsA+CZA6onoYbL4fmvtIxsegsfUz
   teztnets:private-teztnets-baking-key:
-    secure: AAABAMVj5GU3XyvDXwEksQKkhmP1BA7Y1qBrZGdv9u8fXyvhLv9kcdd/eKuKYszudUV0N136uQt4owsfF73ObqyvPtYT5exKXNZAIIcaBDbriOaplas=
+    secure: AAABACEqg+hF7nXIXmlDipiUIAO1j3AOK5ywzWbJevkOrW0LzRZJ+DhbkC6cc6GR8HLqqeU+f+qaIGQ2fLPvZhQbTktc11TNf1QCz7T8dcauv7UmRYM=
