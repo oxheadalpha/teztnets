@@ -1,7 +1,6 @@
-import * as awsx from "@pulumi/awsx"
-import * as aws from "@pulumi/aws"
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
+import * as digitalocean from "@pulumi/digitalocean"
 import { RandomPassword } from "@pulumi/random"
 import * as cronParser from "cron-parser"
 
@@ -38,7 +37,7 @@ export interface TezosInitParameters {
   getAliases(): string[]
   getIndexers(): { name: string; url: string }[]
   getRpcUrls(): string[]
-  getActivationBucket(): aws.s3.Bucket
+  getActivationBucket(): digitalocean.SpacesBucket
 }
 
 export interface TezosParamsInitializer {
@@ -67,7 +66,7 @@ export interface TezosParamsInitializer {
   readonly rollupUrls?: string[]
   readonly evmProxyUrls?: string[]
   readonly dalRpcUrls?: string[]
-  readonly activationBucket?: aws.s3.Bucket
+  readonly activationBucket?: digitalocean.SpacesBucket
 }
 
 export class TezosChainParametersBuilder
@@ -94,7 +93,7 @@ export class TezosChainParametersBuilder
   private _rollupUrls: string[]
   private _evmProxyUrls: string[]
   private _dalRpcUrls: string[]
-  private _activationBucket: aws.s3.Bucket
+  private _activationBucket: digitalocean.SpacesBucket
 
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || params.dnsName || ""
@@ -333,7 +332,7 @@ export class TezosChainParametersBuilder
   public getChartPath(): string {
     return this._chartPath
   }
-  public getActivationBucket(): aws.s3.Bucket {
+  public getActivationBucket(): digitalocean.SpacesBucket {
     return this._activationBucket
   }
 
@@ -388,8 +387,6 @@ export class TezosChainParametersBuilder
 export class TezosChain extends pulumi.ComponentResource {
   readonly params: TezosHelmParameters & TezosInitParameters
   readonly provider: k8s.Provider
-  readonly repo: awsx.ecr.Repository
-  readonly zone: aws.route53.Zone
 
   // readonly ns: k8s.core.v1.Namespace;
   // readonly chain: k8s.helm.v3.Chart;
@@ -404,8 +401,6 @@ export class TezosChain extends pulumi.ComponentResource {
   constructor(
     params: TezosHelmParameters & TezosInitParameters,
     provider: k8s.Provider,
-    repo: awsx.ecr.Repository,
-    zone: aws.route53.Zone,
     opts?: pulumi.ResourceOptions
   ) {
     const inputs: pulumi.Inputs = {
@@ -417,8 +412,6 @@ export class TezosChain extends pulumi.ComponentResource {
 
     this.params = params
     this.provider = provider
-    this.repo = repo
-    this.zone = zone
 
     const ns = new k8s.core.v1.Namespace(
       name,
@@ -432,8 +425,8 @@ export class TezosChain extends pulumi.ComponentResource {
       if (params.getContracts()) {
         params.getContracts().forEach(function(contractFile: any) {
           let contractFullName = `${name}-${contractFile}`
-          const bucketObject = new aws.s3.BucketObject(contractFullName, {
-            bucket: params.getActivationBucket(),
+          const bucketObject = new digitalocean.SpacesBucketObject(contractFullName, {
+            bucket: params.getActivationBucket().name,
             key: contractFullName,
             source: new pulumi.asset.FileAsset(
               `bootstrap_contracts/${contractFile}`
@@ -442,7 +435,7 @@ export class TezosChain extends pulumi.ComponentResource {
           })
           params.helmValues["activation"]["bootstrap_contract_urls"].push(
             pulumi.interpolate`https://${
-              params.getActivationBucket().bucketRegionalDomainName
+              params.getActivationBucket().bucketDomainName
               }/${contractFullName}`
           )
         })
@@ -451,35 +444,6 @@ export class TezosChain extends pulumi.ComponentResource {
 
     const teztnetsDomain = `${name}.teztnets.xyz`
 
-    const defaultResourceOptions: pulumi.ResourceOptions = { parent: this }
-    const registry = repo.repository.registryId.apply(async (id) => {
-      let credentials = await aws.ecr.getCredentials(
-        {
-          registryId: id,
-        },
-        {
-          ...defaultResourceOptions,
-          async: true,
-        }
-      )
-
-      let decodedCredentials = Buffer.from(
-        credentials.authorizationToken,
-        "base64"
-      ).toString()
-      let [username, password] = decodedCredentials.split(":")
-      if (!password || !username) {
-        throw new Error("Invalid credentials")
-      }
-
-      return {
-        registry: credentials.proxyEndpoint.replace("https://", ""),
-        username: username,
-        password: password,
-      }
-    })
-
-    let _cacheFrom: docker.CacheFrom = {}
     let allNames: string[] = [...params.getAliases(), ...[name]]
 
     allNames.forEach((name) => {
