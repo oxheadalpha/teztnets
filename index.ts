@@ -1,148 +1,62 @@
 import * as pulumi from "@pulumi/pulumi"
-import * as eks from "@pulumi/eks"
+import * as digitalocean from "@pulumi/digitalocean"
 import * as k8s from "@pulumi/kubernetes"
-import * as awsx from "@pulumi/awsx"
-import * as aws from "@pulumi/aws"
 import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
-import deployMonitoring from "./pulumi/monitoring"
-import deployExternalDns from "./externalDns"
-import deployCertManager from "./pulumi/certManager"
 import deployPyrometer from "./pyrometer"
-import deployNginx from "./pulumi/nginx"
-import { publicReadPolicyForBucket } from "./s3"
 import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
-import { createEbsCsiRole } from "./pulumi/ebsCsiDriver"
 
-let stack = pulumi.getStack()
 const cfg = new pulumi.Config()
-const slackWebhook = cfg.requireSecret("slack-webhook")
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
 const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret(
   "faucet-recaptcha-secret-key"
 )
-const private_oxhead_baking_key = cfg.requireSecret("private-oxhead-baking-key")
-const awsAccountId = cfg.requireSecret("aws-account-id")
+const private_oxhead_baking_key = cfg.requireSecret("private-teztnets-baking-key")
 
-const repo = new awsx.ecr.Repository(stack)
+const stackRef = new pulumi.StackReference(`tqtezos/oxheadinfra_do/dev`)
 
-const kubeAdminRoleARN =
-  "arn:aws:iam::${aws_account_id}:role/tempKubernetesAdmin"
-const cluster = new eks.Cluster(stack, {
-  createOidcProvider: true,
-  instanceType: "t3.2xlarge",
-  desiredCapacity: 3,
-  minSize: 1,
-  maxSize: 3,
-  nodeRootVolumeSize: 50,
-  providerCredentialOpts: {
-    profileName: aws.config.profile,
-  },
-  roleMappings: [
-    {
-      groups: ["system:masters"],
-      roleArn: kubeAdminRoleARN,
-      username: "admin",
-    },
-  ],
+const kubeconfig = stackRef.requireOutput("kubeconfig")
+
+const doCfg = new pulumi.Config("digitalocean")
+
+const doToken = doCfg.requireSecret("token");
+
+const provider = new k8s.Provider("do-k8s-provider", {
+  kubeconfig
 })
-
-export const clusterOidcArn = cluster.core.oidcProvider!.arn
-export const clusterOidcUrl = cluster.core.oidcProvider!.url
-
-// Metrics server allows view of metrics in k9s, consumable by grafana, and other useful things.
-const metrics = new k8s.yaml.ConfigFile(
-  "metrics",
-  {
-    file: "https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml",
-  },
-  {
-    provider: cluster.provider,
-    parent: cluster,
-  }
-)
-
-const csiRole = createEbsCsiRole({ clusterOidcArn, clusterOidcUrl })
-new aws.eks.Addon(
-  "ebs-csi-driver",
-  {
-    clusterName: cluster.eksCluster.name,
-    addonName: "aws-ebs-csi-driver",
-    serviceAccountRoleArn: csiRole.arn,
-  },
-  { parent: cluster }
-)
-// we define a storage class to allow volume expansion.
-// we also make it gp3 since it's cheaper
-new k8s.yaml.ConfigFile(
-  "gp3-StorageClass",
-  // Path is relative to root of Pulumi project
-  { file: "k8s-yaml/gp3StorageClass.yaml" },
-  {
-    provider: cluster.provider,
-    parent: cluster,
-  }
-)
-
-const teztnetsHostedZone = new aws.route53.Zone("teztnets.xyz", {
-  comment: "Teztnets Hosted Zone",
-  forceDestroy: false,
-  name: "teztnets.xyz",
-})
-
-/**
- * Top level A records points to github pages
- * see: "configure an apex domain"
- * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
- */
-const teztnetsRootRecords = new aws.route53.Record("teztnetsRootRecords", {
-  zoneId: teztnetsHostedZone.zoneId,
-  name: "teztnets.xyz",
-  type: "A",
-  ttl: 300,
-  records: [
-    "185.199.108.153",
-    "185.199.109.153",
-    "185.199.110.153",
-    "185.199.111.153",
-  ],
-})
-
-// Export the cluster's kubeconfig.
-export const kubeconfig = cluster.kubeconfig
-export const clusterName = cluster.eksCluster.name
-export const clusterNodeInstanceRoleName = cluster.instanceRoles.apply(
-  (roles) => roles[0].name
-)
-
-deployMonitoring(cluster, slackWebhook)
-deployExternalDns(cluster)
-deployCertManager(cluster, awsAccountId)
-deployNginx({ cluster })
 
 // Deploy a bucket to store activation smart contracts for all testnets
-const activationBucket = new aws.s3.Bucket(`teztnets-global-activation-bucket`)
-new aws.s3.BucketPublicAccessBlock(
-  `teztnets-activation-bucket-public-access-block`,
-  {
-    bucket: activationBucket.id,
-    blockPublicAcls: false,
-    blockPublicPolicy: false,
-    ignorePublicAcls: false,
-    restrictPublicBuckets: false,
-  }
-)
-new aws.s3.BucketPolicy(`teztnets-activation-bucket-policy`, {
-  bucket: activationBucket.bucket,
-  policy: activationBucket.bucket.apply(publicReadPolicyForBucket),
-})
+const activationBucket = new digitalocean.SpacesBucket("teztnets-global-activation-bucket", { acl: "public-read" })
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
 
+const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
+  name: "teztnets.xyz",
+});
+/**
+ * Top level A records points to github pages
+ * see: "configure an apex domain"
+ * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+ */
+[
+  "185.199.108.153",
+  "185.199.109.153",
+  "185.199.110.153",
+  "185.199.111.153",
+].forEach((v) => {
+  new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
+    domain: teztnetsDomain.name,
+    name: "teztnets.xyz",
+    type: "A",
+    ttl: 300,
+    value: v
+  })
+
+})
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
@@ -170,9 +84,7 @@ const dailynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone
+  provider,
 )
 
 const mondaynet_chain = new TezosChain(
@@ -202,9 +114,7 @@ const mondaynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone
+  provider,
 )
 
 // For ghostnet, we only deploy a faucet.
@@ -220,9 +130,7 @@ new TezosChain(
     humanName: "Ghostnet",
     chartRepoVersion: "6.22.0",
   }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone
+  provider,
 )
 
 const nairobinet_chain = new TezosChain(
@@ -253,9 +161,7 @@ const nairobinet_chain = new TezosChain(
     rpcUrls: ["https://nairobinet.ecadinfra.com"],
     activationBucket: activationBucket,
   }),
-  cluster.provider,
-  repo,
-  teztnetsHostedZone
+  provider,
 )
 
 function getNetworks(chains: TezosChain[]): object {
@@ -465,4 +371,4 @@ export const teztnets = {
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
-deployPyrometer({ cluster, teztnetsHostedZone, networks })
+deployPyrometer({ provider, networks })

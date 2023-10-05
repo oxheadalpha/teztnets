@@ -1,6 +1,6 @@
 accounts:
   oxheadbaker:
-    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     bootstrap_balance: "9700000000000"
     is_bootstrap_baker_account: true
     # key injected by pulumi
@@ -206,7 +206,7 @@ nodes:
           - oxheadbaker
         config:
           shell:
-            history_mode: archive
+            history_mode: rolling
           rpc:
             cors-headers: [ "content-type" ]
             cors-origin: [ "*" ]
@@ -217,13 +217,13 @@ nodes:
       - accuser
       - vdf
     readiness_probe: false
-    storage_size: 500Gi
+    storage_size: 20Gi
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
 full_snapshot_url: null
 rolling_snapshot_url: null
-rolling_tarball_url: null
+rolling_tarball_url: https://nairobinet.xtz-shots.io/rolling-tarball
 archive_tarball_url: https://nairobinet.xtz-shots.io/archive-tarball
 
 images:
