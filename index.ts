@@ -50,7 +50,7 @@ const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
 ].forEach((v) => {
   new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
     domain: teztnetsDomain.name,
-    name: "teztnets.xyz",
+    name: "@",
     type: "A",
     ttl: 300,
     value: v
