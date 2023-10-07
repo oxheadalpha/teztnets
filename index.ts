@@ -200,6 +200,7 @@ function getNetworks(chains: TezosChain[]): object {
     if ("dal_config" in network) {
       network["dal_config"]["bootstrap_peers"] = [
         `dal.${chain.params.getName()}.teztnets.xyz:11732`,
+	`34.22.241.45:30003`,
       ]
     }
 
