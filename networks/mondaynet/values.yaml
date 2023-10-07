@@ -83,9 +83,9 @@ activation:
       number_of_slots: 32
       number_of_shards: 2048
       attestation_lag: 4
-      attestation_threshold: 50
+      attestation_threshold: 1
       slot_size: 65536
-      redundancy_factor: 16
+      redundancy_factor: 4
       page_size: 4096
       blocks_per_epoch: 32
     smart_rollup_enable: true
