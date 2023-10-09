@@ -532,9 +532,7 @@ export class TezosChain extends pulumi.ComponentResource {
         }
       }
 
-      // Using `disableChallenges` atm to determine if redis should be deployed
-      // for the faucet.
-      if (faucetHelmValues.disableChallenges === false) {
+      if (faucetHelmValues.disableChallenges !== true) {
         if (!faucetHelmValues.redis) {
           faucetHelmValues.redis = {}
         }

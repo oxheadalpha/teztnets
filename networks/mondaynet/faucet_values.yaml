@@ -1,6 +1,6 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.0
-  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.0
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
+  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.1
 
 
 # Frontend app configuration. You can optionally deploy only the faucet backend.
@@ -31,7 +31,6 @@ minTez: 1
 # The maximum Tez allowed per request.
 maxTez: 1000000
 
-# Use this prop now to indicate to pulumi to deploy redis backend.
 disableChallenges: false
 # Minimum number of challenges required for the minimum Tez request.
 minChallenges: 1
@@ -48,7 +47,7 @@ challengeSize: 2048
 difficulty: 4
 
 redis:
-  url: "redis://redis-master:6379"
+  url: redis://redis-master:6379
 
 ingress:
   enabled: true
