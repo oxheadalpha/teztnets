@@ -678,6 +678,8 @@ export class TezosChain extends pulumi.ComponentResource {
         ],
       }
       params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
+
+      let dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
       let dalBootstrapLb = new k8s.core.v1.Service(
         `${name}-dal-bootstrap-p2p-lb`,
         {
@@ -685,7 +687,7 @@ export class TezosChain extends pulumi.ComponentResource {
             namespace: ns.metadata.name,
             name: `${name}-dal-bootstrap`,
             annotations: {
-              "external-dns.alpha.kubernetes.io/hostname": `dal.${name}.teztnets.xyz`,
+              "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
             },
           },
           spec: {
@@ -702,6 +704,8 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
+
+      let dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
       let dal1Lb = new k8s.core.v1.Service(
         `${name}-dal-dal1-p2p-lb`,
         {
@@ -709,7 +713,7 @@ export class TezosChain extends pulumi.ComponentResource {
             namespace: ns.metadata.name,
             name: `${name}-dal-dal1`,
             annotations: {
-              "external-dns.alpha.kubernetes.io/hostname": `dal1.${name}.teztnets.xyz`,
+              "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
             },
           },
           spec: {
@@ -731,7 +735,7 @@ export class TezosChain extends pulumi.ComponentResource {
         params.helmValues.dalNodes.dal1 = { publicAddr: pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732` }
       }
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalRpcFqdn}:11732`,
+        `${dalBootstrapP2pFqdn}:11732`,
       ]
     }
     if (Object.keys(params.helmValues).length != 0) {
