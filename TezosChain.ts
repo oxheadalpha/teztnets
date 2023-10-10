@@ -732,7 +732,7 @@ export class TezosChain extends pulumi.ComponentResource {
       )
       if (name.includes("dailynet")) {
         params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
-        params.helmValues.dalNodes.dal1 = { publicAddr: pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732` }
+        params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732`
       }
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
         `${dalBootstrapP2pFqdn}:11732`,
