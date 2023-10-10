@@ -720,15 +720,15 @@ export class TezosChain extends pulumi.ComponentResource {
                 protocol: "TCP",
               },
             ],
-            selector: { app: "dal-bootstrap" },
+            selector: { app: "dal-dal1" },
             type: "LoadBalancer",
           },
         },
         { provider: this.provider }
       )
       if (name.includes("dailynet")) {
-        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:9732`
-        params.helmValues.dalNodes.dal1 = { publicAddr: pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:9732` }
+        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
+        params.helmValues.dalNodes.dal1 = { publicAddr: pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732` }
       }
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
         `${dalRpcFqdn}:11732`,
