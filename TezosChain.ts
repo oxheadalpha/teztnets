@@ -678,15 +678,12 @@ export class TezosChain extends pulumi.ComponentResource {
         ],
       }
       params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
-      params.helmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalRpcFqdn}:11732`,
-      ]
-      new k8s.core.v1.Service(
-        `${name}-dal-p2p-lb`,
+      let dalBootstrapLb = new k8s.core.v1.Service(
+        `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
             namespace: ns.metadata.name,
-            name: `${name}-dal`,
+            name: `${name}-dal-bootstrap`,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": `dal.${name}.teztnets.xyz`,
             },
@@ -705,10 +702,41 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
+      let dal1Lb = new k8s.core.v1.Service(
+        `${name}-dal-dal1-p2p-lb`,
+        {
+          metadata: {
+            namespace: ns.metadata.name,
+            name: `${name}-dal-dal1`,
+            annotations: {
+              "external-dns.alpha.kubernetes.io/hostname": `dal1.${name}.teztnets.xyz`,
+            },
+          },
+          spec: {
+            ports: [
+              {
+                port: 11732,
+                targetPort: 11732,
+                protocol: "TCP",
+              },
+            ],
+            selector: { app: "dal-bootstrap" },
+            type: "LoadBalancer",
+          },
+        },
+        { provider: this.provider }
+      )
+      if (name.includes("dailynet")) {
+        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:9732`
+        params.helmValues.dalNodes.dal1 = { publicAddr: pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:9732` }
+      }
+      params.helmValues.node_config_network.dal_config.bootstrap_peers = [
+        `${dalRpcFqdn}:11732`,
+      ]
     }
     if (Object.keys(params.helmValues).length != 0) {
       if (params.getChartPath()) {
-        // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
+        // assume tezos-k8s submodule present; deploy custom chart from path
 
         const chain = new k8s.helm.v3.Chart(
           name,
