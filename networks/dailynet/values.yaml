@@ -38,6 +38,7 @@ activation:
     minimal_stake: '6000000000'
     minimal_frozen_stake: '600000000'
     adaptive_issuance_launch_ema_threshold: 10000000
+    adaptive_issuance_activation_vote_enable: false
     global_limit_of_staking_over_baking: 5
     edge_of_staking_over_delegation: 2
     adaptive_rewards_params:
