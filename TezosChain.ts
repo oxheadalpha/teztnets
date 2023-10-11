@@ -688,6 +688,8 @@ export class TezosChain extends pulumi.ComponentResource {
             name: `${name}-dal-bootstrap`,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
+              // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
+              "pulumi.com/skipAwait": "true"
             },
           },
           spec: {
@@ -714,6 +716,8 @@ export class TezosChain extends pulumi.ComponentResource {
             name: `${name}-dal-dal1`,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
+              // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
+              "pulumi.com/skipAwait": "true"
             },
           },
           spec: {
