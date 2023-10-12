@@ -735,6 +735,25 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider: this.provider }
       )
       if (name.includes("dailynet")) {
+
+        // Define a custom awaiter function
+        const waitForDalIps = async () => {
+          while (true) {
+            // Get the status of the service from the live object
+            const dalBootstrapLbStatus = await dalBootstrapLb.status;
+            const dal1LbStatus = await dal1Lb.status;
+
+            // Check if the service is ready and the IP address is available
+            if (dalBootstrapLbStatus && dalBootstrapLbStatus.loadBalancer && dalBootstrapLbStatus.loadBalancer.ingress[0].ip &&
+              dal1LbStatus && dal1LbStatus.loadBalancer && dal1LbStatus.loadBalancer.ingress[0].ip) {
+              break;
+            }
+
+            // Wait for 10 seconds before the next check
+            await new Promise((resolve) => setTimeout(resolve, 10000));
+          }
+        };
+        waitForDalIps();
         params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
         params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732`
         params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
