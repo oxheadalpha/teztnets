@@ -21,10 +21,6 @@ const stackRef = new pulumi.StackReference(`tqtezos/oxheadinfra_do/dev`)
 
 const kubeconfig = stackRef.requireOutput("kubeconfig")
 
-const doCfg = new pulumi.Config("digitalocean")
-
-const doToken = doCfg.requireSecret("token")
-
 const provider = new k8s.Provider("do-k8s-provider", {
   kubeconfig,
 })
