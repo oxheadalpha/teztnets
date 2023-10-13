@@ -735,36 +735,37 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider: this.provider }
       )
 
+      params.helmValues.node_config_network.dal_config.bootstrap_peers = [
+        `${dalBootstrapP2pFqdn}:11732`,
+      ]
+
       // Wait for DAL LB to get their IP addresses.
+      let dal1LbIp;
+      let dalBootstrapLbIp;
       const waitForDalIps = async () => {
-        if (name.includes("dailynet")) {
-          let dal1LbIp;
-          let dalBootstrapLbIp;
-          while (true) {
-            // Get the status of the service from the live object
+        while (true) {
+          // Get the status of the service from the live object
 
-            dal1LbIp = (k8s.core.v1.Service.get(name, `${name}-dal-dal1`).status)?.loadBalancer?.ingress?.[0]?.ip;
-            dalBootstrapLbIp = (k8s.core.v1.Service.get(name, `${name}-dal-bootrstrap`).status)?.loadBalancer?.ingress?.[0]?.ip;
+          dal1LbIp = (k8s.core.v1.Service.get(name, `${name}-dal-dal1`).status)?.loadBalancer?.ingress?.[0]?.ip;
+          dalBootstrapLbIp = (k8s.core.v1.Service.get(name, `${name}-dal-bootrstrap`).status)?.loadBalancer?.ingress?.[0]?.ip;
 
-            // If the IP address is available, the service is ready, hence break
-            if (dal1LbIp && dalBootstrapLbIp) {
-              break;
-            }
+          // If the IP address is available, the service is ready, hence break
+          if (dal1LbIp && dalBootstrapLbIp) {
+            break;
+          }
 
-          };
+        };
 
-          // Wait for 10 seconds before the next check
-          await new Promise((resolve) => setTimeout(resolve, 10000));
+        // Wait for 10 seconds before the next check
+        await new Promise((resolve) => setTimeout(resolve, 10000));
 
-          params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLbIp}:11732`
-          params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1LbIp}:11732`
-        }
-        params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
-        params.helmValues.node_config_network.dal_config.bootstrap_peers = [
-          `${dalBootstrapP2pFqdn}:11732`,
-        ]
       }
-      waitForDalIps();
+      if (name.includes("dailynet")) {
+        waitForDalIps();
+        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLbIp}:11732`
+        params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1LbIp}:11732`
+        params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
+      }
       if (Object.keys(params.helmValues).length != 0) {
         if (params.getChartPath()) {
           // assume tezos-k8s submodule present; deploy custom chart from path
