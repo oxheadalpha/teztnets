@@ -1,6 +1,6 @@
 images:
   tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
-  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.1
+  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.2.0
 
 
 # Frontend app configuration. You can optionally deploy only the faucet backend.
