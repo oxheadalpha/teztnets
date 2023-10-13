@@ -680,7 +680,7 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
 
       let dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
-      let dalBootstrapLb = new k8s.core.v1.Service(
+      new k8s.core.v1.Service(
         `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
@@ -708,7 +708,7 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
       let dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
-      let dal1Lb = new k8s.core.v1.Service(
+      new k8s.core.v1.Service(
         `${name}-dal-dal1-p2p-lb`,
         {
           metadata: {
@@ -763,67 +763,65 @@ export class TezosChain extends pulumi.ComponentResource {
         params.helmValues.node_config_network.dal_config.bootstrap_peers = [
           `${dalBootstrapP2pFqdn}:11732`,
         ]
-        if (Object.keys(params.helmValues).length != 0) {
-          if (params.getChartPath()) {
-            // assume tezos-k8s submodule present; deploy custom chart from path
-
-            new k8s.helm.v3.Chart(
-              name,
-              {
-                namespace: ns.metadata.name,
-                path: `${params.getChartPath()}/charts/tezos`,
-                values: params.helmValues,
-              },
-              { providers: { kubernetes: this.provider } }
-            )
-          } else {
-            // deploy from helm repo with public images
-            new k8s.helm.v3.Chart(
-              name,
-              {
-                namespace: ns.metadata.name,
-                chart: "tezos-chain",
-                version: params.getChartRepoVersion(),
-                fetchOpts: {
-                  repo: params.getChartRepo(),
-                },
-                values: params.helmValues,
-              },
-              { providers: { kubernetes: this.provider } }
-            )
-          }
-        }
       }
       waitForDalIps();
       if (Object.keys(params.helmValues).length != 0) {
+        if (params.getChartPath()) {
+          // assume tezos-k8s submodule present; deploy custom chart from path
 
-        allNames.forEach((name) => {
-          new k8s.core.v1.Service(
-            `${name}-p2p-lb`,
+          new k8s.helm.v3.Chart(
+            name,
             {
-              metadata: {
-                namespace: ns.metadata.name,
-                name: name,
-                annotations: {
-                  "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
-                },
+              namespace: ns.metadata.name,
+              path: `${params.getChartPath()}/charts/tezos`,
+              values: params.helmValues,
+            },
+            { providers: { kubernetes: this.provider } }
+          )
+        } else {
+          // deploy from helm repo with public images
+          new k8s.helm.v3.Chart(
+            name,
+            {
+              namespace: ns.metadata.name,
+              chart: "tezos-chain",
+              version: params.getChartRepoVersion(),
+              fetchOpts: {
+                repo: params.getChartRepo(),
               },
-              spec: {
-                ports: [
-                  {
-                    port: 9732,
-                    targetPort: 9732,
-                    protocol: "TCP",
-                  },
-                ],
-                selector: { node_class: "tezos-baking-node" },
-                type: "LoadBalancer",
+              values: params.helmValues,
+            },
+            { providers: { kubernetes: this.provider } }
+          )
+        }
+      }
+
+      allNames.forEach((name) => {
+        new k8s.core.v1.Service(
+          `${name}-p2p-lb`,
+          {
+            metadata: {
+              namespace: ns.metadata.name,
+              name: name,
+              annotations: {
+                "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
               },
             },
-            { provider: this.provider }
-          )
-        })
-      }
+            spec: {
+              ports: [
+                {
+                  port: 9732,
+                  targetPort: 9732,
+                  protocol: "TCP",
+                },
+              ],
+              selector: { node_class: "tezos-baking-node" },
+              type: "LoadBalancer",
+            },
+          },
+          { provider: this.provider }
+        )
+      })
     }
   }
 
