@@ -1,6 +1,6 @@
 images:
   tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
-  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.1.1
+  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.2.0
 
 config:
   application:
@@ -21,13 +21,11 @@ authorizedHost: "" # filled in by pulumi
 backendRpcUrl: http://tezos-node-rpc:8732
 # If the backend requires CAPTCHA tokens to be submitted.
 enableCaptcha: true
-# Faucet won't dispense to an address if its balance exceeds this.
-maxBalance: 10000
+
 # The minimum Tez allowed per request.
 minTez: 1
 # The maximum Tez allowed per request.
-maxTez: 10000
-
+maxTez: 12000
 
 disableChallenges: false
 # Minimum number of challenges required for the minimum Tez request.
