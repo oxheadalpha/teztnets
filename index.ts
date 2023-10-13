@@ -13,7 +13,9 @@ const faucetRecaptchaSiteKey = cfg.requireSecret("faucet-recaptcha-site-key")
 const faucetRecaptchaSecretKey = cfg.requireSecret(
   "faucet-recaptcha-secret-key"
 )
-const private_oxhead_baking_key = cfg.requireSecret("private-teztnets-baking-key")
+const private_oxhead_baking_key = cfg.requireSecret(
+  "private-teztnets-baking-key"
+)
 
 const stackRef = new pulumi.StackReference(`tqtezos/oxheadinfra_do/dev`)
 
@@ -21,14 +23,17 @@ const kubeconfig = stackRef.requireOutput("kubeconfig")
 
 const doCfg = new pulumi.Config("digitalocean")
 
-const doToken = doCfg.requireSecret("token");
+const doToken = doCfg.requireSecret("token")
 
 const provider = new k8s.Provider("do-k8s-provider", {
-  kubeconfig
+  kubeconfig,
 })
 
 // Deploy a bucket to store activation smart contracts for all testnets
-const activationBucket = new digitalocean.SpacesBucket("teztnets-global-activation-bucket", { acl: "public-read" })
+const activationBucket = new digitalocean.SpacesBucket(
+  "teztnets-global-activation-bucket",
+  { acl: "public-read" }
+)
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
@@ -36,13 +41,13 @@ const longCategory = "Long-running Teztnets"
 
 const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
   name: "teztnets.xyz",
-});
+})
 /**
  * Top level A records points to github pages
  * see: "configure an apex domain"
  * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
  */
-[
+;[
   "185.199.108.153",
   "185.199.109.153",
   "185.199.110.153",
@@ -53,9 +58,8 @@ const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
     name: "@",
     type: "A",
     ttl: 300,
-    value: v
+    value: v,
   })
-
 })
 // chains
 const dailynet_chain = new TezosChain(
@@ -84,7 +88,7 @@ const dailynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
-  provider,
+  provider
 )
 
 const mondaynet_chain = new TezosChain(
@@ -114,7 +118,7 @@ const mondaynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
-  provider,
+  provider
 )
 
 // For ghostnet, we only deploy a faucet.
@@ -130,7 +134,7 @@ new TezosChain(
     humanName: "Ghostnet",
     chartRepoVersion: "6.23.1",
   }),
-  provider,
+  provider
 )
 
 const nairobinet_chain = new TezosChain(
@@ -161,13 +165,13 @@ const nairobinet_chain = new TezosChain(
     rpcUrls: ["https://nairobinet.ecadinfra.com"],
     activationBucket: activationBucket,
   }),
-  provider,
+  provider
 )
 
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
-  chains.forEach(function(chain) {
+  chains.forEach(function (chain) {
     const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
     bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
 
@@ -212,7 +216,7 @@ function getNetworks(chains: TezosChain[]): object {
 function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
-  chains.forEach(function(chain) {
+  chains.forEach(function (chain) {
     let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
@@ -286,11 +290,7 @@ const ghostnetNetwork = {
 }
 
 export const networks = {
-  ...getNetworks([
-    dailynet_chain,
-    mondaynet_chain,
-    nairobinet_chain,
-  ]),
+  ...getNetworks([dailynet_chain, mondaynet_chain, nairobinet_chain]),
   ...{ ghostnet: ghostnetNetwork },
 }
 
@@ -362,11 +362,7 @@ const mainnetMetadata = {
 }
 
 export const teztnets = {
-  ...getTeztnets([
-    dailynet_chain,
-    mondaynet_chain,
-    nairobinet_chain,
-  ]),
+  ...getTeztnets([dailynet_chain, mondaynet_chain, nairobinet_chain]),
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
