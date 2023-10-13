@@ -16,7 +16,7 @@ node_config_network:
       number_of_shards: 2048
 
 activation:
-  protocol_hash: ProxfordSW2S7fvchT1Zgj2avb5UES194neRyYVXoaDGvF9egt8
+  protocol_hash: PtNairobiyssHuh87hEhfVBGCVrK3WnS8Z2FT4ymB5tAa4r1nQf
   protocol_parameters:
     preserved_cycles: 3
     blocks_per_cycle: 128
@@ -110,24 +110,24 @@ activation:
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
     zk_rollup_max_ticket_payload_size: 2048
-  bootstrap_parameters:
-    bootstrap_smart_rollups:
-    - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
-      pvm_kind: "wasm_2_0_0"
-      kernel: "fromfile#/usr/local/share/tezos/evm_kernel/evm_installer.wasm"
-      parameters_ty:
-        prim: pair
-        args:
-        - prim: pair
-          args:
-          - prim: bytes
-          - prim: ticket
-            args:
-            - prim: unit
-        - prim: pair
-          args:
-          - prim: nat
-          - prim: bytes
+  # bootstrap_parameters:
+  #   bootstrap_smart_rollups:
+  #   - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
+  #     pvm_kind: "wasm_2_0_0"
+  #     kernel: "fromfile#/usr/local/share/tezos/evm_kernel/evm_installer.wasm"
+  #     parameters_ty:
+  #       prim: pair
+  #       args:
+  #       - prim: pair
+  #         args:
+  #         - prim: bytes
+  #         - prim: ticket
+  #           args:
+  #           - prim: unit
+  #       - prim: pair
+  #         args:
+  #         - prim: nat
+  #         - prim: bytes
 
 nodes:
   tezos-baking-node:
@@ -151,20 +151,20 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-smartRollupNodes:
-  evm:
-    operator_account: oxheadbaker
-    rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
-    ingress:
-      # ingress details filled by pulumi
-    evm_proxy:
-      annotations:
-        # sometimes evm proxy takes too long to initialize
-        # because it depends on the rollup node which in turn
-        # depends on the octez node to be available
-        'pulumi.com/skipAwait': true
-      ingress:
-      # ingress details filled by pulumi
+# smartRollupNodes:
+#   evm:
+#     operator_account: oxheadbaker
+#     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
+#     ingress:
+#       # ingress details filled by pulumi
+#     evm_proxy:
+#       annotations:
+#         # sometimes evm proxy takes too long to initialize
+#         # because it depends on the rollup node which in turn
+#         # depends on the octez node to be available
+#         'pulumi.com/skipAwait': true
+#       ingress:
+#       # ingress details filled by pulumi
 dalNodes:
   bootstrap:
     bootstrapProfile: true
@@ -185,10 +185,9 @@ archive_tarball_url: null
 images: {}
 
 protocols:
-  - command: Proxford
+  - command: PtNairob
     vote:
       liquidity_baking_toggle_vote: "pass"
-      adaptive_issuance_vote: "on"
   - command: alpha
     vote:
       liquidity_baking_toggle_vote: "pass"
