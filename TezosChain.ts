@@ -734,90 +734,96 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
-      if (name.includes("dailynet")) {
 
-        // Define a custom awaiter function
-        const waitForDalIps = async () => {
+      // Wait for DAL LB to get their IP addresses.
+      const waitForDalIps = async () => {
+        if (name.includes("dailynet")) {
+          let dal1LbIp;
+          let dalBootstrapLbIp;
           while (true) {
             // Get the status of the service from the live object
-            const dalBootstrapLbStatus = await dalBootstrapLb.status;
-            const dal1LbStatus = await dal1Lb.status;
 
-            // Check if the service is ready and the IP address is available
-            if (dalBootstrapLbStatus && dalBootstrapLbStatus.loadBalancer && dalBootstrapLbStatus.loadBalancer.ingress[0].ip &&
-              dal1LbStatus && dal1LbStatus.loadBalancer && dal1LbStatus.loadBalancer.ingress[0].ip) {
+            dal1LbIp = (k8s.core.v1.Service.get(name, `${name}-dal-dal1`).status)?.loadBalancer?.ingress?.[0]?.ip;
+            dalBootstrapLbIp = (k8s.core.v1.Service.get(name, `${name}-dal-bootrstrap`).status)?.loadBalancer?.ingress?.[0]?.ip;
+
+            // If the IP address is available, the service is ready, hence break
+            if (dal1LbIp && dalBootstrapLbIp) {
               break;
             }
 
-            // Wait for 10 seconds before the next check
-            await new Promise((resolve) => setTimeout(resolve, 10000));
-          }
-        };
-        waitForDalIps();
-        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
-        params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732`
+          };
+
+          // Wait for 10 seconds before the next check
+          await new Promise((resolve) => setTimeout(resolve, 10000));
+
+          params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLbIp}:11732`
+          params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1LbIp}:11732`
+        }
         params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
-      }
-      params.helmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalBootstrapP2pFqdn}:11732`,
-      ]
-    }
-    if (Object.keys(params.helmValues).length != 0) {
-      if (params.getChartPath()) {
-        // assume tezos-k8s submodule present; deploy custom chart from path
+        params.helmValues.node_config_network.dal_config.bootstrap_peers = [
+          `${dalBootstrapP2pFqdn}:11732`,
+        ]
+        if (Object.keys(params.helmValues).length != 0) {
+          if (params.getChartPath()) {
+            // assume tezos-k8s submodule present; deploy custom chart from path
 
-        const chain = new k8s.helm.v3.Chart(
-          name,
-          {
-            namespace: ns.metadata.name,
-            path: `${params.getChartPath()}/charts/tezos`,
-            values: params.helmValues,
-          },
-          { providers: { kubernetes: this.provider } }
-        )
-      } else {
-        // deploy from helm repo with public images
-        const chain = new k8s.helm.v3.Chart(
-          name,
-          {
-            namespace: ns.metadata.name,
-            chart: "tezos-chain",
-            version: params.getChartRepoVersion(),
-            fetchOpts: {
-              repo: params.getChartRepo(),
-            },
-            values: params.helmValues,
-          },
-          { providers: { kubernetes: this.provider } }
-        )
+            new k8s.helm.v3.Chart(
+              name,
+              {
+                namespace: ns.metadata.name,
+                path: `${params.getChartPath()}/charts/tezos`,
+                values: params.helmValues,
+              },
+              { providers: { kubernetes: this.provider } }
+            )
+          } else {
+            // deploy from helm repo with public images
+            new k8s.helm.v3.Chart(
+              name,
+              {
+                namespace: ns.metadata.name,
+                chart: "tezos-chain",
+                version: params.getChartRepoVersion(),
+                fetchOpts: {
+                  repo: params.getChartRepo(),
+                },
+                values: params.helmValues,
+              },
+              { providers: { kubernetes: this.provider } }
+            )
+          }
+        }
       }
+      waitForDalIps();
+      if (Object.keys(params.helmValues).length != 0) {
 
-      allNames.forEach((name) => {
-        new k8s.core.v1.Service(
-          `${name}-p2p-lb`,
-          {
-            metadata: {
-              namespace: ns.metadata.name,
-              name: name,
-              annotations: {
-                "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+        allNames.forEach((name) => {
+          new k8s.core.v1.Service(
+            `${name}-p2p-lb`,
+            {
+              metadata: {
+                namespace: ns.metadata.name,
+                name: name,
+                annotations: {
+                  "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+                },
+              },
+              spec: {
+                ports: [
+                  {
+                    port: 9732,
+                    targetPort: 9732,
+                    protocol: "TCP",
+                  },
+                ],
+                selector: { node_class: "tezos-baking-node" },
+                type: "LoadBalancer",
               },
             },
-            spec: {
-              ports: [
-                {
-                  port: 9732,
-                  targetPort: 9732,
-                  protocol: "TCP",
-                },
-              ],
-              selector: { node_class: "tezos-baking-node" },
-              type: "LoadBalancer",
-            },
-          },
-          { provider: this.provider }
-        )
-      })
+            { provider: this.provider }
+          )
+        })
+      }
     }
   }
 
