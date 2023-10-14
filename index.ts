@@ -38,25 +38,25 @@ const longCategory = "Long-running Teztnets"
 const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
   name: "teztnets.xyz",
 })
-/**
- * Top level A records points to github pages
- * see: "configure an apex domain"
- * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
- */
-;[
-  "185.199.108.153",
-  "185.199.109.153",
-  "185.199.110.153",
-  "185.199.111.153",
-].forEach((v) => {
-  new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
-    domain: teztnetsDomain.name,
-    name: "@",
-    type: "A",
-    ttl: 300,
-    value: v,
+  /**
+   * Top level A records points to github pages
+   * see: "configure an apex domain"
+   * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+   */
+  ;[
+    "185.199.108.153",
+    "185.199.109.153",
+    "185.199.110.153",
+    "185.199.111.153",
+  ].forEach((v) => {
+    new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
+      domain: teztnetsDomain.name,
+      name: "@",
+      type: "A",
+      ttl: 300,
+      value: v,
+    })
   })
-})
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
@@ -167,7 +167,7 @@ const nairobinet_chain = new TezosChain(
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
     bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
 
@@ -212,7 +212,7 @@ function getNetworks(chains: TezosChain[]): object {
 function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
-  chains.forEach(function (chain) {
+  chains.forEach(function(chain) {
     let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
     teztnets[chain.params.getName()] = {
       chain_name: chain.getChainName(),
