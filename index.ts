@@ -106,8 +106,8 @@ const mondaynet_chain = new TezosChain(
       "taquito_contract.json",
       "taquito_sapling_contract.json",
       "taquito_tzip_12_16_contract.json",
-      "exchanger.json",
-      "evm_bridge.json",
+      // "exchanger.json",
+      // "evm_bridge.json",
     ],
     // chartRepoVersion: "6.18.0",
     chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
