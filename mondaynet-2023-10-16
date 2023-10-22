@@ -26,11 +26,5 @@
       "genesis_pubkey": "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
     }
   },
-  "sandboxed_chain_name": "SANDBOXED_TEZOS",
-  "user_activated_upgrades": [
-    {
-      "level": 512,
-      "replacement_protocol": "ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK"
-    }
-  ]
+  "sandboxed_chain_name": "SANDBOXED_TEZOS"
 }
