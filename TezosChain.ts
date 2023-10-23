@@ -734,7 +734,7 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
-      if (name.includes("dailynet")) {
+      if (name.includes("dailynet") || name.includes("mondaynet")) {
 
         // Define a custom awaiter function
         const waitForDalIps = async () => {

@@ -151,26 +151,27 @@ nodes:
   # Overwrite default values.yaml rolling-node
   rolling-node: null
 
-# smartRollupNodes:
-#   evm:
-#     operator_account: oxheadbaker
-#     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
-#     ingress:
-#       # ingress details filled by pulumi
-#     evm_proxy:
-#       annotations:
-#         # sometimes evm proxy takes too long to initialize
-#         # because it depends on the rollup node which in turn
-#         # depends on the octez node to be available
-#         'pulumi.com/skipAwait': true
-#       ingress:
-#       # ingress details filled by pulumi
+smartRollupNodes:
+  evm:
+    operator_account: oxheadbaker
+    rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
+    ingress:
+      # ingress details filled by pulumi
+    evm_proxy:
+      annotations:
+        # sometimes evm proxy takes too long to initialize
+        # because it depends on the rollup node which in turn
+        # depends on the octez node to be available
+        'pulumi.com/skipAwait': true
+      ingress:
+      # ingress details filled by pulumi
 dalNodes:
   bootstrap:
     bootstrapProfile: true
     ingress:
     # ingress details filled up by pulumi
   dal1:
+    attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
 
 bootstrap_peers:
   - gnomoid-reloaded.freeboxos.fr:9733
