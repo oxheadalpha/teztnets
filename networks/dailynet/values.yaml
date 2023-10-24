@@ -101,6 +101,7 @@ activation:
       blocks_per_epoch: 32
     smart_rollup_enable: true
     smart_rollup_private_enable: true
+    smart_rollup_riscv_pvm_enable: true
     smart_rollup_origination_size: 6314
     smart_rollup_challenge_window_in_blocks: 40
     smart_rollup_stake_amount: "32000000"
