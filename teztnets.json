@@ -93,9 +93,7 @@
     "dal_rpc_url": "https://dal-rpc.mondaynet-2023-10-23.teztnets.xyz",
     "description": "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Oxford for 8 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_8dd6c2f7_20231021090753",
-    "evm_proxy_urls": [
-      "https://evm.mondaynet-2023-10-23.teztnets.xyz"
-    ],
+    "evm_proxy_urls": [],
     "faucet_url": "https://faucet.mondaynet-2023-10-23.teztnets.xyz",
     "git_ref": "8dd6c2f7",
     "human_name": "Mondaynet",
@@ -103,9 +101,7 @@
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.xyz/mondaynet-2023-10-23",
-    "rollup_urls": [
-      "https://evm-rollup-node.mondaynet-2023-10-23.teztnets.xyz"
-    ],
+    "rollup_urls": [],
     "rpc_url": "https://rpc.mondaynet-2023-10-23.teztnets.xyz",
     "rpc_urls": [
       "https://rpc.mondaynet-2023-10-23.teztnets.xyz"
