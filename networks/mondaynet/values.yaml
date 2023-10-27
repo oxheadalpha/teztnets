@@ -160,6 +160,7 @@ dalNodes:
     ingress:
     # ingress details filled up by pulumi
   dal1:
+    attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
 
 bootstrap_peers:
   - gnomoid-reloaded.freeboxos.fr:9733
