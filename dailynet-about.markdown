@@ -8,11 +8,11 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.dailynet-2023-10-29.teztnets.xyz](https://rpc.dailynet-2023-10-29.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2023-10-29.teztnets.xyz) |
-| Full network name | `TEZOS-DAILYNET-2023-10-29T00:00:00.000Z` |
+| Public RPC endpoints | [https://rpc.dailynet-2023-10-30.teztnets.xyz](https://rpc.dailynet-2023-10-30.teztnets.xyz/chains/main/chain_id)<br/> |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2023-10-30.teztnets.xyz) |
+| Full network name | `TEZOS-DAILYNET-2023-10-30T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_c97d49a8_20231027104818](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_c97d49a8_20231027104818) |
-| Activated on | 2023-10-29T00:00:00.000Z |
+| Activated on | 2023-10-30T00:00:00.000Z |
 
 
 
@@ -52,7 +52,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/dailynet-2023-10-29
+octez-node config init --network https://teztnets.xyz/dailynet-2023-10-30
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -64,8 +64,8 @@ More information about the Tezos EVM Rollup will be available soon.
 
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-10-29.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-10-29.teztnets.xyz/global/block/head) |
-| EVM Proxy URL | [`https://evm.dailynet-2023-10-29.teztnets.xyz`](https://evm.dailynet-2023-10-29.teztnets.xyz) |
+| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-10-30.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-10-30.teztnets.xyz/global/block/head) |
+| EVM Proxy URL | [`https://evm.dailynet-2023-10-30.teztnets.xyz`](https://evm.dailynet-2023-10-30.teztnets.xyz) |
 
 
 
@@ -80,8 +80,8 @@ The DAL node is accessible with the following endpoints:
 
 | | |
 |-------|---------------------|
-| Octez DAL Node RPC URL | [`https://dal-rpc.dailynet-2023-10-29.teztnets.xyz`](https://dal-rpc.dailynet-2023-10-29.teztnets.xyz) |
-| DAL P2P Endpoint | `dal.dailynet-2023-10-29.teztnets.xyz:11732` |
+| Octez DAL Node RPC URL | [`https://dal-rpc.dailynet-2023-10-30.teztnets.xyz`](https://dal-rpc.dailynet-2023-10-30.teztnets.xyz) |
+| DAL P2P Endpoint | `dal.dailynet-2023-10-30.teztnets.xyz:11732` |
 
 
 
