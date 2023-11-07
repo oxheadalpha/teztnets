@@ -1,0 +1,56 @@
+images:
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
+  tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.2.1
+
+
+# Frontend app configuration. You can optionally deploy only the faucet backend.
+enableUI: true
+config:
+  application:
+    name: "Tezos Weeklynet Faucet"
+    googleCaptchaSiteKey: "" # filled in by pulumi
+    backendUrl: "" # filled in by pulumi
+    githubRepo: https://github.com/oxheadalpha/tezos-faucet
+  network:
+    name: custom # Beacon SDK doesn't recognize Oxfordnet atm.
+    rpcUrl: "" # filled in by pulumi
+    faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
+
+# Value the server sets for the "Access-Control-Allow-Origin" header for CORS.
+authorizedHost: "" # filled in by pulumi
+# RPC url for the faucet backend. Default value assumes tezos-k8s created an RPC
+# service in the same namespace. If not set, defaults to `config.network.rpcUrl`.
+backendRpcUrl: http://tezos-node-rpc:8732
+# If the backend requires CAPTCHA tokens to be submitted.
+enableCaptcha: true
+
+# The minimum Tez allowed per request.
+minTez: 1
+# The maximum Tez allowed per request.
+maxTez: 1000000
+
+disableChallenges: false
+# Minimum number of challenges required for the minimum Tez request.
+minChallenges: 1
+# Maximum number of challenges required for the maximum Tez request.
+# 1100 challenges should take ~20m.
+maxChallenges: 1100
+# Maximum number of challenges required for the maximum Tez request when a
+# captcha is used.
+# 53 challenges should take ~4m.
+maxChallengesWithCaptcha: 53
+# How many bytes the challenge string should be.
+challengeSize: 2048
+# Difficulty level for challenges.
+difficulty: 4
+
+redis:
+  url: redis://redis-master:6379
+
+ingress:
+  enabled: true
+  annotations:
+    "kubernetes.io/ingress.class": "nginx"
+    "cert-manager.io/cluster-issuer": "letsencrypt-prod"
+  host: "" # faucet fqdn, filled in by pulumi
+  tls: [] # filled in by pulumi
