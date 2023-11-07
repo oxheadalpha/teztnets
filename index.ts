@@ -98,9 +98,39 @@ const mondaynet_chain = new TezosChain(
     category: periodicCategory,
     humanName: "Mondaynet",
     description:
-      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Oxford for 8 cycles then upgrades to proto Alpha.",
+      "A testnet that restarts every Monday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
     schedule: "0 0 * * MON",
     bootstrapPeers: ["mondaynet.ecadinfra.com"],
+    bootstrapContracts: [
+      "taquito_big_map_contract.json",
+      "taquito_contract.json",
+      "taquito_sapling_contract.json",
+      "taquito_tzip_12_16_contract.json",
+      // "exchanger.json",
+      // "evm_bridge.json",
+    ],
+    // chartRepoVersion: "6.18.0",
+    chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
+    privateBakingKey: private_oxhead_baking_key,
+    activationBucket: activationBucket,
+  }),
+  provider
+)
+
+const weeklynet_chain = new TezosChain(
+  new TezosChainParametersBuilder({
+    yamlFile: "networks/weeklynet/values.yaml",
+    faucetYamlFile: "networks/weeklynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    dnsName: "weeklynet",
+    category: periodicCategory,
+    humanName: "Weeklynet",
+    description:
+      "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
+    schedule: "0 0 * * WED",
+    bootstrapPeers: [],
     bootstrapContracts: [
       "taquito_big_map_contract.json",
       "taquito_contract.json",
@@ -286,7 +316,7 @@ const ghostnetNetwork = {
 }
 
 export const networks = {
-  ...getNetworks([dailynet_chain, mondaynet_chain, nairobinet_chain]),
+  ...getNetworks([dailynet_chain, mondaynet_chain, weeklynet_chain, nairobinet_chain]),
   ...{ ghostnet: ghostnetNetwork },
 }
 
@@ -358,7 +388,7 @@ const mainnetMetadata = {
 }
 
 export const teztnets = {
-  ...getTeztnets([dailynet_chain, mondaynet_chain, nairobinet_chain]),
+  ...getTeztnets([dailynet_chain, mondaynet_chain, weeklynet_chain, nairobinet_chain]),
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
