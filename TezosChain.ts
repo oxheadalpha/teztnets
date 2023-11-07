@@ -1,3 +1,4 @@
+import { local } from "@pulumi/command"
 import * as digitalocean from "@pulumi/digitalocean"
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
@@ -655,8 +656,8 @@ export class TezosChain extends pulumi.ComponentResource {
 
     // Data Availability Layer
     if (params.helmValues.dalNodes && params.helmValues.dalNodes.length != 0) {
-      let dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`
-      let dalIngressParams = {
+      const dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`
+      const dalIngressParams = {
         enabled: true,
         host: dalRpcFqdn,
         labels: {
@@ -678,12 +679,13 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
 
       const dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
+      const dalBootstrapSvcName = `${name}-dal-bootstrap`
       const dalBootstrapLb = new k8s.core.v1.Service(
         `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
             namespace: ns.metadata.name,
-            name: `${name}-dal-bootstrap`,
+            name: dalBootstrapSvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
               // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
@@ -706,12 +708,13 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
       const dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
+      const dal1SvcName = `${name}-dal-dal1`
       const dal1Lb = new k8s.core.v1.Service(
         `${name}-dal-dal1-p2p-lb`,
         {
           metadata: {
             namespace: ns.metadata.name,
-            name: `${name}-dal-dal1`,
+            name: dal1SvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
               // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
@@ -734,30 +737,76 @@ export class TezosChain extends pulumi.ComponentResource {
       )
 
       if (name.includes("dailynet") || name.includes("mondaynet")) {
-        // Define a custom awaiter function
-        const waitForDalIps = async () => {
-          while (true) {
-            // Get the status of the service from the live object
-            const dalBootstrapLbStatus = await dalBootstrapLb.status
-            const dal1LbStatus = await dal1Lb.status
+        if (!process.env.KUBECONFIG) {
+          throw new Error(
+            "KUBECONFIG env var is required when deploying DAL nodes."
+          )
+        }
 
-            // Check if the service is ready and the IP address is available
-            if (
-              dalBootstrapLbStatus?.loadBalancer?.ingress[0]?.ip &&
-              dal1LbStatus?.loadBalancer?.ingress[0]?.ip
-            ) {
-              break
+        const awaitingIps = pulumi
+          .all([dalBootstrapLb.status, dal1Lb.status])
+          .apply(() => {
+            const waitForDalIps = async () => {
+              if (pulumi.runtime.isDryRun()) {
+                return {}
+              }
+
+              while (true) {
+                const cmdOutput = local.runOutput({
+                  command: `kubectl get svc -n ${name} ${dalBootstrapSvcName} ${dal1SvcName} -o json --ignore-not-found`,
+                })
+
+                const dalIps: Record<string, string> | null = await new Promise(
+                  (resolve, reject) =>
+                    cmdOutput.apply(({ stdout, stderr }) => {
+                      if (stderr) {
+                        pulumi.log.error(
+                          "Error while waiting for DAL Loadbalancers."
+                        )
+                        return reject(stderr)
+                      }
+
+                      if (stdout) {
+                        const output = JSON.parse(stdout)
+                        if (output.items) {
+                          const ips: Record<string, string> = {}
+                          output.items.forEach(
+                            (item: any) =>
+                              (ips[item.metadata.name] =
+                                item?.status?.loadBalancer?.ingress?.[0]?.ip)
+                          )
+                          return resolve(ips)
+                        }
+                      }
+
+                      resolve(null)
+                    })
+                )
+
+                if (dalIps?.[dalBootstrapSvcName] && dalIps?.[dal1SvcName]) {
+                  return dalIps
+                }
+
+                // Wait for 20 seconds before the next check
+                pulumi.log.info(
+                  `${name}: Waiting for DAL Loadbalancers to be ready...`
+                )
+                await new Promise((r) => setTimeout(r, 20_000))
+              }
             }
 
-            // Wait for 10 seconds before the next check
-            await new Promise((resolve) => setTimeout(resolve, 10000))
-          }
-        }
-        waitForDalIps()
-        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
-        params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732`
+            return pulumi.output(waitForDalIps())
+          })
+
+        params.helmValues.dalNodes.bootstrap.publicAddr = awaitingIps.apply(
+          (o: any) => `${o[dalBootstrapSvcName]}:11732`
+        )
+        params.helmValues.dalNodes.dal1.publicAddr = awaitingIps.apply(
+          (o: any) => `${o[dal1SvcName]}:11732`
+        )
         params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
       }
+
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
         `${dalBootstrapP2pFqdn}:11732`,
       ]
