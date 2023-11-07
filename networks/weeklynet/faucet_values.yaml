@@ -12,7 +12,7 @@ config:
     backendUrl: "" # filled in by pulumi
     githubRepo: https://github.com/oxheadalpha/tezos-faucet
   network:
-    name: "" # filled in by pulumi
+    name: custom # Beacon SDK doesn't recognize Oxfordnet atm.
     rpcUrl: "" # filled in by pulumi
     faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
 
