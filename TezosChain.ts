@@ -736,7 +736,11 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider: this.provider }
       )
 
-      if (name.includes("dailynet") || name.includes("mondaynet")) {
+      if (
+        name.includes("dailynet") ||
+        name.includes("mondaynet") ||
+        name.includes("weeklynet")
+      ) {
         if (!process.env.KUBECONFIG) {
           throw new Error(
             "KUBECONFIG env var is required when deploying DAL nodes."
