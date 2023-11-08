@@ -1,15 +1,14 @@
+import { local } from "@pulumi/command"
+import * as digitalocean from "@pulumi/digitalocean"
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
-import * as digitalocean from "@pulumi/digitalocean"
 import { RandomPassword } from "@pulumi/random"
 import * as cronParser from "cron-parser"
-
-import { TezosImageResolver } from "./TezosImageResolver"
-import * as docker from "@pulumi/docker"
-
 import * as fs from "fs"
 import * as YAML from "yaml"
 const mime = require("mime")
+
+import { TezosImageResolver } from "./TezosImageResolver"
 
 export interface TezosHelmParameters {
   readonly helmValues: any
@@ -70,7 +69,8 @@ export interface TezosParamsInitializer {
 }
 
 export class TezosChainParametersBuilder
-  implements TezosHelmParameters, TezosInitParameters {
+  implements TezosHelmParameters, TezosInitParameters
+{
   private _helmValues: any
   private _faucetHelmValues: any
   private _name: string
@@ -252,7 +252,7 @@ export class TezosChainParametersBuilder
     )
     this.name(
       `${this.getDnsName().toLowerCase()}-${
-      deployDate.toISOString().split("T")[0]
+        deployDate.toISOString().split("T")[0]
       }`
     )
     // this is a trick to change mondaynet's name when it needs to be respun.
@@ -400,6 +400,7 @@ export class TezosChain extends pulumi.ComponentResource {
    */
   constructor(
     params: TezosHelmParameters & TezosInitParameters,
+    kubeconfig: pulumi.Output<any> | null,
     provider: k8s.Provider,
     opts?: pulumi.ResourceOptions
   ) {
@@ -423,21 +424,20 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues["activation"]["bootstrap_contract_urls"] = []
 
       if (params.getContracts()) {
-        params.getContracts().forEach(function(contractFile: any) {
+        params.getContracts().forEach((contractFile) => {
           let contractFullName = `${name}-${contractFile}`
           new digitalocean.SpacesBucketObject(contractFullName, {
             region: digitalocean.Region.NYC3,
             bucket: params.getActivationBucket().name,
             key: contractFullName,
-            source:
-              `bootstrap_contracts/${contractFile}`,
+            source: `bootstrap_contracts/${contractFile}`,
             contentType: mime.getType(contractFile),
-            acl: "public-read"
+            acl: "public-read",
           })
           params.helmValues["activation"]["bootstrap_contract_urls"].push(
             pulumi.interpolate`https://${
               params.getActivationBucket().bucketDomainName
-              }/${contractFullName}`
+            }/${contractFullName}`
           )
         })
       }
@@ -503,7 +503,6 @@ export class TezosChain extends pulumi.ComponentResource {
     })
 
     let tezosK8sImages
-    let pulumiTaggedImages
     if (params.getChartRepo() == "") {
       // assume tezos-k8s submodule present; build custom images, and deploy custom chart from path
       //make list of images to build in case we are using submodules
@@ -655,10 +654,11 @@ export class TezosChain extends pulumi.ComponentResource {
       params.helmValues.smartRollupNodes.evm.evm_proxy.ingress =
         evmProxyIngressParams
     }
+
     // Data Availability Layer
     if (params.helmValues.dalNodes && params.helmValues.dalNodes.length != 0) {
-      let dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`
-      let dalIngressParams = {
+      const dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`
+      const dalIngressParams = {
         enabled: true,
         host: dalRpcFqdn,
         labels: {
@@ -679,17 +679,18 @@ export class TezosChain extends pulumi.ComponentResource {
       }
       params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
 
-      let dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
-      let dalBootstrapLb = new k8s.core.v1.Service(
+      const dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
+      const dalBootstrapSvcName = `${name}-dal-bootstrap`
+      const dalBootstrapLb = new k8s.core.v1.Service(
         `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
             namespace: ns.metadata.name,
-            name: `${name}-dal-bootstrap`,
+            name: dalBootstrapSvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
               // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
-              "pulumi.com/skipAwait": "true"
+              "pulumi.com/skipAwait": "true",
             },
           },
           spec: {
@@ -707,17 +708,18 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider: this.provider }
       )
 
-      let dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
-      let dal1Lb = new k8s.core.v1.Service(
+      const dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
+      const dal1SvcName = `${name}-dal-dal1`
+      const dal1Lb = new k8s.core.v1.Service(
         `${name}-dal-dal1-p2p-lb`,
         {
           metadata: {
             namespace: ns.metadata.name,
-            name: `${name}-dal-dal1`,
+            name: dal1SvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
               // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
-              "pulumi.com/skipAwait": "true"
+              "pulumi.com/skipAwait": "true",
             },
           },
           spec: {
@@ -734,35 +736,90 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
-      if (name.includes("dailynet") || name.includes("mondaynet")) {
 
-        // Define a custom awaiter function
-        const waitForDalIps = async () => {
-          while (true) {
-            // Get the status of the service from the live object
-            const dalBootstrapLbStatus = await dalBootstrapLb.status;
-            const dal1LbStatus = await dal1Lb.status;
-
-            // Check if the service is ready and the IP address is available
-            if (dalBootstrapLbStatus && dalBootstrapLbStatus.loadBalancer && dalBootstrapLbStatus.loadBalancer.ingress[0].ip &&
-              dal1LbStatus && dal1LbStatus.loadBalancer && dal1LbStatus.loadBalancer.ingress[0].ip) {
-              break;
+      if (
+        name.includes("dailynet") ||
+        name.includes("mondaynet") ||
+        name.includes("weeklynet")
+      ) {
+        const awaitingIps = pulumi
+          .all([dalBootstrapLb.status, dal1Lb.status])
+          .apply(async () => {
+            if (pulumi.runtime.isDryRun()) {
+              return {}
             }
 
-            // Wait for 10 seconds before the next check
-            await new Promise((resolve) => setTimeout(resolve, 10000));
-          }
-        };
-        waitForDalIps();
-        params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapLb.status.loadBalancer.ingress[0].ip}:11732`
-        params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1Lb.status.loadBalancer.ingress[0].ip}:11732`
+            while (true) {
+              const cmdOutput = local.runOutput({
+                // Defaults to `/bin/sh`. `bash` is needed for the command to
+                // use process substitution.
+                interpreter: ["/bin/bash", "-c"],
+                command: `kubectl get svc \
+                      ${dalBootstrapSvcName} ${dal1SvcName} \
+                       -n ${name} --ignore-not-found -o json \
+                       --kubeconfig <(echo $KUBECONFIG_DATA | base64 --decode)`,
+                environment: {
+                  KUBECONFIG_DATA:
+                    kubeconfig?.apply((k) =>
+                      Buffer.from(k).toString("base64")
+                    ) || "",
+                },
+              })
+
+              const dalIps: Record<string, string> | null = await new Promise(
+                (resolve, reject) =>
+                  cmdOutput.apply(({ stdout, stderr }) => {
+                    if (stderr) {
+                      pulumi.log.error(
+                        "Error while waiting for DAL Loadbalancers."
+                      )
+                      return reject(stderr)
+                    }
+
+                    if (stdout) {
+                      const output = JSON.parse(stdout)
+                      if (output.items) {
+                        const ips: Record<string, string> = {}
+                        output.items.forEach(
+                          (item: any) =>
+                            (ips[item.metadata.name] =
+                              item?.status?.loadBalancer?.ingress?.[0]?.ip)
+                        )
+                        return resolve(ips)
+                      }
+                    }
+
+                    resolve(null)
+                  })
+              )
+
+              if (dalIps?.[dalBootstrapSvcName] && dalIps?.[dal1SvcName]) {
+                return pulumi.output(dalIps)
+              }
+
+              // Wait for 20 seconds before the next check
+              pulumi.log.info(
+                `${name}: Waiting for DAL Loadbalancers to be ready...`
+              )
+              await new Promise((r) => setTimeout(r, 20_000))
+            }
+          })
+
+        params.helmValues.dalNodes.bootstrap.publicAddr = awaitingIps.apply(
+          (o: any) => `${o[dalBootstrapSvcName]}:11732`
+        )
+        params.helmValues.dalNodes.dal1.publicAddr = awaitingIps.apply(
+          (o: any) => `${o[dal1SvcName]}:11732`
+        )
         params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
       }
+
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
         `${dalBootstrapP2pFqdn}:11732`,
       ]
     }
-    if (Object.keys(params.helmValues).length != 0) {
+
+    if (Object.keys(params.helmValues).length) {
       if (params.getChartPath()) {
         // assume tezos-k8s submodule present; deploy custom chart from path
 
