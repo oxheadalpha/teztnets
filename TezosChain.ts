@@ -400,6 +400,7 @@ export class TezosChain extends pulumi.ComponentResource {
    */
   constructor(
     params: TezosHelmParameters & TezosInitParameters,
+    kubeconfig: pulumi.Output<any> | null,
     provider: k8s.Provider,
     opts?: pulumi.ResourceOptions
   ) {
@@ -741,65 +742,67 @@ export class TezosChain extends pulumi.ComponentResource {
         name.includes("mondaynet") ||
         name.includes("weeklynet")
       ) {
-        if (!process.env.KUBECONFIG) {
-          throw new Error(
-            "KUBECONFIG env var is required when deploying DAL nodes."
-          )
-        }
-
         const awaitingIps = pulumi
           .all([dalBootstrapLb.status, dal1Lb.status])
-          .apply(() => {
-            const waitForDalIps = async () => {
-              if (pulumi.runtime.isDryRun()) {
-                return {}
-              }
-
-              while (true) {
-                const cmdOutput = local.runOutput({
-                  command: `kubectl get svc -n ${name} ${dalBootstrapSvcName} ${dal1SvcName} -o json --ignore-not-found`,
-                })
-
-                const dalIps: Record<string, string> | null = await new Promise(
-                  (resolve, reject) =>
-                    cmdOutput.apply(({ stdout, stderr }) => {
-                      if (stderr) {
-                        pulumi.log.error(
-                          "Error while waiting for DAL Loadbalancers."
-                        )
-                        return reject(stderr)
-                      }
-
-                      if (stdout) {
-                        const output = JSON.parse(stdout)
-                        if (output.items) {
-                          const ips: Record<string, string> = {}
-                          output.items.forEach(
-                            (item: any) =>
-                              (ips[item.metadata.name] =
-                                item?.status?.loadBalancer?.ingress?.[0]?.ip)
-                          )
-                          return resolve(ips)
-                        }
-                      }
-
-                      resolve(null)
-                    })
-                )
-
-                if (dalIps?.[dalBootstrapSvcName] && dalIps?.[dal1SvcName]) {
-                  return dalIps
-                }
-
-                // Wait for 20 seconds before the next check
-                pulumi.log.info(
-                  `${name}: Waiting for DAL Loadbalancers to be ready...`
-                )
-                await new Promise((r) => setTimeout(r, 20_000))
-              }
+          .apply(async () => {
+            if (pulumi.runtime.isDryRun()) {
+              return {}
             }
 
-            return pulumi.output(waitForDalIps())
+            while (true) {
+              const cmdOutput = local.runOutput({
+                // Defaults to `/bin/sh`. `bash` is needed for the command to
+                // use process substitution.
+                interpreter: ["/bin/bash", "-c"],
+                command: `kubectl get svc \
+                      ${dalBootstrapSvcName} ${dal1SvcName} \
+                       -n ${name} --ignore-not-found -o json \
+                       --kubeconfig <(echo $KUBECONFIG_DATA | base64 --decode)`,
+                environment: {
+                  KUBECONFIG_DATA:
+                    kubeconfig?.apply((k) =>
+                      Buffer.from(k).toString("base64")
+                    ) || "",
+                },
+              })
+
+              const dalIps: Record<string, string> | null = await new Promise(
+                (resolve, reject) =>
+                  cmdOutput.apply(({ stdout, stderr }) => {
+                    if (stderr) {
+                      pulumi.log.error(
+                        "Error while waiting for DAL Loadbalancers."
+                      )
+                      return reject(stderr)
+                    }
+
+                    if (stdout) {
+                      const output = JSON.parse(stdout)
+                      if (output.items) {
+                        const ips: Record<string, string> = {}
+                        output.items.forEach(
+                          (item: any) =>
+                            (ips[item.metadata.name] =
+                              item?.status?.loadBalancer?.ingress?.[0]?.ip)
+                        )
+                        return resolve(ips)
+                      }
+                    }
+
+                    resolve(null)
+                  })
+              )
+
+              if (dalIps?.[dalBootstrapSvcName] && dalIps?.[dal1SvcName]) {
+                return pulumi.output(dalIps)
+              }
+
+              // Wait for 20 seconds before the next check
+              pulumi.log.info(
+                `${name}: Waiting for DAL Loadbalancers to be ready...`
+              )
+              await new Promise((r) => setTimeout(r, 20_000))
+            }
           })
 
         params.helmValues.dalNodes.bootstrap.publicAddr = awaitingIps.apply(
