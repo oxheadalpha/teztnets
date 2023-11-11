@@ -11,7 +11,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 | Public RPC endpoints | [https://rpc.dailynet-2023-11-11.teztnets.xyz](https://rpc.dailynet-2023-11-11.teztnets.xyz/chains/main/chain_id)<br/> |
 | Faucet | [Dailynet faucet](https://faucet.dailynet-2023-11-11.teztnets.xyz) |
 | Full network name | `TEZOS-DAILYNET-2023-11-11T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_362bd8b5_20231110203716](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_362bd8b5_20231110203716) |
+| Tezos docker build | [tezos/tezos:master_6252ac78_20231110234757](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_6252ac78_20231110234757) |
 | Activated on | 2023-11-11T00:00:00.000Z |
 
 
@@ -29,7 +29,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_362bd8b5_20231110203716
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_6252ac78_20231110234757
 ```
 
 #### Alternative: Build the software
@@ -39,7 +39,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_362bd8b5_20231110203716
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 362bd8b5
+git checkout 6252ac78
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
