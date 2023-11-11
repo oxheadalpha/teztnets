@@ -289,7 +289,7 @@ accounts:
     key: edpkvFUn1N79a7hGtVUF8AoQHf5q3A5g6xXtDcVTmna5wzHmgF1BfA
     type: public
     is_bootstrap_baker_account: true
-    bootstrap_balance: "1000000000000"
+    bootstrap_balance: "370000000000"
   german:
     #  tz1TGKSrZrBpND3PELJ43nVdyadoeiM1WMzb
     key: edpkvG8RpyhnPi3ugWWvavsKwR79rb7iMvedeFNxBdyCvenTDZeC9n
