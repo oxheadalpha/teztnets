@@ -84,6 +84,7 @@ const dailynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
+  kubeconfig,
   provider
 )
 
@@ -114,6 +115,7 @@ const weeklynet_chain = new TezosChain(
     privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
   }),
+  kubeconfig,
   provider
 )
 
@@ -130,6 +132,7 @@ new TezosChain(
     humanName: "Ghostnet",
     chartRepoVersion: "6.23.2",
   }),
+  null,
   provider
 )
 
@@ -161,6 +164,7 @@ const nairobinet_chain = new TezosChain(
     rpcUrls: ["https://nairobinet.ecadinfra.com"],
     activationBucket: activationBucket,
   }),
+  null,
   provider
 )
 
