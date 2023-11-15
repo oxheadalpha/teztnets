@@ -218,36 +218,6 @@ accounts:
     type: public
     is_bootstrap_baker_account: true
     bootstrap_balance: "370000000000"
-  tf_singapore1:
-    # tz1i7y4ECTZ1j4w3zFN39Lc7g26FSXX7bo1r
-    key: edpkvNvwRzGXQaiYyDBXiHahMAMgGyY599GoAymcc5p3yWztdZTqWA
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_singapore2:
-    # tz1M6XnMjxGDNArR9fsWmptyxtm65jPwUgfA
-    key: edpku3ZnYDvrijsC8f2VNGS295h3gbHpS2X1SwYRPxudgGszNaWBpk
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_singapore3:
-    # tz1fK5YaAZb127B62Y8xiTDVtjVBVMmRbBZZ
-    key: edpkuzbKWYG9k8MVuJSNm5QQBHgVfFrsFCcNamFDja9bqMoo8ihji3
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_singapore4:
-    # tz1PGgfXneewsjbaumXbCDgQPP311QoT12LJ
-    key: edpktkDVyt7Fud32vcjah3i9Kv2thLCD5GWtJgpCZU9RNuJc4ZHZz5
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
-  tf_singapore5:
-    # tz1b7jqE2Lp5N9Fjo1k8cxL4JR9uC4DXuoYZ
-    key: edpku4nGaeteS2koJfeGEHf9HDFPhx28MwAkNaetDVegghqBmFPSZr
-    type: public
-    is_bootstrap_baker_account: true
-    bootstrap_balance: "370000000000"
   tf_gcp_oregon_1:
     # tz1Q5yMydHkc2DHaP8GdWcz6YcuNu5wKWSa9
     key: edpkuqgGiesSEaxJ2pUjNpHa46Lq7TiRJBqDCxBgdVisEQjPG1TdxQ
