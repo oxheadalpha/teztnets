@@ -100,7 +100,6 @@ activation:
       redundancy_factor: 16
       page_size: 4096
       blocks_per_epoch: 32
-    smart_rollup_enable: true
     smart_rollup_private_enable: true
     smart_rollup_riscv_pvm_enable: true
     smart_rollup_origination_size: 6314
