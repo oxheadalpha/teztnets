@@ -8,11 +8,11 @@ A testnet that restarts every Wednesday launched from tezos/tezos master branch.
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.weeklynet-2023-11-15.teztnets.xyz](https://rpc.weeklynet-2023-11-15.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Weeklynet faucet](https://faucet.weeklynet-2023-11-15.teztnets.xyz) |
-| Full network name | `TEZOS-WEEKLYNET-2023-11-15T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_9c8d2fca_20231114223704](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_9c8d2fca_20231114223704) |
-| Activated on | 2023-11-15T00:00:00.000Z |
+| Public RPC endpoints | [https://rpc.weeklynet-2023-11-22.teztnets.xyz](https://rpc.weeklynet-2023-11-22.teztnets.xyz/chains/main/chain_id)<br/> |
+| Faucet | [Weeklynet faucet](https://faucet.weeklynet-2023-11-22.teztnets.xyz) |
+| Full network name | `TEZOS-WEEKLYNET-2023-11-22T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_cafb1b8e_20231121214541](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_cafb1b8e_20231121214541) |
+| Activated on | 2023-11-22T00:00:00.000Z |
 
 
 
@@ -29,7 +29,7 @@ A testnet that restarts every Wednesday launched from tezos/tezos master branch.
 To join Weeklynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_9c8d2fca_20231114223704
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_cafb1b8e_20231121214541
 ```
 
 #### Alternative: Build the software
@@ -39,7 +39,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_9c8d2fca_20231114223704
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 9c8d2fca
+git checkout cafb1b8e
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -52,7 +52,7 @@ export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/weeklynet-2023-11-15
+octez-node config init --network https://teztnets.xyz/weeklynet-2023-11-22
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -70,8 +70,8 @@ The DAL node is accessible with the following endpoints:
 
 | | |
 |-------|---------------------|
-| Octez DAL Node RPC URL | [`https://dal-rpc.weeklynet-2023-11-15.teztnets.xyz`](https://dal-rpc.weeklynet-2023-11-15.teztnets.xyz) |
-| DAL P2P Endpoint | `dal.weeklynet-2023-11-15.teztnets.xyz:11732` |
+| Octez DAL Node RPC URL | [`https://dal-rpc.weeklynet-2023-11-22.teztnets.xyz`](https://dal-rpc.weeklynet-2023-11-22.teztnets.xyz) |
+| DAL P2P Endpoint | `dal.weeklynet-2023-11-22.teztnets.xyz:11732` |
 
 
 
