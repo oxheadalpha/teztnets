@@ -69,8 +69,7 @@ export interface TezosParamsInitializer {
 }
 
 export class TezosChainParametersBuilder
-  implements TezosHelmParameters, TezosInitParameters
-{
+  implements TezosHelmParameters, TezosInitParameters {
   private _helmValues: any
   private _faucetHelmValues: any
   private _name: string
@@ -252,7 +251,7 @@ export class TezosChainParametersBuilder
     )
     this.name(
       `${this.getDnsName().toLowerCase()}-${
-        deployDate.toISOString().split("T")[0]
+      deployDate.toISOString().split("T")[0]
       }`
     )
     // this is a trick to change mondaynet's name when it needs to be respun.
@@ -437,7 +436,7 @@ export class TezosChain extends pulumi.ComponentResource {
           params.helmValues["activation"]["bootstrap_contract_urls"].push(
             pulumi.interpolate`https://${
               params.getActivationBucket().bucketDomainName
-            }/${contractFullName}`
+              }/${contractFullName}`
           )
         })
       }
@@ -657,12 +656,12 @@ export class TezosChain extends pulumi.ComponentResource {
 
     // Data Availability Layer
     if (params.helmValues.dalNodes && params.helmValues.dalNodes.length != 0) {
-      const dalRpcFqdn = `dal-rpc.${name}.teztnets.xyz`
-      const dalIngressParams = {
+      const dalBootstrapRpcFqdn = `dal-bootstrap-rpc.${name}.teztnets.xyz`
+      const dalBootstrapIngressParams = {
         enabled: true,
-        host: dalRpcFqdn,
+        host: dalBootstrapRpcFqdn,
         labels: {
-          app: "dal",
+          app: "dal-bootstrap",
         },
         annotations: {
           "kubernetes.io/ingress.class": "nginx",
@@ -672,12 +671,12 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         tls: [
           {
-            hosts: [dalRpcFqdn],
-            secretName: `${dalRpcFqdn}-secret`,
+            hosts: [dalBootstrapRpcFqdn],
+            secretName: `${dalBootstrapRpcFqdn}-secret`,
           },
         ],
       }
-      params.helmValues.dalNodes.bootstrap.ingress = dalIngressParams
+      params.helmValues.dalNodes.bootstrap.ingress = dalBootstrapIngressParams
 
       const dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
       const dalBootstrapSvcName = `${name}-dal-bootstrap`
@@ -707,6 +706,28 @@ export class TezosChain extends pulumi.ComponentResource {
         },
         { provider: this.provider }
       )
+
+      const dalAttestorRpcFqdn = `dal-attestor-rpc.${name}.teztnets.xyz`
+      const dalAttestorIngressParams = {
+        enabled: true,
+        host: dalAttestorRpcFqdn,
+        labels: {
+          app: "dal-dal1",
+        },
+        annotations: {
+          "kubernetes.io/ingress.class": "nginx",
+          "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+          "nginx.ingress.kubernetes.io/enable-cors": "true",
+          "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
+        },
+        tls: [
+          {
+            hosts: [dalAttestorRpcFqdn],
+            secretName: `${dalAttestorRpcFqdn}-secret`,
+          },
+        ],
+      }
+      params.helmValues.dalNodes.dal1.ingress = dalAttestorIngressParams
 
       const dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
       const dal1SvcName = `${name}-dal-dal1`
@@ -739,7 +760,6 @@ export class TezosChain extends pulumi.ComponentResource {
 
       if (
         name.includes("dailynet") ||
-        name.includes("mondaynet") ||
         name.includes("weeklynet")
       ) {
         const awaitingIps = pulumi

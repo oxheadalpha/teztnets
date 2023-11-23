@@ -161,6 +161,8 @@ dalNodes:
     # ingress details filled up by pulumi
   dal1:
     attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    ingress:
+    # ingress details filled up by pulumi
 
 bootstrap_peers: []
 
