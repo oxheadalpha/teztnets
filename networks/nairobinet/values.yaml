@@ -146,8 +146,6 @@ snapshot_metadata_network_name: nairobinet
 
 images:
   octez: tezos/tezos:v18.1
-tezos_k8s_images:
-  utils: ghcr.io/oxheadalpha/tezos-k8s-utils:pr-614
 
 protocols:
   - command: PtNairob
