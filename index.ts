@@ -5,7 +5,7 @@ import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
 import deployPyrometer from "./pyrometer"
-import { TezosChain, TezosChainParametersBuilder } from "./TezosChain"
+import { TezosChain } from "./TezosChain"
 
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
@@ -74,98 +74,92 @@ new gcp.dns.RecordSet("teztnetsSiteRecord", {
 
 // chains
 const dailynet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "networks/dailynet/values.yaml",
-    faucetYamlFile: "networks/dailynet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    dnsName: "dailynet",
+  {
     category: periodicCategory,
     humanName: "Dailynet",
     description:
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
+    activationBucket: activationBucket,
     bootstrapContracts: [
-      // "taquito_big_map_contract.json",
-      // "taquito_contract.json",
-      // "taquito_sapling_contract.json",
-      // "taquito_tzip_12_16_contract.json",
-      // "evm_bridge.json",
-      // "exchanger.json",
+      "taquito_big_map_contract.json",
+      "taquito_contract.json",
+      "taquito_sapling_contract.json",
+      "taquito_tzip_12_16_contract.json",
+      "evm_bridge.json",
+      "exchanger.json",
     ],
-    // chartRepoVersion: "6.18.0",
+    tezosHelmValuesFile: "networks/dailynet/values.yaml",
+    tezosFaucetHelmValuesFile: "networks/dailynet/faucet_values.yaml",
+    bakingPrivateKey: private_oxhead_baking_key,
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     chartPath: "networks/dailynet/tezos-k8s",
-    privateBakingKey: private_oxhead_baking_key,
-    // activationBucket: activationBucket,
-  }),
-  kubeconfig,
+  },
   provider
 )
 
 const weeklynet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "networks/weeklynet/values.yaml",
-    faucetYamlFile: "networks/weeklynet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    dnsName: "weeklynet",
+  {
     category: periodicCategory,
     humanName: "Weeklynet",
     description:
       "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
     schedule: "0 0 * * WED",
-    bootstrapPeers: [],
-    bootstrapContracts: [
-      // "taquito_big_map_contract.json",
-      // "taquito_contract.json",
-      // "taquito_sapling_contract.json",
-      // "taquito_tzip_12_16_contract.json",
-      // // "exchanger.json",
-      // // "evm_bridge.json",
-    ],
-    // chartRepoVersion: "6.18.0",
-    chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
-    privateBakingKey: private_oxhead_baking_key,
     activationBucket: activationBucket,
-  }),
-  kubeconfig,
+    bootstrapContracts: [
+      "taquito_big_map_contract.json",
+      "taquito_contract.json",
+      "taquito_sapling_contract.json",
+      "taquito_tzip_12_16_contract.json",
+      // "exchanger.json",
+      // "evm_bridge.json",
+    ],
+    tezosHelmValuesFile: "networks/weeklynet/values.yaml",
+    tezosFaucetHelmValuesFile: "networks/weeklynet/faucet_values.yaml",
+    bakingPrivateKey: private_oxhead_baking_key,
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
+    // chartRepoVersion: "6.18.0",
+    bootstrapPeers: [],
+  },
   provider
 )
 
 // For ghostnet, we only deploy a faucet.
 // The RPC service and baker are in the sensitive infra.
 new TezosChain(
-  new TezosChainParametersBuilder({
-    faucetYamlFile: "networks/ghostnet/faucet_values.yaml",
+  {
+    category: longCategory,
+    humanName: "Ghostnet",
+    activationBucket: activationBucket,
+    description: "",
+    tezosFaucetHelmValuesFile: "networks/ghostnet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "ghostnet",
-    dnsName: "ghostnet",
-    humanName: "Ghostnet",
     chartRepoVersion: "6.24.3",
-  }),
-  null,
+  },
   provider
 )
 
 const nairobinet_chain = new TezosChain(
-  new TezosChainParametersBuilder({
-    yamlFile: "networks/nairobinet/values.yaml",
-    faucetYamlFile: "networks/nairobinet/faucet_values.yaml",
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    name: "nairobinet",
-    dnsName: "nairobinet",
+  {
     category: protocolCategory,
     humanName: "Nairobinet",
     description: "Test Chain for the Nairobi Protocol Proposal",
+    activationBucket: activationBucket,
+    tezosHelmValuesFile: "networks/nairobinet/values.yaml",
+    tezosFaucetHelmValuesFile: "networks/nairobinet/faucet_values.yaml",
+    bakingPrivateKey: private_oxhead_baking_key,
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
-    chartRepoVersion: "6.24.3",
-    privateBakingKey: private_oxhead_baking_key,
+    rpcUrls: ["https://nairobinet.ecadinfra.com"],
     indexers: [
       {
         name: "TzKT",
@@ -176,10 +170,8 @@ const nairobinet_chain = new TezosChain(
         url: "https://nairobi.tzstats.com",
       },
     ],
-    rpcUrls: ["https://nairobinet.ecadinfra.com"],
-    // activationBucket: activationBucket,
-  }),
-  null,
+    chartRepoVersion: "6.24.3",
+  },
   provider
 )
 
@@ -187,8 +179,8 @@ function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
   chains.forEach(function(chain) {
-    const bootstrapPeers: string[] = Object.assign([], chain.params.getPeers()) // clone
-    bootstrapPeers.splice(0, 0, `${chain.params.getName()}.teztnets.xyz`)
+    const bootstrapPeers: string[] = Object.assign([], chain.newParams.bootstrapPeers) // clone
+    bootstrapPeers.splice(0, 0, `${chain.name}.teztnets.xyz`)
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
     // TODO: generate it dynamically based on privkey
@@ -196,7 +188,7 @@ function getNetworks(chains: TezosChain[]): object {
       "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
     const network = Object.assign(
       {},
-      chain.params.helmValues["node_config_network"]
+      chain.tezosHelmValues["node_config_network"]
     ) // clone
     network["sandboxed_chain_name"] = "SANDBOXED_TEZOS"
     network["default_bootstrap_peers"] = bootstrapPeers
@@ -218,11 +210,11 @@ function getNetworks(chains: TezosChain[]): object {
     }
     if ("dal_config" in network) {
       network["dal_config"]["bootstrap_peers"] = [
-        `dal.${chain.params.getName()}.teztnets.xyz:11732`,
+        `dal.${chain.name}.teztnets.xyz:11732`,
       ]
     }
 
-    networks[chain.params.getName()] = network
+    networks[chain.name] = network
   })
 
   return networks
@@ -232,26 +224,25 @@ function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
   chains.forEach(function(chain) {
-    let faucetUrl = `https://faucet.${chain.params.getName()}.teztnets.xyz`
-    teztnets[chain.params.getName()] = {
-      chain_name: chain.getChainName(),
+    let faucetUrl = `https://faucet.${chain.name}.teztnets.xyz`
+    teztnets[chain.name] = {
+      chain_name: chain.tezosHelmValues["node_config_network"]["chain_name"],
       network_url: chain.getNetworkUrl(),
-      human_name: chain.params.getHumanName(),
-      description: chain.getDescription(),
+      human_name: chain.newParams.humanName,
+      description: chain.newParams.description,
       docker_build: chain.getDockerBuild(),
       git_ref: chain.getGitRef(),
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
-      category: chain.params.getCategory(),
+      category: chain.newParams.category,
       rpc_url: chain.getRpcUrl(),
       rollup_urls: chain.getRollupUrls(),
       evm_proxy_urls: chain.getEvmProxyUrls(),
       dal_p2p_url: chain.getDalP2pUrl()!,
       dal_rpc_url: chain.getDalRpcUrl()!,
       rpc_urls: chain.getRpcUrls(),
-      masked_from_main_page: chain.params.isMaskedFromMainPage(),
-      aliases: chain.params.getAliases(),
-      indexers: chain.params.getIndexers(),
+      masked_from_main_page: false,
+      indexers: chain.newParams.indexers || [],
     }
   })
 
@@ -316,7 +307,6 @@ export const networks = {
 const gitRefMainnetGhostnet = "v17.3"
 const lastBakingDaemonMainnetGhostnet = "PtNairob"
 const ghostnetTeztnet = {
-  aliases: ["ithacanet"],
   category: "Long-running Teztnets",
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   description: "Ghostnet is the long-running testnet for Tezos.",
@@ -349,7 +339,6 @@ const ghostnetTeztnet = {
 // Some systems rely on this to provide lists of third-party RPC services
 // to their users. For example, umami wallet.
 const mainnetMetadata = {
-  aliases: [],
   category: "Long-running Teztnets",
   chain_name: "TEZOS_MAINNET",
   description: "Tezos Mainnet",
