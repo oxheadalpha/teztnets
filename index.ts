@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi"
-import * as digitalocean from "@pulumi/digitalocean"
+import * as gcp from "@pulumi/gcp"
 import * as k8s from "@pulumi/kubernetes"
 import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
@@ -25,38 +25,43 @@ const provider = new k8s.Provider("do-k8s-provider", {
   kubeconfig,
 })
 
-// // Deploy a bucket to store activation smart contracts for all testnets
+const periodicCategory = "Periodic Teztnets"
+const protocolCategory = "Protocol Teztnets"
+const longCategory = "Long-running Teztnets"
+// // // Deploy a bucket to store activation smart contracts for all testnets
 // const activationBucket = new digitalocean.SpacesBucket(
 //   "teztnets-global-activation-bucket",
 //   { acl: "public-read" }
 // )
 
-const periodicCategory = "Periodic Teztnets"
-const protocolCategory = "Protocol Teztnets"
-const longCategory = "Long-running Teztnets"
+// Define your domain name and a suitable name for the managed zone
+const domainName = "teztnets.xyz";
+const managedZoneName = "teztnets-zone";
 
-// const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
-//   name: "teztnets.xyz",
-// })
-//   /**
-//    * Top level A records points to github pages
-//    * see: "configure an apex domain"
-//    * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
-//    */
-//   ;[
-//     "185.199.108.153",
-//     "185.199.109.153",
-//     "185.199.110.153",
-//     "185.199.111.153",
-//   ].forEach((v) => {
-//     new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
-//       domain: teztnetsDomain.name,
-//       name: "@",
-//       type: "A",
-//       ttl: 300,
-//       value: v,
-//     })
-//   })
+// Create a managed DNS zone
+const dnsZone = new gcp.dns.ManagedZone(managedZoneName, {
+  name: managedZoneName,
+  dnsName: domainName + ".",
+  description: "Managed zone for " + domainName,
+});
+
+// GitHub Pages IP addresses
+
+// Create A records for each GitHub Pages IP
+new gcp.dns.RecordSet("teztnetsSiteRecord", {
+  name: domainName + ".",
+  managedZone: dnsZone.name,
+  type: "A",
+  ttl: 300,
+  rrdatas: [
+    "185.199.108.153",
+    "185.199.109.153",
+    "185.199.110.153",
+    "185.199.111.153",
+  ]
+});
+
+
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({

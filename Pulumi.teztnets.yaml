@@ -1,4 +1,6 @@
 config:
+  gcp:project: tf-teztnets
+  gcp:region: us-central1
   teztnets:faucet-private-key:
     secure: AAABAGlP8xgBoqsCZ/Y9LyCKGM9ybeYxcz18wCn/fmDjIKUv2jHGtejPJYSrJU5/TX7iOv7aTCbCYwlxA6tXgfnTdr7QNtaDUU6FoNT6FHFurIuTL5c=
   teztnets:faucet-recaptcha-secret-key:
