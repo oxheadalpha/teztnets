@@ -130,7 +130,7 @@ new TezosChain(
     name: "ghostnet",
     dnsName: "ghostnet",
     humanName: "Ghostnet",
-    chartRepoVersion: "6.23.2",
+    chartRepoVersion: "6.24.2",
   }),
   null,
   provider
@@ -149,7 +149,7 @@ const nairobinet_chain = new TezosChain(
     humanName: "Nairobinet",
     description: "Test Chain for the Nairobi Protocol Proposal",
     bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
-    chartRepoVersion: "6.23.2",
+    chartRepoVersion: "6.24.2",
     privateBakingKey: private_oxhead_baking_key,
     indexers: [
       {
