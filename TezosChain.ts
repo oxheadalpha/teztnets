@@ -1,5 +1,5 @@
 import { local } from "@pulumi/command"
-import * as digitalocean from "@pulumi/digitalocean"
+import * as gcp from "@pulumi/gcp"
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
 import { RandomPassword } from "@pulumi/random"
@@ -36,7 +36,7 @@ export interface TezosInitParameters {
   getAliases(): string[]
   getIndexers(): { name: string; url: string }[]
   getRpcUrls(): string[]
-  getActivationBucket(): digitalocean.SpacesBucket
+  getActivationBucket(): gcp.storage.Bucket
 }
 
 export interface TezosParamsInitializer {
@@ -65,7 +65,7 @@ export interface TezosParamsInitializer {
   readonly rollupUrls?: string[]
   readonly evmProxyUrls?: string[]
   readonly dalRpcUrls?: string[]
-  readonly activationBucket?: digitalocean.SpacesBucket
+  readonly activationBucket?: gcp.storage.Bucket
 }
 
 export class TezosChainParametersBuilder
@@ -92,7 +92,7 @@ export class TezosChainParametersBuilder
   private _rollupUrls: string[]
   private _evmProxyUrls: string[]
   private _dalRpcUrls: string[]
-  private _activationBucket: digitalocean.SpacesBucket
+  private _activationBucket: gcp.storage.Bucket
 
   constructor(params: TezosParamsInitializer = {}) {
     this._name = params.name || params.dnsName || ""
@@ -331,7 +331,7 @@ export class TezosChainParametersBuilder
   public getChartPath(): string {
     return this._chartPath
   }
-  public getActivationBucket(): digitalocean.SpacesBucket {
+  public getActivationBucket(): gcp.storage.Bucket {
     return this._activationBucket
   }
 
@@ -419,27 +419,23 @@ export class TezosChain extends pulumi.ComponentResource {
       { provider: this.provider }
     )
 
-    if ("activation" in params.helmValues && params.getContracts()) {
-      params.helmValues["activation"]["bootstrap_contract_urls"] = []
+    if (params.getContracts()) {
+      params.getContracts().forEach((contractFile) => {
+        let contractFullName = `${name}-${contractFile}`;
 
-      if (params.getContracts()) {
-        params.getContracts().forEach((contractFile) => {
-          let contractFullName = `${name}-${contractFile}`
-          new digitalocean.SpacesBucketObject(contractFullName, {
-            region: digitalocean.Region.NYC3,
-            bucket: params.getActivationBucket().name,
-            key: contractFullName,
-            source: `bootstrap_contracts/${contractFile}`,
-            contentType: mime.getType(contractFile),
-            acl: "public-read",
-          })
-          params.helmValues["activation"]["bootstrap_contract_urls"].push(
-            pulumi.interpolate`https://${
-              params.getActivationBucket().bucketDomainName
-              }/${contractFullName}`
-          )
-        })
-      }
+        // Create a new GCP storage object
+        new gcp.storage.BucketObject(contractFullName, {
+          bucket: params.getActivationBucket().name,
+          name: contractFullName,
+          source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
+          contentType: mime.getType(contractFile) || undefined,
+        });
+
+        // Push the URL to the helm values
+        params.helmValues["activation"]["bootstrap_contract_urls"].push(
+          pulumi.interpolate`https://storage.googleapis.com/${params.getActivationBucket().name}/${contractFullName}`
+        );
+      });
     }
 
     const teztnetsDomain = `${name}.teztnets.xyz`
@@ -680,7 +676,11 @@ export class TezosChain extends pulumi.ComponentResource {
 
       const dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
       const dalBootstrapSvcName = `${name}-dal-bootstrap`
-      const dalBootstrapLb = new k8s.core.v1.Service(
+      const dalBootstrapStaticIP = new gcp.compute.Address(`${name}-dal-bootstrap-ip`, {
+        name: `${name}-dal-bootstrap-ip`,
+        region: "us-central1", // Specify your GCP region here
+      });
+      new k8s.core.v1.Service(
         `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
@@ -688,8 +688,10 @@ export class TezosChain extends pulumi.ComponentResource {
             name: dalBootstrapSvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
-              // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
-              "pulumi.com/skipAwait": "true",
+              "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
+              "networking.gke.io/load-balancer-type": "External",
+              "kubernetes.io/ingress.regional-static-ip-name": dalBootstrapStaticIP.name,
+
             },
           },
           spec: {
@@ -731,7 +733,12 @@ export class TezosChain extends pulumi.ComponentResource {
 
       const dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
       const dal1SvcName = `${name}-dal-dal1`
-      const dal1Lb = new k8s.core.v1.Service(
+      const dal1StaticIP = new gcp.compute.Address(`${name}-dal-dal1-ip`, {
+        name: `${name}-dal-dal1-ip`,
+        region: "us-central1", // Specify your GCP region here
+      });
+
+      new k8s.core.v1.Service(
         `${name}-dal-dal1-p2p-lb`,
         {
           metadata: {
@@ -739,8 +746,10 @@ export class TezosChain extends pulumi.ComponentResource {
             name: dal1SvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
-              // skip await, otherwise we can't pass the LB IP to the pod (chicken and egg)
-              "pulumi.com/skipAwait": "true",
+              "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
+              "networking.gke.io/load-balancer-type": "External",
+              "kubernetes.io/ingress.regional-static-ip-name": dal1StaticIP.name,
+
             },
           },
           spec: {
@@ -758,87 +767,14 @@ export class TezosChain extends pulumi.ComponentResource {
         { provider: this.provider }
       )
 
-      if (
-        name.includes("dailynet") ||
-        name.includes("weeklynet")
-      ) {
-        const awaitingIps = pulumi
-          .all([dalBootstrapLb.status, dal1Lb.status])
-          .apply(async () => {
-            if (pulumi.runtime.isDryRun()) {
-              return {}
-            }
 
-            while (true) {
-              const cmdOutput = local.runOutput({
-                // Defaults to `/bin/sh`. `bash` is needed for the command to
-                // use process substitution.
-                interpreter: ["/bin/bash", "-c"],
-                command: `kubectl get svc \
-                      ${dalBootstrapSvcName} ${dal1SvcName} \
-                       -n ${name} --ignore-not-found -o json \
-                       --kubeconfig <(echo $KUBECONFIG_DATA | base64 --decode)`,
-                environment: {
-                  KUBECONFIG_DATA:
-                    kubeconfig?.apply((k) =>
-                      Buffer.from(k).toString("base64")
-                    ) || "",
-                },
-              })
-
-              const dalIps: Record<string, string> | null = await new Promise(
-                (resolve, reject) =>
-                  cmdOutput.apply(({ stdout, stderr }) => {
-                    if (stderr) {
-                      pulumi.log.error(
-                        "Error while waiting for DAL Loadbalancers."
-                      )
-                      return reject(stderr)
-                    }
-
-                    if (stdout) {
-                      const output = JSON.parse(stdout)
-                      if (output.items) {
-                        const ips: Record<string, string> = {}
-                        output.items.forEach(
-                          (item: any) =>
-                            (ips[item.metadata.name] =
-                              item?.status?.loadBalancer?.ingress?.[0]?.ip)
-                        )
-                        return resolve(ips)
-                      }
-                    }
-
-                    resolve(null)
-                  })
-              )
-
-              if (dalIps?.[dalBootstrapSvcName] && dalIps?.[dal1SvcName]) {
-                return pulumi.output(dalIps)
-              }
-
-              // Wait for 20 seconds before the next check
-              pulumi.log.info(
-                `${name}: Waiting for DAL Loadbalancers to be ready...`
-              )
-              await new Promise((r) => setTimeout(r, 20_000))
-            }
-          })
-
-        params.helmValues.dalNodes.bootstrap.publicAddr = awaitingIps.apply(
-          (o: any) => `${o[dalBootstrapSvcName]}:11732`
-        )
-        params.helmValues.dalNodes.dal1.publicAddr = awaitingIps.apply(
-          (o: any) => `${o[dal1SvcName]}:11732`
-        )
-        params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
-      }
-
+      params.helmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapStaticIP.address}:11732`
+      params.helmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1StaticIP.address}:11732`
+      params.helmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
       params.helmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalBootstrapP2pFqdn}:11732`,
+        `${dalBootstrapP2pFqdn}:11732 `
       ]
     }
-
     if (Object.keys(params.helmValues).length) {
       if (params.getChartPath()) {
         // assume tezos-k8s submodule present; deploy custom chart from path

@@ -28,11 +28,21 @@ const provider = new k8s.Provider("do-k8s-provider", {
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
-// // // Deploy a bucket to store activation smart contracts for all testnets
-// const activationBucket = new digitalocean.SpacesBucket(
-//   "teztnets-global-activation-bucket",
-//   { acl: "public-read" }
-// )
+
+// Create a GCP resource (Storage Bucket) for Bootstrap Smart Contracts
+const activationBucket = new gcp.storage.Bucket("testnets-global-activation-bucket", {
+  location: "US", // You can choose the appropriate location
+  uniformBucketLevelAccess: true,
+  storageClass: "STANDARD",
+});
+
+// Set the bucket to be publicly readable
+new gcp.storage.BucketIAMMember("publicRead", {
+  bucket: activationBucket.name,
+  role: "roles/storage.objectViewer",
+  member: "allUsers",
+});
+
 
 // Define your domain name and a suitable name for the managed zone
 const domainName = "teztnets.xyz";
@@ -118,7 +128,7 @@ const weeklynet_chain = new TezosChain(
     // chartRepoVersion: "6.18.0",
     chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
     privateBakingKey: private_oxhead_baking_key,
-    // activationBucket: activationBucket,
+    activationBucket: activationBucket,
   }),
   kubeconfig,
   provider
