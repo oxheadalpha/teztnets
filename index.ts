@@ -17,7 +17,7 @@ const private_oxhead_baking_key = cfg.requireSecret(
   "private-teztnets-baking-key"
 )
 
-const stackRef = new pulumi.StackReference(`tqtezos/oxheadinfra_do/dev`)
+const stackRef = new pulumi.StackReference(`tacoinfra/tf-teztnets-infra/prod`)
 
 const kubeconfig = stackRef.requireOutput("kubeconfig")
 
@@ -25,38 +25,38 @@ const provider = new k8s.Provider("do-k8s-provider", {
   kubeconfig,
 })
 
-// Deploy a bucket to store activation smart contracts for all testnets
-const activationBucket = new digitalocean.SpacesBucket(
-  "teztnets-global-activation-bucket",
-  { acl: "public-read" }
-)
+// // Deploy a bucket to store activation smart contracts for all testnets
+// const activationBucket = new digitalocean.SpacesBucket(
+//   "teztnets-global-activation-bucket",
+//   { acl: "public-read" }
+// )
 
 const periodicCategory = "Periodic Teztnets"
 const protocolCategory = "Protocol Teztnets"
 const longCategory = "Long-running Teztnets"
 
-const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
-  name: "teztnets.xyz",
-})
-  /**
-   * Top level A records points to github pages
-   * see: "configure an apex domain"
-   * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
-   */
-  ;[
-    "185.199.108.153",
-    "185.199.109.153",
-    "185.199.110.153",
-    "185.199.111.153",
-  ].forEach((v) => {
-    new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
-      domain: teztnetsDomain.name,
-      name: "@",
-      type: "A",
-      ttl: 300,
-      value: v,
-    })
-  })
+// const teztnetsDomain = new digitalocean.Domain("teztnets.xyz", {
+//   name: "teztnets.xyz",
+// })
+//   /**
+//    * Top level A records points to github pages
+//    * see: "configure an apex domain"
+//    * https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+//    */
+//   ;[
+//     "185.199.108.153",
+//     "185.199.109.153",
+//     "185.199.110.153",
+//     "185.199.111.153",
+//   ].forEach((v) => {
+//     new digitalocean.DnsRecord(`teztnetsSiteRecord-${v}`, {
+//       domain: teztnetsDomain.name,
+//       name: "@",
+//       type: "A",
+//       ttl: 300,
+//       value: v,
+//     })
+//   })
 // chains
 const dailynet_chain = new TezosChain(
   new TezosChainParametersBuilder({
@@ -72,17 +72,17 @@ const dailynet_chain = new TezosChain(
       "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     schedule: "0 0 * * *",
     bootstrapContracts: [
-      "taquito_big_map_contract.json",
-      "taquito_contract.json",
-      "taquito_sapling_contract.json",
-      "taquito_tzip_12_16_contract.json",
-      "evm_bridge.json",
-      "exchanger.json",
+      // "taquito_big_map_contract.json",
+      // "taquito_contract.json",
+      // "taquito_sapling_contract.json",
+      // "taquito_tzip_12_16_contract.json",
+      // "evm_bridge.json",
+      // "exchanger.json",
     ],
     // chartRepoVersion: "6.18.0",
     chartPath: "networks/dailynet/tezos-k8s",
     privateBakingKey: private_oxhead_baking_key,
-    activationBucket: activationBucket,
+    // activationBucket: activationBucket,
   }),
   kubeconfig,
   provider
@@ -103,17 +103,17 @@ const weeklynet_chain = new TezosChain(
     schedule: "0 0 * * WED",
     bootstrapPeers: [],
     bootstrapContracts: [
-      "taquito_big_map_contract.json",
-      "taquito_contract.json",
-      "taquito_sapling_contract.json",
-      "taquito_tzip_12_16_contract.json",
-      // "exchanger.json",
-      // "evm_bridge.json",
+      // "taquito_big_map_contract.json",
+      // "taquito_contract.json",
+      // "taquito_sapling_contract.json",
+      // "taquito_tzip_12_16_contract.json",
+      // // "exchanger.json",
+      // // "evm_bridge.json",
     ],
     // chartRepoVersion: "6.18.0",
     chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
     privateBakingKey: private_oxhead_baking_key,
-    activationBucket: activationBucket,
+    // activationBucket: activationBucket,
   }),
   kubeconfig,
   provider
@@ -162,7 +162,7 @@ const nairobinet_chain = new TezosChain(
       },
     ],
     rpcUrls: ["https://nairobinet.ecadinfra.com"],
-    activationBucket: activationBucket,
+    // activationBucket: activationBucket,
   }),
   null,
   provider

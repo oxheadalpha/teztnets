@@ -1,15 +1,9 @@
 config:
-  digitalocean:spaces_access_id:
-    secure: AAABAJc7V0rEIgqs1AZKELWa+K7j/fpusQD6W4iyO3yjBNmo9OLoZrG21f0TZI8GvaxqLA==
-  digitalocean:spaces_secret_key:
-    secure: AAABAB8eVXHaf0xgSMSGIoa6aIIYdY9E3Ap5PRpuSpPPr2wEGEB1cdT9HAjtMQnDlvnZCFXWjnl+Cpdf4iM46HUHpC7o2ToSrG8M
-  digitalocean:token:
-    secure: AAABAKYsYKLtjVN2UtdOPKiTu2eLKOgYYbGPdckrKvqXOqPJ92nV0vPqAKos/8qtGdxLLsxTsy3XHUmNfHFWuX0Z825U1cHqjnR9EAfFJUszL/fsSmrjUsG08S3l79dpveuVuSX5jg==
   teztnets:faucet-private-key:
-    secure: AAABAFEB5jCOJWeMci6Dzu1AzK+iwkgyW5K5ww0eJXorAVMwt2IqE90NCqc+MUwmj+6eVBuJaUFslmqN8J4lSk+dLWKlAiMbpurkFmib9/kADLPqp1I=
+    secure: AAABAGlP8xgBoqsCZ/Y9LyCKGM9ybeYxcz18wCn/fmDjIKUv2jHGtejPJYSrJU5/TX7iOv7aTCbCYwlxA6tXgfnTdr7QNtaDUU6FoNT6FHFurIuTL5c=
   teztnets:faucet-recaptcha-secret-key:
-    secure: AAABACaZeKlZOEiW1pyF8D/kCFxC6ftmGV1mLl3OX83upTmAkXAFn3OlSU6o4opyttUWtOzbbjs59xtdwIYvMFEqKRJzfvf2
+    secure: AAABAGVsSlKbT34ndcMj9+yG0QL7S6enFcvJ9gnMN4DpizDJrJAS6oQEuy837tpz/tcpp45xA9NkZ7Ud8Ihf+xWI/xxblue6
   teztnets:faucet-recaptcha-site-key:
-    secure: AAABAOsBQ+7YnCNYruw3IHLRRIcFfd8rvvftJbTAA1o6A4HeMRj00ST9Rf4dExmyzED/hsA+CZA6onoYbL4fmvtIxsegsfUz
+    secure: AAABAEmST1AIUWhiwQxT/iGPmTBwXvpublb39pOZhPQbSLS+rjK4Tka8dKYvBTiCQet7d1ldzdjh7EfUkSbTZLDZa0xK2DUT
   teztnets:private-teztnets-baking-key:
-    secure: AAABACEqg+hF7nXIXmlDipiUIAO1j3AOK5ywzWbJevkOrW0LzRZJ+DhbkC6cc6GR8HLqqeU+f+qaIGQ2fLPvZhQbTktc11TNf1QCz7T8dcauv7UmRYM=
+    secure: AAABAHp3Be/p8g7IV3dsEBVT2UFaaS/VOzKAvlfJY4mbtSLhQJTYZ38g/TsQf+gtQveSSi7CQXMdVmqqiPwRmFYNGR4GgqljOiPCnUmY22Ut7apFxzA=
