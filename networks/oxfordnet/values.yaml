@@ -40,6 +40,31 @@ accounts:
     key: p2pk66p7iVbEFyJaYM5bjJmXP74B7qso8rXMCmKwVRdRZunMdhUjYBH
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
+  tfspare1:
+    # tz1Pv4fw2vYyM7yCjwmtRShAR3MaKas2rEB6
+    key: edpkvGuDSyySWhiHXCwH8GB12W89WGP2GdDgm3eHuZrjfX3AeSX4UK
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000" 
+  tfspare2:
+    # tz1czy3zUFrpY3p46YqrPKLFPFv7wTVCwAVh
+    key: edpktqQjmPMTjfurDvyaQ4xSpkzKaxJMs75xBwP7dQ7beYLKt4Ew48
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000" 
+  tfspare3:
+    # tz1ReSV2MyjTbPqKTN1CJL3CMtYwe8WYrDaj
+    key: edpkvN2xdjxH93EESi3kjZb3Vd3zjmQ1wSGykmE6NgVLbc38zJGSfT
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000" 
+  tfspare4:
+    # tz1YnTwsuM5fh83kXPC9HViMrYGRvRVP3ff1
+    key: edpkvadEsLbRkJoPjG1UtpZfwxFCL7G35VXYLmfcVTw4bUHNWZNy5f
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000" 
+  tfspare5:
+    # tz1P4jwyqooBmjBEWXLvgfcdy4wstG2Bzsky
+    key: edpkvP1MM5ojoW94m6Tzxgw4hg2N9TbNudycwPLVC9GqDpUk8LAU3Q
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "100000" 
   marco:
     # Marco Schurtenberger
     key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
