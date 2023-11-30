@@ -383,7 +383,6 @@ export class TezosChain extends pulumi.ComponentResource {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
               "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
               "networking.gke.io/load-balancer-type": "External",
-              "kubernetes.io/ingress.regional-static-ip-name": dalBootstrapStaticIP.name,
 
             },
           },
@@ -397,6 +396,7 @@ export class TezosChain extends pulumi.ComponentResource {
             ],
             selector: { app: "dal-bootstrap" },
             type: "LoadBalancer",
+            loadBalancerIP: dalBootstrapStaticIP.address,
           },
         },
         { provider: this.provider }
@@ -441,7 +441,6 @@ export class TezosChain extends pulumi.ComponentResource {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
               "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
               "networking.gke.io/load-balancer-type": "External",
-              "kubernetes.io/ingress.regional-static-ip-name": dal1StaticIP.name,
 
             },
           },
@@ -455,6 +454,7 @@ export class TezosChain extends pulumi.ComponentResource {
             ],
             selector: { app: "dal-dal1" },
             type: "LoadBalancer",
+            loadBalancerIP: dal1StaticIP.address,
           },
         },
         { provider: this.provider }
