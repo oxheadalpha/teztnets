@@ -35,7 +35,7 @@ jobs:
         id: pup
         with:
           command: ${{ inputs.pulumi-command }}
-          stack-name: midl/teztnets/teztnets
+          stack-name: tacoinfra/teztnets/teztnets
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
