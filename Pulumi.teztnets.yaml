@@ -2,10 +2,10 @@ config:
   gcp:project: tf-teztnets
   gcp:region: us-central1
   teztnets:faucet-private-key:
-    secure: AAABAGlP8xgBoqsCZ/Y9LyCKGM9ybeYxcz18wCn/fmDjIKUv2jHGtejPJYSrJU5/TX7iOv7aTCbCYwlxA6tXgfnTdr7QNtaDUU6FoNT6FHFurIuTL5c=
+    secure: AAABABFqG18LfEQ9tA+PFeSh2UKb3Cpcmx9ptbvNlfSR0DCi+KDWm6/yTr4fQ4rGf2B6/JjOcrBHqw0tyY9R9j+1H/dx0dqml0/Irz7R9UkdK1Vnjks=
   teztnets:faucet-recaptcha-secret-key:
     secure: AAABAGVsSlKbT34ndcMj9+yG0QL7S6enFcvJ9gnMN4DpizDJrJAS6oQEuy837tpz/tcpp45xA9NkZ7Ud8Ihf+xWI/xxblue6
   teztnets:faucet-recaptcha-site-key:
     secure: AAABAEmST1AIUWhiwQxT/iGPmTBwXvpublb39pOZhPQbSLS+rjK4Tka8dKYvBTiCQet7d1ldzdjh7EfUkSbTZLDZa0xK2DUT
   teztnets:private-teztnets-baking-key:
-    secure: AAABAHp3Be/p8g7IV3dsEBVT2UFaaS/VOzKAvlfJY4mbtSLhQJTYZ38g/TsQf+gtQveSSi7CQXMdVmqqiPwRmFYNGR4GgqljOiPCnUmY22Ut7apFxzA=
+    secure: AAABAAgMJLuhBpihD9LyO3cKw5acR7Ke0fq2cxPH5fQibPvfwiB6voGS0i8w77H0TWHPWwWwf9PP6+WWAuGJUlhb2+cZCSFY0inwImz47Ql2wbxs5kA=
