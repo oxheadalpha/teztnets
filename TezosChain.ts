@@ -228,7 +228,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
         this.tezosFaucetHelmValues.redis.password = redisPassword
 
-        const redisChart = new k8s.helm.v3.Release(
+        new k8s.helm.v3.Release(
           `${name}-redis`,
           {
             chart: "redis",
@@ -472,7 +472,7 @@ export class TezosChain extends pulumi.ComponentResource {
       if (newParams.chartPath) {
         // assume tezos-k8s submodule present; deploy custom chart from path
 
-        const chain = new k8s.helm.v3.Chart(
+        new k8s.helm.v3.Chart(
           name,
           {
             namespace: ns.metadata.name,
@@ -483,7 +483,7 @@ export class TezosChain extends pulumi.ComponentResource {
         )
       } else {
         // deploy from helm repo with public images
-        const chain = new k8s.helm.v3.Chart(
+        new k8s.helm.v3.Chart(
           name,
           {
             namespace: ns.metadata.name,
