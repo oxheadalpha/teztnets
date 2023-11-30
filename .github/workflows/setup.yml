@@ -31,6 +31,12 @@ jobs:
 
       - run: npm install
 
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Install gke-gcloud-auth-plugin
+        run: gcloud components install gke-gcloud-auth-plugin
+
       - uses: pulumi/actions@v4
         id: pup
         with:
