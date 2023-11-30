@@ -465,7 +465,7 @@ export class TezosChain extends pulumi.ComponentResource {
       this.tezosHelmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1StaticIP.address}:11732`
       this.tezosHelmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
       this.tezosHelmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalBootstrapP2pFqdn}:11732 `
+        `${dalBootstrapP2pFqdn}:11732`
       ]
     }
     if (this.newParams.tezosHelmValuesFile) {
