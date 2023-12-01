@@ -86,9 +86,3 @@ for k, v in teztnets.items():
         f"target/release/{v['human_name'].lower()}-about.markdown", "w"
     ) as out_file:
         print(teztnet_md, file=out_file)
-
-    for alias in v["aliases"]:
-        with open(f"target/release/{alias}-about.markdown", "w") as out_file:
-            print(f"{alias} is now {k}, go to [{k}-about]({k}-about)", file=out_file)
-        with open(f"target/release/{alias}", "w") as out_file:
-            print(json.dumps(networks[k], indent=2), file=out_file)
