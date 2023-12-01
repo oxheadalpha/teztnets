@@ -1,35 +1,31 @@
 {
-  "dailynet-2023-11-30": {
-    "aliases": [],
+  "dailynet-2023-12-01": {
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-11-30T00:00:00.000Z",
-    "dal_p2p_url": "dal.dailynet-2023-11-30.teztnets.xyz",
-    "dal_rpc_url": "https://dal-rpc.dailynet-2023-11-30.teztnets.xyz",
+    "chain_name": "TEZOS-DAILYNET-2023-12-01T00:00:00.000Z",
+    "dal_p2p_url": "dal.dailynet-2023-12-01.teztnets.xyz",
+    "dal_rpc_url": "https://dal-rpc.dailynet-2023-12-01.teztnets.xyz",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_a2d44b20_20231129210732",
+    "docker_build": "tezos/tezos:master_67433be3_20231130215029",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2023-11-30.teztnets.xyz"
+      "https://evm.dailynet-2023-12-01.teztnets.xyz"
     ],
-    "faucet_url": "https://faucet.dailynet-2023-11-30.teztnets.xyz",
-    "git_ref": "a2d44b20",
+    "faucet_url": "https://faucet.dailynet-2023-12-01.teztnets.xyz",
+    "git_ref": "67433be3",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-11-30",
+    "network_url": "https://teztnets.xyz/dailynet-2023-12-01",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2023-11-30.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2023-12-01.teztnets.xyz"
     ],
-    "rpc_url": "https://rpc.dailynet-2023-11-30.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2023-12-01.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-11-30.teztnets.xyz"
+      "https://rpc.dailynet-2023-12-01.teztnets.xyz"
     ],
-    "activated_on": "2023-11-30"
+    "activated_on": "2023-12-01"
   },
   "ghostnet": {
-    "aliases": [
-      "ithacanet"
-    ],
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
@@ -59,7 +55,6 @@
     "activated_on": "2022-01-25"
   },
   "mainnet": {
-    "aliases": [],
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_MAINNET",
     "description": "Tezos Mainnet",
@@ -86,14 +81,13 @@
     ]
   },
   "nairobinet": {
-    "aliases": [],
     "category": "Protocol Teztnets",
     "chain_name": "TEZOS_NAIROBINET_2023-04-20T15:00:00Z",
     "description": "Test Chain for the Nairobi Protocol Proposal",
-    "docker_build": "tezos/tezos:v17.3",
+    "docker_build": "tezos/tezos:v18.1",
     "evm_proxy_urls": [],
     "faucet_url": "https://faucet.nairobinet.teztnets.xyz",
-    "git_ref": "v17.3",
+    "git_ref": "v18.1",
     "human_name": "Nairobinet",
     "indexers": [
       {
@@ -117,7 +111,6 @@
     "activated_on": "2023-04-20"
   },
   "weeklynet-2023-11-29": {
-    "aliases": [],
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-WEEKLYNET-2023-11-29T00:00:00.000Z",
     "dal_p2p_url": "dal.weeklynet-2023-11-29.teztnets.xyz",

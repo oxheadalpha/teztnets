@@ -11,7 +11,7 @@ Test Chain for the Nairobi Protocol Proposal
 | Public RPC endpoints | [https://rpc.nairobinet.teztnets.xyz](https://rpc.nairobinet.teztnets.xyz/chains/main/chain_id)<br/>[https://nairobinet.ecadinfra.com](https://nairobinet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Nairobinet faucet](https://faucet.nairobinet.teztnets.xyz) |
 | Full network name | `TEZOS_NAIROBINET_2023-04-20T15:00:00Z` |
-| Tezos docker build | [tezos/tezos:v17.3](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v17.3) |
+| Tezos docker build | [tezos/tezos:v18.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.1) |
 | Activated on | 2023-04-20T15:00:00Z |
 | Block Explorers | [TzKT](https://nairobinet.tzkt.io) - [TzStats](https://nairobi.tzstats.com) |
 
@@ -23,7 +23,7 @@ Test Chain for the Nairobi Protocol Proposal
 ⚠️  If you already have an existing Tezos installation, do not forget to backup and delete your `~/.tezos-node` and `~/.tezos-client`.
 
 
-#### Download and install Tezos version v17.3
+#### Download and install Tezos version v18.1
 
 Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/introduction/howtoget.html#installing-binaries).
 
@@ -33,7 +33,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 To join Nairobinet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:v17.3
+docker run -it --entrypoint=/bin/sh tezos/tezos:v18.1
 ```
 
 #### Alternative: Build the software
@@ -43,7 +43,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v17.3
 ```
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout v17.3
+git checkout v18.1
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
