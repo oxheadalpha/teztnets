@@ -124,6 +124,7 @@ activation:
     zk_rollup_origination_size: 4000
     zk_rollup_min_pending_to_process: 10
     zk_rollup_max_ticket_payload_size: 2048
+    direct_ticket_spending_enable: true
   bootstrap_parameters:
     bootstrap_smart_rollups:
     - address: "sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf"
