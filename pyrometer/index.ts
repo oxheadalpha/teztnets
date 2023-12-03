@@ -22,7 +22,7 @@ const deployPyrometer = async ({
     pyrometerStr,
     {
       chart: pyrometerStr,
-      version: "6.22.0",
+      version: "6.24.4",
       namespace: pyrometerStr,
       fetchOpts: {
         repo: "https://oxheadalpha.github.io/tezos-helm-charts/",
