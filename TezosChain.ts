@@ -36,13 +36,10 @@ export interface TezosParameters {
 
 export class TezosChain extends pulumi.ComponentResource {
   readonly name: string
-  readonly newParams: TezosParameters
+  readonly params: TezosParameters
   readonly tezosHelmValues: any
   readonly tezosFaucetHelmValues: any
   readonly provider: k8s.Provider
-
-  // readonly ns: k8s.core.v1.Namespace;
-  // readonly chain: k8s.helm.v3.Chart;
 
   /**
    * Deploys a private chain on a Kubernetes cluster.
@@ -52,7 +49,7 @@ export class TezosChain extends pulumi.ComponentResource {
    * @param repo The container repository where to push the custom images for this chain.
    */
   constructor(
-    newParams: TezosParameters,
+    params: TezosParameters,
     provider: k8s.Provider,
     opts?: pulumi.ResourceOptions
   ) {
@@ -61,35 +58,35 @@ export class TezosChain extends pulumi.ComponentResource {
     }
 
     let name: string;
-    if (newParams.schedule) {
+    if (params.schedule) {
       const deployDate = new Date(
         cronParser
-          .parseExpression(newParams.schedule, { utc: true })
+          .parseExpression(params.schedule, { utc: true })
           .prev()
           .toLocaleString()
       )
       name =
-        `${newParams.humanName.toLowerCase()}-${
+        `${params.humanName.toLowerCase()}-${
         deployDate.toISOString().split("T")[0]
         }`
     } else {
-      name = newParams.humanName.toLowerCase()
+      name = params.humanName.toLowerCase()
     }
     super("pulumi-contrib:components:TezosChain", name, inputs, opts)
 
-    this.newParams = newParams
+    this.params = params
     this.provider = provider
     this.name = name
 
-    if (this.newParams.tezosHelmValuesFile) {
+    if (this.params.tezosHelmValuesFile) {
       this.tezosHelmValues = YAML.parse(
-        fs.readFileSync(this.newParams.tezosHelmValuesFile, "utf8")
+        fs.readFileSync(this.params.tezosHelmValuesFile, "utf8")
       );
-      this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.newParams.bakingPrivateKey
-      if (this.newParams.schedule) {
+      this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
+      if (this.params.schedule) {
         const deployDate = new Date(
           cronParser
-            .parseExpression(this.newParams.schedule, { utc: true })
+            .parseExpression(this.params.schedule, { utc: true })
             .prev()
             .toLocaleString()
         )
@@ -105,24 +102,24 @@ export class TezosChain extends pulumi.ComponentResource {
         // Otherwise, the old broken mondaynet will mix with the new one and you'll never be able to produce
         // another genesis block.
         this.tezosHelmValues["node_config_network"]["chain_name"] =
-          `TEZOS-${this.newParams.humanName.toUpperCase()}-${deployDate.toISOString()}`
+          `TEZOS-${this.params.humanName.toUpperCase()}-${deployDate.toISOString()}`
         this.tezosHelmValues["node_config_network"]["genesis"]["timestamp"] = deployDate.toISOString();
       }
     }
-    if (this.newParams.tezosFaucetHelmValuesFile) {
+    if (this.params.tezosFaucetHelmValuesFile) {
       this.tezosFaucetHelmValues = YAML.parse(
-        fs.readFileSync(this.newParams.tezosFaucetHelmValuesFile, "utf8")
+        fs.readFileSync(this.params.tezosFaucetHelmValuesFile, "utf8")
       );
-      this.tezosFaucetHelmValues["faucetPrivateKey"] = this.newParams.faucetPrivateKey
+      this.tezosFaucetHelmValues["faucetPrivateKey"] = this.params.faucetPrivateKey
     }
 
-    if (newParams.bootstrapContracts) {
-      newParams.bootstrapContracts.forEach((contractFile) => {
+    if (params.bootstrapContracts) {
+      params.bootstrapContracts.forEach((contractFile) => {
         let contractFullName = `${name}-${contractFile}`;
 
         // Create a new GCP storage object
         new gcp.storage.BucketObject(contractFullName, {
-          bucket: newParams.activationBucket.name,
+          bucket: params.activationBucket.name,
           name: contractFullName,
           source: new pulumi.asset.FileAsset(`bootstrap_contracts/${contractFile}`),
           contentType: mime.getType(contractFile) || undefined,
@@ -133,7 +130,7 @@ export class TezosChain extends pulumi.ComponentResource {
           this.tezosHelmValues["activation"]["bootstrap_contract_urls"] = [];
         }
         this.tezosHelmValues["activation"]["bootstrap_contract_urls"].push(
-          pulumi.interpolate`https://storage.googleapis.com/${newParams.activationBucket.name}/${contractFullName}`
+          pulumi.interpolate`https://storage.googleapis.com/${params.activationBucket.name}/${contractFullName}`
         );
       });
     }
@@ -147,7 +144,7 @@ export class TezosChain extends pulumi.ComponentResource {
     )
 
 
-    if (this.newParams.tezosHelmValuesFile) {
+    if (this.params.tezosHelmValuesFile) {
       // RPC Ingress
       const rpcDomain = `rpc.${name}.teztnets.xyz`
 
@@ -204,8 +201,8 @@ export class TezosChain extends pulumi.ComponentResource {
 
     if (this.tezosFaucetHelmValues) {
       let chartParams
-      if (newParams.chartPath) {
-        chartParams = { path: `${newParams.chartPath}/charts/tezos-faucet` }
+      if (params.chartPath) {
+        chartParams = { path: `${params.chartPath}/charts/tezos-faucet` }
       } else {
         chartParams = {
           fetchOpts: {
@@ -261,13 +258,13 @@ export class TezosChain extends pulumi.ComponentResource {
 
       const faucetDomain = `faucet.${teztnetsDomain}`
       this.tezosFaucetHelmValues.googleCaptchaSecretKey =
-        newParams.faucetRecaptchaSecretKey
+        params.faucetRecaptchaSecretKey
       this.tezosFaucetHelmValues.authorizedHost = `https://${faucetDomain}`
       this.tezosFaucetHelmValues.config.application.googleCaptchaSiteKey =
-        newParams.faucetRecaptchaSiteKey
+        params.faucetRecaptchaSiteKey
       this.tezosFaucetHelmValues.config.application.backendUrl = `https://${faucetDomain}`
       this.tezosFaucetHelmValues.config.network.name =
-        this.tezosFaucetHelmValues.config.network.name || newParams.humanName
+        this.tezosFaucetHelmValues.config.network.name || params.humanName
       this.tezosFaucetHelmValues.config.network.rpcUrl = `https://rpc.${teztnetsDomain}`
       this.tezosFaucetHelmValues.ingress.host = faucetDomain
       this.tezosFaucetHelmValues.ingress.tls = [
@@ -281,7 +278,7 @@ export class TezosChain extends pulumi.ComponentResource {
         ...chartParams,
         namespace: ns.metadata.name,
         values: this.tezosFaucetHelmValues,
-        version: newParams.chartRepoVersion,
+        version: params.chartRepoVersion,
       }
 
       new k8s.helm.v3.Chart(`${name}-faucet`, faucetChartValues, {
@@ -468,15 +465,15 @@ export class TezosChain extends pulumi.ComponentResource {
         `${dalBootstrapP2pFqdn}:11732`
       ]
     }
-    if (this.newParams.tezosHelmValuesFile) {
-      if (newParams.chartPath) {
+    if (this.params.tezosHelmValuesFile) {
+      if (params.chartPath) {
         // assume tezos-k8s submodule present; deploy custom chart from path
 
         new k8s.helm.v3.Chart(
           name,
           {
             namespace: ns.metadata.name,
-            path: `${newParams.chartPath}/charts/tezos`,
+            path: `${params.chartPath}/charts/tezos`,
             values: this.tezosHelmValues,
           },
           { providers: { kubernetes: this.provider } }
@@ -488,7 +485,7 @@ export class TezosChain extends pulumi.ComponentResource {
           {
             namespace: ns.metadata.name,
             chart: "tezos-chain",
-            version: newParams.chartRepoVersion,
+            version: params.chartRepoVersion,
             fetchOpts: {
               repo: "https://oxheadalpha.github.io/tezos-helm-charts"
             },
@@ -597,7 +594,7 @@ export class TezosChain extends pulumi.ComponentResource {
     return
   }
   getRpcUrls(): Array<string> {
-    return [...[this.getRpcUrl()], ...this.newParams.rpcUrls || []]
+    return [...[this.getRpcUrl()], ...this.params.rpcUrls || []]
   }
 
   getLastBakingDaemon(): string {

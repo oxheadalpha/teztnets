@@ -190,7 +190,7 @@ function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
   chains.forEach(function(chain) {
-    const bootstrapPeers: string[] = Object.assign([], chain.newParams.bootstrapPeers) // clone
+    const bootstrapPeers: string[] = Object.assign([], chain.params.bootstrapPeers) // clone
     bootstrapPeers.splice(0, 0, `${chain.name}.teztnets.xyz`)
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
@@ -239,13 +239,13 @@ function getTeztnets(chains: TezosChain[]): object {
     teztnets[chain.name] = {
       chain_name: chain.tezosHelmValues["node_config_network"]["chain_name"],
       network_url: chain.getNetworkUrl(),
-      human_name: chain.newParams.humanName,
-      description: chain.newParams.description,
+      human_name: chain.params.humanName,
+      description: chain.params.description,
       docker_build: chain.getDockerBuild(),
       git_ref: chain.getGitRef(),
       last_baking_daemon: chain.getLastBakingDaemon(),
       faucet_url: faucetUrl,
-      category: chain.newParams.category,
+      category: chain.params.category,
       rpc_url: chain.getRpcUrl(),
       rollup_urls: chain.getRollupUrls(),
       evm_proxy_urls: chain.getEvmProxyUrls(),
@@ -253,7 +253,7 @@ function getTeztnets(chains: TezosChain[]): object {
       dal_rpc_url: chain.getDalRpcUrl()!,
       rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: false,
-      indexers: chain.newParams.indexers || [],
+      indexers: chain.params.indexers || [],
     }
   })
 
