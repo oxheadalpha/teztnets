@@ -14,7 +14,7 @@ with open("networks/oxfordnet/values.yaml", "r") as f:
 
 mainnet_params = flatten_params(requests.get("https://mainnet.ecadinfra.com/chains/main/blocks/head/context/constants").json())
 
-ghostnet_params = flatten_params(requests.get("https://rpc.ghostnet.teztnets.xyz/chains/main/blocks/head/context/constants").json())
+ghostnet_params = flatten_params(requests.get("https://ghostnet.tezos.marigold.dev/chains/main/blocks/head/context/constants").json())
 
 nairobinet_params = flatten_params(requests.get("https://rpc.nairobinet.teztnets.xyz/chains/main/blocks/head/context/constants").json())
 
