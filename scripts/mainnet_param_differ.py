@@ -2,12 +2,15 @@
 import requests
 import yaml
 
-
-def flatten_params(params):
-    dal_params = params.pop("dal_parametric")
-    for p in dal_params.keys():
-        params["dal_" + p]=dal_params[p]
-    return params
+def flatten_params(params, parent_key=''):
+    flat_params = {}
+    for k, v in params.items():
+        new_key = f"{parent_key}_{k}" if parent_key else k
+        if isinstance(v, dict):
+            flat_params.update(flatten_params(v, new_key))
+        else:
+            flat_params[new_key] = v
+    return flat_params
 
 with open("networks/oxfordnet/values.yaml", "r") as f:
     params = flatten_params(yaml.safe_load(f)["activation"]["protocol_parameters"])
