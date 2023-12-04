@@ -46,7 +46,6 @@ export class TezosChain extends pulumi.ComponentResource {
    * @param name The name of the Pulumi resource.
    * @param params Helm chart values and chain bootstrap parameters
    * @param provider The Kubernetes cluster to deploy it into.
-   * @param repo The container repository where to push the custom images for this chain.
    */
   constructor(
     params: TezosParameters,

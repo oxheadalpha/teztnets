@@ -6,6 +6,7 @@ import * as bs58check from "bs58check"
 
 import deployPyrometer from "./pyrometer"
 import { TezosChain } from "./TezosChain"
+import { TezosNodes } from "./TezosNodes"
 
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
@@ -140,8 +141,26 @@ const weeklynet_chain = new TezosChain(
   provider
 )
 
-// For ghostnet, we only deploy a faucet.
-// The RPC service and baker are in the sensitive infra.
+// Ghostnet is different from the other testnets:
+// * launched long time ago, launch code is not in the active code path
+// * heavy usage on the RPC endpoint requires a more elaborate setup
+//   with archive/rolling nodes, NGINX path filtering and rate limiting.
+new TezosNodes(
+  "ghostnet-nodes",
+  {
+    chainName: "ghostnet",
+    rpcFqdn: "rpc.ghostnet.teztnets.xyz",
+    p2pFqdn: "ghostnet.teztnets.xyz",
+    octezVersion: "v18.1",
+    chartRepoVersion: "6.24.4",
+    rollingPvcSize: "50Gi",
+    archivePvcSize: "750Gi"
+
+  },
+  provider,
+)
+
+// For ghostnet, we only deploy a faucet from TezosChain
 new TezosChain(
   {
     category: longCategory,
