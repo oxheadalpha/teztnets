@@ -18,6 +18,10 @@ const faucetRecaptchaSecretKey = cfg.requireSecret(
 const private_oxhead_baking_key = cfg.requireSecret(
   "private-teztnets-baking-key"
 )
+const private_teztnets_baking_key = cfg.requireSecret(
+  "tf-teztnets-baking-key"
+)
+
 
 const stackRef = new pulumi.StackReference(`tacoinfra/tf-teztnets-infra/prod`)
 
@@ -219,6 +223,23 @@ new TezosFaucet(
   provider
 )
 
+const oxfordnet_chain = new TezosChain(
+  {
+    category: protocolCategory,
+    humanName: "Oxfordnet",
+    description: "Test Chain for the Oxford Protocol Proposal",
+    activationBucket: activationBucket,
+    helmValuesFile: "networks/oxfordnet/values.yaml",
+    bakingPrivateKey: private_teztnets_baking_key,
+    bootstrapPeers: [],
+    rpcUrls: [],
+    indexers: [
+    ],
+    chartRepoVersion: "6.24.6",
+  },
+  provider
+)
+
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
 
@@ -340,7 +361,7 @@ const ghostnetNetwork = {
 }
 
 export const networks = {
-  ...getNetworks([dailynet_chain, weeklynet_chain, nairobinet_chain]),
+  ...getNetworks([dailynet_chain, weeklynet_chain, nairobinet_chain, oxfordnet_chain]),
   ...{ ghostnet: ghostnetNetwork },
 }
 
@@ -406,7 +427,7 @@ const mainnetMetadata = {
 }
 
 export const teztnets = {
-  ...getTeztnets([dailynet_chain, weeklynet_chain, nairobinet_chain]),
+  ...getTeztnets([dailynet_chain, weeklynet_chain, nairobinet_chain, oxfordnet_chain]),
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
