@@ -249,8 +249,14 @@ function getNetworks(chains: TezosChain[]): object {
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
     // TODO: generate it dynamically based on privkey
-    let genesisPubkey: string =
-      "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+    let genesisPubkey: string;
+    if (chain.name == "oxfordnet") {
+      genesisPubkey =
+        "edpktosVHk2f3Yrz9Jb6rMrk6uVy4sTxVhP2iyF39AdgzvsTWgbaLy"
+    } else {
+      genesisPubkey =
+        "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+    }
     const network = Object.assign(
       {},
       chain.tezosHelmValues["node_config_network"]
