@@ -74,7 +74,7 @@ for k, v in teztnets.items():
 
     readme = ""
 
-    if os.path.exists(f"{k.split('-')[0]}/README.md"):
+    if os.path.exists(f"networks/{k.split('-')[0]}/README.md"):
         with open(f"{k.split('-')[0]}/README.md") as readme_file:
             readme = readme_file.read()
 
