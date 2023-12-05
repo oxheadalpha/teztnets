@@ -38,8 +38,7 @@ The Teztnet platform creates and exposes such endpoints.
 
 You are encouraged to build automation to ensure your Tezos project keeps running with the future versions of Tezos shell and/or protocol.
 
-1. monitor this repo's `main` branch using your monitoring tool of choice
-1. this endpoint lists the current active testnets: [https://teztnets.xyz/teztnets.json](https://teztnets.xyz/teztnets.json)
+This endpoint lists the current active testnets: [https://teztnets.xyz/teztnets.json](https://teztnets.xyz/teztnets.json)
 
 ## Add new Teztnets or modify existing Teztnets
 
@@ -60,7 +59,7 @@ The Helm chart values.yaml lets you customize your chain in many ways:
 - specify user-activated upgrades for hard-forks at a given length
 - specify the list of baker/endorser binaries to run.
 
-Look in any Teztnet directory's values.yaml file for reference as to how to configure your own Teztnet.
+Look in any Teztnet directory's values.yaml file in [`/networks`](/networks) for reference as to how to configure your own Teztnet.
 
 The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
 
@@ -70,7 +69,6 @@ The website is created with Jekyll from Markdown files generated from Jinja temp
 
 To build the website locally, from the top-level dir of the repo:
 
-1. `source .env` to populate the secret env vars
 1. run `pulumi stack output networks > networks.json`
 1. run `pulumi stack output teztnets > teztnets.json`
 1. run `python src/release.py`
