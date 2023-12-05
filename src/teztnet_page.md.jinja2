@@ -44,6 +44,7 @@ docker run -it --entrypoint=/bin/sh {{ v["docker_build"] }}
 ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
+cd
 git clone {{ v["git_repo"] }}
 cd tezos
 git checkout {{ v["git_ref"] }}
@@ -51,7 +52,7 @@ opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
-export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
+export PATH=$HOME/tezos:$PATH
 ```
 
 ### Join the {{ v["human_name"] }} network
@@ -102,7 +103,7 @@ To improve reliability of the chain, you can take part in the consensus by becom
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./octez-client register key mykey as delegate
+octez-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
