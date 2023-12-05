@@ -74,8 +74,9 @@ for k, v in teztnets.items():
 
     readme = ""
 
-    if os.path.exists(f"networks/{k.split('-')[0]}/README.md"):
-        with open(f"{k.split('-')[0]}/README.md") as readme_file:
+    readme_path = f"networks/{k.split('-')[0]}/README.md"
+    if os.path.exists(readme_path):
+        with open(readme_path) as readme_file:
             readme = readme_file.read()
 
     teztnet_md = jinja2.Template(open("src/teztnet_page.md.jinja2").read()).render(
