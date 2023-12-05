@@ -256,6 +256,9 @@ images:
   octez: tezos/tezos:v19.0-rc1
 
 protocols:
+  - command: PtNairob
+    vote:
+      liquidity_baking_toggle_vote: "pass"
   - command: Proxford
     vote:
       liquidity_baking_toggle_vote: "pass"
