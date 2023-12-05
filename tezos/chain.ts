@@ -1,13 +1,12 @@
 import * as gcp from "@pulumi/gcp"
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
-import { RandomPassword } from "@pulumi/random"
 import * as cronParser from "cron-parser"
 import * as fs from "fs"
 import * as YAML from "yaml"
 const mime = require("mime")
-
-import { TezosImageResolver } from "./TezosImageResolver"
+import { getChartParams } from './chartResolver'
+import { TezosImageResolver } from "./imageResolver"
 
 export interface TezosParameters {
   readonly activationBucket: gcp.storage.Bucket
@@ -15,17 +14,13 @@ export interface TezosParameters {
   readonly category: string
   readonly description: string
   readonly bakingPrivateKey?: pulumi.Output<string>
-  readonly faucetPrivateKey?: pulumi.Output<string>
-  readonly faucetRecaptchaSiteKey: pulumi.Output<string>
-  readonly faucetRecaptchaSecretKey: pulumi.Output<string>
   readonly humanName: string
   readonly indexers?: { name: string; url: string }[]
   readonly chartPath?: string
   readonly chartRepoVersion?: string
   readonly bootstrapPeers?: string[]
   readonly rpcUrls?: string[]
-  readonly tezosHelmValuesFile?: string
-  readonly tezosFaucetHelmValuesFile?: string
+  readonly helmValuesFile: string
   readonly schedule?: string
 }
 
@@ -38,8 +33,7 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly name: string
   readonly params: TezosParameters
   readonly tezosHelmValues: any
-  readonly tezosFaucetHelmValues: any
-  readonly provider: k8s.Provider
+  readonly namespace: k8s.core.v1.Namespace
 
   /**
    * Deploys a private chain on a Kubernetes cluster.
@@ -74,42 +68,33 @@ export class TezosChain extends pulumi.ComponentResource {
     super("pulumi-contrib:components:TezosChain", name, inputs, opts)
 
     this.params = params
-    this.provider = provider
     this.name = name
 
-    if (this.params.tezosHelmValuesFile) {
-      this.tezosHelmValues = YAML.parse(
-        fs.readFileSync(this.params.tezosHelmValuesFile, "utf8")
-      );
-      this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
-      if (this.params.schedule) {
-        const deployDate = new Date(
-          cronParser
-            .parseExpression(this.params.schedule, { utc: true })
-            .prev()
-            .toLocaleString()
-        )
-        const imageResolver = new TezosImageResolver()
-        this.tezosHelmValues["images"]["octez"] =
-          pulumi
-            .output(imageResolver.getLatestTagAsync(deployDate))
-            .apply((tag) => `${imageResolver.image}:${tag}`)
-        // this is a trick to change mondaynet's name when it needs to be respun.
-        // if the chain has already launched but gets bricked because it can no longer upgrade from one proto to the next,
-        // change the date below. It will start with a different chainId.
-        // This way, it won't mix with the existing mondaynet and will be able to sync.
-        // Otherwise, the old broken mondaynet will mix with the new one and you'll never be able to produce
-        // another genesis block.
-        this.tezosHelmValues["node_config_network"]["chain_name"] =
-          `TEZOS-${this.params.humanName.toUpperCase()}-${deployDate.toISOString()}`
-        this.tezosHelmValues["node_config_network"]["genesis"]["timestamp"] = deployDate.toISOString();
-      }
-    }
-    if (this.params.tezosFaucetHelmValuesFile) {
-      this.tezosFaucetHelmValues = YAML.parse(
-        fs.readFileSync(this.params.tezosFaucetHelmValuesFile, "utf8")
-      );
-      this.tezosFaucetHelmValues["faucetPrivateKey"] = this.params.faucetPrivateKey
+    this.tezosHelmValues = YAML.parse(
+      fs.readFileSync(this.params.helmValuesFile, "utf8")
+    );
+    this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
+    if (this.params.schedule) {
+      const deployDate = new Date(
+        cronParser
+          .parseExpression(this.params.schedule, { utc: true })
+          .prev()
+          .toLocaleString()
+      )
+      const imageResolver = new TezosImageResolver()
+      this.tezosHelmValues["images"]["octez"] =
+        pulumi
+          .output(imageResolver.getLatestTagAsync(deployDate))
+          .apply((tag) => `${imageResolver.image}:${tag}`)
+      // this is a trick to change mondaynet's name when it needs to be respun.
+      // if the chain has already launched but gets bricked because it can no longer upgrade from one proto to the next,
+      // change the date below. It will start with a different chainId.
+      // This way, it won't mix with the existing mondaynet and will be able to sync.
+      // Otherwise, the old broken mondaynet will mix with the new one and you'll never be able to produce
+      // another genesis block.
+      this.tezosHelmValues["node_config_network"]["chain_name"] =
+        `TEZOS-${this.params.humanName.toUpperCase()}-${deployDate.toISOString()}`
+      this.tezosHelmValues["node_config_network"]["genesis"]["timestamp"] = deployDate.toISOString();
     }
 
     if (params.bootstrapContracts) {
@@ -134,160 +119,67 @@ export class TezosChain extends pulumi.ComponentResource {
       });
     }
 
-    const teztnetsDomain = `${name}.teztnets.xyz`
-
-    const ns = new k8s.core.v1.Namespace(
+    this.namespace = new k8s.core.v1.Namespace(
       this.name,
       { metadata: { name: name } },
-      { provider: this.provider }
+      { provider: provider }
     )
 
 
-    if (this.params.tezosHelmValuesFile) {
-      // RPC Ingress
-      const rpcDomain = `rpc.${name}.teztnets.xyz`
+    // RPC Ingress
+    const rpcDomain = `rpc.${name}.teztnets.xyz`
 
-      const rpcIngName = `${rpcDomain}-ingress`
-      new k8s.networking.v1.Ingress(
-        rpcIngName,
-        {
-          metadata: {
-            namespace: ns.metadata.name,
-            name: rpcIngName,
-            annotations: {
-              "kubernetes.io/ingress.class": "nginx",
-              "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-              "nginx.ingress.kubernetes.io/enable-cors": "true",
-              "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
-            },
-            labels: { app: "tezos-node" },
+    const rpcIngName = `${rpcDomain}-ingress`
+    new k8s.networking.v1.Ingress(
+      rpcIngName,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: rpcIngName,
+          annotations: {
+            "kubernetes.io/ingress.class": "nginx",
+            "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+            "nginx.ingress.kubernetes.io/enable-cors": "true",
+            "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
           },
-          spec: {
-            rules: [
-              {
-                host: rpcDomain,
-                http: {
-                  paths: [
-                    {
-                      path: "/",
-                      pathType: "Prefix",
-                      backend: {
-                        service: {
-                          name: "tezos-node-rpc",
-                          port: {
-                            name: "rpc",
-                          },
+          labels: { app: "tezos-node" },
+        },
+        spec: {
+          rules: [
+            {
+              host: rpcDomain,
+              http: {
+                paths: [
+                  {
+                    path: "/",
+                    pathType: "Prefix",
+                    backend: {
+                      service: {
+                        name: "tezos-node-rpc",
+                        port: {
+                          name: "rpc",
                         },
                       },
                     },
-                  ],
-                },
-              },
-            ],
-            tls: [
-              {
-                hosts: [rpcDomain],
-                secretName: `${rpcDomain}-secret`,
-              },
-            ],
-          },
-        },
-        { provider, parent: this }
-      )
-    }
-
-    let tezosK8sImages
-
-    if (this.tezosFaucetHelmValues) {
-      let chartParams
-      if (params.chartPath) {
-        chartParams = { path: `${params.chartPath}/charts/tezos-faucet` }
-      } else {
-        chartParams = {
-          fetchOpts: {
-            repo: "https://oxheadalpha.github.io/tezos-helm-charts"
-          },
-          chart: "tezos-faucet",
-        }
-      }
-
-      if (this.tezosFaucetHelmValues.disableChallenges !== true) {
-        if (!this.tezosFaucetHelmValues.redis) {
-          this.tezosFaucetHelmValues.redis = {}
-        }
-
-        const redisPassword = new RandomPassword(
-          `${name}-redis-pswd`,
-          { length: 16 },
-          { parent: this }
-        ).result
-
-        this.tezosFaucetHelmValues.redis.password = redisPassword
-
-        new k8s.helm.v3.Release(
-          `${name}-redis`,
-          {
-            chart: "redis",
-            version: "17.15.6",
-            namespace: ns.metadata.name,
-            repositoryOpts: {
-              repo: "https://charts.bitnami.com/bitnami",
-            },
-            values: {
-              // Keep the resource names short and simple
-              fullnameOverride: "redis",
-              // Deploy a single instance
-              architecture: "standalone",
-              // Don't create a pv and persist data
-              master: {
-                persistence: {
-                  enabled: false,
-                },
-              },
-              global: {
-                redis: {
-                  password: redisPassword,
-                },
+                  },
+                ],
               },
             },
-          },
-          { provider: this.provider, parent: this }
-        )
-      }
-
-      const faucetDomain = `faucet.${teztnetsDomain}`
-      this.tezosFaucetHelmValues.googleCaptchaSecretKey =
-        params.faucetRecaptchaSecretKey
-      this.tezosFaucetHelmValues.authorizedHost = `https://${faucetDomain}`
-      this.tezosFaucetHelmValues.config.application.googleCaptchaSiteKey =
-        params.faucetRecaptchaSiteKey
-      this.tezosFaucetHelmValues.config.application.backendUrl = `https://${faucetDomain}`
-      this.tezosFaucetHelmValues.config.network.name =
-        this.tezosFaucetHelmValues.config.network.name || params.humanName
-      this.tezosFaucetHelmValues.config.network.rpcUrl = `https://rpc.${teztnetsDomain}`
-      this.tezosFaucetHelmValues.ingress.host = faucetDomain
-      this.tezosFaucetHelmValues.ingress.tls = [
-        {
-          hosts: [faucetDomain],
-          secretName: `${faucetDomain}-secret`,
+          ],
+          tls: [
+            {
+              hosts: [rpcDomain],
+              secretName: `${rpcDomain}-secret`,
+            },
+          ],
         },
-      ]
+      },
+      { provider, parent: this }
+    )
 
-      const faucetChartValues: any = {
-        ...chartParams,
-        namespace: ns.metadata.name,
-        values: this.tezosFaucetHelmValues,
-        version: params.chartRepoVersion,
-      }
-
-      new k8s.helm.v3.Chart(`${name}-faucet`, faucetChartValues, {
-        providers: { kubernetes: this.provider },
-      })
-    }
 
     // Rollup
     if (
-      this.tezosHelmValues &&
       this.tezosHelmValues.smartRollupNodes &&
       this.tezosHelmValues.smartRollupNodes.length != 0
     ) {
@@ -338,7 +230,6 @@ export class TezosChain extends pulumi.ComponentResource {
 
     // Data Availability Layer
     if (
-      this.tezosHelmValues &&
       this.tezosHelmValues.dalNodes &&
       this.tezosHelmValues.dalNodes.length != 0) {
       const dalBootstrapRpcFqdn = `dal-bootstrap-rpc.${name}.teztnets.xyz`
@@ -373,7 +264,7 @@ export class TezosChain extends pulumi.ComponentResource {
         `${name}-dal-bootstrap-p2p-lb`,
         {
           metadata: {
-            namespace: ns.metadata.name,
+            namespace: this.namespace.metadata.name,
             name: dalBootstrapSvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
@@ -395,7 +286,7 @@ export class TezosChain extends pulumi.ComponentResource {
             loadBalancerIP: dalBootstrapStaticIP.address,
           },
         },
-        { provider: this.provider }
+        { provider: provider }
       )
 
       const dalAttestorRpcFqdn = `dal-attestor-rpc.${name}.teztnets.xyz`
@@ -431,7 +322,7 @@ export class TezosChain extends pulumi.ComponentResource {
         `${name}-dal-dal1-p2p-lb`,
         {
           metadata: {
-            namespace: ns.metadata.name,
+            namespace: this.namespace.metadata.name,
             name: dal1SvcName,
             annotations: {
               "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
@@ -453,7 +344,7 @@ export class TezosChain extends pulumi.ComponentResource {
             loadBalancerIP: dal1StaticIP.address,
           },
         },
-        { provider: this.provider }
+        { provider: provider }
       )
 
 
@@ -464,61 +355,43 @@ export class TezosChain extends pulumi.ComponentResource {
         `${dalBootstrapP2pFqdn}:11732`
       ]
     }
-    if (this.params.tezosHelmValuesFile) {
-      if (params.chartPath) {
-        // assume tezos-k8s submodule present; deploy custom chart from path
 
-        new k8s.helm.v3.Chart(
-          name,
-          {
-            namespace: ns.metadata.name,
-            path: `${params.chartPath}/charts/tezos`,
-            values: this.tezosHelmValues,
-          },
-          { providers: { kubernetes: this.provider } }
-        )
-      } else {
-        // deploy from helm repo with public images
-        new k8s.helm.v3.Chart(
-          name,
-          {
-            namespace: ns.metadata.name,
-            chart: "tezos-chain",
-            version: params.chartRepoVersion,
-            fetchOpts: {
-              repo: "https://oxheadalpha.github.io/tezos-helm-charts"
-            },
-            values: this.tezosHelmValues,
-          },
-          { providers: { kubernetes: this.provider } }
-        )
-      }
+    let chartParams = getChartParams(params, "tezos");
+    const chartValues: any = {
+      ...chartParams,
+      namespace: this.namespace.metadata.name,
+      values: this.tezosHelmValues,
+    }
+    new k8s.helm.v3.Chart(
+      name,
+      chartValues,
+      { providers: { kubernetes: provider } }
+    )
 
-      new k8s.core.v1.Service(
-        `${name}-p2p-lb`,
-        {
-          metadata: {
-            namespace: ns.metadata.name,
-            name: name,
-            annotations: {
-              "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
-            },
-          },
-          spec: {
-            ports: [
-              {
-                port: 9732,
-                targetPort: 9732,
-                protocol: "TCP",
-              },
-            ],
-            selector: { node_class: "tezos-baking-node" },
-            type: "LoadBalancer",
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb`,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: name,
+          annotations: {
+            "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
           },
         },
-        { provider: this.provider }
-      )
-    }
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { node_class: "tezos-baking-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: provider }
+    )
   }
 
   getNetworkUrl(baseUrl?: string, relativeUrl?: string): string {
@@ -574,7 +447,6 @@ export class TezosChain extends pulumi.ComponentResource {
   }
   getDalRpcUrl(): string | undefined {
     if (
-      this.tezosHelmValues &&
       this.tezosHelmValues.dalNodes &&
       this.tezosHelmValues.dalNodes.length != 0
     ) {
@@ -584,7 +456,6 @@ export class TezosChain extends pulumi.ComponentResource {
   }
   getDalP2pUrl(): string | undefined {
     if (
-      this.tezosHelmValues &&
       this.tezosHelmValues.dalNodes &&
       this.tezosHelmValues.dalNodes.length != 0
     ) {

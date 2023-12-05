@@ -1,5 +1,6 @@
 import * as k8s from "@pulumi/kubernetes"
 import * as pulumi from "@pulumi/pulumi"
+import { getChartParams } from './chartResolver'
 
 export interface TezosNodesParameters {
   readonly chainName: string;
@@ -14,7 +15,7 @@ export interface TezosNodesParameters {
 
 export class TezosNodes extends pulumi.ComponentResource {
   readonly params: TezosNodesParameters
-  readonly provider: k8s.Provider
+  readonly namespace: k8s.core.v1.Namespace
 
   constructor(
     name: string,
@@ -35,31 +36,21 @@ export class TezosNodes extends pulumi.ComponentResource {
     super("pulumi-contrib:components:TezosChain", name, inputs, opts)
 
     this.params = params
-    this.provider = provider
 
 
     const nodesNSName = `${name}-nodes`;
-    const ns = new k8s.core.v1.Namespace(
+    this.namespace = new k8s.core.v1.Namespace(
       name,
       { metadata: { name: name } },
       {
-        provider: this.provider,
+        provider: provider,
         parent: this
       }
 
     )
 
-    let chartParams
-    if (params.chartPath) {
-      chartParams = { path: `${params.chartPath}/charts/tezos-faucet` }
-    } else {
-      chartParams = {
-        fetchOpts: {
-          repo: "https://oxheadalpha.github.io/tezos-helm-charts"
-        },
-        chart: "tezos-chain",
-      }
-    }
+    let chartParams = getChartParams(params, 'tezos-chain')
+
     let helmValues = {
       images: {
         octez: `tezos/tezos:${params.octezVersion}`,
@@ -79,33 +70,32 @@ export class TezosNodes extends pulumi.ComponentResource {
             }
           }],
         },
-        // 'archive-node': {
-        //   storage_size: params.archivePvcSize,
-        //   instances: [{
-        //     config: {
-        //       shell: {
-        //         history_mode: "archive"
-        //       }
-        //     }
-        //   }],
-        // }
+        'archive-node': {
+          storage_size: params.archivePvcSize,
+          instances: [{
+            config: {
+              shell: {
+                history_mode: "archive"
+              }
+            }
+          }],
+        }
       },
     };
     const chartValues: any = {
       ...chartParams,
-      namespace: ns.metadata.name,
+      namespace: this.namespace.metadata.name,
       values: helmValues,
-      version: params.chartRepoVersion,
     }
     new k8s.helm.v3.Chart(name, chartValues, {
-      providers: { kubernetes: this.provider },
+      providers: { kubernetes: provider },
       parent: this
     });
     new k8s.networking.v1.Ingress(
       `${name}-ingress`,
       {
         metadata: {
-          namespace: ns.metadata.name,
+          namespace: this.namespace.metadata.name,
           name: `${name}-ingress`,
           annotations: {
             'kubernetes.io/ingress.class': "nginx",

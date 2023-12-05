@@ -4,9 +4,10 @@ import * as k8s from "@pulumi/kubernetes"
 import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
-import deployPyrometer from "./pyrometer"
-import { TezosChain } from "./TezosChain"
-import { TezosNodes } from "./TezosNodes"
+import deployStatusPage from "./tezos/statusPage"
+import { TezosChain } from "./tezos/chain"
+import { TezosNodes } from "./tezos/nodes"
+import { TezosFaucet } from "./tezos/faucet"
 
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
@@ -89,9 +90,18 @@ const dailynet_chain = new TezosChain(
       "evm_bridge.json",
       "exchanger.json",
     ],
-    tezosHelmValuesFile: "networks/dailynet/values.yaml",
-    tezosFaucetHelmValuesFile: "networks/dailynet/faucet_values.yaml",
+    helmValuesFile: "networks/dailynet/values.yaml",
     bakingPrivateKey: private_oxhead_baking_key,
+    chartPath: "networks/dailynet/tezos-k8s",
+  },
+  provider
+)
+new TezosFaucet(
+  dailynet_chain.name,
+  {
+    humanName: "Dailynet",
+    namespace: dailynet_chain.namespace,
+    helmValuesFile: "networks/dailynet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
@@ -116,15 +126,24 @@ const weeklynet_chain = new TezosChain(
       // "exchanger.json",
       // "evm_bridge.json",
     ],
-    tezosHelmValuesFile: "networks/weeklynet/values.yaml",
-    tezosFaucetHelmValuesFile: "networks/weeklynet/faucet_values.yaml",
+    helmValuesFile: "networks/weeklynet/values.yaml",
     bakingPrivateKey: private_oxhead_baking_key,
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
     // chartRepoVersion: "6.18.0",
     bootstrapPeers: [],
+  },
+  provider
+)
+new TezosFaucet(
+  weeklynet_chain.name,
+  {
+    humanName: "Weeklynet",
+    namespace: weeklynet_chain.namespace,
+    helmValuesFile: "networks/weeklynet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    chartRepoVersion: "6.24.6",
   },
   provider
 )
@@ -133,13 +152,14 @@ const weeklynet_chain = new TezosChain(
 // * launched long time ago, launch code is not in the active code path
 // * heavy usage on the RPC endpoint requires a more elaborate setup
 //   with archive/rolling nodes, NGINX path filtering and rate limiting.
-new TezosNodes(
+const ghostnetOctezVersion = "v18.1";
+const ghostnet_chain = new TezosNodes(
   "ghostnet-nodes",
   {
     chainName: "ghostnet",
     rpcFqdn: "rpc.ghostnet.teztnets.xyz",
     p2pFqdn: "ghostnet.teztnets.xyz",
-    octezVersion: "v18.1",
+    octezVersion: ghostnetOctezVersion,
     chartRepoVersion: "6.24.4",
     rollingPvcSize: "50Gi",
     archivePvcSize: "750Gi"
@@ -147,19 +167,16 @@ new TezosNodes(
   },
   provider,
 )
-
-// For ghostnet, we only deploy a faucet from TezosChain
-new TezosChain(
+new TezosFaucet(
+  "ghostnet",
   {
-    category: longCategory,
     humanName: "Ghostnet",
-    activationBucket: activationBucket,
-    description: "",
-    tezosFaucetHelmValuesFile: "networks/ghostnet/faucet_values.yaml",
+    namespace: ghostnet_chain.namespace,
+    helmValuesFile: "networks/ghostnet/faucet_values.yaml",
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartRepoVersion: "6.24.3",
+    chartRepoVersion: "6.24.6",
   },
   provider
 )
@@ -170,12 +187,8 @@ const nairobinet_chain = new TezosChain(
     humanName: "Nairobinet",
     description: "Test Chain for the Nairobi Protocol Proposal",
     activationBucket: activationBucket,
-    tezosHelmValuesFile: "networks/nairobinet/values.yaml",
-    tezosFaucetHelmValuesFile: "networks/nairobinet/faucet_values.yaml",
+    helmValuesFile: "networks/nairobinet/values.yaml",
     bakingPrivateKey: private_oxhead_baking_key,
-    faucetPrivateKey: faucetPrivateKey,
-    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
-    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     bootstrapPeers: ["nairobinet.boot.ecadinfra.com", "nairobinet.tzboot.net"],
     rpcUrls: ["https://nairobinet.ecadinfra.com"],
     indexers: [
@@ -188,6 +201,19 @@ const nairobinet_chain = new TezosChain(
         url: "https://nairobi.tzstats.com",
       },
     ],
+    chartRepoVersion: "6.24.3",
+  },
+  provider
+)
+new TezosFaucet(
+  nairobinet_chain.name,
+  {
+    namespace: nairobinet_chain.namespace,
+    humanName: "Nairobinet",
+    helmValuesFile: "networks/nairobinet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
     chartRepoVersion: "6.24.3",
   },
   provider
@@ -318,19 +344,15 @@ export const networks = {
   ...{ ghostnet: ghostnetNetwork },
 }
 
-// We do not host a ghostnet node here.
-// Oxhead Alpha hosts a ghostnet RPC service and baker in the
-// sensitive infra cluster.
-// Instead, we hardcode the values to be displayed on the webpage.
-const gitRefMainnetGhostnet = "v17.3"
+// We hardcode the values to be displayed on the webpage.
 const lastBakingDaemonMainnetGhostnet = "PtNairob"
 const ghostnetTeztnet = {
   category: "Long-running Teztnets",
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   description: "Ghostnet is the long-running testnet for Tezos.",
-  docker_build: `tezos/tezos:${gitRefMainnetGhostnet}`,
+  docker_build: `tezos/tezos:${ghostnetOctezVersion}`,
   faucet_url: "https://faucet.ghostnet.teztnets.xyz",
-  git_ref: gitRefMainnetGhostnet,
+  git_ref: ghostnetOctezVersion,
   human_name: "Ghostnet",
   indexers: [
     {
@@ -360,8 +382,8 @@ const mainnetMetadata = {
   category: "Long-running Teztnets",
   chain_name: "TEZOS_MAINNET",
   description: "Tezos Mainnet",
-  docker_build: `tezos/tezos:${gitRefMainnetGhostnet}`,
-  git_ref: gitRefMainnetGhostnet,
+  docker_build: `tezos/tezos:${ghostnetOctezVersion}`,
+  git_ref: ghostnetOctezVersion,
   human_name: "Mainnet",
   indexers: [
     {
@@ -388,4 +410,9 @@ export const teztnets = {
   ...{ ghostnet: ghostnetTeztnet, mainnet: mainnetMetadata },
 }
 
-deployPyrometer({ provider, networks, teztnets })
+deployStatusPage(provider, {
+  networks: networks,
+  teztnets: teztnets,
+  statusPageFqdn: "status.teztnets.xyz",
+  chartRepoVersion: "6.24.6"
+});
