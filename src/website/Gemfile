@@ -2,8 +2,11 @@
 
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.2.2"
+# gem "rails"
+
+gem "jekyll", "~> 4.3"
+
+gem "minima", "~> 2.5"
+gem "webrick", "~> 1.8"
 
 gem "jekyll-datapage-generator", "~> 1.4"
-gem "minima", "~> 2.5"
-gem "webrick", "~> 1.7"
