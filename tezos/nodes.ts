@@ -14,7 +14,6 @@ export interface TezosNodesParameters {
 }
 
 export class TezosNodes extends pulumi.ComponentResource {
-  readonly params: TezosNodesParameters
   readonly namespace: k8s.core.v1.Namespace
 
   constructor(
@@ -34,9 +33,6 @@ export class TezosNodes extends pulumi.ComponentResource {
      * @param provider The Kubernetes cluster to deploy it into.
      */
     super("pulumi-contrib:components:TezosChain", name, inputs, opts)
-
-    this.params = params
-
 
     const nodesNSName = `${name}-nodes`;
     this.namespace = new k8s.core.v1.Namespace(
@@ -196,6 +192,30 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
         provider: provider,
         parent: this
       }
+    )
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb`,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: name,
+          annotations: {
+            "external-dns.alpha.kubernetes.io/hostname": params.p2pFqdn,
+          },
+        },
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { node_class: "rolling-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: provider }
     )
   }
 }
