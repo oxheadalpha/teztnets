@@ -63,11 +63,11 @@ accounts:
   #   key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # andrewk:
+  andrewk:
   #   # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
-  #   key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # pirbo:
   #   # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
   #   key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
