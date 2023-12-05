@@ -73,7 +73,11 @@ export class TezosChain extends pulumi.ComponentResource {
     this.tezosHelmValues = YAML.parse(
       fs.readFileSync(this.params.helmValuesFile, "utf8")
     );
-    this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
+    if (this.name == "oxfordnet") {
+      this.tezosHelmValues["accounts"]["teztnetsbaker"]["key"] = this.params.bakingPrivateKey
+    } else {
+      this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
+    }
     if (this.params.schedule) {
       const deployDate = new Date(
         cronParser
