@@ -1,0 +1,17 @@
+{
+  "chain_name": "TEZOS_OXFORDNET_2023-12-07T15:00:00Z",
+  "default_bootstrap_peers": [
+    "oxfordnet.teztnets.xyz"
+  ],
+  "genesis": {
+    "block": "BLm6eM7L6NF8R6BQDuLajwkpfB7Yt823m5m5ue635ECrNst4qfi",
+    "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
+    "timestamp": "2023-12-07T15:00:00Z"
+  },
+  "genesis_parameters": {
+    "values": {
+      "genesis_pubkey": "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+    }
+  },
+  "sandboxed_chain_name": "SANDBOXED_TEZOS"
+}
