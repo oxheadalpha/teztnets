@@ -37,6 +37,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_5fb6551e_20231204213907
 ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
+cd
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
 git checkout 5fb6551e
@@ -44,7 +45,7 @@ opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
-export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
+export PATH=$HOME/tezos:$PATH
 ```
 
 ### Join the Dailynet network

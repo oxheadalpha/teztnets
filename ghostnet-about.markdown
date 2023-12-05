@@ -16,6 +16,7 @@ Ghostnet is the long-running testnet for Tezos.
 | Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
 
 
+Ghostnet is centrally managed to follow Tezos Mainnet protocol upgrades. It generally updates to the same protocol than Mainnet one week before Mainnet update itself.
 
 
 ### Install the software
@@ -41,6 +42,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v18.1
 ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
+cd
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
 git checkout v18.1
@@ -48,7 +50,7 @@ opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
-export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
+export PATH=$HOME/tezos:$PATH
 ```
 
 ### Join the Ghostnet network
@@ -72,12 +74,7 @@ To improve reliability of the chain, you can take part in the consensus by becom
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./octez-client register key mykey as delegate
-```
-
-Then, you need to **stake** some amount of tez greater than 6,000 (this only applies to Oxford protocol and beyond). For example, to stake 10,000 tez, issue the following command:
-```bash=2
-./octez-client stake 10000 for mykey
+octez-client register key mykey as delegate
 ```
 
 You may now launch the baker process.

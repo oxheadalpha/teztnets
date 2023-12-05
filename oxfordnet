@@ -10,7 +10,7 @@
   },
   "genesis_parameters": {
     "values": {
-      "genesis_pubkey": "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
+      "genesis_pubkey": "edpktosVHk2f3Yrz9Jb6rMrk6uVy4sTxVhP2iyF39AdgzvsTWgbaLy"
     }
   },
   "sandboxed_chain_name": "SANDBOXED_TEZOS"

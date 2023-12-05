@@ -16,6 +16,13 @@ Test Chain for the Oxford Protocol Proposal
 
 
 
+Oxfordnet has 8 second blocks (twice faster than mainnet).
+
+We welcome bootstrap bakers for Oxfordnet! The process is opt-in: please make yourself known in the baking slack, or make a Pull Request against the teztnets repo [Oxfordnet definition](https://github.com/oxheadalpha/teztnets/blob/main/oxfordnet/values.yaml) file.
+
+Oxfordnet will start on Nairobi protocol then upgrade to Oxford at the end of cycle 1 (the second cycle). Please start your Nairobi bakers.
+
+Adaptive Issuance is disabled on Oxfordnet. To test Adaptive Issuance, please use Weeklynet or Dailynet.
 
 
 ### Install the software
@@ -41,6 +48,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:v19.0-rc1
 ⚠️  If this is your first time installing Tezos, you may need to [install a few dependencies](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch).
 
 ```
+cd
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
 git checkout v19.0-rc1
@@ -48,7 +56,7 @@ opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
 make
-export PATH=$HOME/tezos/_build/install/default/bin/:$PATH
+export PATH=$HOME/tezos:$PATH
 ```
 
 ### Join the Oxfordnet network
@@ -72,12 +80,7 @@ To improve reliability of the chain, you can take part in the consensus by becom
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
-./octez-client register key mykey as delegate
-```
-
-Then, you need to **stake** some amount of tez greater than 6,000 (this only applies to Oxford protocol and beyond). For example, to stake 10,000 tez, issue the following command:
-```bash=2
-./octez-client stake 10000 for mykey
+octez-client register key mykey as delegate
 ```
 
 You may now launch the baker process.
