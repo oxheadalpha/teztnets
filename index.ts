@@ -72,18 +72,6 @@ new gcp.dns.RecordSet("teztnetsSiteRecord", {
   ]
 });
 
-// Create A records for each GitHub Pages IP
-new gcp.dns.RecordSet("oldGhostnetRecord", {
-  name: "rpc.ghostnet.teztnets.xyz.",
-  managedZone: dnsZone.name,
-  type: "A",
-  ttl: 300,
-  rrdatas: [
-    '45.55.105.6',
-  ]
-});
-
-
 // chains
 const dailynet_chain = new TezosChain(
   {
