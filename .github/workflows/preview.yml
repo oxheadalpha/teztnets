@@ -1,4 +1,4 @@
-name: Pulumi Preview
+name: Preview
 on:
   pull_request:
     branches:
@@ -6,7 +6,22 @@ on:
 jobs:
   preview:
     name: Preview
+    # don't do this on fork - this won't work because secrets won't be accessible
+    if: github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/setup.yml
     secrets: inherit
     with:
       pulumi-command: preview
+
+  validate-yaml:
+    name: Validate YAML Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install YAML Lint
+        run: sudo apt-get install yamllint
+
+      - name: Validate YAML Files
+        run: yamllint networks/*/*.yaml
