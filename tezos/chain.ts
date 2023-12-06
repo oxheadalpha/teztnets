@@ -13,7 +13,7 @@ export interface TezosParameters {
   readonly bootstrapContracts?: string[]
   readonly category: string
   readonly description: string
-  readonly bakingPrivateKey?: pulumi.Output<string>
+  readonly bakingPrivateKey: pulumi.Output<string>
   readonly humanName: string
   readonly indexers?: { name: string; url: string }[]
   readonly chartPath?: string
@@ -73,10 +73,10 @@ export class TezosChain extends pulumi.ComponentResource {
     this.tezosHelmValues = YAML.parse(
       fs.readFileSync(this.params.helmValuesFile, "utf8")
     );
-    if (this.name == "oxfordnet") {
-      this.tezosHelmValues["accounts"]["teztnetsbaker"]["key"] = this.params.bakingPrivateKey
-    } else {
+    if (this.name == "nairobinet") {
       this.tezosHelmValues["accounts"]["oxheadbaker"]["key"] = this.params.bakingPrivateKey
+    } else {
+      this.tezosHelmValues["accounts"]["teztnetsbaker"]["key"] = this.params.bakingPrivateKey
     }
     if (this.params.schedule) {
       const deployDate = new Date(

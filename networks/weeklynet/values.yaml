@@ -1,7 +1,7 @@
 tezos_k8s_images:
   utils: ghcr.io/oxheadalpha/tezos-k8s-utils:pr-613
 node_config_network:
-  activation_account_name: oxheadbaker
+  activation_account_name: teztnetsbaker
   genesis:
     protocol: Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P
   user_activated_upgrades:
@@ -122,7 +122,7 @@ nodes:
   tezos-baking-node:
     instances:
       - bake_using_accounts:
-          - oxheadbaker
+          - teztnetsbaker
         config:
           shell:
             history_mode: archive
@@ -142,7 +142,7 @@ nodes:
 
 # smartRollupNodes:
 #   evm:
-#     operator_account: oxheadbaker
+#     operator_account: teztnetsbaker
 #     rollup_address: sr1RYurGZtN8KNSpkMcCt9CgWeUaNkzsAfXf
 #     ingress:
 #       # ingress details filled by pulumi
@@ -184,8 +184,8 @@ protocols:
       liquidity_baking_toggle_vote: "pass"
       adaptive_issuance_vote: "on"
 accounts:
-  oxheadbaker:
-    # tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+  teztnetsbaker:
+    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     bootstrap_balance: "1500000000000"
     is_bootstrap_baker_account: true
     type: secret
