@@ -57,12 +57,12 @@ accounts:
     # tz1P4jwyqooBmjBEWXLvgfcdy4wstG2Bzsky
     key: edpkvP1MM5ojoW94m6Tzxgw4hg2N9TbNudycwPLVC9GqDpUk8LAU3Q
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000" 
-  # marco:
-  #   # Marco Schurtenberger
-  #   key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+    bootstrap_balance: "100000"
+  marco:
+    # Marco Schurtenberger
+    key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   andrewk:
   #   # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
     key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
