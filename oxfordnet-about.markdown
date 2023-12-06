@@ -18,7 +18,7 @@ Test Chain for the Oxford Protocol Proposal
 
 Oxfordnet has 8 second blocks (twice faster than mainnet).
 
-We welcome bootstrap bakers for Oxfordnet! The process is opt-in: please make yourself known in the baking slack, or make a Pull Request against the teztnets repo [Oxfordnet definition](https://github.com/oxheadalpha/teztnets/blob/main/network/oxfordnet/values.yaml) file.
+We welcome bootstrap bakers for Oxfordnet! The process is opt-in: please make yourself known in the [Discord server "teztnets" channel](https://discord.gg/AwJGCaBG), or make a Pull Request against the teztnets repo [Oxfordnet definition](https://github.com/oxheadalpha/teztnets/blob/main/network/oxfordnet/values.yaml) file.
 
 Oxfordnet will start on Nairobi protocol then upgrade to Oxford at the end of cycle 1 (the second cycle). Please start your Nairobi bakers.
 
