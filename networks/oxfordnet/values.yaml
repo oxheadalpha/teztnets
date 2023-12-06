@@ -113,11 +113,11 @@ accounts:
   #   key: edpktmqPi9eRefM9ZrwsPNAdg9832UDg3r894J4rkBGfUhpqZpqx6y
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # albin:
-  #   # tz1YtB3Hn6oghVk96vkpZt6PHrfbyRY1ciL3
-  #   key: edpkuc4NCkkmTyLogcU32b7sU363J2jggs19EyBzhmms6JmjQZxEJo
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  albin:
+    # tz1YtB3Hn6oghVk96vkpZt6PHrfbyRY1ciL3
+    key: edpkuc4NCkkmTyLogcU32b7sU363J2jggs19EyBzhmms6JmjQZxEJo
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # blueledger:
   #   # Mike Kerhnaghan
   #   # tz1bQYMFieZHomNPjJvpp2g7PuhxRPDxpnFt
