@@ -1,6 +1,6 @@
 accounts:
   teztnetsbaker:
-    # tz1ZpAXZe2tG9kXpmvdxKZ5A4K6RcKuA6sqs
+    # tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     bootstrap_balance: "9700000000000"
     is_bootstrap_baker_account: true
     # key injected by pulumi
@@ -57,32 +57,32 @@ accounts:
     # tz1P4jwyqooBmjBEWXLvgfcdy4wstG2Bzsky
     key: edpkvP1MM5ojoW94m6Tzxgw4hg2N9TbNudycwPLVC9GqDpUk8LAU3Q
     is_bootstrap_baker_account: true
-    bootstrap_balance: "100000" 
+    bootstrap_balance: "100000"
   marco:
     # Marco Schurtenberger
     key: edpkubw32gvTfUYRERGECHbMTsiLdM9z9JrEXGVEahbZf9yMhTozSg
     is_bootstrap_baker_account: true
     bootstrap_balance: "1000000000000"
-  # andrewk:
+  andrewk:
   #   # tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9
-  #   key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+    key: edpkvNGUd3xcBNmPWRbXJoS6WEvxu1BVoWjHr7ab7QoAJFFqhx9tkR
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # pirbo:
   #   # tz1PirbogVqfmBT9XCuYJ1KnDx4bnMSYfGru
   #   key: edpkvaQpRgsSGPJSY91sjNArLMgpTUHmmfkvuSekwos43uze2H2EFM
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # ecadlabs:
-  #   # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
-  #   key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
-  # ecadlabs_2:
-  #   # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
-  #   key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  ecadlabs:
+    # tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD
+    key: edpkvP1NXoo8vhYbPSvXdy466EHoYWBpf6zmjghB2p3DwJPjbB5nsf
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
+  ecadlabs_2:
+    # tz1RuHDSj9P7mNNhfKxsyLGRDahTX5QD1DdP
+    key: edpkthQu5xeKjD9Dxh5tAf3f61z2Nteqk9xRVPVoZekk1CF738zbcJ
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # fredcy:
   #   # tz1KkJtLB9pMdLKNpVRNZw9zmysrxKmYcRGU
   #   key: edpkvTUqzRYhotk2YFnemLfBk8apvcSVNwTSxB6F6CaXUA64CRXgHN
@@ -104,11 +104,11 @@ accounts:
   #   key: edpktrpiJF24hcmJ22tfDaFWuFihZYbSgr15vFAGUmHThtnr37BZqX
   #   is_bootstrap_baker_account: true
   #   bootstrap_balance: "1000000000000"
-  # killian_d:
-  #   # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
-  #   key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
-  #   is_bootstrap_baker_account: true
-  #   bootstrap_balance: "1000000000000"
+  killian_d:
+    # tz1gBnaS1n7LKqpaRnyBX5MSmamadXXfzNpt
+    key: edpkv7AqKLxQXWa2tHcPbMnah1JbMUHohvmvgPS7nVaB7kdNnrg1XW
+    is_bootstrap_baker_account: true
+    bootstrap_balance: "1000000000000"
   # feeny:
   #   key: edpktmqPi9eRefM9ZrwsPNAdg9832UDg3r894J4rkBGfUhpqZpqx6y
   #   is_bootstrap_baker_account: true

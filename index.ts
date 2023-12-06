@@ -1,6 +1,7 @@
 import * as pulumi from "@pulumi/pulumi"
 import * as gcp from "@pulumi/gcp"
 import * as k8s from "@pulumi/kubernetes"
+
 import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
@@ -8,6 +9,7 @@ import deployStatusPage from "./tezos/statusPage"
 import { TezosChain } from "./tezos/chain"
 import { TezosNodes } from "./tezos/nodes"
 import { TezosFaucet } from "./tezos/faucet"
+import getPublicKeyFromPrivateKey from './tezos/keys'
 
 const cfg = new pulumi.Config()
 const faucetPrivateKey = cfg.requireSecret("faucet-private-key")
@@ -95,7 +97,7 @@ const dailynet_chain = new TezosChain(
       "exchanger.json",
     ],
     helmValuesFile: "networks/dailynet/values.yaml",
-    bakingPrivateKey: private_oxhead_baking_key,
+    bakingPrivateKey: private_teztnets_baking_key,
     chartPath: "networks/dailynet/tezos-k8s",
   },
   provider
@@ -131,7 +133,7 @@ const weeklynet_chain = new TezosChain(
       // "evm_bridge.json",
     ],
     helmValuesFile: "networks/weeklynet/values.yaml",
-    bakingPrivateKey: private_oxhead_baking_key,
+    bakingPrivateKey: private_teztnets_baking_key,
     chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
     // chartRepoVersion: "6.18.0",
     bootstrapPeers: [],
@@ -249,14 +251,7 @@ function getNetworks(chains: TezosChain[]): object {
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
     // TODO: generate it dynamically based on privkey
-    let genesisPubkey: string;
-    if (chain.name == "oxfordnet") {
-      genesisPubkey =
-        "edpktosVHk2f3Yrz9Jb6rMrk6uVy4sTxVhP2iyF39AdgzvsTWgbaLy"
-    } else {
-      genesisPubkey =
-        "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-    }
+    let genesisPubkey = getPublicKeyFromPrivateKey(chain.params.bakingPrivateKey)
     const network = Object.assign(
       {},
       chain.tezosHelmValues["node_config_network"]

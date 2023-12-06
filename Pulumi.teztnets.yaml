@@ -12,4 +12,4 @@ config:
   teztnets:private-teztnets-baking-key:
     secure: AAABAAgMJLuhBpihD9LyO3cKw5acR7Ke0fq2cxPH5fQibPvfwiB6voGS0i8w77H0TWHPWwWwf9PP6+WWAuGJUlhb2+cZCSFY0inwImz47Ql2wbxs5kA=
   teztnets:tf-teztnets-baking-key:
-    secure: AAABANDi0kjThi/k59ER0Crx97l+dI6FsqRr3c/PmtnIa81GS+/KwCCQ5vbdQKh6qHIqnX+8h8t9Xhu86hH8K2iMTTLmDQn7GuWQFIiUBx1FCnKtRQE=
+    secure: AAABAC105maeYac8/PRun+tP9M63QbBSeLg0H0J9BWzC9Dn8jVkWhEyHTeDGE95YKT3scDY47Q7R0vW8FtT2gK6IY8CJCblfSHQr6/bKWdWO34pVJMQ=
