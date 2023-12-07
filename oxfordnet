@@ -1,7 +1,8 @@
 {
   "chain_name": "TEZOS_OXFORDNET_2023-12-07T15:00:00Z",
   "default_bootstrap_peers": [
-    "oxfordnet.teztnets.xyz"
+    "oxfordnet.teztnets.xyz",
+    "oxfordnet.tzinit.net"
   ],
   "genesis": {
     "block": "BLm6eM7L6NF8R6BQDuLajwkpfB7Yt823m5m5ue635ECrNst4qfi",
