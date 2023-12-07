@@ -1,5 +1,5 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.2
   tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.2.1
 
 config:
@@ -9,7 +9,7 @@ config:
     backendUrl: # filled in by pulumi
     githubRepo: https://github.com/oxheadalpha/tezos-faucet
   network:
-    name: custom # tezos-faucet does not recognize Oxfordnet now
+    name: # filled in by pulumi
     rpcUrl: # filled in by pulumi
     faucetAddress: tz1a4GT7THHaGDiTxgXoatDWcZfJ5j29z5RC
     viewer: https://nairobi.tzstats.com
