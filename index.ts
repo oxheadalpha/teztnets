@@ -233,7 +233,7 @@ const oxfordnet_chain = new TezosChain(
     activationBucket: activationBucket,
     helmValuesFile: "networks/oxfordnet/values.yaml",
     bakingPrivateKey: private_teztnets_baking_key,
-    bootstrapPeers: [],
+    bootstrapPeers: ["oxfordnet.tzinit.net"],
     rpcUrls: [],
     indexers: [
     ],

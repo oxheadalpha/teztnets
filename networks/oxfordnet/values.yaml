@@ -262,4 +262,5 @@ protocols:
       liquidity_baking_toggle_vote: "pass"
       adaptive_issuance_vote: "on"
 
-bootstrap_peers: []
+bootstrap_peers:
+  - oxfordnet.tzinit.org
