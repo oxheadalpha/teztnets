@@ -241,6 +241,19 @@ const oxfordnet_chain = new TezosChain(
   },
   provider
 )
+new TezosFaucet(
+  oxfordnet_chain.name,
+  {
+    namespace: oxfordnet_chain.namespace,
+    humanName: "Oxfordnet",
+    helmValuesFile: "networks/oxfordnet/faucet_values.yaml",
+    faucetPrivateKey: faucetPrivateKey,
+    faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
+    faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
+    chartRepoVersion: "6.24.6",
+  },
+  provider
+)
 
 function getNetworks(chains: TezosChain[]): object {
   const networks: { [name: string]: object } = {}
