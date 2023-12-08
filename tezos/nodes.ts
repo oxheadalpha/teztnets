@@ -63,6 +63,12 @@ export class TezosNodes extends pulumi.ComponentResource {
                 history_mode: "rolling"
               }
             }
+          }, {
+            config: {
+              shell: {
+                history_mode: "rolling"
+              }
+            }
           }],
         },
         'archive-node': {
