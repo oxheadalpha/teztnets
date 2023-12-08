@@ -24,6 +24,8 @@ export interface TezosParameters {
   readonly schedule?: string
 }
 
+const gcpRegion = "us-central1";
+
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
  * Supports either local charts or charts from a repo
@@ -232,132 +234,83 @@ export class TezosChain extends pulumi.ComponentResource {
         evmProxyIngressParams
     }
 
-    // Data Availability Layer
-    if (
-      this.tezosHelmValues.dalNodes &&
-      this.tezosHelmValues.dalNodes.length != 0) {
-      const dalBootstrapRpcFqdn = `dal-bootstrap-rpc.${name}.teztnets.xyz`
-      const dalBootstrapIngressParams = {
-        enabled: true,
-        host: dalBootstrapRpcFqdn,
-        labels: {
-          app: "dal-bootstrap",
-        },
-        annotations: {
-          "kubernetes.io/ingress.class": "nginx",
-          "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-          "nginx.ingress.kubernetes.io/enable-cors": "true",
-          "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
-        },
-        tls: [
-          {
-            hosts: [dalBootstrapRpcFqdn],
-            secretName: `${dalBootstrapRpcFqdn}-secret`,
-          },
-        ],
-      }
-      this.tezosHelmValues.dalNodes.bootstrap.ingress = dalBootstrapIngressParams
-
-      const dalBootstrapP2pFqdn = `dal.${name}.teztnets.xyz`
-      const dalBootstrapSvcName = `${name}-dal-bootstrap`
-      const dalBootstrapStaticIP = new gcp.compute.Address(`${name}-dal-bootstrap-ip`, {
-        name: `${name}-dal-bootstrap-ip`,
-        region: "us-central1", // Specify your GCP region here
-      });
-      new k8s.core.v1.Service(
-        `${name}-dal-bootstrap-p2p-lb`,
+    if (this.tezosHelmValues.dalNodes && this.tezosHelmValues.dalNodes.length !== 0) {
+      // We define both DAL nodes: the bootstrap node for the network, and the attester.
+      // This is different than the L1, where the same node does everything.
+      // Gossipsub requires separation from the bootstrap node and the nodes that actually
+      // does the duties.
+      const dalConfigs = [
         {
+          nodeType: 'bootstrap',
+          nodeLabel: 'dal-bootstrap',
+          rpcFqdn: `dal-bootstrap-rpc.${name}.teztnets.xyz`,
+          p2pFqdn: `dal.${name}.teztnets.xyz`,
+        },
+        {
+          nodeType: 'dal1',
+          nodeLabel: 'dal-dal1',
+          rpcFqdn: `dal-attestor-rpc.${name}.teztnets.xyz`,
+          p2pFqdn: `dal1.${name}.teztnets.xyz`,
+        }
+      ];
+      const dalP2pPort = 11732;
+
+      dalConfigs.forEach(({ nodeType, nodeLabel, rpcFqdn, p2pFqdn }) => {
+
+        const ingressParams = {
+          enabled: true,
+          host: rpcFqdn,
+          labels: { app: nodeLabel },
+          annotations: {
+            "kubernetes.io/ingress.class": "nginx",
+            "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+            "nginx.ingress.kubernetes.io/enable-cors": "true",
+            "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
+          },
+          tls: [{ hosts: [rpcFqdn], secretName: `${rpcFqdn}-secret` }],
+        };
+        this.tezosHelmValues.dalNodes[nodeType].ingress = ingressParams;
+
+        // Setting up GCP static IP address
+        const staticIPName = `${name}-dal-${nodeType}-ip`;
+        const staticIP = new gcp.compute.Address(staticIPName, {
+          name: staticIPName,
+          region: gcpRegion,
+        });
+
+        const serviceName = `${name}-dal-${nodeType}`;
+        new k8s.core.v1.Service(`${serviceName}-p2p-lb`, {
           metadata: {
             namespace: this.namespace.metadata.name,
-            name: dalBootstrapSvcName,
+            name: serviceName,
             annotations: {
-              "external-dns.alpha.kubernetes.io/hostname": dalBootstrapP2pFqdn,
+              "external-dns.alpha.kubernetes.io/hostname": p2pFqdn,
               "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
               "networking.gke.io/load-balancer-type": "External",
-
             },
           },
           spec: {
-            ports: [
-              {
-                port: 11732,
-                targetPort: 11732,
-                protocol: "TCP",
-              },
-            ],
-            selector: { app: "dal-bootstrap" },
+            ports: [{ port: dalP2pPort, targetPort: dalP2pPort, protocol: "TCP" }],
+            selector: { app: nodeLabel },
             type: "LoadBalancer",
-            loadBalancerIP: dalBootstrapStaticIP.address,
+            loadBalancerIP: staticIP.address,
           },
         },
-        { provider: provider }
-      )
-
-      const dalAttestorRpcFqdn = `dal-attestor-rpc.${name}.teztnets.xyz`
-      const dalAttestorIngressParams = {
-        enabled: true,
-        host: dalAttestorRpcFqdn,
-        labels: {
-          app: "dal-dal1",
-        },
-        annotations: {
-          "kubernetes.io/ingress.class": "nginx",
-          "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-          "nginx.ingress.kubernetes.io/enable-cors": "true",
-          "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
-        },
-        tls: [
           {
-            hosts: [dalAttestorRpcFqdn],
-            secretName: `${dalAttestorRpcFqdn}-secret`,
-          },
-        ],
-      }
-      this.tezosHelmValues.dalNodes.dal1.ingress = dalAttestorIngressParams
+            provider: provider,
+            //parent: this,
+          }
+        );
 
-      const dalAttestorP2pFqdn = `dal1.${name}.teztnets.xyz`
-      const dal1SvcName = `${name}-dal-dal1`
-      const dal1StaticIP = new gcp.compute.Address(`${name}-dal-dal1-ip`, {
-        name: `${name}-dal-dal1-ip`,
-        region: "us-central1", // Specify your GCP region here
-      });
+        this.tezosHelmValues.dalNodes[nodeType].publicAddr = pulumi.interpolate`${staticIP.address}:${dalP2pPort}`;
+      })
 
-      new k8s.core.v1.Service(
-        `${name}-dal-dal1-p2p-lb`,
-        {
-          metadata: {
-            namespace: this.namespace.metadata.name,
-            name: dal1SvcName,
-            annotations: {
-              "external-dns.alpha.kubernetes.io/hostname": dalAttestorP2pFqdn,
-              "service.beta.kubernetes.io/gcp-load-balancer-type": "External",
-              "networking.gke.io/load-balancer-type": "External",
-
-            },
-          },
-          spec: {
-            ports: [
-              {
-                port: 11732,
-                targetPort: 11732,
-                protocol: "TCP",
-              },
-            ],
-            selector: { app: "dal-dal1" },
-            type: "LoadBalancer",
-            loadBalancerIP: dal1StaticIP.address,
-          },
-        },
-        { provider: provider }
-      )
-
-
-      this.tezosHelmValues.dalNodes.bootstrap.publicAddr = pulumi.interpolate`${dalBootstrapStaticIP.address}:11732`
-      this.tezosHelmValues.dalNodes.dal1.publicAddr = pulumi.interpolate`${dal1StaticIP.address}:11732`
-      this.tezosHelmValues.dalNodes.dal1.peer = `${dalBootstrapP2pFqdn}:11732`
+      // ensures that the internal non-bootstrap dal node peers with the bootstrap one
+      this.tezosHelmValues.dalNodes.dal1.peer = `dal.${name}.teztnets.xyz:${dalP2pPort}`;
+      // Set bootstrap peers on the network config (specific to testnets)
       this.tezosHelmValues.node_config_network.dal_config.bootstrap_peers = [
-        `${dalBootstrapP2pFqdn}:11732`
-      ]
+        `dal.${name}.teztnets.xyz:11732`
+      ];
     }
 
     let chartParams = getChartParams(params, "tezos");
