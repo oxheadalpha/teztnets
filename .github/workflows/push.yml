@@ -16,8 +16,7 @@ jobs:
   publish:
     needs: up
     uses: ./.github/workflows/_publish.yml
+    secrets: inherit
     with:
       networks: ${{ needs.up.outputs.networks }}
       teztnets: ${{ needs.up.outputs.teztnets }}
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
