@@ -20,6 +20,10 @@ We support the beacon-compatible Tezos Faucet.
 
 A [collection of raw Michelson contracts](https://github.com/oxheadalpha/teztnets/tree/main/bootstrap_contracts) can be optionally deployed in any Teztnet at genesis.
 
+### Injection of Smart Rollups at genesis
+
+Rollups can be injected at genesis of your test chain. Teztnets supports extraction of the EVM Rollup from the Octez container, and its injection at a predetermined address.
+
 ### Bootstrap baker and bootstrap p2p endpoint
 
 Upon deployment of a Teztnet, a genesis baker will run and its p2p and rpc endpoints will be exposed externally.

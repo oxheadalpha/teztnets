@@ -225,7 +225,6 @@ activation:
 
 nodes:
   tezos-baking-node:
-    #storageClassName: gp3
     instances:
       - bake_using_accounts:
           - teztnetsbaker
