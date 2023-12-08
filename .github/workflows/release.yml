@@ -1,4 +1,4 @@
-name: Publish Teztnets
+name: Dailynet/Weeklynet Deployment Cronjob
 
 on:
   push:
