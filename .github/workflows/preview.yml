@@ -5,10 +5,10 @@ on:
       - main
 jobs:
   preview:
-    name: Preview
-    # don't do this on fork - this won't work because secrets won't be accessible
+    name: Pulumi Preview
+    # don't do this on fork - this would not work because secrets would not be accessible
     if: github.event.pull_request.head.repo.full_name == github.repository
-    uses: ./.github/workflows/setup.yml
+    uses: ./.github/workflows/_pulumi.yml
     secrets: inherit
     with:
       pulumi-command: preview

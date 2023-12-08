@@ -1,23 +1,20 @@
-name: Dailynet/Weeklynet Deployment Cronjob
+name: Publish Job Workflow
 
 on:
-  push:
-    branches:
-      - main
-  schedule:
-    # update the deployment every Monday at 0:00 UTC
-    - cron: "0 0 * * *"
+  workflow_call:
+    inputs:
+      networks:
+        required: true
+        type: string
+      teztnets:
+        required: true
+        type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
-  up:
-    name: Up
-    uses: ./.github/workflows/setup.yml
-    secrets: inherit
-    with:
-      pulumi-command: up
-
   publish:
-    needs: up
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

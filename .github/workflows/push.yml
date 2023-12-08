@@ -1,0 +1,23 @@
+name: Deploy On Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  up:
+    name: Pulumi Up
+    uses: ./.github/workflows/_pulumi.yml
+    secrets: inherit
+    with:
+      pulumi-command: up
+
+  publish:
+    needs: up
+    uses: ./.github/workflows/_publish.yml
+    with:
+      networks: ${{ needs.up.outputs.networks }}
+      teztnets: ${{ needs.up.outputs.teztnets }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
