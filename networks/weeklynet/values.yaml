@@ -120,6 +120,9 @@ activation:
 
 nodes:
   tezos-baking-node:
+    env:
+      all:
+        TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER: "Y"
     instances:
       - bake_using_accounts:
           - teztnetsbaker
