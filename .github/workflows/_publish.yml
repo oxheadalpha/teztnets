@@ -25,11 +25,11 @@ jobs:
           pip install PyYAML jinja2
       - run: |
           cat > networks.json <<EOF
-          ${{ needs.up.outputs.networks }}
+          ${{ inputs.networks }}
           EOF
       - run: |
           cat > teztnets.json <<EOF
-          ${{ needs.up.outputs.teztnets }}
+          ${{ inputs.teztnets }}
           EOF
       - name: generate release artifacts
         run: |
