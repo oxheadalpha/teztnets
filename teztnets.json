@@ -5,12 +5,12 @@
     "dal_p2p_url": "dal.dailynet-2023-12-08.teztnets.xyz",
     "dal_rpc_url": "https://dal-rpc.dailynet-2023-12-08.teztnets.xyz",
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_5199c192_20231207222148",
+    "docker_build": "tezos/tezos:master_3a8d5c1a_20231207235053",
     "evm_proxy_urls": [
       "https://evm.dailynet-2023-12-08.teztnets.xyz"
     ],
     "faucet_url": "https://faucet.dailynet-2023-12-08.teztnets.xyz",
-    "git_ref": "5199c192",
+    "git_ref": "3a8d5c1a",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
