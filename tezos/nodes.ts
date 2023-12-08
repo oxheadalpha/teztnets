@@ -34,7 +34,6 @@ export class TezosNodes extends pulumi.ComponentResource {
      */
     super("pulumi-contrib:components:TezosChain", name, inputs, opts)
 
-    const nodesNSName = `${name}-nodes`;
     this.namespace = new k8s.core.v1.Namespace(
       name,
       { metadata: { name: name } },
@@ -115,7 +114,7 @@ export class TezosNodes extends pulumi.ComponentResource {
             'nginx.ingress.kubernetes.io/custom-http-errors': "404",
             'nginx.ingress.kubernetes.io/configuration-snippet': "error_page 404 = @archivenode;",
             'nginx.ingress.kubernetes.io/server-snippet': `location @archivenode {
-  set $archivenode http://archive-node.${nodesNSName}.svc.cluster.local:8732;
+  set $archivenode http://archive-node.${name}.svc.cluster.local:8732;
   more_set_headers 'Access-Control-Allow-Origin: *';
   more_set_headers 'Access-Control-Allow_Credentials: true';
   more_set_headers 'Access-Control-Allow-Headers: Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
@@ -151,7 +150,7 @@ location ~ ^/chains/([a-zA-Z]+)/mempool {
 # These queries state the mode of the node (archive or rolling)
 # and give the highest/lowest levels that we have.
 location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
-  set $archivenode http://archive-node.${nodesNSName}.svc.cluster.local:8732;
+  set $archivenode http://archive-node.${name}.svc.cluster.local:8732;
   more_set_headers 'Access-Control-Allow-Origin: *';
   more_set_headers 'Access-Control-Allow_Credentials: true';
   more_set_headers 'Access-Control-Allow-Headers: Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
