@@ -56,7 +56,7 @@ export class TezosNodes extends pulumi.ComponentResource {
       prefer_tarballs: true,
       nodes: {
         'rolling-node': {
-          storage_size: params.rollingPvcSize,
+          local_storage: true,
           instances: [{
             config: {
               shell: {
