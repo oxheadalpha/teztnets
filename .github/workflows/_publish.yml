@@ -33,7 +33,7 @@ jobs:
           EOF
       - name: generate release artifacts
         run: |
-          python src/release.py
+          python teztnets_xyz_page/release.py
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

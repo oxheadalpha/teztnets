@@ -75,7 +75,7 @@ To build the website locally, from the top-level dir of the repo:
 
 1. run `pulumi stack output networks > networks.json`
 1. run `pulumi stack output teztnets > teztnets.json`
-1. run `python src/release.py`
+1. run `python teztnets_xyz_page/release.py`
 1. `cd target/release`
 1. run `bundle install`
 1. run `bundle exec jekyll serve`

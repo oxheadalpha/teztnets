@@ -4,7 +4,7 @@ import os
 import shutil
 import jinja2
 
-shutil.copytree("src/website", "target/release", dirs_exist_ok=True)
+shutil.copytree("teztnets_xyz_page/website", "target/release", dirs_exist_ok=True)
 
 teztnets = {}
 with open("./teztnets.json", "r") as teztnets_file:
@@ -42,7 +42,7 @@ for k, v in teztnets.items():
         "timestamp"
     ].split("T")[0]
 
-index = jinja2.Template(open("src/index.md.jinja2").read()).render(
+index = jinja2.Template(open("teztnets_xyz_page/index.md.jinja2").read()).render(
     teztnets=nested_teztnets, category_desc=category_desc
 )
 
@@ -79,7 +79,7 @@ for k, v in teztnets.items():
         with open(readme_path) as readme_file:
             readme = readme_file.read()
 
-    teztnet_md = jinja2.Template(open("src/teztnet_page.md.jinja2").read()).render(
+    teztnet_md = jinja2.Template(open("teztnets_xyz_page/teztnet_page.md.jinja2").read()).render(
         k=k, v=v, network_params=networks[k], readme=readme
     )
 
