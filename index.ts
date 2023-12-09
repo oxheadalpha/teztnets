@@ -158,6 +158,7 @@ new TezosFaucet(
 // * launched long time ago, launch code is not in the active code path
 // * heavy usage on the RPC endpoint requires a more elaborate setup
 //   with archive/rolling nodes, NGINX path filtering and rate limiting.
+// Consequently, we made a special class "TezosNodes" for the purpose.
 const ghostnetOctezVersion = "v18.1";
 const ghostnet_chain = new TezosNodes(
   "ghostnet-nodes",

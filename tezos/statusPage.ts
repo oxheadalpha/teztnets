@@ -23,10 +23,9 @@ const deployStatusPage = async (
     config: {
       node_monitor: {
         nodes: Object.keys(params.networks)
-          .filter((n) => n !== "ghostnet")
-          .map((network) => ({
-            url: `http://tezos-node-rpc.${network}:8732`,
-            name: params.teztnets[network]['human_name']
+          .map((n) => ({
+            url: `http://tezos-node-rpc.${n === "ghostnet" ? 'ghostnet-nodes' : n}:8732`,
+            name: params.teztnets[n]['human_name']
           }))
       },
       ui: {
