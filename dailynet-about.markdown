@@ -59,31 +59,36 @@ octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 
-### EVM Rollup
+### Ethereum Virtual Machine Rollup
 
-More information about the Tezos EVM Rollup will be available soon.
+This network is running a bleeding-edge [EVM Rollup](https://docs.etherlink.com/welcome/what-is-etherlink) from the most recent [kernel code](https://gitlab.com/tezos/tezos/-/tree/master/etherlink) in the Octez repository.
+
+This is not to be confused with [Etherlink](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink) which currently runs on Ghostnet.
+
+[For Etherlink test network, go here](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink).
 
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-12-09.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-12-09.teztnets.xyz/global/block/head) |
-| EVM Proxy URL | [`https://evm.dailynet-2023-12-09.teztnets.xyz`](https://evm.dailynet-2023-12-09.teztnets.xyz) |
+| EVM RPC URL | [`https://evm.dailynet-2023-12-09.teztnets.xyz`](https://evm.dailynet-2023-12-09.teztnets.xyz) |
+| Bare Rollup RPC URL | [`https://evm-rollup-node.dailynet-2023-12-09.teztnets.xyz`](https://evm-rollup-node.dailynet-2023-12-09.teztnets.xyz/global/block/head) |
 
 
 
 
 ### Data Availability Layer
 
-The Teztnets baker for this network is running a Data Availability Layer node.
+This network is running [Data Availability Layer](https://tezos.gitlab.io/shell/dal.html) nodes.
+
+
+The DAL nodes are accessible with the following endpoints:
+
+| | RPC | P2P Endpoint |
+|------------|---------|--------------|
+| DAL Bootstrap | [Link](https://dal-bootstrap-rpc.dailynet-2023-12-09.teztnets.xyz) | `dal.dailynet-2023-12-09.teztnets.xyz:11732` |
+| DAL Teztnets Attestor | [Link](https://dal-attestor-rpc.dailynet-2023-12-09.teztnets.xyz) | `dal1.dailynet-2023-12-09.teztnets.xyz:11732` |
+
 
 For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).
-
-The DAL node is accessible with the following endpoints:
-
-| | |
-|-------|---------------------|
-| Octez DAL Node RPC URL | [`https://dal-rpc.dailynet-2023-12-09.teztnets.xyz`](https://dal-rpc.dailynet-2023-12-09.teztnets.xyz) |
-| DAL P2P Endpoint | `dal.dailynet-2023-12-09.teztnets.xyz:11732` |
-
 
 
 
