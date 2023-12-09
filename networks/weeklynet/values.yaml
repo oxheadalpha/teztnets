@@ -162,10 +162,24 @@ dalNodes:
     bootstrapProfile: true
     ingress:
     # ingress details filled up by pulumi
+    identity:
+      peer_id: "idtJh8bYedP2hKdRk6oCLX3SS2KuTM"
+      public_key:
+        "5a6cd66cbd2f69817fb2eb81e5dd2a9c4f88df950fc90a96a08fe3976724a063"
+      secret_key:
+          "42f716781cf80b2b7ad129ac56dfcb1b333f3021e49c6729199de8303c7152c9"
+      proof_of_work_stamp: "b7edd6ea938998f8f088b83b692baeddb49f5522f07572f9"
   dal1:
     attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
     ingress:
     # ingress details filled up by pulumi
+    identity:
+      peer_id: "ids8gZ6Gu67e58DqPn2e9VyjasB1jo"
+      public_key:
+        "c4ea1f6dddfa43b87b6a37432c4c34e1c79baeed5ff165fee2a85ffafb819e5f"
+      secret_key:
+          "a67519da6166f97ca2dea6dc519f1a453d96e01348816d102fb9a7099ee08137"
+      proof_of_work_stamp: "c85a3aab8a1fc903e8c7e9bcd1714a890e22f160a96d9779"
 
 bootstrap_peers: []
 

@@ -187,8 +187,24 @@ dalNodes:
     bootstrapProfile: true
     ingress:
     # ingress details filled up by pulumi
+    identity:
+      peer_id: "idtP2sCN5G1DEb8jnRWKzuuuady3rN"
+      public_key:
+        "baefe8b7fb13708e859266b2ff33c71bfaceeb6bde01d7b829d81586fb00025c"
+      secret_key:
+        "e01819d7321a360369c2e9cbb738cd13592901163e4c4f21b17cf7081f78afc3"
+      proof_of_work_stamp: "c10a73f331df5df498d5f0332611b3ec25334a8328f5c2b8"
   dal1:
     attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    ingress:
+    # ingress details filled up by pulumi
+    identity:
+      peer_id: "idr42HkfCUcYYNBW51xUkobr1mxchY"
+      public_key:
+        "c2de27a3047a3a01f22523da8de69ce54ede3cdb001d23ca5038967f7c068c66"
+      secret_key:
+          "e68041663d0600f19d67b42f94d7dddcbd5f22db604b7f318b4ce17aec19ba2b"
+      proof_of_work_stamp: "5f847aaa8f1624bf3e1861532947beeef3e9b4d509f06362"
 
 bootstrap_peers: []
 full_snapshot_url: null
