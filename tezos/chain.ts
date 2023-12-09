@@ -36,6 +36,13 @@ export class TezosChain extends pulumi.ComponentResource {
   readonly params: TezosParameters
   readonly tezosHelmValues: any
   readonly namespace: k8s.core.v1.Namespace
+  readonly dalNodes: {
+    [name: string]: {
+      humanName: string;
+      rpc: string;
+      p2p: string;
+    };
+  };
 
   /**
    * Deploys a private chain on a Kubernetes cluster.
@@ -71,6 +78,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
     this.params = params
     this.name = name
+    this.dalNodes = {}
 
     this.tezosHelmValues = YAML.parse(
       fs.readFileSync(this.params.helmValuesFile, "utf8")
@@ -239,28 +247,26 @@ export class TezosChain extends pulumi.ComponentResource {
       // This is different than the L1, where the same node does everything.
       // Gossipsub requires separation from the bootstrap node and the nodes that actually
       // does the duties.
-      const dalConfigs = [
-        {
-          nodeType: 'bootstrap',
-          nodeLabel: 'dal-bootstrap',
+      const dalP2pPort = 11732;
+
+      Object.entries({
+        bootstrap: {
+          humanName: 'DAL Bootstrap',
           rpcFqdn: `dal-bootstrap-rpc.${name}.teztnets.xyz`,
           p2pFqdn: `dal.${name}.teztnets.xyz`,
         },
-        {
-          nodeType: 'dal1',
-          nodeLabel: 'dal-dal1',
+        dal1: {
+          humanName: 'DAL Teztnets Attestor',
           rpcFqdn: `dal-attestor-rpc.${name}.teztnets.xyz`,
           p2pFqdn: `dal1.${name}.teztnets.xyz`,
-        }
-      ];
-      const dalP2pPort = 11732;
 
-      dalConfigs.forEach(({ nodeType, nodeLabel, rpcFqdn, p2pFqdn }) => {
+        }
+      }).forEach(([dalNodeName, { humanName, rpcFqdn, p2pFqdn }]) => {
 
         const ingressParams = {
           enabled: true,
           host: rpcFqdn,
-          labels: { app: nodeLabel },
+          labels: { app: `dal-${dalNodeName}` },
           annotations: {
             "kubernetes.io/ingress.class": "nginx",
             "cert-manager.io/cluster-issuer": "letsencrypt-prod",
@@ -269,16 +275,16 @@ export class TezosChain extends pulumi.ComponentResource {
           },
           tls: [{ hosts: [rpcFqdn], secretName: `${rpcFqdn}-secret` }],
         };
-        this.tezosHelmValues.dalNodes[nodeType].ingress = ingressParams;
+        this.tezosHelmValues.dalNodes[dalNodeName].ingress = ingressParams;
 
         // Setting up GCP static IP address
-        const staticIPName = `${name}-dal-${nodeType}-ip`;
+        const staticIPName = `${name}-dal-${dalNodeName}-ip`;
         const staticIP = new gcp.compute.Address(staticIPName, {
           name: staticIPName,
           region: gcpRegion,
         });
 
-        const serviceName = `${name}-dal-${nodeType}`;
+        const serviceName = `${name}-dal-${dalNodeName}`;
         new k8s.core.v1.Service(`${serviceName}-p2p-lb`, {
           metadata: {
             namespace: this.namespace.metadata.name,
@@ -291,18 +297,22 @@ export class TezosChain extends pulumi.ComponentResource {
           },
           spec: {
             ports: [{ port: dalP2pPort, targetPort: dalP2pPort, protocol: "TCP" }],
-            selector: { app: nodeLabel },
+            selector: { app: `dal-${dalNodeName}` },
             type: "LoadBalancer",
             loadBalancerIP: staticIP.address,
           },
         },
           {
             provider: provider,
-            //parent: this,
           }
         );
 
-        this.tezosHelmValues.dalNodes[nodeType].publicAddr = pulumi.interpolate`${staticIP.address}:${dalP2pPort}`;
+        this.tezosHelmValues.dalNodes[dalNodeName].publicAddr = pulumi.interpolate`${staticIP.address}:${dalP2pPort}`;
+        this.dalNodes[dalNodeName] = {
+          humanName: humanName,
+          rpc: `https://${rpcFqdn}`,
+          p2p: `${p2pFqdn}:${dalP2pPort}`
+        }
       })
 
       // ensures that the internal non-bootstrap dal node peers with the bootstrap one
@@ -351,19 +361,6 @@ export class TezosChain extends pulumi.ComponentResource {
     )
   }
 
-  getNetworkUrl(baseUrl?: string, relativeUrl?: string): string {
-    if (
-      "activation_account_name" in this.tezosHelmValues["node_config_network"]
-    ) {
-      baseUrl = baseUrl || "https://teztnets.xyz"
-      relativeUrl = relativeUrl || this.name
-      return `${baseUrl}/${relativeUrl}`
-    }
-
-    // network config hardcoded in binary, pass the name instead of URL
-    return this.name
-  }
-
   getDockerBuild(): string {
     return this.tezosHelmValues["images"]["octez"]
   }
@@ -401,24 +398,6 @@ export class TezosChain extends pulumi.ComponentResource {
       return [`https://evm.${this.name}.teztnets.xyz`]
     }
     return []
-  }
-  getDalRpcUrl(): string | undefined {
-    if (
-      this.tezosHelmValues.dalNodes &&
-      this.tezosHelmValues.dalNodes.length != 0
-    ) {
-      return `https://dal-rpc.${this.name}.teztnets.xyz`
-    }
-    return
-  }
-  getDalP2pUrl(): string | undefined {
-    if (
-      this.tezosHelmValues.dalNodes &&
-      this.tezosHelmValues.dalNodes.length != 0
-    ) {
-      return `dal.${this.name}.teztnets.xyz`
-    }
-    return
   }
   getRpcUrls(): Array<string> {
     return [...[this.getRpcUrl()], ...this.params.rpcUrls || []]

@@ -69,31 +69,36 @@ octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 {% if v["rollup_urls"] | length > 0 %}
-### EVM Rollup
+### Ethereum Virtual Machine Rollup
 
-More information about the Tezos EVM Rollup will be available soon.
+This network is running a bleeding-edge [EVM Rollup](https://docs.etherlink.com/welcome/what-is-etherlink) from the most recent [kernel code](https://gitlab.com/tezos/tezos/-/tree/master/etherlink) in the Octez repository.
+
+This is not to be confused with [Etherlink](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink) which currently runs on Ghostnet.
+
+[For Etherlink test network, go here](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink).
 
 | | |
 |-------|---------------------|
-| Octez Rollup RPC URL | [`{{ v["rollup_urls"][0] }}`]({{ v["rollup_urls"][0] }}/global/block/head) |
-| EVM Proxy URL | [`{{ v["evm_proxy_urls"][0] }}`]({{ v["evm_proxy_urls"][0] }}) |
+| EVM RPC URL | [`{{ v["evm_proxy_urls"][0] }}`]({{ v["evm_proxy_urls"][0] }}) |
+| Bare Rollup RPC URL | [`{{ v["rollup_urls"][0] }}`]({{ v["rollup_urls"][0] }}/global/block/head) |
 
 {% endif %}
 
-{% if v["dal_p2p_url"] %}
+{% if v["dal_nodes"] %}
 ### Data Availability Layer
 
-The Teztnets baker for this network is running a Data Availability Layer node.
+This network is running [Data Availability Layer](https://tezos.gitlab.io/shell/dal.html) nodes.
+
+
+The DAL nodes are accessible with the following endpoints:
+
+| | RPC | P2P Endpoint |
+|------------|---------|--------------|
+{% for key, dal_data in v["dal_nodes"].items() -%}
+| {{ dal_data["humanName"] }} | [Link]({{ dal_data["rpc"] }}) | `{{ dal_data["p2p"] }}` |
+{% endfor %}
 
 For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).
-
-The DAL node is accessible with the following endpoints:
-
-| | |
-|-------|---------------------|
-| Octez DAL Node RPC URL | [`{{ v["dal_rpc_url"] }}`]({{ v["dal_rpc_url"] }}) |
-| DAL P2P Endpoint | `{{ v["dal_p2p_url"] }}:11732` |
-
 {% endif %}
 
 {% if v["category"] in [ "Protocol Teztnets", "Long-running Teztnets" ] %}

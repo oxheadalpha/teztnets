@@ -306,7 +306,7 @@ function getTeztnets(chains: TezosChain[]): object {
     let faucetUrl = `https://faucet.${chain.name}.teztnets.xyz`
     teztnets[chain.name] = {
       chain_name: chain.tezosHelmValues["node_config_network"]["chain_name"],
-      network_url: chain.getNetworkUrl(),
+      network_url: `https://teztnets.xyz/${chain.name}`,
       human_name: chain.params.humanName,
       description: chain.params.description,
       docker_build: chain.getDockerBuild(),
@@ -317,11 +317,12 @@ function getTeztnets(chains: TezosChain[]): object {
       rpc_url: chain.getRpcUrl(),
       rollup_urls: chain.getRollupUrls(),
       evm_proxy_urls: chain.getEvmProxyUrls(),
-      dal_p2p_url: chain.getDalP2pUrl()!,
-      dal_rpc_url: chain.getDalRpcUrl()!,
       rpc_urls: chain.getRpcUrls(),
       masked_from_main_page: false,
       indexers: chain.params.indexers || [],
+    }
+    if (Object.keys(chain.dalNodes).length > 0) {
+      teztnets[chain.name].dal_nodes = chain.dalNodes;
     }
   })
 
