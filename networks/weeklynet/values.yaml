@@ -160,6 +160,7 @@ nodes:
 dalNodes:
   bootstrap:
     bootstrapProfile: true
+    storageSize: 15Gi
     ingress:
     # ingress details filled up by pulumi
     identity:
@@ -171,6 +172,7 @@ dalNodes:
       proof_of_work_stamp: "b7edd6ea938998f8f088b83b692baeddb49f5522f07572f9"
   dal1:
     attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    storageSize: 50Gi
     ingress:
     # ingress details filled up by pulumi
     identity:
