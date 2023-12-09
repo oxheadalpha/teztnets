@@ -196,7 +196,7 @@ dalNodes:
         "e01819d7321a360369c2e9cbb738cd13592901163e4c4f21b17cf7081f78afc3"
       proof_of_work_stamp: "c10a73f331df5df498d5f0332611b3ec25334a8328f5c2b8"
   dal1:
-    attesterProfiles: tz1foXHgRzdYdaLgX6XhpZGxbBv42LZ6ubvE
+    attesterProfiles: tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     storageSize: 50Gi
     ingress:
     # ingress details filled up by pulumi
