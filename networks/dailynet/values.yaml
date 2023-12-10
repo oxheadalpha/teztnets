@@ -1,5 +1,5 @@
-tezos_k8s_images:
-  utils: ghcr.io/oxheadalpha/tezos-k8s-utils:pr-613
+# tezos_k8s_images:
+#   utils: ghcr.io/oxheadalpha/tezos-k8s-utils:pr-613
 signers:
   tezos-signer-0:
     sign_for_accounts:

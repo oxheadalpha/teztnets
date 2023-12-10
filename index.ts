@@ -98,7 +98,8 @@ const dailynet_chain = new TezosChain(
     ],
     helmValuesFile: "networks/dailynet/values.yaml",
     bakingPrivateKey: private_teztnets_baking_key,
-    chartPath: "networks/dailynet/tezos-k8s",
+    //chartPath: "networks/dailynet/tezos-k8s",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -111,7 +112,8 @@ new TezosFaucet(
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartPath: "networks/dailynet/tezos-k8s",
+    //chartPath: "networks/dailynet/tezos-k8s",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -134,8 +136,8 @@ const weeklynet_chain = new TezosChain(
     ],
     helmValuesFile: "networks/weeklynet/values.yaml",
     bakingPrivateKey: private_teztnets_baking_key,
-    chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
-    // chartRepoVersion: "6.18.0",
+    //chartPath: "networks/dailynet/tezos-k8s", // Using dal node code in dailynet submod
+    chartRepoVersion: "6.25.0",
     bootstrapPeers: [],
   },
   provider
@@ -149,7 +151,7 @@ new TezosFaucet(
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartRepoVersion: "6.24.6",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -167,7 +169,7 @@ const ghostnet_chain = new TezosNodes(
     rpcFqdn: "rpc.ghostnet.teztnets.xyz",
     p2pFqdn: "ghostnet.teztnets.xyz",
     octezVersion: ghostnetOctezVersion,
-    chartRepoVersion: "6.24.4",
+    chartRepoVersion: "6.25.0",
     rollingPvcSize: "50Gi",
     archivePvcSize: "750Gi"
 
@@ -183,7 +185,7 @@ new TezosFaucet(
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartRepoVersion: "6.24.6",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -208,7 +210,7 @@ const nairobinet_chain = new TezosChain(
         url: "https://nairobi.tzstats.com",
       },
     ],
-    chartRepoVersion: "6.24.3",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -221,7 +223,7 @@ new TezosFaucet(
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartRepoVersion: "6.24.3",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -238,7 +240,7 @@ const oxfordnet_chain = new TezosChain(
     rpcUrls: [],
     indexers: [
     ],
-    chartRepoVersion: "6.24.6",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -251,7 +253,7 @@ new TezosFaucet(
     faucetPrivateKey: faucetPrivateKey,
     faucetRecaptchaSiteKey: faucetRecaptchaSiteKey,
     faucetRecaptchaSecretKey: faucetRecaptchaSecretKey,
-    chartRepoVersion: "6.24.6",
+    chartRepoVersion: "6.25.0",
   },
   provider
 )
@@ -451,5 +453,5 @@ deployStatusPage(provider, {
   networks: networks,
   teztnets: teztnets,
   statusPageFqdn: "status.teztnets.xyz",
-  chartRepoVersion: "6.24.6"
+  chartRepoVersion: "6.25.0"
 });
