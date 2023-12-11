@@ -10,7 +10,8 @@ export interface TezosNodesParameters {
   readonly archivePvcSize: string;
   readonly chartRepoVersion?: string;
   readonly chartPath?: string;
-  readonly octezVersion: string;
+  readonly octezRollingVersion: string;
+  readonly octezArchiveVersion: string;
 }
 
 export class TezosNodes extends pulumi.ComponentResource {
@@ -47,9 +48,6 @@ export class TezosNodes extends pulumi.ComponentResource {
     let chartParams = getChartParams(params, 'tezos-chain')
 
     let helmValues = {
-      images: {
-        octez: `tezos/tezos:${params.octezVersion}`,
-      },
       node_config_network: {
         chain_name: params.chainName,
       },
@@ -57,6 +55,9 @@ export class TezosNodes extends pulumi.ComponentResource {
       nodes: {
         'rolling-node': {
           local_storage: true,
+          images: {
+            octez: `tezos/tezos:${params.octezRollingVersion}`,
+          },
           instances: [{
             config: {
               shell: {
@@ -73,6 +74,9 @@ export class TezosNodes extends pulumi.ComponentResource {
         },
         'archive-node': {
           storage_size: params.archivePvcSize,
+          images: {
+            octez: `tezos/tezos:${params.octezArchiveVersion}`,
+          },
           instances: [{
             config: {
               shell: {

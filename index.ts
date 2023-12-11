@@ -161,14 +161,16 @@ new TezosFaucet(
 // * heavy usage on the RPC endpoint requires a more elaborate setup
 //   with archive/rolling nodes, NGINX path filtering and rate limiting.
 // Consequently, we made a special class "TezosNodes" for the purpose.
-const ghostnetOctezVersion = "v18.1";
+const ghostnetRollingVersion = "v18.1";
+const ghostnetArchiveVersion = "v18.1";
 const ghostnet_chain = new TezosNodes(
   "ghostnet-nodes",
   {
     chainName: "ghostnet",
     rpcFqdn: "rpc.ghostnet.teztnets.xyz",
     p2pFqdn: "ghostnet.teztnets.xyz",
-    octezVersion: ghostnetOctezVersion,
+    octezRollingVersion: ghostnetRollingVersion,
+    octezArchiveVersion: ghostnetArchiveVersion,
     chartRepoVersion: "6.25.0",
     rollingPvcSize: "50Gi",
     archivePvcSize: "750Gi"
@@ -389,9 +391,9 @@ const ghostnetTeztnet = {
   category: "Long-running Teztnets",
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   description: "Ghostnet is the long-running testnet for Tezos.",
-  docker_build: `tezos/tezos:${ghostnetOctezVersion}`,
+  docker_build: `tezos/tezos:${ghostnetRollingVersion}`,
   faucet_url: "https://faucet.ghostnet.teztnets.xyz",
-  git_ref: ghostnetOctezVersion,
+  git_ref: ghostnetRollingVersion,
   human_name: "Ghostnet",
   indexers: [
     {
@@ -421,8 +423,8 @@ const mainnetMetadata = {
   category: "Long-running Teztnets",
   chain_name: "TEZOS_MAINNET",
   description: "Tezos Mainnet",
-  docker_build: `tezos/tezos:${ghostnetOctezVersion}`,
-  git_ref: ghostnetOctezVersion,
+  docker_build: `tezos/tezos:${ghostnetRollingVersion}`,
+  git_ref: ghostnetRollingVersion,
   human_name: "Mainnet",
   indexers: [
     {
