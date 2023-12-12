@@ -1,5 +1,5 @@
 images:
-  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.1
+  tezosFaucet: ghcr.io/oxheadalpha/tezos-faucet:2.2.3
   tezosFaucetBackend: ghcr.io/oxheadalpha/tezos-faucet-backend:2.2.1
 
 
