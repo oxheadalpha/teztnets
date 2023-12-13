@@ -250,14 +250,14 @@ export class TezosChain extends pulumi.ComponentResource {
       const dalP2pPort = 11732;
 
       Object.entries({
-        bootstrap: {
+        "dal-bootstrap": {
           humanName: 'DAL Bootstrap',
           rpcFqdn: `dal-bootstrap-rpc.${name}.teztnets.xyz`,
           p2pFqdn: `dal.${name}.teztnets.xyz`,
         },
-        dal1: {
-          humanName: 'DAL Teztnets Attestor',
-          rpcFqdn: `dal-attestor-rpc.${name}.teztnets.xyz`,
+        "dal-dal1": {
+          humanName: 'DAL Teztnets Attester',
+          rpcFqdn: `dal-attester-rpc.${name}.teztnets.xyz`,
           p2pFqdn: `dal1.${name}.teztnets.xyz`,
 
         }
@@ -278,13 +278,13 @@ export class TezosChain extends pulumi.ComponentResource {
         this.tezosHelmValues.dalNodes[dalNodeName].ingress = ingressParams;
 
         // Setting up GCP static IP address
-        const staticIPName = `${name}-dal-${dalNodeName}-ip`;
+        const staticIPName = `${name}-${dalNodeName}-ip`;
         const staticIP = new gcp.compute.Address(staticIPName, {
           name: staticIPName,
           region: gcpRegion,
         });
 
-        const serviceName = `${name}-dal-${dalNodeName}`;
+        const serviceName = `${name}-${dalNodeName}`;
         new k8s.core.v1.Service(`${serviceName}-p2p-lb`, {
           metadata: {
             namespace: this.namespace.metadata.name,
@@ -297,7 +297,7 @@ export class TezosChain extends pulumi.ComponentResource {
           },
           spec: {
             ports: [{ port: dalP2pPort, targetPort: dalP2pPort, protocol: "TCP" }],
-            selector: { app: `dal-${dalNodeName}` },
+            selector: { app: `${dalNodeName}` },
             type: "LoadBalancer",
             loadBalancerIP: staticIP.address,
           },
@@ -315,8 +315,6 @@ export class TezosChain extends pulumi.ComponentResource {
         }
       })
 
-      // ensures that the internal non-bootstrap dal node peers with the bootstrap one
-      this.tezosHelmValues.dalNodes.dal1.peer = `dal.${name}.teztnets.xyz:${dalP2pPort}`;
       // Set bootstrap peers on the network config (specific to testnets)
       this.tezosHelmValues.node_config_network.dal_config.bootstrap_peers = [
         `dal.${name}.teztnets.xyz:11732`

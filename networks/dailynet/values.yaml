@@ -183,7 +183,7 @@ smartRollupNodes:
       ingress:
       # ingress details filled by pulumi
 dalNodes:
-  bootstrap:
+  dal-bootstrap:
     bootstrapProfile: true
     node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
     storageSize: 15Gi
@@ -196,10 +196,10 @@ dalNodes:
       secret_key:
         "e01819d7321a360369c2e9cbb738cd13592901163e4c4f21b17cf7081f78afc3"
       proof_of_work_stamp: "c10a73f331df5df498d5f0332611b3ec25334a8328f5c2b8"
-  dal1:
+  dal-dal1:
     attest_using_accounts:
       - teztnetsbaker
-    storageSize: 50Gi
+    storageSize: 15Gi
     node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
     ingress:
     # ingress details filled up by pulumi
