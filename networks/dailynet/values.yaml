@@ -1,5 +1,5 @@
-# tezos_k8s_images:
-#   utils: ghcr.io/oxheadalpha/tezos-k8s-utils:pr-613
+tezos_k8s_images:
+  utils: ghcr.io/oxheadalpha/tezos-k8s-utils:bake_remotely
 signers:
   tezos-signer-0:
     sign_for_accounts:
@@ -185,6 +185,7 @@ smartRollupNodes:
 dalNodes:
   bootstrap:
     bootstrapProfile: true
+    node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
     storageSize: 15Gi
     ingress:
     # ingress details filled up by pulumi
@@ -196,8 +197,10 @@ dalNodes:
         "e01819d7321a360369c2e9cbb738cd13592901163e4c4f21b17cf7081f78afc3"
       proof_of_work_stamp: "c10a73f331df5df498d5f0332611b3ec25334a8328f5c2b8"
   dal1:
-    attesterProfiles: tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
+    attest_using_accounts:
+      - teztnetsbaker
     storageSize: 50Gi
+    node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
     ingress:
     # ingress details filled up by pulumi
     identity:
@@ -223,7 +226,7 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-    dal_node: http://dal-dal1:10732
+    dal_node_rpc_url: http://dal1:10732
   tf1:
     key: edpktnhkGfR4GWZ2BWthxB796zDQtcRDaiTDbUGMwXA9stoLqzPncb
     type: public
@@ -278,3 +281,10 @@ accounts:
     key: edpkuwL7MVYArfQN9jyR8pZTqmFGYFWTYhhF4F8KWjr2vB18ozTqbd
     bootstrap_balance: "1000000000000"
     is_bootstrap_baker_account: false
+
+dal_deploy_slot_injector:
+  enabled: true
+  inject_using_account: teztnetsbaker
+  node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
+  dal_node_rpc_url: http://dal1:10732
+  slot_size: 16384

@@ -1,0 +1,4 @@
+[submodule "networks/dailynet/tezos-k8s"]
+	path = networks/dailynet/tezos-k8s
+	url = git@github.com:oxheadalpha/tezos-k8s.git
+	branch = bake_remotely

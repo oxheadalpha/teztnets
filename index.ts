@@ -98,8 +98,8 @@ const dailynet_chain = new TezosChain(
     ],
     helmValuesFile: "networks/dailynet/values.yaml",
     bakingPrivateKey: private_teztnets_baking_key,
-    //chartPath: "networks/dailynet/tezos-k8s",
-    chartRepoVersion: "6.25.0",
+    chartPath: "networks/dailynet/tezos-k8s",
+    //chartRepoVersion: "6.25.0",
   },
   provider
 )
