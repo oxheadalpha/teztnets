@@ -71,7 +71,7 @@ The DAL nodes are accessible with the following endpoints:
 | | RPC | P2P Endpoint |
 |------------|---------|--------------|
 | DAL Bootstrap | [Link](https://dal-bootstrap-rpc.weeklynet-2023-12-13.teztnets.xyz) | `dal.weeklynet-2023-12-13.teztnets.xyz:11732` |
-| DAL Teztnets Attestor | [Link](https://dal-attestor-rpc.weeklynet-2023-12-13.teztnets.xyz) | `dal1.weeklynet-2023-12-13.teztnets.xyz:11732` |
+| DAL Teztnets Attester | [Link](https://dal-attester-rpc.weeklynet-2023-12-13.teztnets.xyz) | `dal1.weeklynet-2023-12-13.teztnets.xyz:11732` |
 
 
 For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).

@@ -3,15 +3,15 @@
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-DAILYNET-2023-12-13T00:00:00.000Z",
     "dal_nodes": {
-      "bootstrap": {
+      "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
         "p2p": "dal.dailynet-2023-12-13.teztnets.xyz:11732",
         "rpc": "https://dal-bootstrap-rpc.dailynet-2023-12-13.teztnets.xyz"
       },
-      "dal1": {
-        "humanName": "DAL Teztnets Attestor",
+      "dal-dal1": {
+        "humanName": "DAL Teztnets Attester",
         "p2p": "dal1.dailynet-2023-12-13.teztnets.xyz:11732",
-        "rpc": "https://dal-attestor-rpc.dailynet-2023-12-13.teztnets.xyz"
+        "rpc": "https://dal-attester-rpc.dailynet-2023-12-13.teztnets.xyz"
       }
     },
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
@@ -144,15 +144,15 @@
     "category": "Periodic Teztnets",
     "chain_name": "TEZOS-WEEKLYNET-2023-12-13T00:00:00.000Z",
     "dal_nodes": {
-      "bootstrap": {
+      "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
         "p2p": "dal.weeklynet-2023-12-13.teztnets.xyz:11732",
         "rpc": "https://dal-bootstrap-rpc.weeklynet-2023-12-13.teztnets.xyz"
       },
-      "dal1": {
-        "humanName": "DAL Teztnets Attestor",
+      "dal-dal1": {
+        "humanName": "DAL Teztnets Attester",
         "p2p": "dal1.weeklynet-2023-12-13.teztnets.xyz:11732",
-        "rpc": "https://dal-attestor-rpc.weeklynet-2023-12-13.teztnets.xyz"
+        "rpc": "https://dal-attester-rpc.weeklynet-2023-12-13.teztnets.xyz"
       }
     },
     "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
