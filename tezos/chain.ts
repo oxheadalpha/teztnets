@@ -297,7 +297,7 @@ export class TezosChain extends pulumi.ComponentResource {
           },
           spec: {
             ports: [{ port: dalP2pPort, targetPort: dalP2pPort, protocol: "TCP" }],
-            selector: { app: `${dalNodeName}` },
+            selector: { app: `dal-${dalNodeName}` },
             type: "LoadBalancer",
             loadBalancerIP: staticIP.address,
           },

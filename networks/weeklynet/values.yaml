@@ -187,6 +187,13 @@ dalNodes:
           "a67519da6166f97ca2dea6dc519f1a453d96e01348816d102fb9a7099ee08137"
       proof_of_work_stamp: "c85a3aab8a1fc903e8c7e9bcd1714a890e22f160a96d9779"
 
+dal_deploy_slot_injector:
+  enabled: true
+  inject_using_account: teztnetsbaker
+  node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
+  dal_node_rpc_url: http://dal-dal1:10732
+  slot_size: 65536
+
 bootstrap_peers: []
 
 full_snapshot_url: null
@@ -213,7 +220,7 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-    dal_node_rpc_url: http://dal1:10732
+    dal_node_rpc_url: http://dal-dal1:10732
   tf_frankfurt1:
     # tz1WLNVBKmPWEMdXD5c3NrpnUsTtb97Fdevg
     key: edpktzR9unKcG2XtsArVGNzQkrkUvbV3KAyWmX8XAsYFBLXwb1MicW

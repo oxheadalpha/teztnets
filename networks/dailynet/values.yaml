@@ -211,6 +211,13 @@ dalNodes:
           "e68041663d0600f19d67b42f94d7dddcbd5f22db604b7f318b4ce17aec19ba2b"
       proof_of_work_stamp: "5f847aaa8f1624bf3e1861532947beeef3e9b4d509f06362"
 
+dal_deploy_slot_injector:
+  enabled: true
+  inject_using_account: teztnetsbaker
+  node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
+  dal_node_rpc_url: http://dal-dal1:10732
+  slot_size: 16384
+
 bootstrap_peers: []
 full_snapshot_url: null
 rolling_snapshot_url: null
@@ -226,7 +233,7 @@ accounts:
     is_bootstrap_baker_account: true
     type: secret
     # key injected by pulumi
-    dal_node_rpc_url: http://dal1:10732
+    dal_node_rpc_url: http://dal-dal1:10732
   tf1:
     key: edpktnhkGfR4GWZ2BWthxB796zDQtcRDaiTDbUGMwXA9stoLqzPncb
     type: public
@@ -281,10 +288,3 @@ accounts:
     key: edpkuwL7MVYArfQN9jyR8pZTqmFGYFWTYhhF4F8KWjr2vB18ozTqbd
     bootstrap_balance: "1000000000000"
     is_bootstrap_baker_account: false
-
-dal_deploy_slot_injector:
-  enabled: true
-  inject_using_account: teztnetsbaker
-  node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
-  dal_node_rpc_url: http://dal1:10732
-  slot_size: 16384
