@@ -1,9 +1,9 @@
 {
-  "chain_name": "TEZOS-WEEKLYNET-2023-12-06T00:00:00.000Z",
+  "chain_name": "TEZOS-WEEKLYNET-2023-12-13T00:00:00.000Z",
   "dal_config": {
     "activated": true,
     "bootstrap_peers": [
-      "dal.weeklynet-2023-12-06.teztnets.xyz:11732"
+      "dal.weeklynet-2023-12-13.teztnets.xyz:11732"
     ],
     "use_mock_srs_for_testing": {
       "number_of_shards": 2048,
@@ -13,12 +13,12 @@
     }
   },
   "default_bootstrap_peers": [
-    "weeklynet-2023-12-06.teztnets.xyz"
+    "weeklynet-2023-12-13.teztnets.xyz"
   ],
   "genesis": {
-    "block": "BMRASgTZ8mFwXKyWHwGQ17o6PSF3TKFRHteKZKjLsLRFw2cCQBv",
+    "block": "BML3D6qb4UL7rq1XHd99sZx2NQNhbAmjHiLUWdfjisE8yqMWpW4",
     "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P",
-    "timestamp": "2023-12-06T00:00:00.000Z"
+    "timestamp": "2023-12-13T00:00:00.000Z"
   },
   "genesis_parameters": {
     "values": {
