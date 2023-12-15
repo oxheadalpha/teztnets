@@ -90,10 +90,6 @@ const dailynet_chain = new TezosChain(
     schedule: "0 0 * * *",
     activationBucket: activationBucket,
     bootstrapContracts: [
-      "taquito_big_map_contract.json",
-      "taquito_contract.json",
-      "taquito_sapling_contract.json",
-      "taquito_tzip_12_16_contract.json",
       "evm_bridge.json",
       "exchanger.json",
     ],
@@ -128,10 +124,6 @@ const weeklynet_chain = new TezosChain(
     schedule: "0 0 * * WED",
     activationBucket: activationBucket,
     bootstrapContracts: [
-      "taquito_big_map_contract.json",
-      "taquito_contract.json",
-      "taquito_sapling_contract.json",
-      "taquito_tzip_12_16_contract.json",
       // "exchanger.json",
       // "evm_bridge.json",
     ],
