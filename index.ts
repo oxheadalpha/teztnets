@@ -6,6 +6,7 @@ import * as blake2b from "blake2b"
 import * as bs58check from "bs58check"
 
 import deployStatusPage from "./tezos/statusPage"
+import deployMetricsPage from "./tezos/metricsPage"
 import { TezosChain } from "./tezos/chain"
 import { TezosNodes } from "./tezos/nodes"
 import { TezosFaucet } from "./tezos/faucet"
@@ -456,4 +457,7 @@ deployStatusPage(provider, {
   teztnets: teztnets,
   statusPageFqdn: "status.teztnets.xyz",
   chartRepoVersion: "6.25.0"
+});
+deployMetricsPage(provider, {
+  metricsPageFqdn: "metrics.teztnets.xyz",
 });
