@@ -132,6 +132,7 @@ nodes:
           rpc:
             cors-headers: [ "content-type" ]
             cors-origin: [ "*" ]
+          metrics_addr: ["0.0.0.0:9932"]
         is_bootstrap_node: true
     runs:
       - octez_node
@@ -204,6 +205,11 @@ archive_tarball_url: null
 snapshot_source: https://snapshots.tezos.marigold.dev/api/tezos-snapshots.json
 
 images: {}
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: monitoring-96695a88
 
 protocols:
   - command: PtNairob
