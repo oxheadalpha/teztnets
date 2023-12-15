@@ -209,6 +209,8 @@ images: {}
 serviceMonitor:
   enabled: true
   labels:
+    # FIXME: reinstall prom-opreator chart so this name is predictable.
+    # Right now, it contains the random chart name.
     release: monitoring-96695a88
 
 protocols:

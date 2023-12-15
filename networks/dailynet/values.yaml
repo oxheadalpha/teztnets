@@ -229,10 +229,12 @@ archive_tarball_url: null
 snapshot_source: https://snapshots.tezos.marigold.dev/api/tezos-snapshots.json
 images: {}
 
-serviceMonitor:
-  enabled: true
-  labels:
-    release: monitoring-96695a88
+# FIXME: does not work properly when several namespaces have it
+# The dashboards get all mixed up together.
+# serviceMonitor:
+#   enabled: true
+#   labels:
+#     release: monitoring-96695a88
 
 accounts:
   teztnetsbaker:
