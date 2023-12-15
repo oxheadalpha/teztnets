@@ -4,7 +4,7 @@ title: Weeklynet
 permalink: /weeklynet-about
 ---
 
-A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.
+A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Oxford for 4 cycles then upgrades to proto Alpha.
 
 | | |
 |-------|---------------------|

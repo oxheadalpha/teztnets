@@ -155,7 +155,7 @@
         "rpc": "https://dal-attester-rpc.weeklynet-2023-12-13.teztnets.xyz"
       }
     },
-    "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Nairobi for 8 cycles then upgrades to proto Alpha.",
+    "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Oxford for 4 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_73a9db1d_20231212221411",
     "evm_proxy_urls": [],
     "faucet_url": "https://faucet.weeklynet-2023-12-13.teztnets.xyz",
