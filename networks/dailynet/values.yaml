@@ -77,6 +77,8 @@ activation:
     max_operations_time_to_live: 120
     minimal_block_delay: "7"
     delay_increment_per_round: "7"
+    consensus_rights_delay: 3
+    blocks_preservation_cycles: 3
     consensus_committee_size: 7000
     consensus_threshold: 4667
     minimal_participation_ratio:
