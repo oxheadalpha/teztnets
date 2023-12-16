@@ -150,6 +150,14 @@ nodes:
             cors-origin: [ "*" ]
           metrics_addr: ["0.0.0.0:9932"]
         is_bootstrap_node: true
+        identity:
+          # hard-coded identity - saves 1-2 minutes on daily cron
+          peer_id: idqnaeAw4oGfUEnKrLH2fZYRQo4Ev1
+          public_key:
+            c988f65dfbc50ef61d8db84b89ea8df93643328bbd0524321582e39d33e32115
+          secret_key:
+            38ffcb4629db7152141824835bebf42f12d90933d68773d78002f86637500b62
+          proof_of_work_stamp: 3ee07208e41a0489299909c0bd3cac5c05b20a9acc4a3bc7
     runs:
       - octez_node
       - baker
