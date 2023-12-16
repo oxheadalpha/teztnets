@@ -238,9 +238,6 @@ serviceMonitor:
     release: monitoring-96695a88
 
 protocols:
-  - command: PtNairob
-    vote:
-      liquidity_baking_toggle_vote: "pass"
   - command: Proxford
     vote:
       liquidity_baking_toggle_vote: "pass"
