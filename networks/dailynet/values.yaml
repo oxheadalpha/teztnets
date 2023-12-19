@@ -78,6 +78,7 @@ activation:
     minimal_block_delay: "7"
     delay_increment_per_round: "7"
     consensus_rights_delay: 3
+    delegate_parameters_activation_delay: 3
     blocks_preservation_cycles: 3
     consensus_committee_size: 7000
     consensus_threshold: 4667
