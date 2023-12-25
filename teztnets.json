@@ -1,39 +1,39 @@
 {
-  "dailynet-2023-12-24": {
+  "dailynet-2023-12-25": {
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2023-12-24T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2023-12-25T00:00:00.000Z",
     "dal_nodes": {
       "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
-        "p2p": "dal.dailynet-2023-12-24.teztnets.xyz:11732",
-        "rpc": "https://dal-bootstrap-rpc.dailynet-2023-12-24.teztnets.xyz"
+        "p2p": "dal.dailynet-2023-12-25.teztnets.xyz:11732",
+        "rpc": "https://dal-bootstrap-rpc.dailynet-2023-12-25.teztnets.xyz"
       },
       "dal-dal1": {
         "humanName": "DAL Teztnets Attester",
-        "p2p": "dal1.dailynet-2023-12-24.teztnets.xyz:11732",
-        "rpc": "https://dal-attester-rpc.dailynet-2023-12-24.teztnets.xyz"
+        "p2p": "dal1.dailynet-2023-12-25.teztnets.xyz:11732",
+        "rpc": "https://dal-attester-rpc.dailynet-2023-12-25.teztnets.xyz"
       }
     },
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_b58db3f6_20231222193014",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2023-12-24.teztnets.xyz"
+      "https://evm.dailynet-2023-12-25.teztnets.xyz"
     ],
-    "faucet_url": "https://faucet.dailynet-2023-12-24.teztnets.xyz",
+    "faucet_url": "https://faucet.dailynet-2023-12-25.teztnets.xyz",
     "git_ref": "b58db3f6",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.xyz/dailynet-2023-12-24",
+    "network_url": "https://teztnets.xyz/dailynet-2023-12-25",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2023-12-24.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2023-12-25.teztnets.xyz"
     ],
-    "rpc_url": "https://rpc.dailynet-2023-12-24.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2023-12-25.teztnets.xyz",
     "rpc_urls": [
-      "https://rpc.dailynet-2023-12-24.teztnets.xyz"
+      "https://rpc.dailynet-2023-12-25.teztnets.xyz"
     ],
-    "activated_on": "2023-12-24"
+    "activated_on": "2023-12-25"
   },
   "ghostnet": {
     "category": "Long-running Teztnets",
