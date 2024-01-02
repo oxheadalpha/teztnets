@@ -201,7 +201,7 @@ dalNodes:
       - teztnetsbaker
     attesterProfiles: tz1TnEtqDV9mZyts2pfMy6Jw1BTPs4LMjL8M
     node_rpc_url: http://tezos-baking-node-0.tezos-baking-node:8732
-    storageSize: 50Gi
+    storageSize: 80Gi
     ingress:
     # ingress details filled up by pulumi
     identity:
