@@ -40,3 +40,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/release
           enable_jekyll: true
+      - name: Deploy Teztnets.com
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/release
+          external_repository: tacoinfra/teztnets
+          enable_jekyll: true
