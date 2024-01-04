@@ -43,7 +43,7 @@ jobs:
       - name: Deploy Teztnets.com
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          deploy_key: ${{ secrets.TEZTNETS_COM_DEPLOY_KEY }}
           publish_dir: ./target/release
           external_repository: tacoinfra/teztnets
           enable_jekyll: true
