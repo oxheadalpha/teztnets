@@ -64,6 +64,19 @@ const dnsZone = new gcp.dns.ManagedZone(managedZoneName, {
   description: "Managed zone for " + domainName,
 });
 
+
+// Define another domain name and a suitable name for the managed zone
+const domainNameCom = "teztnets.com";
+const managedZoneNameCom = "teztnetscom-zone";
+
+// Create a managed DNS zone
+const dnsZoneCom = new gcp.dns.ManagedZone(managedZoneNameCom, {
+  name: managedZoneNameCom,
+  dnsName: domainNameCom + ".",
+  description: "Managed zone for " + domainNameCom,
+});
+
+
 // GitHub Pages IP addresses
 
 // Create A records for each GitHub Pages IP
