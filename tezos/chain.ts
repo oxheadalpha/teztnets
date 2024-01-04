@@ -25,6 +25,7 @@ export interface TezosParameters {
 }
 
 const gcpRegion = "us-central1";
+const domainName = 'teztnets.xyz';
 
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
@@ -141,7 +142,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
 
     // RPC Ingress
-    const rpcDomain = `rpc.${name}.teztnets.xyz`
+    const rpcDomain = `rpc.${name}.${domainName}`
 
     const rpcIngName = `${rpcDomain}-ingress`
     new k8s.networking.v1.Ingress(
@@ -197,7 +198,7 @@ export class TezosChain extends pulumi.ComponentResource {
       this.tezosHelmValues.smartRollupNodes &&
       this.tezosHelmValues.smartRollupNodes.length != 0
     ) {
-      let rollupFqdn = `evm-rollup-node.${name}.teztnets.xyz`
+      let rollupFqdn = `evm-rollup-node.${name}.${domainName}`
       let rollupIngressParams = {
         enabled: true,
         host: rollupFqdn,
@@ -218,7 +219,7 @@ export class TezosChain extends pulumi.ComponentResource {
         ],
       }
       this.tezosHelmValues.smartRollupNodes.evm.ingress = rollupIngressParams
-      let evmProxyFqdn = `evm.${name}.teztnets.xyz`
+      let evmProxyFqdn = `evm.${name}.${domainName}`
       let evmProxyIngressParams = {
         enabled: true,
         host: evmProxyFqdn,
@@ -252,13 +253,13 @@ export class TezosChain extends pulumi.ComponentResource {
       Object.entries({
         "dal-bootstrap": {
           humanName: 'DAL Bootstrap',
-          rpcFqdn: `dal-bootstrap-rpc.${name}.teztnets.xyz`,
-          p2pFqdn: `dal.${name}.teztnets.xyz`,
+          rpcFqdn: `dal-bootstrap-rpc.${name}.${domainName}`,
+          p2pFqdn: `dal.${name}.${domainName}`,
         },
         "dal-dal1": {
           humanName: 'DAL Teztnets Attester',
-          rpcFqdn: `dal-attester-rpc.${name}.teztnets.xyz`,
-          p2pFqdn: `dal1.${name}.teztnets.xyz`,
+          rpcFqdn: `dal-attester-rpc.${name}.${domainName}`,
+          p2pFqdn: `dal1.${name}.${domainName}`,
 
         }
       }).forEach(([dalNodeName, { humanName, rpcFqdn, p2pFqdn }]) => {
@@ -317,7 +318,7 @@ export class TezosChain extends pulumi.ComponentResource {
 
       // Set bootstrap peers on the network config (specific to testnets)
       this.tezosHelmValues.node_config_network.dal_config.bootstrap_peers = [
-        `dal.${name}.teztnets.xyz:11732`
+        `dal.${name}.${domainName}:11732`
       ];
     }
 
@@ -340,7 +341,7 @@ export class TezosChain extends pulumi.ComponentResource {
           namespace: this.namespace.metadata.name,
           name: name,
           annotations: {
-            "external-dns.alpha.kubernetes.io/hostname": `${name}.teztnets.xyz`,
+            "external-dns.alpha.kubernetes.io/hostname": `${name}.${domainName}`,
           },
         },
         spec: {
@@ -377,14 +378,14 @@ export class TezosChain extends pulumi.ComponentResource {
   }
 
   getRpcUrl(): string {
-    return `https://rpc.${this.name}.teztnets.xyz`
+    return `https://rpc.${this.name}.${domainName}`
   }
   getRollupUrls(): string[] {
     if (
       this.tezosHelmValues.smartRollupNodes &&
       this.tezosHelmValues.smartRollupNodes.length != 0
     ) {
-      return [`https://evm-rollup-node.${this.name}.teztnets.xyz`]
+      return [`https://evm-rollup-node.${this.name}.${domainName}`]
     }
     return []
   }
@@ -393,7 +394,7 @@ export class TezosChain extends pulumi.ComponentResource {
       this.tezosHelmValues.smartRollupNodes &&
       this.tezosHelmValues.smartRollupNodes.length != 0
     ) {
-      return [`https://evm.${this.name}.teztnets.xyz`]
+      return [`https://evm.${this.name}.${domainName}`]
     }
     return []
   }
