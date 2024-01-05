@@ -26,6 +26,7 @@ export interface TezosParameters {
 
 const gcpRegion = "us-central1";
 const domainName = 'teztnets.xyz';
+const domainNameCom = 'teztnets.com';
 
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
@@ -185,6 +186,56 @@ export class TezosChain extends pulumi.ComponentResource {
             {
               hosts: [rpcDomain],
               secretName: `${rpcDomain}-secret`,
+            },
+          ],
+        },
+      },
+      { provider, parent: this }
+    )
+    // RPC Ingress
+    const rpcDomainCom = `rpc.${name}.${domainNameCom}`
+
+    const rpcIngNameCom = `${rpcDomainCom}-ingress`
+    new k8s.networking.v1.Ingress(
+      rpcIngNameCom,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: rpcIngNameCom,
+          annotations: {
+            "kubernetes.io/ingress.class": "nginx",
+            "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+            "nginx.ingress.kubernetes.io/enable-cors": "true",
+            "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
+          },
+          labels: { app: "tezos-node" },
+        },
+        spec: {
+          rules: [
+            {
+              host: rpcDomainCom,
+              http: {
+                paths: [
+                  {
+                    path: "/",
+                    pathType: "Prefix",
+                    backend: {
+                      service: {
+                        name: "tezos-node-rpc",
+                        port: {
+                          name: "rpc",
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          tls: [
+            {
+              hosts: [rpcDomainCom],
+              secretName: `${rpcDomainCom}-secret`,
             },
           ],
         },
