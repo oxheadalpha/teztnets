@@ -46,11 +46,15 @@ jobs:
       # Rewrite teztnets.json and networks.json with inputs and apply domain replacement
       - name: Rewrite and replace domain in networks.json
         run: |
-          echo "${{ inputs.networks }}" > networks.json
+          cat > networks.json <<EOF
+          ${{ inputs.networks }}
+          EOF
           sed -i 's/teztnets.xyz/teztnets.com/g' networks.json
       - name: Rewrite and replace domain in teztnets.json
         run: |
-          echo "${{ inputs.teztnets }}" > teztnets.json
+          cat > teztnets.json <<EOF
+          ${{ inputs.teztnets }}
+          EOF
           sed -i 's/teztnets.xyz/teztnets.com/g' teztnets.json
 
       # Generate release artifacts for teztnets.com
