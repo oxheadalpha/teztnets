@@ -18,11 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 🌮 Teztnets.xyz 🚧
+title: 🌮 Teztnets 🚧
 baseurl: ""
-url: "https://teztnets.xyz" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: oxheadalpha
-github_username:  oxheadalpha
+url: "https://teztnets.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: tacoinfra
+github_username:  tacoinfra
 
 # Build settings
 theme: minima
