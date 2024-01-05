@@ -409,6 +409,32 @@ export class TezosChain extends pulumi.ComponentResource {
       },
       { provider: provider }
     )
+    // temporary domain name for .com
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb-com`,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: `${name}-teztnetscom`,
+          annotations: {
+            "external-dns.alpha.kubernetes.io/hostname": `${name}.${domainNameCom}`,
+          },
+        },
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { node_class: "tezos-baking-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: provider }
+    )
+    // end temporary domain name for .com
   }
 
   getDockerBuild(): string {
