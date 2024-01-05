@@ -70,4 +70,5 @@ jobs:
           publish_dir: ./target/release
           external_repository: tacoinfra/teztnets
           enable_jekyll: true
+          cname: teztnets.com
       # End Temporary - deploy to teztnets.com
