@@ -226,5 +226,138 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
       },
       { provider: provider }
     )
+    // Temp teztnets.com
+    const rpcFqdnCom = "rpc.ghostnet.teztnets.com";
+    new k8s.networking.v1.Ingress(
+      `${name}-ingress-com`,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: `${name}-ingress-com`,
+          annotations: {
+            'kubernetes.io/ingress.class': "nginx",
+            'cert-manager.io/cluster-issuer': "letsencrypt-prod",
+            'nginx.ingress.kubernetes.io/enable-cors': 'true',
+            'nginx.ingress.kubernetes.io/cors-allow-origin': '*',
+
+            // Rate Limit
+            'nginx.ingress.kubernetes.io/limit-rps': "250",
+            'nginx.ingress.kubernetes.io/limit-connections': "250",
+            'nginx.ingress.kubernetes.io/limit-req-status-code': "429",
+            // End Rate Limit
+
+            // Redirect to Archive and blacklisted endpoints
+            // When we get a 404 from the rolling node, we redirect to the archive node.
+            // This is a slight hack of the "custom-http-errors" feature.
+            // Normally, it would be used to show a fancy 404 page.
+            // We also set a variable $archivenode to force DNS resolution, see
+            // https://serverfault.com/questions/240476/how-to-force-nginx-to-resolve-dns-of-a-dynamic-hostname-everytime-when-doing-p
+            // And when using proxy, we have to add CORS headers manually since ingress-nginx "enable-cors" does not apply to proxy.
+            'nginx.ingress.kubernetes.io/custom-http-errors': "404",
+            'nginx.ingress.kubernetes.io/configuration-snippet': "error_page 404 = @archivenode;",
+            'nginx.ingress.kubernetes.io/server-snippet': `location @archivenode {
+  set $archivenode http://archive-node.${name}.svc.cluster.local:8732;
+  more_set_headers 'Access-Control-Allow-Origin: *';
+  more_set_headers 'Access-Control-Allow_Credentials: true';
+  more_set_headers 'Access-Control-Allow-Headers: Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+  more_set_headers 'Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE,PATCH';
+  proxy_pass $archivenode;
+}
+# Deny injection of blocks and protocols (no baking)
+location ~ ^/injection/(block|protocol) {
+  deny all;
+  return 403;
+}
+# Deny access to internal node config
+location ~ ^/(network|worker|stats|config) {
+  deny all;
+  return 403;
+}
+# Query all contracts can hang the node
+location ~ ^/chains/main/blocks/([a-zA-Z0-9]+)/context/contracts$ {
+  deny all;
+  return 403;
+}
+# Query all endorsing rights can hang the node
+location ~ ^/chains/main/blocks/([a-zA-Z0-9]+)/helpers/(baking|endorsing)_rights$ {
+  deny all;
+  return 403;
+}
+# Bots sometimes query the mempool for frontrunning
+location ~ ^/chains/([a-zA-Z]+)/mempool {
+  deny all;
+  return 403;
+}
+# Any queries about level go to archive node.
+# These queries state the mode of the node (archive or rolling)
+# and give the highest/lowest levels that we have.
+location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
+  set $archivenode http://archive-node.${name}.svc.cluster.local:8732;
+  more_set_headers 'Access-Control-Allow-Origin: *';
+  more_set_headers 'Access-Control-Allow_Credentials: true';
+  more_set_headers 'Access-Control-Allow-Headers: Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+  more_set_headers 'Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE,PATCH';
+  proxy_pass $archivenode;
+}
+`,
+            // End Redirect to Archive and blacklisted endpoints
+          }
+        },
+        spec: {
+          rules: [
+            {
+              host: rpcFqdnCom,
+              http: {
+                paths: [{
+                  pathType: "Prefix",
+                  path: "/",
+                  backend: {
+                    service: {
+                      name: "tezos-node-rpc",
+                      port: { number: 8732 },
+                    },
+                  },
+                }],
+              },
+            }
+          ],
+          tls: [
+            {
+              hosts: [rpcFqdnCom],
+              secretName: `${name}-tls-secret-com`
+            }
+          ],
+        },
+      },
+      {
+        provider: provider,
+        parent: this
+      }
+    )
+    new k8s.core.v1.Service(
+      `${name}-p2p-lb-com`,
+      {
+        metadata: {
+          namespace: this.namespace.metadata.name,
+          name: `${name}-com`,
+          annotations: {
+            "external-dns.alpha.kubernetes.io/hostname": "ghostnet.teztnets.com",
+          },
+        },
+        spec: {
+          ports: [
+            {
+              port: 9732,
+              targetPort: 9732,
+              protocol: "TCP",
+            },
+          ],
+          selector: { node_class: "rolling-node" },
+          type: "LoadBalancer",
+        },
+      },
+      { provider: provider }
+    )
+    // end temp teztnets.com
   }
 }
