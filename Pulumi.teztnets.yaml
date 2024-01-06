@@ -5,6 +5,10 @@ config:
   gcp:region: us-central1
   teztnets:faucet-private-key:
     secure: AAABABFqG18LfEQ9tA+PFeSh2UKb3Cpcmx9ptbvNlfSR0DCi+KDWm6/yTr4fQ4rGf2B6/JjOcrBHqw0tyY9R9j+1H/dx0dqml0/Irz7R9UkdK1Vnjks=
+  teztnets:faucet-recaptcha-enterprise-secret-key:
+    secure: AAABAEbyAPGfG6Auv8Qm1Dho4xT9xSgTM9vA+Kv73f+X/RpJAaBv7SprXs6MhCcmRXMqx45xxyO9ANdYMtGwbi3aUYLnaB1j
+  teztnets:faucet-recaptcha-enterprise-site-key:
+    secure: AAABAPTYz6zjPbaz70KaY3jOa1b0j2z2d0LldmaZfc2hA/ACbpL/3n69nrDbDYecKDb6tAMZE/ZAf7u0vqbCPfWKzUkIl8VP
   teztnets:faucet-recaptcha-secret-key:
     secure: AAABAGVsSlKbT34ndcMj9+yG0QL7S6enFcvJ9gnMN4DpizDJrJAS6oQEuy837tpz/tcpp45xA9NkZ7Ud8Ihf+xWI/xxblue6
   teztnets:faucet-recaptcha-site-key:
