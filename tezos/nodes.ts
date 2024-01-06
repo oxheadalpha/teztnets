@@ -226,14 +226,14 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
       },
       { provider: provider }
     )
-    // Temp teztnets.com
-    const rpcFqdnCom = "rpc.ghostnet.teztnets.com";
+    // Temp teztnets.xyz
+    const rpcFqdnXyz = "rpc.ghostnet.teztnets.xyz";
     new k8s.networking.v1.Ingress(
-      `${name}-ingress-com`,
+      `${name}-ingress-xyz`,
       {
         metadata: {
           namespace: this.namespace.metadata.name,
-          name: `${name}-ingress-com`,
+          name: `${name}-ingress-xyz`,
           annotations: {
             'kubernetes.io/ingress.class': "nginx",
             'cert-manager.io/cluster-issuer': "letsencrypt-prod",
@@ -306,7 +306,7 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
         spec: {
           rules: [
             {
-              host: rpcFqdnCom,
+              host: rpcFqdnXyz,
               http: {
                 paths: [{
                   pathType: "Prefix",
@@ -323,8 +323,8 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
           ],
           tls: [
             {
-              hosts: [rpcFqdnCom],
-              secretName: `${name}-tls-secret-com`
+              hosts: [rpcFqdnXyz],
+              secretName: `${name}-tls-secret-xyz`
             }
           ],
         },
@@ -335,13 +335,13 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
       }
     )
     new k8s.core.v1.Service(
-      `${name}-p2p-lb-com`,
+      `${name}-p2p-lb-xyz`,
       {
         metadata: {
           namespace: this.namespace.metadata.name,
-          name: `${name}-com`,
+          name: `${name}-xyz`,
           annotations: {
-            "external-dns.alpha.kubernetes.io/hostname": "ghostnet.teztnets.com",
+            "external-dns.alpha.kubernetes.io/hostname": "ghostnet.teztnets.xyz",
           },
         },
         spec: {
@@ -358,6 +358,6 @@ location ~ ^/chains/([a-zA-Z]+)/(checkpoint|levels) {
       },
       { provider: provider }
     )
-    // end temp teztnets.com
+    // end temp teztnets.xyz
   }
 }

@@ -2,7 +2,7 @@
 
 Infrastructure-as-code repo to activate and bootstrap Tezos testnets in a repeatable, automated way.
 
-See [teztnets.xyz](https://teztnets.xyz) for the list of active Teztnets.
+See [teztnets.com](https://teztnets.com) for the list of active Teztnets.
 
 ## Features
 
@@ -29,12 +29,12 @@ Rollups can be injected at genesis of your test chain. Teztnets supports extract
 Upon deployment of a Teztnet, a genesis baker will run and its p2p and rpc endpoints will be exposed externally.
 Example:
 
-- p2p: `ghostnet.teztnets.xyz`
-- rpc `rpc.ghostnet.teztnets.xyz`
+- p2p: `ghostnet.teztnets.com`
+- rpc `rpc.ghostnet.teztnets.com`
 
 ### `--network` endpoint for Tezos node
 
-Tezos nodes supports downloading of network specification from a json endpoint: `octez-node config init --network https://teztnets.xyz/<TEZTNET NAME>`
+Tezos nodes supports downloading of network specification from a json endpoint: `octez-node config init --network https://teztnets.com/<TEZTNET NAME>`
 
 The Teztnet platform creates and exposes such endpoints.
 
@@ -42,7 +42,7 @@ The Teztnet platform creates and exposes such endpoints.
 
 You are encouraged to build automation to ensure your Tezos project keeps running with the future versions of Tezos shell and/or protocol.
 
-This endpoint lists the current active testnets: [https://teztnets.xyz/teztnets.json](https://teztnets.xyz/teztnets.json)
+This endpoint lists the current active testnets: [https://teztnets.com/teztnets.json](https://teztnets.com/teztnets.json)
 
 ## Add new Teztnets or modify existing Teztnets
 
@@ -67,7 +67,7 @@ Look in any Teztnet directory's values.yaml file in [`/networks`](/networks) for
 
 The [default Helm values.yaml](https://github.com/oxheadalpha/tezos-k8s/blob/master/charts/tezos/values.yaml) has details on every possible way to customize your teztnet.
 
-## Teztnets.xyz website
+## Teztnets.com website
 
 The website is created with Jekyll from Markdown files generated from Jinja templates based on Pulumi outputs.
 

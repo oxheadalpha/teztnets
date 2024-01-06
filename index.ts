@@ -187,8 +187,8 @@ const ghostnet_chain = new TezosNodes(
   "ghostnet-nodes",
   {
     chainName: "ghostnet",
-    rpcFqdn: `rpc.ghostnet.${domainName}`,
-    p2pFqdn: `ghostnet.${domainName}`,
+    rpcFqdn: `rpc.ghostnet.${domainNameCom}`,
+    p2pFqdn: `ghostnet.${domainNameCom}`,
     octezRollingVersion: ghostnetRollingVersion,
     octezArchiveVersion: ghostnetArchiveVersion,
     chartRepoVersion: "6.25.0",
@@ -285,7 +285,7 @@ function getNetworks(chains: TezosChain[]): object {
 
   chains.forEach(function(chain) {
     const bootstrapPeers: string[] = Object.assign([], chain.params.bootstrapPeers) // clone
-    bootstrapPeers.splice(0, 0, `${chain.name}.${domainName}`)
+    bootstrapPeers.splice(0, 0, `${chain.name}.${domainNameCom}`)
 
     // genesis_pubkey is the public key associated with the $TEZOS_OXHEAD_BAKING_KEY private key in github secrets
     // TODO: generate it dynamically based on privkey
@@ -314,7 +314,7 @@ function getNetworks(chains: TezosChain[]): object {
     }
     if ("dal_config" in network) {
       network["dal_config"]["bootstrap_peers"] = [
-        `dal.${chain.name}.${domainName}:11732`,
+        `dal.${chain.name}.${domainNameCom}:11732`,
       ]
     }
 
@@ -328,10 +328,10 @@ function getTeztnets(chains: TezosChain[]): object {
   const teztnets: { [name: string]: { [name: string]: Object } } = {}
 
   chains.forEach(function(chain) {
-    let faucetUrl = `https://faucet.${chain.name}.${domainName}`
+    let faucetUrl = `https://faucet.${chain.name}.${domainNameCom}`
     teztnets[chain.name] = {
       chain_name: chain.tezosHelmValues["node_config_network"]["chain_name"],
-      network_url: `https://${domainName}/${chain.name}`,
+      network_url: `https://${domainNameCom}/${chain.name}`,
       human_name: chain.params.humanName,
       description: chain.params.description,
       docker_build: chain.getDockerBuild(),
@@ -361,7 +361,7 @@ function getTeztnets(chains: TezosChain[]): object {
 const ghostnetNetwork = {
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   default_bootstrap_peers: [
-    `ghostnet.${domainName}`,
+    `ghostnet.${domainNameCom}`,
     "ghostnet.boot.ecadinfra.com",
     "ghostnet.stakenow.de:9733",
   ],
@@ -412,7 +412,7 @@ const ghostnetTeztnet = {
   chain_name: "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   description: "Ghostnet is the long-running testnet for Tezos.",
   docker_build: `tezos/tezos:${ghostnetRollingVersion}`,
-  faucet_url: `https://faucet.ghostnet.${domainName}`,
+  faucet_url: `https://faucet.ghostnet.${domainNameCom}`,
   git_ref: ghostnetRollingVersion,
   human_name: "Ghostnet",
   indexers: [
@@ -427,10 +427,10 @@ const ghostnetTeztnet = {
   ],
   last_baking_daemon: lastBakingDaemonMainnetGhostnet,
   masked_from_main_page: false,
-  network_url: `https://${domainName}/ghostnet`,
-  rpc_url: `https://rpc.ghostnet.${domainName}`,
+  network_url: `https://${domainNameCom}/ghostnet`,
+  rpc_url: `https://rpc.ghostnet.${domainNameCom}`,
   rpc_urls: [
-    `https://rpc.ghostnet.${domainName}`,
+    `https://rpc.ghostnet.${domainNameCom}`,
     "https://ghostnet.ecadinfra.com",
     "https://ghostnet.tezos.marigold.dev",
   ],
@@ -474,11 +474,11 @@ export const teztnets = {
 deployStatusPage(provider, {
   networks: networks,
   teztnets: teztnets,
-  statusPageFqdn: `status.${domainName}`,
+  statusPageFqdn: `status.${domainNameCom}`,
   chartRepoVersion: "6.25.0"
 });
 deployMetricsPage(provider, {
-  metricsPageFqdn: `metrics.${domainName}`,
+  metricsPageFqdn: `metrics.${domainNameCom}`,
 });
 
 // Redirects .com to .xyz
@@ -509,3 +509,4 @@ function createDomainRedirectIngress(srcDomain: string, destDomain: string): k8s
 createDomainRedirectIngress("faucet.ghostnet.teztnets.xyz", "faucet.ghostnet.teztnets.com");
 createDomainRedirectIngress("faucet.oxfordnet.teztnets.xyz", "faucet.oxfordnet.teztnets.com");
 createDomainRedirectIngress("faucet.nairobinet.teztnets.xyz", "faucet.nairobinet.teztnets.com");
+createDomainRedirectIngress("status.teztnets.xyz", "status.teztnets.com");
