@@ -506,6 +506,6 @@ function createDomainRedirectIngress(srcDomain: string, destDomain: string): k8s
   }, { provider });
 }
 
-// createDomainRedirectIngress("faucet.ghostnet.teztnets.com", "faucet.ghostnet.teztnets.xyz");
-// createDomainRedirectIngress("faucet.oxfordnet.teztnets.com", "faucet.oxfordnet.teztnets.xyz");
-// createDomainRedirectIngress("faucet.nairobinet.teztnets.com", "faucet.nairobinet.teztnets.xyz");
+createDomainRedirectIngress("faucet.ghostnet.teztnets.xyz", "faucet.ghostnet.teztnets.com");
+createDomainRedirectIngress("faucet.oxfordnet.teztnets.xyz", "faucet.oxfordnet.teztnets.com");
+createDomainRedirectIngress("faucet.nairobinet.teztnets.xyz", "faucet.nairobinet.teztnets.com");
