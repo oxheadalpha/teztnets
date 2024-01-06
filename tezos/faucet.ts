@@ -85,7 +85,7 @@ export class TezosFaucet extends pulumi.ComponentResource {
       )
     }
 
-    const teztnetsDomain = `${name}.teztnets.xyz`
+    const teztnetsDomain = `${name}.teztnets.com`
     const faucetDomain = `faucet.${teztnetsDomain}`
     this.tezosFaucetHelmValues.googleCaptchaSecretKey =
       params.faucetRecaptchaSecretKey
@@ -114,90 +114,6 @@ export class TezosFaucet extends pulumi.ComponentResource {
     new k8s.helm.v3.Chart(`${name}-faucet`, faucetChartValues, {
       providers: { kubernetes: provider }, parent: this,
     })
-
-    // Temporary faucet ingress for teztnets.com
-    const domainNameCom = "teztnets.com";
-    const faucetDomainCom = `faucet.${name}.${domainNameCom}`;
-    const faucetIngName = `${faucetDomainCom}-ingress`;
-
-    new k8s.networking.v1.Ingress(faucetIngName, {
-      metadata: {
-        namespace: params.namespace.metadata.name,
-        name: faucetIngName,
-        annotations: {
-          "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-          "kubernetes.io/ingress.class": "nginx",
-        },
-        labels: {
-          "app.kubernetes.io/instance": "dailynet-2024-01-05-faucet",
-          "app.kubernetes.io/managed-by": "pulumi",
-          "app.kubernetes.io/name": "tezos-faucet",
-          "app.kubernetes.io/version": "2.0.0",
-          "helm.sh/chart": "tezos-faucet-6.25.0",
-        },
-      },
-      spec: {
-        rules: [
-          {
-            host: faucetDomainCom,
-            http: {
-              paths: [
-                {
-                  path: "/info",
-                  pathType: "Exact",
-                  backend: {
-                    service: {
-                      name: "tezos-faucet",
-                      port: { number: 3000 },
-                    },
-                  },
-                },
-                {
-                  path: "/challenge",
-                  pathType: "Exact",
-                  backend: {
-                    service: {
-                      name: "tezos-faucet",
-                      port: { number: 3000 },
-                    },
-                  },
-                },
-                {
-                  path: "/verify",
-                  pathType: "Exact",
-                  backend: {
-                    service: {
-                      name: "tezos-faucet",
-                      port: { number: 3000 },
-                    },
-                  },
-                },
-                {
-                  path: "/",
-                  pathType: "Prefix",
-                  backend: {
-                    service: {
-                      name: "tezos-faucet",
-                      port: { number: 8080 },
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        ],
-        tls: [
-          {
-            hosts: [faucetDomainCom],
-            secretName: `${faucetDomainCom}-secret`,
-          },
-        ],
-      },
-    }, {
-      provider: provider,
-      parent: this,
-    });
-    // End Temporary faucet ingress for teztnets.com
 
   }
 }

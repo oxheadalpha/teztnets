@@ -480,3 +480,32 @@ deployStatusPage(provider, {
 deployMetricsPage(provider, {
   metricsPageFqdn: `metrics.${domainName}`,
 });
+
+// Redirects .com to .xyz
+
+function createDomainRedirectIngress(srcDomain: string, destDomain: string): k8s.networking.v1.Ingress {
+  return new k8s.networking.v1.Ingress(`ingress-redirect-${srcDomain}`, {
+    metadata: {
+      annotations: {
+        "kubernetes.io/ingress.class": "nginx",
+        "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+        "nginx.ingress.kubernetes.io/enable-cors": "true",
+        "nginx.ingress.kubernetes.io/cors-allow-origin": "*",
+        "nginx.ingress.kubernetes.io/server-snippet": `return 301 $scheme://${destDomain}$request_uri;`
+      },
+    },
+    spec: {
+      tls: [{
+        hosts: [srcDomain],
+        secretName: `${srcDomain}-secret`,
+      }],
+      rules: [{
+        host: srcDomain
+      }]
+    },
+  }, { provider });
+}
+
+// createDomainRedirectIngress("faucet.ghostnet.teztnets.com", "faucet.ghostnet.teztnets.xyz");
+// createDomainRedirectIngress("faucet.oxfordnet.teztnets.com", "faucet.oxfordnet.teztnets.xyz");
+// createDomainRedirectIngress("faucet.nairobinet.teztnets.com", "faucet.nairobinet.teztnets.xyz");
