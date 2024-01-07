@@ -25,8 +25,8 @@ export interface TezosParameters {
 }
 
 const gcpRegion = "us-central1";
-const domainName = 'teztnets.xyz';
-const domainNameCom = 'teztnets.com';
+const domainName = 'teztnets.com';
+const domainNameXyz = 'teztnets.xyz';
 
 /**
  * Deploy a tezos-k8s topology in a k8s cluster.
@@ -193,7 +193,7 @@ export class TezosChain extends pulumi.ComponentResource {
       { provider, parent: this }
     )
     // RPC Ingress
-    const rpcDomainCom = `rpc.${name}.${domainNameCom}`
+    const rpcDomainCom = `rpc.${name}.${domainNameXyz}`
 
     const rpcIngNameCom = `${rpcDomainCom}-ingress`
     new k8s.networking.v1.Ingress(
@@ -409,7 +409,7 @@ export class TezosChain extends pulumi.ComponentResource {
       },
       { provider: provider }
     )
-    // temporary domain name for .com
+    // temporary domain name for .xyz
     new k8s.core.v1.Service(
       `${name}-p2p-lb-com`,
       {
@@ -417,7 +417,7 @@ export class TezosChain extends pulumi.ComponentResource {
           namespace: this.namespace.metadata.name,
           name: `${name}-teztnetscom`,
           annotations: {
-            "external-dns.alpha.kubernetes.io/hostname": `${name}.${domainNameCom}`,
+            "external-dns.alpha.kubernetes.io/hostname": `${name}.${domainNameXyz}`,
           },
         },
         spec: {
