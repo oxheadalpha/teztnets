@@ -9,7 +9,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 | | |
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.dailynet-2024-01-07.teztnets.xyz](https://rpc.dailynet-2024-01-07.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2024-01-07.teztnets.xyz) |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2024-01-07.teztnets.com) |
 | Full network name | `TEZOS-DAILYNET-2024-01-07T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_2f7b6c60_20240105172958](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_2f7b6c60_20240105172958) |
 | Activated on | 2024-01-07T00:00:00.000Z |
@@ -53,7 +53,7 @@ export PATH=$HOME/tezos:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/dailynet-2024-01-07
+octez-node config init --network https://teztnets.com/dailynet-2024-01-07
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```

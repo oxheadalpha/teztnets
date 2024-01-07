@@ -3,7 +3,7 @@
   "dal_config": {
     "activated": true,
     "bootstrap_peers": [
-      "dal.dailynet-2024-01-07.teztnets.xyz:11732"
+      "dal.dailynet-2024-01-07.teztnets.com:11732"
     ],
     "use_mock_srs_for_testing": {
       "number_of_shards": 512,
@@ -13,7 +13,7 @@
     }
   },
   "default_bootstrap_peers": [
-    "dailynet-2024-01-07.teztnets.xyz"
+    "dailynet-2024-01-07.teztnets.com"
   ],
   "genesis": {
     "block": "BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM",

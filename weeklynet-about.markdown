@@ -9,7 +9,7 @@ A testnet that restarts every Wednesday launched from tezos/tezos master branch.
 | | |
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.weeklynet-2024-01-03.teztnets.xyz](https://rpc.weeklynet-2024-01-03.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Weeklynet faucet](https://faucet.weeklynet-2024-01-03.teztnets.xyz) |
+| Faucet | [Weeklynet faucet](https://faucet.weeklynet-2024-01-03.teztnets.com) |
 | Full network name | `TEZOS-WEEKLYNET-2024-01-03T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_4c93fab1_20240102195539](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_4c93fab1_20240102195539) |
 | Activated on | 2024-01-03T00:00:00.000Z |
@@ -53,7 +53,7 @@ export PATH=$HOME/tezos:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/weeklynet-2024-01-03
+octez-node config init --network https://teztnets.com/weeklynet-2024-01-03
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```

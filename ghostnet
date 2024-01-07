@@ -1,7 +1,7 @@
 {
   "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
   "default_bootstrap_peers": [
-    "ghostnet.teztnets.xyz",
+    "ghostnet.teztnets.com",
     "ghostnet.boot.ecadinfra.com",
     "ghostnet.stakenow.de:9733"
   ],

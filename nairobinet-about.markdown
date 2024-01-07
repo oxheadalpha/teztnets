@@ -9,7 +9,7 @@ Test Chain for the Nairobi Protocol Proposal
 | | |
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.nairobinet.teztnets.xyz](https://rpc.nairobinet.teztnets.xyz/chains/main/chain_id)<br/>[https://nairobinet.ecadinfra.com](https://nairobinet.ecadinfra.com/chains/main/chain_id)<br/> |
-| Faucet | [Nairobinet faucet](https://faucet.nairobinet.teztnets.xyz) |
+| Faucet | [Nairobinet faucet](https://faucet.nairobinet.teztnets.com) |
 | Full network name | `TEZOS_NAIROBINET_2023-04-20T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v18.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.1) |
 | Activated on | 2023-04-20T15:00:00Z |
@@ -60,7 +60,7 @@ export PATH=$HOME/tezos:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/nairobinet
+octez-node config init --network https://teztnets.com/nairobinet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -72,7 +72,7 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Nairobinet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.nairobinet.teztnets.xyz).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.nairobinet.teztnets.com).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2

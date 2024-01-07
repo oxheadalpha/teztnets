@@ -8,8 +8,8 @@ Ghostnet is the long-running testnet for Tezos.
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.ghostnet.teztnets.xyz](https://rpc.ghostnet.teztnets.xyz/chains/main/chain_id)<br/>[https://ghostnet.ecadinfra.com](https://ghostnet.ecadinfra.com/chains/main/chain_id)<br/>[https://ghostnet.tezos.marigold.dev](https://ghostnet.tezos.marigold.dev/chains/main/chain_id)<br/> |
-| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.xyz) |
+| Public RPC endpoints | [https://rpc.ghostnet.teztnets.com](https://rpc.ghostnet.teztnets.com/chains/main/chain_id)<br/>[https://ghostnet.ecadinfra.com](https://ghostnet.ecadinfra.com/chains/main/chain_id)<br/>[https://ghostnet.tezos.marigold.dev](https://ghostnet.tezos.marigold.dev/chains/main/chain_id)<br/> |
+| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.com) |
 | Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v18.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.1) |
 | Activated on | 2022-01-25T15:00:00Z |
@@ -70,7 +70,7 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Ghostnet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.ghostnet.teztnets.xyz).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.ghostnet.teztnets.com).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2

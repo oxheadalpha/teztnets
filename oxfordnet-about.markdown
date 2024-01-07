@@ -9,7 +9,7 @@ Test Chain for the Oxford Protocol Proposal
 | | |
 |-------|---------------------|
 | Public RPC endpoints | [https://rpc.oxfordnet.teztnets.xyz](https://rpc.oxfordnet.teztnets.xyz/chains/main/chain_id)<br/> |
-| Faucet | [Oxfordnet faucet](https://faucet.oxfordnet.teztnets.xyz) |
+| Faucet | [Oxfordnet faucet](https://faucet.oxfordnet.teztnets.com) |
 | Full network name | `TEZOS_OXFORDNET_2023-12-07T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v19.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v19.0-rc1) |
 | Activated on | 2023-12-07T15:00:00Z |
@@ -62,7 +62,7 @@ export PATH=$HOME/tezos:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.xyz/oxfordnet
+octez-node config init --network https://teztnets.com/oxfordnet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -74,7 +74,7 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 ### Bake on the Oxfordnet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.oxfordnet.teztnets.xyz).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.oxfordnet.teztnets.com).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
