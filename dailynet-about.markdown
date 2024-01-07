@@ -8,7 +8,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.dailynet-2024-01-07.teztnets.xyz](https://rpc.dailynet-2024-01-07.teztnets.xyz/chains/main/chain_id)<br/> |
+| Public RPC endpoints | [https://rpc.dailynet-2024-01-07.teztnets.com](https://rpc.dailynet-2024-01-07.teztnets.com/chains/main/chain_id)<br/> |
 | Faucet | [Dailynet faucet](https://faucet.dailynet-2024-01-07.teztnets.com) |
 | Full network name | `TEZOS-DAILYNET-2024-01-07T00:00:00.000Z` |
 | Tezos docker build | [tezos/tezos:master_2f7b6c60_20240105172958](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_2f7b6c60_20240105172958) |
@@ -69,8 +69,8 @@ This is not to be confused with [Etherlink](https://docs.etherlink.com/get-start
 
 | | |
 |-------|---------------------|
-| EVM RPC URL | [`https://evm.dailynet-2024-01-07.teztnets.xyz`](https://evm.dailynet-2024-01-07.teztnets.xyz) |
-| Bare Rollup RPC URL | [`https://evm-rollup-node.dailynet-2024-01-07.teztnets.xyz`](https://evm-rollup-node.dailynet-2024-01-07.teztnets.xyz/global/block/head) |
+| EVM RPC URL | [`https://evm.dailynet-2024-01-07.teztnets.com`](https://evm.dailynet-2024-01-07.teztnets.com) |
+| Bare Rollup RPC URL | [`https://evm-rollup-node.dailynet-2024-01-07.teztnets.com`](https://evm-rollup-node.dailynet-2024-01-07.teztnets.com/global/block/head) |
 
 
 
@@ -84,8 +84,8 @@ The DAL nodes are accessible with the following endpoints:
 
 | | RPC | P2P Endpoint |
 |------------|---------|--------------|
-| DAL Bootstrap | [Link](https://dal-bootstrap-rpc.dailynet-2024-01-07.teztnets.xyz) | `dal.dailynet-2024-01-07.teztnets.xyz:11732` |
-| DAL Teztnets Attester | [Link](https://dal-attester-rpc.dailynet-2024-01-07.teztnets.xyz) | `dal1.dailynet-2024-01-07.teztnets.xyz:11732` |
+| DAL Bootstrap | [Link](https://dal-bootstrap-rpc.dailynet-2024-01-07.teztnets.com) | `dal.dailynet-2024-01-07.teztnets.com:11732` |
+| DAL Teztnets Attester | [Link](https://dal-attester-rpc.dailynet-2024-01-07.teztnets.com) | `dal1.dailynet-2024-01-07.teztnets.com:11732` |
 
 
 For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).

@@ -8,7 +8,7 @@ Test Chain for the Nairobi Protocol Proposal
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.nairobinet.teztnets.xyz](https://rpc.nairobinet.teztnets.xyz/chains/main/chain_id)<br/>[https://nairobinet.ecadinfra.com](https://nairobinet.ecadinfra.com/chains/main/chain_id)<br/> |
+| Public RPC endpoints | [https://rpc.nairobinet.teztnets.com](https://rpc.nairobinet.teztnets.com/chains/main/chain_id)<br/>[https://nairobinet.ecadinfra.com](https://nairobinet.ecadinfra.com/chains/main/chain_id)<br/> |
 | Faucet | [Nairobinet faucet](https://faucet.nairobinet.teztnets.com) |
 | Full network name | `TEZOS_NAIROBINET_2023-04-20T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v18.1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v18.1) |

@@ -5,19 +5,19 @@
     "dal_nodes": {
       "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
-        "p2p": "dal.dailynet-2024-01-07.teztnets.xyz:11732",
-        "rpc": "https://dal-bootstrap-rpc.dailynet-2024-01-07.teztnets.xyz"
+        "p2p": "dal.dailynet-2024-01-07.teztnets.com:11732",
+        "rpc": "https://dal-bootstrap-rpc.dailynet-2024-01-07.teztnets.com"
       },
       "dal-dal1": {
         "humanName": "DAL Teztnets Attester",
-        "p2p": "dal1.dailynet-2024-01-07.teztnets.xyz:11732",
-        "rpc": "https://dal-attester-rpc.dailynet-2024-01-07.teztnets.xyz"
+        "p2p": "dal1.dailynet-2024-01-07.teztnets.com:11732",
+        "rpc": "https://dal-attester-rpc.dailynet-2024-01-07.teztnets.com"
       }
     },
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
     "docker_build": "tezos/tezos:master_2f7b6c60_20240105172958",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2024-01-07.teztnets.xyz"
+      "https://evm.dailynet-2024-01-07.teztnets.com"
     ],
     "faucet_url": "https://faucet.dailynet-2024-01-07.teztnets.com",
     "git_ref": "2f7b6c60",
@@ -27,11 +27,11 @@
     "masked_from_main_page": false,
     "network_url": "https://teztnets.com/dailynet-2024-01-07",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2024-01-07.teztnets.xyz"
+      "https://evm-rollup-node.dailynet-2024-01-07.teztnets.com"
     ],
-    "rpc_url": "https://rpc.dailynet-2024-01-07.teztnets.xyz",
+    "rpc_url": "https://rpc.dailynet-2024-01-07.teztnets.com",
     "rpc_urls": [
-      "https://rpc.dailynet-2024-01-07.teztnets.xyz"
+      "https://rpc.dailynet-2024-01-07.teztnets.com"
     ],
     "activated_on": "2024-01-07"
   },
@@ -113,9 +113,9 @@
     "masked_from_main_page": false,
     "network_url": "https://teztnets.com/nairobinet",
     "rollup_urls": [],
-    "rpc_url": "https://rpc.nairobinet.teztnets.xyz",
+    "rpc_url": "https://rpc.nairobinet.teztnets.com",
     "rpc_urls": [
-      "https://rpc.nairobinet.teztnets.xyz",
+      "https://rpc.nairobinet.teztnets.com",
       "https://nairobinet.ecadinfra.com"
     ],
     "activated_on": "2023-04-20"
@@ -134,9 +134,9 @@
     "masked_from_main_page": false,
     "network_url": "https://teztnets.com/oxfordnet",
     "rollup_urls": [],
-    "rpc_url": "https://rpc.oxfordnet.teztnets.xyz",
+    "rpc_url": "https://rpc.oxfordnet.teztnets.com",
     "rpc_urls": [
-      "https://rpc.oxfordnet.teztnets.xyz"
+      "https://rpc.oxfordnet.teztnets.com"
     ],
     "activated_on": "2023-12-07"
   },
@@ -146,13 +146,13 @@
     "dal_nodes": {
       "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
-        "p2p": "dal.weeklynet-2024-01-03.teztnets.xyz:11732",
-        "rpc": "https://dal-bootstrap-rpc.weeklynet-2024-01-03.teztnets.xyz"
+        "p2p": "dal.weeklynet-2024-01-03.teztnets.com:11732",
+        "rpc": "https://dal-bootstrap-rpc.weeklynet-2024-01-03.teztnets.com"
       },
       "dal-dal1": {
         "humanName": "DAL Teztnets Attester",
-        "p2p": "dal1.weeklynet-2024-01-03.teztnets.xyz:11732",
-        "rpc": "https://dal-attester-rpc.weeklynet-2024-01-03.teztnets.xyz"
+        "p2p": "dal1.weeklynet-2024-01-03.teztnets.com:11732",
+        "rpc": "https://dal-attester-rpc.weeklynet-2024-01-03.teztnets.com"
       }
     },
     "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Oxford for 4 cycles then upgrades to proto Alpha.",
@@ -166,9 +166,9 @@
     "masked_from_main_page": false,
     "network_url": "https://teztnets.com/weeklynet-2024-01-03",
     "rollup_urls": [],
-    "rpc_url": "https://rpc.weeklynet-2024-01-03.teztnets.xyz",
+    "rpc_url": "https://rpc.weeklynet-2024-01-03.teztnets.com",
     "rpc_urls": [
-      "https://rpc.weeklynet-2024-01-03.teztnets.xyz"
+      "https://rpc.weeklynet-2024-01-03.teztnets.com"
     ],
     "activated_on": "2024-01-03"
   }

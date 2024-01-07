@@ -8,7 +8,7 @@ Test Chain for the Oxford Protocol Proposal
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.oxfordnet.teztnets.xyz](https://rpc.oxfordnet.teztnets.xyz/chains/main/chain_id)<br/> |
+| Public RPC endpoints | [https://rpc.oxfordnet.teztnets.com](https://rpc.oxfordnet.teztnets.com/chains/main/chain_id)<br/> |
 | Faucet | [Oxfordnet faucet](https://faucet.oxfordnet.teztnets.com) |
 | Full network name | `TEZOS_OXFORDNET_2023-12-07T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v19.0-rc1](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v19.0-rc1) |
