@@ -34,39 +34,6 @@ jobs:
       - name: generate release artifacts
         run: |
           python teztnets_xyz_page/release.py
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/release
-          enable_jekyll: true
-
-      # Temporary - deploy to teztnets.com
-
-      # Rewrite teztnets.json and networks.json with inputs and apply domain replacement
-      - name: Rewrite and replace domain in networks.json
-        run: |
-          cat > networks.json <<EOF
-          ${{ inputs.networks }}
-          EOF
-          sed -i 's/teztnets.xyz/teztnets.com/g' networks.json
-      - name: Rewrite and replace domain in teztnets.json
-        run: |
-          cat > teztnets.json <<EOF
-          ${{ inputs.teztnets }}
-          EOF
-          sed -i 's/teztnets.xyz/teztnets.com/g' teztnets.json
-      - name: Rewrite and replace domain in jekyll site
-        run: |
-          sed -i 's/teztnets.xyz/teztnets.com/g' teztnets_xyz_page/website/CNAME
-          sed -i 's/teztnets.xyz/teztnets.com/g' teztnets_xyz_page/website/_config.yml
-          sed -i 's/teztnets.xyz/teztnets.com/g' teztnets_xyz_page/website/_includes/header.html
-          sed -i 's/teztnets.xyz/teztnets.com/g' teztnets_xyz_page/website/index.markdown
-
-      # Generate release artifacts for teztnets.com
-      - name: Generate release artifacts for teztnets.com
-        run: |
-          python teztnets_xyz_page/release.py
 
       # Deploy to Teztnets.com
       - name: Deploy to Teztnets.com
@@ -76,4 +43,23 @@ jobs:
           publish_dir: ./target/release
           external_repository: tacoinfra/teztnets
           enable_jekyll: true
-      # End Temporary - deploy to teztnets.com
+      # Temporary - deploy to teztnets.com
+      - name: Rewrite and replace domain in jekyll site
+        run: |
+          sed -i 's/teztnets.com/teztnets.com/g' teztnets_xyz_page/website/CNAME
+          sed -i 's/teztnets.com/teztnets.com/g' teztnets_xyz_page/website/_config.yml
+          sed -i 's/teztnets.com/teztnets.com/g' teztnets_xyz_page/website/_includes/header.html
+          sed -i 's/teztnets.com/teztnets.com/g' teztnets_xyz_page/website/index.markdown
+
+      # Generate release artifacts for teztnets.com
+      - name: Generate release artifacts for teztnets.com
+        run: |
+          python teztnets_xyz_page/release.py
+      - name: Deploy to teztnets.xyz
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/release
+          enable_jekyll: true
+
+      # End Temporary - deploy to teztnets.xyz
