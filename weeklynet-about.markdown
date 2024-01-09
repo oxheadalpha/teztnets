@@ -59,6 +59,20 @@ octez-node run --rpc-addr 127.0.0.1:8732
 ```
 
 
+### Ethereum Virtual Machine Rollup
+
+This network is running a bleeding-edge [EVM Rollup](https://docs.etherlink.com/welcome/what-is-etherlink) from the most recent [kernel code](https://gitlab.com/tezos/tezos/-/tree/master/etherlink) in the Octez repository.
+
+This is not to be confused with [Etherlink](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink) which currently runs on Ghostnet.
+
+[For Etherlink test network, go here](https://docs.etherlink.com/get-started/connect-your-wallet-to-etherlink).
+
+| | |
+|-------|---------------------|
+| EVM RPC URL | [`https://evm.weeklynet-2024-01-03.teztnets.com`](https://evm.weeklynet-2024-01-03.teztnets.com) |
+| Bare Rollup RPC URL | [`https://evm-rollup-node.weeklynet-2024-01-03.teztnets.com`](https://evm-rollup-node.weeklynet-2024-01-03.teztnets.com/global/block/head) |
+
+
 
 
 ### Data Availability Layer

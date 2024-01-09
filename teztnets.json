@@ -157,7 +157,9 @@
     },
     "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Oxford for 4 cycles then upgrades to proto Alpha.",
     "docker_build": "tezos/tezos:master_4c93fab1_20240102195539",
-    "evm_proxy_urls": [],
+    "evm_proxy_urls": [
+      "https://evm.weeklynet-2024-01-03.teztnets.com"
+    ],
     "faucet_url": "https://faucet.weeklynet-2024-01-03.teztnets.com",
     "git_ref": "4c93fab1",
     "human_name": "Weeklynet",
@@ -165,7 +167,9 @@
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
     "network_url": "https://teztnets.com/weeklynet-2024-01-03",
-    "rollup_urls": [],
+    "rollup_urls": [
+      "https://evm-rollup-node.weeklynet-2024-01-03.teztnets.com"
+    ],
     "rpc_url": "https://rpc.weeklynet-2024-01-03.teztnets.com",
     "rpc_urls": [
       "https://rpc.weeklynet-2024-01-03.teztnets.com"
