@@ -1,39 +1,39 @@
 {
-  "dailynet-2024-01-09": {
+  "dailynet-2024-01-10": {
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-DAILYNET-2024-01-09T00:00:00.000Z",
+    "chain_name": "TEZOS-DAILYNET-2024-01-10T00:00:00.000Z",
     "dal_nodes": {
       "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
-        "p2p": "dal.dailynet-2024-01-09.teztnets.com:11732",
-        "rpc": "https://dal-bootstrap-rpc.dailynet-2024-01-09.teztnets.com"
+        "p2p": "dal.dailynet-2024-01-10.teztnets.com:11732",
+        "rpc": "https://dal-bootstrap-rpc.dailynet-2024-01-10.teztnets.com"
       },
       "dal-dal1": {
         "humanName": "DAL Teztnets Attester",
-        "p2p": "dal1.dailynet-2024-01-09.teztnets.com:11732",
-        "rpc": "https://dal-attester-rpc.dailynet-2024-01-09.teztnets.com"
+        "p2p": "dal1.dailynet-2024-01-10.teztnets.com:11732",
+        "rpc": "https://dal-attester-rpc.dailynet-2024-01-10.teztnets.com"
       }
     },
     "description": "A testnet that restarts every day launched from tezos/tezos master branch and protocol alpha.",
-    "docker_build": "tezos/tezos:master_8876d0e0_20240108181218",
+    "docker_build": "tezos/tezos:master_6f1e7c7e_20240109152818",
     "evm_proxy_urls": [
-      "https://evm.dailynet-2024-01-09.teztnets.com"
+      "https://evm.dailynet-2024-01-10.teztnets.com"
     ],
-    "faucet_url": "https://faucet.dailynet-2024-01-09.teztnets.com",
-    "git_ref": "8876d0e0",
+    "faucet_url": "https://faucet.dailynet-2024-01-10.teztnets.com",
+    "git_ref": "6f1e7c7e",
     "human_name": "Dailynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.com/dailynet-2024-01-09",
+    "network_url": "https://teztnets.com/dailynet-2024-01-10",
     "rollup_urls": [
-      "https://evm-rollup-node.dailynet-2024-01-09.teztnets.com"
+      "https://evm-rollup-node.dailynet-2024-01-10.teztnets.com"
     ],
-    "rpc_url": "https://rpc.dailynet-2024-01-09.teztnets.com",
+    "rpc_url": "https://rpc.dailynet-2024-01-10.teztnets.com",
     "rpc_urls": [
-      "https://rpc.dailynet-2024-01-09.teztnets.com"
+      "https://rpc.dailynet-2024-01-10.teztnets.com"
     ],
-    "activated_on": "2024-01-09"
+    "activated_on": "2024-01-10"
   },
   "ghostnet": {
     "category": "Long-running Teztnets",
@@ -140,36 +140,36 @@
     ],
     "activated_on": "2023-12-07"
   },
-  "weeklynet-2024-01-03": {
+  "weeklynet-2024-01-10": {
     "category": "Periodic Teztnets",
-    "chain_name": "TEZOS-WEEKLYNET-2024-01-03T00:00:00.000Z",
+    "chain_name": "TEZOS-WEEKLYNET-2024-01-10T00:00:00.000Z",
     "dal_nodes": {
       "dal-bootstrap": {
         "humanName": "DAL Bootstrap",
-        "p2p": "dal.weeklynet-2024-01-03.teztnets.com:11732",
-        "rpc": "https://dal-bootstrap-rpc.weeklynet-2024-01-03.teztnets.com"
+        "p2p": "dal.weeklynet-2024-01-10.teztnets.com:11732",
+        "rpc": "https://dal-bootstrap-rpc.weeklynet-2024-01-10.teztnets.com"
       },
       "dal-dal1": {
         "humanName": "DAL Teztnets Attester",
-        "p2p": "dal1.weeklynet-2024-01-03.teztnets.com:11732",
-        "rpc": "https://dal-attester-rpc.weeklynet-2024-01-03.teztnets.com"
+        "p2p": "dal1.weeklynet-2024-01-10.teztnets.com:11732",
+        "rpc": "https://dal-attester-rpc.weeklynet-2024-01-10.teztnets.com"
       }
     },
     "description": "A testnet that restarts every Wednesday launched from tezos/tezos master branch. It runs Oxford for 4 cycles then upgrades to proto Alpha.",
-    "docker_build": "tezos/tezos:master_4c93fab1_20240102195539",
+    "docker_build": "tezos/tezos:master_6f1e7c7e_20240109152818",
     "evm_proxy_urls": [],
-    "faucet_url": "https://faucet.weeklynet-2024-01-03.teztnets.com",
-    "git_ref": "4c93fab1",
+    "faucet_url": "https://faucet.weeklynet-2024-01-10.teztnets.com",
+    "git_ref": "6f1e7c7e",
     "human_name": "Weeklynet",
     "indexers": [],
     "last_baking_daemon": "alpha",
     "masked_from_main_page": false,
-    "network_url": "https://teztnets.com/weeklynet-2024-01-03",
+    "network_url": "https://teztnets.com/weeklynet-2024-01-10",
     "rollup_urls": [],
-    "rpc_url": "https://rpc.weeklynet-2024-01-03.teztnets.com",
+    "rpc_url": "https://rpc.weeklynet-2024-01-10.teztnets.com",
     "rpc_urls": [
-      "https://rpc.weeklynet-2024-01-03.teztnets.com"
+      "https://rpc.weeklynet-2024-01-10.teztnets.com"
     ],
-    "activated_on": "2024-01-03"
+    "activated_on": "2024-01-10"
   }
 }
