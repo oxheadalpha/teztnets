@@ -8,11 +8,11 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.dailynet-2024-01-10.teztnets.com](https://rpc.dailynet-2024-01-10.teztnets.com/chains/main/chain_id)<br/> |
-| Faucet | [Dailynet faucet](https://faucet.dailynet-2024-01-10.teztnets.com) |
-| Full network name | `TEZOS-DAILYNET-2024-01-10T00:00:00.000Z` |
-| Tezos docker build | [tezos/tezos:master_6f1e7c7e_20240109152818](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_6f1e7c7e_20240109152818) |
-| Activated on | 2024-01-10T00:00:00.000Z |
+| Public RPC endpoints | [https://rpc.dailynet-2024-01-11.teztnets.com](https://rpc.dailynet-2024-01-11.teztnets.com/chains/main/chain_id)<br/> |
+| Faucet | [Dailynet faucet](https://faucet.dailynet-2024-01-11.teztnets.com) |
+| Full network name | `TEZOS-DAILYNET-2024-01-11T00:00:00.000Z` |
+| Tezos docker build | [tezos/tezos:master_577c847d_20240110171456](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=master_577c847d_20240110171456) |
+| Activated on | 2024-01-11T00:00:00.000Z |
 
 
 
@@ -29,7 +29,7 @@ A testnet that restarts every day launched from tezos/tezos master branch and pr
 To join Dailynet with docker, open a shell in the container:
 
 ```
-docker run -it --entrypoint=/bin/sh tezos/tezos:master_6f1e7c7e_20240109152818
+docker run -it --entrypoint=/bin/sh tezos/tezos:master_577c847d_20240110171456
 ```
 
 #### Alternative: Build the software
@@ -40,7 +40,7 @@ docker run -it --entrypoint=/bin/sh tezos/tezos:master_6f1e7c7e_20240109152818
 cd
 git clone git@gitlab.com:tezos/tezos.git
 cd tezos
-git checkout 6f1e7c7e
+git checkout 577c847d
 opam init # if this is your first time using OPAM
 make build-deps
 eval $(opam env)
@@ -53,7 +53,7 @@ export PATH=$HOME/tezos:$PATH
 Run the following commands:
 
 ```
-octez-node config init --network https://teztnets.com/dailynet-2024-01-10
+octez-node config init --network https://teztnets.com/dailynet-2024-01-11
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -69,8 +69,8 @@ This is not to be confused with [Etherlink](https://docs.etherlink.com/get-start
 
 | | |
 |-------|---------------------|
-| EVM RPC URL | [`https://evm.dailynet-2024-01-10.teztnets.com`](https://evm.dailynet-2024-01-10.teztnets.com) |
-| Bare Rollup RPC URL | [`https://evm-rollup-node.dailynet-2024-01-10.teztnets.com`](https://evm-rollup-node.dailynet-2024-01-10.teztnets.com/global/block/head) |
+| EVM RPC URL | [`https://evm.dailynet-2024-01-11.teztnets.com`](https://evm.dailynet-2024-01-11.teztnets.com) |
+| Bare Rollup RPC URL | [`https://evm-rollup-node.dailynet-2024-01-11.teztnets.com`](https://evm-rollup-node.dailynet-2024-01-11.teztnets.com/global/block/head) |
 
 
 
@@ -84,8 +84,8 @@ The DAL nodes are accessible with the following endpoints:
 
 | | RPC | P2P Endpoint |
 |------------|---------|--------------|
-| DAL Bootstrap | [Link](https://dal-bootstrap-rpc.dailynet-2024-01-10.teztnets.com) | `dal.dailynet-2024-01-10.teztnets.com:11732` |
-| DAL Teztnets Attester | [Link](https://dal-attester-rpc.dailynet-2024-01-10.teztnets.com) | `dal1.dailynet-2024-01-10.teztnets.com:11732` |
+| DAL Bootstrap | [Link](https://dal-bootstrap-rpc.dailynet-2024-01-11.teztnets.com) | `dal.dailynet-2024-01-11.teztnets.com:11732` |
+| DAL Teztnets Attester | [Link](https://dal-attester-rpc.dailynet-2024-01-11.teztnets.com) | `dal1.dailynet-2024-01-11.teztnets.com:11732` |
 
 
 For more info, read this [blog post from Nomadic Labs](https://research-development.nomadic-labs.com/data-availability-layer-tezos.html).
