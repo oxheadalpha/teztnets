@@ -1,21 +1,24 @@
 ---
 layout: page
-title: Ghostnet
-permalink: /ghostnet-about
+title: Janet
+permalink: /janet-about
 ---
 
-Ghostnet is the long-running testnet for Tezos.
+Test Chain for the Janet test
 
 | | |
 |-------|---------------------|
-| Public RPC endpoints | [https://rpc.ghostnet.teztnets.com](https://rpc.ghostnet.teztnets.com/chains/main/chain_id)<br/>[https://ghostnet.ecadinfra.com](https://ghostnet.ecadinfra.com/chains/main/chain_id)<br/>[https://ghostnet.tezos.marigold.dev](https://ghostnet.tezos.marigold.dev/chains/main/chain_id)<br/> |
-| Faucet | [Ghostnet faucet](https://faucet.ghostnet.teztnets.com) |
-| Full network name | `TEZOS_ITHACANET_2022-01-25T15:00:00Z` |
+| Public RPC endpoints | [https://rpc.janet.teztnets.com](https://rpc.janet.teztnets.com/chains/main/chain_id)<br/> |
+| Faucet | [Janet faucet](https://faucet.janet.teztnets.com) |
+| Full network name | `TEZOS_JANET_2024-01-24T15:00:00Z` |
 | Tezos docker build | [tezos/tezos:v19.0](https://hub.docker.com/r/tezos/tezos/tags?page=1&ordering=last_updated&name=v19.0) |
-| Activated on | 2022-01-25T15:00:00Z |
-| Block Explorers | [TzKT](https://ghostnet.tzkt.io) - [TzStats](https://ghost.tzstats.com) |
+| Activated on | 2024-01-24T15:00:00Z |
 
 
+
+Janet has 8 second blocks (twice faster than mainnet).
+
+Janet started on Nairobi protocol then upgraded to Oxford at the end of cycle 1 (the second cycle).
 
 
 ### Install the software
@@ -30,7 +33,7 @@ Follow instructions from the [Tezos documentation](https://tezos.gitlab.io/intro
 
 #### Alternative: Use docker
 
-To join Ghostnet with docker, open a shell in the container:
+To join Janet with docker, open a shell in the container:
 
 ```
 docker run -it --entrypoint=/bin/sh tezos/tezos:v19.0
@@ -52,12 +55,12 @@ make
 export PATH=$HOME/tezos:$PATH
 ```
 
-### Join the Ghostnet network
+### Join the Janet network
 
 Run the following commands:
 
 ```
-octez-node config init --network ghostnet
+octez-node config init --network https://teztnets.com/janet
 
 octez-node run --rpc-addr 127.0.0.1:8732
 ```
@@ -67,9 +70,9 @@ octez-node run --rpc-addr 127.0.0.1:8732
 
 
 
-### Bake on the Ghostnet network
+### Bake on the Janet network
 
-To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.ghostnet.teztnets.com).
+To improve reliability of the chain, you can take part in the consensus by becoming a baker. In that case, you will need some test tokens from the [faucet](https://faucet.janet.teztnets.com).
 
 If you are not a bootstrap baker, you need to register your key as a delegate using your alias or `pkh`. For instance:
 ```bash=2
@@ -78,12 +81,12 @@ octez-client register key mykey as delegate
 
 You may now launch the baker process.
 ```bash=3
-octez-baker-PtNairob run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
+octez-baker-Proxford run with local node ~/.tezos-node mykey --liquidity-baking-toggle-vote pass
 ```
 
 You may run the accuser as well:
 ```bash=3
-octez-accuser-PtNairob run
+octez-accuser-Proxford run
 ```
 
 Note that you need a minimum amount of tez to get baking rights. If you are not a bootstrap baker, it will take you several cycles to start baking.

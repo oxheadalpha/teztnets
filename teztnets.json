@@ -39,9 +39,9 @@
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_ITHACANET_2022-01-25T15:00:00Z",
     "description": "Ghostnet is the long-running testnet for Tezos.",
-    "docker_build": "tezos/tezos:v18.1",
+    "docker_build": "tezos/tezos:v19.0",
     "faucet_url": "https://faucet.ghostnet.teztnets.com",
-    "git_ref": "v18.1",
+    "git_ref": "v19.0",
     "human_name": "Ghostnet",
     "indexers": [
       {
@@ -64,12 +64,32 @@
     ],
     "activated_on": "2022-01-25"
   },
+  "janet": {
+    "category": "Protocol Teztnets",
+    "chain_name": "TEZOS_JANET_2024-01-24T15:00:00Z",
+    "description": "Test Chain for the Janet test",
+    "docker_build": "tezos/tezos:v19.0",
+    "evm_proxy_urls": [],
+    "faucet_url": "https://faucet.janet.teztnets.com",
+    "git_ref": "v19.0",
+    "human_name": "Janet",
+    "indexers": [],
+    "last_baking_daemon": "Proxford",
+    "masked_from_main_page": false,
+    "network_url": "https://teztnets.com/janet",
+    "rollup_urls": [],
+    "rpc_url": "https://rpc.janet.teztnets.com",
+    "rpc_urls": [
+      "https://rpc.janet.teztnets.com"
+    ],
+    "activated_on": "2024-01-24"
+  },
   "mainnet": {
     "category": "Long-running Teztnets",
     "chain_name": "TEZOS_MAINNET",
     "description": "Tezos Mainnet",
-    "docker_build": "tezos/tezos:v18.1",
-    "git_ref": "v18.1",
+    "docker_build": "tezos/tezos:v19.0",
+    "git_ref": "v19.0",
     "human_name": "Mainnet",
     "indexers": [
       {

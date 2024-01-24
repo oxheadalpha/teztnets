@@ -22,6 +22,7 @@ Testnets deployed specifically to test new Tezos protocol proposals.
 
 | | Activated on | Faucet |
 |-------|---------------------|--|
+| [Janet](/janet-about) | `2024-01-24` | [Faucet](https://faucet.janet.teztnets.com) |
 | [Nairobinet](/nairobinet-about) | `2023-04-20` | [Faucet](https://faucet.nairobinet.teztnets.com) |
 | [Oxfordnet](/oxfordnet-about) | `2023-12-07` | [Faucet](https://faucet.oxfordnet.teztnets.com) |
 
